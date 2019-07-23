@@ -7,16 +7,16 @@ namespace Raft {
         stubs.emplace_back(RaftRpc::NewStub(channels[i]));
       }
     }
-    bool RaftRpcClient::RequestVote(size_t id, const RequestVoteRequest &request, RequestVoteReply &reply) {
+    bool RaftRpcClient::RpcRequestVote(size_t id, const RpcRequestVoteRequest &request, RpcRequestVoteReply &reply) {
       grpc::ClientContext context;
-      grpc::Status status = stubs[id]->RequestVote(&context, request, &reply);
+      grpc::Status status = stubs[id]->RpcRequestVote(&context, request, &reply);
       std::cout <<"sending..." << std::endl;
       return status.ok();
     }
-    void RaftRpcClient::RequestVotes(const RequestVoteRequest &request) {
+    void RaftRpcClient::RpcRequestVotes(const RpcRequestVoteRequest &request) {
     	for(size_t i = 0; i < stubs.size(); ++i) {
-		     RequestVoteReply reply;
-    		if(RequestVote(i, request, reply)) {
+		     RpcRequestVoteReply reply;
+    		if(RpcRequestVote(i, request, reply)) {
     			std::cout << "The local receives the reply from the server " << i << " :" << reply.term() << std::endl; 
     		}
         else std::cout << "error..." << std::endl;

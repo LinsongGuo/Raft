@@ -2,12 +2,12 @@
 
 namespace Raft {
   namespace Rpc {
-    grpc::Status RaftRpcServiceImpl::AppendEntries(grpc::ServerContext *context, const AppendEntriesRequest *request, AppendEntriesReply *reply) {
+    grpc::Status RaftRpcServiceImpl::RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) {
       reply->set_term(233);
       reply->set_success(1);
       return grpc::Status::OK;
     }
-    grpc::Status RaftRpcServiceImpl::RequestVote(grpc::ServerContext *context, const RequestVoteRequest *request, RequestVoteReply *reply) {
+    grpc::Status RaftRpcServiceImpl::RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) {
       Term x = rand() % 65536;
       reply->set_term(x);
       reply->set_votegranted(1);

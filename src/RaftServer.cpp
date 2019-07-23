@@ -28,11 +28,11 @@ namespace Raft {
     rpcClient = std::make_unique<Rpc::RaftRpcClient>(channels);
   }
   void RaftServer::RequestVotes() {
-    Rpc::RequestVoteRequest request;
+    Rpc::RpcRequestVoteRequest request;
     Term x = rand() % 65536;
     request.set_term(x);
     std::cout << "The local is going to send requests " << x << " to all servers..." << std::endl;
-    rpcClient->RequestVotes(request);
+    rpcClient->RpcRequestVotes(request);
   }
 }
 

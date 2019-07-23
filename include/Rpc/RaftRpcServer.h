@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <functional>
 #include <grpc/grpc.h>
 #include <grpc++/server.h>
 #include <grpc++/server_builder.h>
@@ -18,9 +19,16 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     public:
-      grpc::Status AppendEntries(grpc::ServerContext *context, const AppendEntriesRequest *request, AppendEntriesReply *reply) override;
-      grpc::Status RequestVote(grpc::ServerContext *context, const RequestVoteRequest *request, RequestVoteReply *reply) override;
+      grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
+      grpc::Status RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) override;
+     // template <class func> 
+      //void bind
       Address adr;  
+      
+    private:
+      //std::function<Raft::RequestVoteReply(const RequestVoteRequest&)> RequestVote;
+      //std::function<Raft::RequestVoteReply(const AppendEntriesRequest&)> AppendEntries;
+
     };
     class RaftRpcServer {
     private:

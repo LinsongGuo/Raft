@@ -13,8 +13,8 @@ namespace Raft {
       std::vector<std::unique_ptr<RaftRpc::Stub> > stubs;
     public:
       RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels);
-      bool RequestVote(size_t id, const RequestVoteRequest &request, RequestVoteReply &reply);
-      void RequestVotes(const RequestVoteRequest &request);
+      bool RpcRequestVote(size_t id, const RpcRequestVoteRequest &request, RpcRequestVoteReply &reply);
+      void RpcRequestVotes(const RpcRequestVoteRequest &request);
     };
   }
 }
