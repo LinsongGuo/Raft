@@ -1,0 +1,46 @@
+#include "define.h"
+
+namespace Raft {
+  Timer getTime() {
+    return boost::chrono::duration_cast<boost::chrono::milliseconds>(boost::chrono::system_clock::now().time_since_epoch()).count();
+  }
+
+  ServerId getServerId(const Address &address, const Port &port) {
+    return address + ":" + std::to_string(port);
+  }
+  
+  AppendEntriesRequest::AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit):
+    leaderId(_leaderId), term(_term), prevLogTerm(_prevLogTerm), prevLogIndex(_prevLogIndex), leaderCommit(_leaderCommit) {;}
+ 
+  AppendEntiresReply::AppendEntiresReply(Term _term, bool _success): 
+    term(_term), success(_success) {;}
+  
+  RequestVoteRequest::RequestVoteRequest(ServerId _candidateId, Term _term, Term _lastLogTerm, Index _lastLogIndex):
+    candidateId(_candidateId), term(_term), lastLogTerm(_lastLogTerm), lastLogIndex(_lastLogIndex) {;}
+  
+  RequestVoteReply::RequestVoteReply(Term _term, bool _voteGranted): 
+    term(_term), voteGranted(_voteGranted) {;}
+  
+  RaftServerCluster::RaftServerCluster(): 
+    localId(invalidServerId) {;}
+
+  RaftServerCluster::RaftServerCluster(const std::string &fileName) {
+    boost::property_tree::ptree tree;
+    boost::property_tree::read_json(fileName, tree);
+    localId = tree.get<std::string>("local");
+    for(auto &&adr : tree.get_child("serverList")) {
+      serverList.emplace_back(adr.second.get_value<std::string>());
+    }
+  }
+
+  RaftServerCluster::RaftServerCluster(ServerId _localId, const std::vector<ServerId> &v) {
+    localId = _localId;
+    for(size_t i = 0; i < v.size(); ++i) {
+      serverList.push_back(v[i]);
+    }
+  }
+
+  RaftServerInfo::RaftServerInfo(Term _currentTerm = invalidTerm, ServerId _votedFor = invalidServerId, Index _commitIndex = invalidIndex, Index _lastApplied = invalidIndex):
+    currentTerm(_currentTerm), votedFor(_votedFor), commitIndex(_commitIndex), lastApplied(_lastApplied) {;}
+}
+

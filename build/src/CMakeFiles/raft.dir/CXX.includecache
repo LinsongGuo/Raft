@@ -95,8 +95,16 @@ cstdio
 -
 iostream
 -
+boost/thread/thread.hpp
+-
+boost/thread/lock_factories.hpp
+-
+boost/fiber/future/future.hpp
+-
 defines.h
 ../include/defines.h
+Task.h
+../include/Task.h
 RaftRpc.pb.h
 ../include/RaftRpc.pb.h
 RaftRpc.grpc.pb.h
@@ -105,6 +113,28 @@ RaftRpcServer.h
 ../include/RaftRpcServer.h
 RaftRpcClient.h
 ../include/RaftRpcClient.h
+
+../include/Role/Base.h
+cstdio
+-
+iostream
+-
+defines.h
+../include/Role/defines.h
+RaftRpcClient.h
+../include/Role/RaftRpcClient.h
+
+../include/Role/Candidate.h
+Base.h
+../include/Role/Base.h
+
+../include/Role/Follower.h
+Base.h
+../include/Role/Base.h
+
+../include/Role/Leader.h
+Base.h
+../include/Role/Base.h
 
 ../include/Rpc/RaftRpc.grpc.pb.h
 RaftRpc.pb.h
@@ -218,6 +248,14 @@ RaftRpc.pb.h
 defines.h
 ../include/Rpc/defines.h
 
+../include/Task.h
+queue
+-
+boost/thread/future.hpp
+-
+defines.h
+../include/defines.h
+
 ../include/defines.h
 iostream
 -
@@ -303,14 +341,24 @@ google/protobuf/port_undef.inc
 -
 
 /home/gls/Raft/src/RaftServer.cpp
-boost/thread/thread.hpp
--
-chrono
--
-thread
--
 RaftServer.h
 /home/gls/Raft/src/RaftServer.h
+
+/home/gls/Raft/src/Role/Base.cpp
+Base.h
+/home/gls/Raft/src/Role/Base.h
+
+/home/gls/Raft/src/Role/Candidate.cpp
+Candidate.h
+/home/gls/Raft/src/Role/Candidate.h
+
+/home/gls/Raft/src/Role/Follower.cpp
+Follower.h
+/home/gls/Raft/src/Role/Follower.h
+
+/home/gls/Raft/src/Role/Leader.cpp
+Leader.h
+/home/gls/Raft/src/Role/Leader.h
 
 /home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc
 RaftRpc.pb.h
@@ -373,6 +421,14 @@ RaftRpcClient.h
 /home/gls/Raft/src/Rpc/RaftRpcServer.cpp
 RaftRpcServer.h
 /home/gls/Raft/src/Rpc/RaftRpcServer.h
+
+/home/gls/Raft/src/Task.cpp
+Task.h
+/home/gls/Raft/src/Task.h
+
+/home/gls/Raft/src/defines.cpp
+define.h
+/home/gls/Raft/src/define.h
 
 /home/gls/Raft/src/main.cpp
 cstdlib

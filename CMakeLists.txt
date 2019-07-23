@@ -14,7 +14,8 @@ find_package(GRPC REQUIRED)
 include_directories(
 	include
 	include/Rpc
-	include/External	
+	include/External
+	include/Role	
 	${Boost_INCLUDE_DIR}
 	${PROTOBUF_INCLUDE_DIR}
 	${GRPC_INCLUDE_DIR}

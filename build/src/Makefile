@@ -233,6 +233,114 @@ RaftServer.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.s
 .PHONY : RaftServer.cpp.s
 
+Role/Base.o: Role/Base.cpp.o
+
+.PHONY : Role/Base.o
+
+# target to build an object file
+Role/Base.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.o
+.PHONY : Role/Base.cpp.o
+
+Role/Base.i: Role/Base.cpp.i
+
+.PHONY : Role/Base.i
+
+# target to preprocess a source file
+Role/Base.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.i
+.PHONY : Role/Base.cpp.i
+
+Role/Base.s: Role/Base.cpp.s
+
+.PHONY : Role/Base.s
+
+# target to generate assembly for a file
+Role/Base.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.s
+.PHONY : Role/Base.cpp.s
+
+Role/Candidate.o: Role/Candidate.cpp.o
+
+.PHONY : Role/Candidate.o
+
+# target to build an object file
+Role/Candidate.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.o
+.PHONY : Role/Candidate.cpp.o
+
+Role/Candidate.i: Role/Candidate.cpp.i
+
+.PHONY : Role/Candidate.i
+
+# target to preprocess a source file
+Role/Candidate.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.i
+.PHONY : Role/Candidate.cpp.i
+
+Role/Candidate.s: Role/Candidate.cpp.s
+
+.PHONY : Role/Candidate.s
+
+# target to generate assembly for a file
+Role/Candidate.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.s
+.PHONY : Role/Candidate.cpp.s
+
+Role/Follower.o: Role/Follower.cpp.o
+
+.PHONY : Role/Follower.o
+
+# target to build an object file
+Role/Follower.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.o
+.PHONY : Role/Follower.cpp.o
+
+Role/Follower.i: Role/Follower.cpp.i
+
+.PHONY : Role/Follower.i
+
+# target to preprocess a source file
+Role/Follower.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.i
+.PHONY : Role/Follower.cpp.i
+
+Role/Follower.s: Role/Follower.cpp.s
+
+.PHONY : Role/Follower.s
+
+# target to generate assembly for a file
+Role/Follower.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.s
+.PHONY : Role/Follower.cpp.s
+
+Role/Leader.o: Role/Leader.cpp.o
+
+.PHONY : Role/Leader.o
+
+# target to build an object file
+Role/Leader.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.o
+.PHONY : Role/Leader.cpp.o
+
+Role/Leader.i: Role/Leader.cpp.i
+
+.PHONY : Role/Leader.i
+
+# target to preprocess a source file
+Role/Leader.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.i
+.PHONY : Role/Leader.cpp.i
+
+Role/Leader.s: Role/Leader.cpp.s
+
+.PHONY : Role/Leader.s
+
+# target to generate assembly for a file
+Role/Leader.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.s
+.PHONY : Role/Leader.cpp.s
+
 Rpc/RaftRpc.grpc.pb.o: Rpc/RaftRpc.grpc.pb.cc.o
 
 .PHONY : Rpc/RaftRpc.grpc.pb.o
@@ -341,6 +449,60 @@ Rpc/RaftRpcServer.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.s
 .PHONY : Rpc/RaftRpcServer.cpp.s
 
+Task.o: Task.cpp.o
+
+.PHONY : Task.o
+
+# target to build an object file
+Task.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.o
+.PHONY : Task.cpp.o
+
+Task.i: Task.cpp.i
+
+.PHONY : Task.i
+
+# target to preprocess a source file
+Task.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.i
+.PHONY : Task.cpp.i
+
+Task.s: Task.cpp.s
+
+.PHONY : Task.s
+
+# target to generate assembly for a file
+Task.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.s
+.PHONY : Task.cpp.s
+
+defines.o: defines.cpp.o
+
+.PHONY : defines.o
+
+# target to build an object file
+defines.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.o
+.PHONY : defines.cpp.o
+
+defines.i: defines.cpp.i
+
+.PHONY : defines.i
+
+# target to preprocess a source file
+defines.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.i
+.PHONY : defines.cpp.i
+
+defines.s: defines.cpp.s
+
+.PHONY : defines.s
+
+# target to generate assembly for a file
+defines.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.s
+.PHONY : defines.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -389,6 +551,18 @@ help:
 	@echo "... RaftServer.o"
 	@echo "... RaftServer.i"
 	@echo "... RaftServer.s"
+	@echo "... Role/Base.o"
+	@echo "... Role/Base.i"
+	@echo "... Role/Base.s"
+	@echo "... Role/Candidate.o"
+	@echo "... Role/Candidate.i"
+	@echo "... Role/Candidate.s"
+	@echo "... Role/Follower.o"
+	@echo "... Role/Follower.i"
+	@echo "... Role/Follower.s"
+	@echo "... Role/Leader.o"
+	@echo "... Role/Leader.i"
+	@echo "... Role/Leader.s"
 	@echo "... Rpc/RaftRpc.grpc.pb.o"
 	@echo "... Rpc/RaftRpc.grpc.pb.i"
 	@echo "... Rpc/RaftRpc.grpc.pb.s"
@@ -401,6 +575,12 @@ help:
 	@echo "... Rpc/RaftRpcServer.o"
 	@echo "... Rpc/RaftRpcServer.i"
 	@echo "... Rpc/RaftRpcServer.s"
+	@echo "... Task.o"
+	@echo "... Task.i"
+	@echo "... Task.s"
+	@echo "... defines.o"
+	@echo "... defines.i"
+	@echo "... defines.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

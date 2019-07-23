@@ -19,28 +19,30 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     private:
-      std::function<Raft::RequestVoteReply(const RequestVoteRequest&)> RequestVote;
-      std::function<Raft::RequestVoteReply(const AppendEntriesRequest&)> AppendEntries;
+      std::function<RequestVoteReply(const RequestVoteRequest&)> respondRequestVote;
+      std::function<RequestVoteReply(const AppendEntriesRequest&)> respondAppendEntries;
     public:
       grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
       grpc::Status RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) override;
-      template <class func> 
-      void bindRequestVote(func &&f) {
-        RequestVote = std::forward<func>(f);
-      }
-      template<class func>
-      void bindAppendEntries(func &&f) {
-        AppendEntries = std::forward<func>(f);
-      }
+      template <class T> 
+      void bindRespondRequestVote(T &&func);
+      template<class T>
+      void bindRespondAppendEntries(T &&func);
       ServerId localId;  
     };
     class RaftRpcServer {
     private:
        RaftRpcServiceImpl service;
        std::unique_ptr<grpc::Server> server;
-       boost::thread serviceThread;
+       boost::thread raftRpcServerThread;
     public:
       void start(const std::string &str);
+      void shutdown();
+      template <class T> 
+      void bindRespondRequestVote(T &&func);
+      template<class T>
+      void bindRespondAppendEntries(T &&func);
+      ServerId localId;  
     };
   }
 }
