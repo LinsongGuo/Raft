@@ -125,6 +125,87 @@ raft/fast:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/build
 .PHONY : raft/fast
 
+External/Client.o: External/Client.cpp.o
+
+.PHONY : External/Client.o
+
+# target to build an object file
+External/Client.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.o
+.PHONY : External/Client.cpp.o
+
+External/Client.i: External/Client.cpp.i
+
+.PHONY : External/Client.i
+
+# target to preprocess a source file
+External/Client.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.i
+.PHONY : External/Client.cpp.i
+
+External/Client.s: External/Client.cpp.s
+
+.PHONY : External/Client.s
+
+# target to generate assembly for a file
+External/Client.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.s
+.PHONY : External/Client.cpp.s
+
+External/External.grpc.pb.o: External/External.grpc.pb.cc.o
+
+.PHONY : External/External.grpc.pb.o
+
+# target to build an object file
+External/External.grpc.pb.cc.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o
+.PHONY : External/External.grpc.pb.cc.o
+
+External/External.grpc.pb.i: External/External.grpc.pb.cc.i
+
+.PHONY : External/External.grpc.pb.i
+
+# target to preprocess a source file
+External/External.grpc.pb.cc.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.i
+.PHONY : External/External.grpc.pb.cc.i
+
+External/External.grpc.pb.s: External/External.grpc.pb.cc.s
+
+.PHONY : External/External.grpc.pb.s
+
+# target to generate assembly for a file
+External/External.grpc.pb.cc.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.s
+.PHONY : External/External.grpc.pb.cc.s
+
+External/External.pb.o: External/External.pb.cc.o
+
+.PHONY : External/External.pb.o
+
+# target to build an object file
+External/External.pb.cc.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.o
+.PHONY : External/External.pb.cc.o
+
+External/External.pb.i: External/External.pb.cc.i
+
+.PHONY : External/External.pb.i
+
+# target to preprocess a source file
+External/External.pb.cc.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.i
+.PHONY : External/External.pb.cc.i
+
+External/External.pb.s: External/External.pb.cc.s
+
+.PHONY : External/External.pb.s
+
+# target to generate assembly for a file
+External/External.pb.cc.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.s
+.PHONY : External/External.pb.cc.s
+
 RaftServer.o: RaftServer.cpp.o
 
 .PHONY : RaftServer.o
@@ -350,6 +431,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... raft"
 	@echo "... edit_cache"
+	@echo "... External/Client.o"
+	@echo "... External/Client.i"
+	@echo "... External/Client.s"
+	@echo "... External/External.grpc.pb.o"
+	@echo "... External/External.grpc.pb.i"
+	@echo "... External/External.grpc.pb.s"
+	@echo "... External/External.pb.o"
+	@echo "... External/External.pb.i"
+	@echo "... External/External.pb.s"
 	@echo "... RaftServer.o"
 	@echo "... RaftServer.i"
 	@echo "... RaftServer.s"

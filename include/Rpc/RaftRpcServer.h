@@ -9,6 +9,7 @@
 #include <grpc++/server_context.h>
 #include <grpc++/security/server_credentials.h>
 #include <boost/thread/thread.hpp>
+#include <boost/chrono/chrono.hpp>
 #include "RaftRpc.grpc.pb.h"
 #include "RaftRpc.pb.h"
 #include "defines.h"

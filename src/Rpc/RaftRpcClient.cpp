@@ -10,6 +10,7 @@ namespace Raft {
     bool RaftRpcClient::RequestVote(size_t id, const RequestVoteRequest &request, RequestVoteReply &reply) {
       grpc::ClientContext context;
       grpc::Status status = stubs[id]->RequestVote(&context, request, &reply);
+      std::cout <<"sending..." << std::endl;
       return status.ok();
     }
     void RaftRpcClient::RequestVotes(const RequestVoteRequest &request) {

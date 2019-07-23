@@ -13,7 +13,8 @@ find_package(GRPC REQUIRED)
 
 include_directories(
 	include
-	include/Rpc	
+	include/Rpc
+	include/External	
 	${Boost_INCLUDE_DIR}
 	${PROTOBUF_INCLUDE_DIR}
 	${GRPC_INCLUDE_DIR}

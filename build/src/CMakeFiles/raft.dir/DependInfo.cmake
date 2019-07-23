@@ -4,6 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/gls/Raft/src/External/Client.cpp" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/External/Client.cpp.o"
+  "/home/gls/Raft/src/External/External.grpc.pb.cc" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o"
+  "/home/gls/Raft/src/External/External.pb.cc" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/External/External.pb.cc.o"
   "/home/gls/Raft/src/RaftServer.cpp" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/RaftServer.cpp.o"
   "/home/gls/Raft/src/RaftServerInfo.cpp" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o"
   "/home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc" "/home/gls/Raft/build/src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o"
@@ -19,6 +22,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "../include/Rpc"
+  "../include/External"
   "/usr/local/include"
   )
 

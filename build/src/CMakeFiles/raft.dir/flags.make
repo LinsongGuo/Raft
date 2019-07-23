@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/gls/Raft/include -I/home/gls/Raft/include/Rpc -I/usr/local/include 
+CXX_INCLUDES = -I/home/gls/Raft/include -I/home/gls/Raft/include/Rpc -I/home/gls/Raft/include/External -I/usr/local/include 
 
