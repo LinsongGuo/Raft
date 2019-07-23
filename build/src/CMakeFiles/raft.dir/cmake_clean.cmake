@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/raft.dir/External/Client.cpp.o"
   "CMakeFiles/raft.dir/RaftServer.cpp.o"
-  "CMakeFiles/raft.dir/RaftServerInfo.cpp.o"
   "CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o"
   "CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o"
-  "CMakeFiles/raft.dir/Timer.cpp.o"
   "CMakeFiles/raft.dir/main.cpp.o"
   "CMakeFiles/raft.dir/External/External.grpc.pb.cc.o"
   "CMakeFiles/raft.dir/External/External.pb.cc.o"

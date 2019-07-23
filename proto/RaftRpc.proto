@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package Raft.Rpc;
 
-message Entry {
+message RpcEntry {
     uint64 term = 1;
     string key = 2;
     string args = 3;
@@ -13,7 +13,7 @@ message RpcAppendEntriesRequest {
     string leaderID = 2;
     uint64 prevLogIndex = 3;
     uint64 prevLogTerm = 4;
-    repeated Entry entries = 5;
+    repeated RpcEntry entries = 5;
     int64 leaderCommit = 6;
 }
 

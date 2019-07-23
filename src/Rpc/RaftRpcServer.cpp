@@ -11,16 +11,15 @@ namespace Raft {
       Term x = rand() % 65536;
       reply->set_term(x);
       reply->set_votegranted(1);
-      std::cout << adr << " receives the request " << request->term();
+      std::cout << localId << " receives the request " << request->term();
       std::cout << " and returns a reply " << x << std::endl;
       boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
       return grpc::Status::OK;
     }
-    void RaftRpcServer::start(const std::string &_address) {
-      address = _address;
-      service.adr = _address;
+    void RaftRpcServer::start(const std::string &str) {
+      service.localId = str;
       grpc::ServerBuilder builder;
-      builder.AddListeningPort(address, grpc::InsecureServerCredentials());
+      builder.AddListeningPort(str, grpc::InsecureServerCredentials());
       builder.RegisterService(&service);
       server = builder.BuildAndStart();
       serviceThread = boost::thread([this]{server->Wait();});

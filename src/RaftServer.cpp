@@ -4,11 +4,11 @@
 #include "RaftServer.h"
 
 namespace Raft {
-  RaftServer::RaftServer(const std::string &fileName) : info(fileName) {}
+  RaftServer::RaftServer(const std::string &fileName) : clusters(fileName) {}
   void RaftServer::start() {
     rpcServer = std::make_unique<Rpc::RaftRpcServer>();
-    std::cout << "The local Address : " << info.local << std::endl;
-    rpcServer->start(info.local);
+    std::cout << "The local Address : " << clusters.localId << std::endl;
+    rpcServer->start(clusters.localId);
 
     //boost::this_thread::sleep_for(boost::chrono::milliseconds(10000));
     std::cout <<"rpcServer has been built, rpcClient is going to be built..." << std::endl;  
@@ -22,8 +22,8 @@ namespace Raft {
     std::cout << std::put_time(ptm,"%X") << " reached!\n";
 
     std::vector<std::shared_ptr<grpc::Channel> > channels;
-    for(int i = 0; i < info.serverList.size(); ++i) {
-      channels.emplace_back(grpc::CreateChannel(info.serverList[i], grpc::InsecureChannelCredentials()));
+    for(int i = 0; i < clusters.serverList.size(); ++i) {
+      channels.emplace_back(grpc::CreateChannel(clusters.serverList[i], grpc::InsecureChannelCredentials()));
     }
     rpcClient = std::make_unique<Rpc::RaftRpcClient>(channels);
   }

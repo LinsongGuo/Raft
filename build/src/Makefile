@@ -233,33 +233,6 @@ RaftServer.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.s
 .PHONY : RaftServer.cpp.s
 
-RaftServerInfo.o: RaftServerInfo.cpp.o
-
-.PHONY : RaftServerInfo.o
-
-# target to build an object file
-RaftServerInfo.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o
-.PHONY : RaftServerInfo.cpp.o
-
-RaftServerInfo.i: RaftServerInfo.cpp.i
-
-.PHONY : RaftServerInfo.i
-
-# target to preprocess a source file
-RaftServerInfo.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServerInfo.cpp.i
-.PHONY : RaftServerInfo.cpp.i
-
-RaftServerInfo.s: RaftServerInfo.cpp.s
-
-.PHONY : RaftServerInfo.s
-
-# target to generate assembly for a file
-RaftServerInfo.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServerInfo.cpp.s
-.PHONY : RaftServerInfo.cpp.s
-
 Rpc/RaftRpc.grpc.pb.o: Rpc/RaftRpc.grpc.pb.cc.o
 
 .PHONY : Rpc/RaftRpc.grpc.pb.o
@@ -368,33 +341,6 @@ Rpc/RaftRpcServer.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.s
 .PHONY : Rpc/RaftRpcServer.cpp.s
 
-Timer.o: Timer.cpp.o
-
-.PHONY : Timer.o
-
-# target to build an object file
-Timer.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Timer.cpp.o
-.PHONY : Timer.cpp.o
-
-Timer.i: Timer.cpp.i
-
-.PHONY : Timer.i
-
-# target to preprocess a source file
-Timer.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Timer.cpp.i
-.PHONY : Timer.cpp.i
-
-Timer.s: Timer.cpp.s
-
-.PHONY : Timer.s
-
-# target to generate assembly for a file
-Timer.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Timer.cpp.s
-.PHONY : Timer.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -443,9 +389,6 @@ help:
 	@echo "... RaftServer.o"
 	@echo "... RaftServer.i"
 	@echo "... RaftServer.s"
-	@echo "... RaftServerInfo.o"
-	@echo "... RaftServerInfo.i"
-	@echo "... RaftServerInfo.s"
 	@echo "... Rpc/RaftRpc.grpc.pb.o"
 	@echo "... Rpc/RaftRpc.grpc.pb.i"
 	@echo "... Rpc/RaftRpc.grpc.pb.s"
@@ -458,9 +401,6 @@ help:
 	@echo "... Rpc/RaftRpcServer.o"
 	@echo "... Rpc/RaftRpcServer.i"
 	@echo "... Rpc/RaftRpcServer.s"
-	@echo "... Timer.o"
-	@echo "... Timer.i"
-	@echo "... Timer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

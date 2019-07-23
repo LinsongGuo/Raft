@@ -101,22 +101,10 @@ RaftRpc.pb.h
 ../include/RaftRpc.pb.h
 RaftRpc.grpc.pb.h
 ../include/RaftRpc.grpc.pb.h
-RaftServerInfo.h
-../include/RaftServerInfo.h
 RaftRpcServer.h
 ../include/RaftRpcServer.h
 RaftRpcClient.h
 ../include/RaftRpcClient.h
-
-../include/RaftServerInfo.h
-vector
--
-boost/property_tree/json_parser.hpp
--
-boost/property_tree/ptree.hpp
--
-defines.h
-../include/defines.h
 
 ../include/Rpc/RaftRpc.grpc.pb.h
 RaftRpc.pb.h
@@ -233,6 +221,14 @@ defines.h
 ../include/defines.h
 iostream
 -
+vector
+-
+boost/chrono/chrono.hpp
+-
+boost/property_tree/json_parser.hpp
+-
+boost/property_tree/ptree.hpp
+-
 
 /home/gls/Raft/src/External/Client.cpp
 atomic
@@ -316,14 +312,6 @@ thread
 RaftServer.h
 /home/gls/Raft/src/RaftServer.h
 
-/home/gls/Raft/src/RaftServerInfo.cpp
-boost/property_tree/json_parser.hpp
--
-boost/property_tree/ptree.hpp
--
-RaftServerInfo.h
-/home/gls/Raft/src/RaftServerInfo.h
-
 /home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc
 RaftRpc.pb.h
 /home/gls/Raft/src/Rpc/RaftRpc.pb.h
@@ -385,12 +373,6 @@ RaftRpcClient.h
 /home/gls/Raft/src/Rpc/RaftRpcServer.cpp
 RaftRpcServer.h
 /home/gls/Raft/src/Rpc/RaftRpcServer.h
-
-/home/gls/Raft/src/Timer.cpp
-boost/chrono/chrono.hpp
--
-defines.h
-/home/gls/Raft/src/defines.h
 
 /home/gls/Raft/src/main.cpp
 cstdlib

@@ -339,7 +339,6 @@ src/CMakeFiles/raft.dir/External/External.pb.cc.o: /usr/local/include/google/pro
 src/CMakeFiles/raft.dir/External/External.pb.cc.o: /usr/local/include/google/protobuf/wire_format_lite.h
 
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/RaftServer.h
-src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/RaftServerInfo.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Rpc/RaftRpc.pb.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Rpc/RaftRpcClient.h
@@ -530,10 +529,6 @@ src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/grpcpp/support/chan
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/grpcpp/support/config.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/grpcpp/support/status.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/grpcpp/support/string_ref.h
-
-src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o: ../include/RaftServerInfo.h
-src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o: ../include/defines.h
-src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o: ../src/RaftServerInfo.cpp
 
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o: ../include/Rpc/RaftRpc.grpc.pb.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o: ../include/Rpc/RaftRpc.pb.h
@@ -1077,11 +1072,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/grpcpp/suppo
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/grpcpp/support/status.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/grpcpp/support/string_ref.h
 
-src/CMakeFiles/raft.dir/Timer.cpp.o: ../include/defines.h
-src/CMakeFiles/raft.dir/Timer.cpp.o: ../src/Timer.cpp
-
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/RaftServer.h
-src/CMakeFiles/raft.dir/main.cpp.o: ../include/RaftServerInfo.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/Rpc/RaftRpc.pb.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/Rpc/RaftRpcClient.h

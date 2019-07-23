@@ -340,7 +340,6 @@ src/CMakeFiles/raft.dir/External/External.pb.cc.o
  /usr/local/include/google/protobuf/wire_format_lite.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o
  ../include/RaftServer.h
- ../include/RaftServerInfo.h
  ../include/Rpc/RaftRpc.grpc.pb.h
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
@@ -531,10 +530,6 @@ src/CMakeFiles/raft.dir/RaftServer.cpp.o
  /usr/local/include/grpcpp/support/config.h
  /usr/local/include/grpcpp/support/status.h
  /usr/local/include/grpcpp/support/string_ref.h
-src/CMakeFiles/raft.dir/RaftServerInfo.cpp.o
- ../include/RaftServerInfo.h
- ../include/defines.h
- /home/gls/Raft/src/RaftServerInfo.cpp
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o
  ../include/Rpc/RaftRpc.grpc.pb.h
  ../include/Rpc/RaftRpc.pb.h
@@ -1077,12 +1072,8 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o
  /usr/local/include/grpcpp/support/config.h
  /usr/local/include/grpcpp/support/status.h
  /usr/local/include/grpcpp/support/string_ref.h
-src/CMakeFiles/raft.dir/Timer.cpp.o
- ../include/defines.h
- /home/gls/Raft/src/Timer.cpp
 src/CMakeFiles/raft.dir/main.cpp.o
  ../include/RaftServer.h
- ../include/RaftServerInfo.h
  ../include/Rpc/RaftRpc.grpc.pb.h
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
