@@ -8,6 +8,6 @@ int main() {
   std::cin >> fileName;
 	std::unique_ptr<Raft::RaftServer>raftServer(new Raft::RaftServer(fileName));
   raftServer->start();
-  raftServer->RequestVotes();
+  //raftServer->RequestVotes();
   return 0;
 }

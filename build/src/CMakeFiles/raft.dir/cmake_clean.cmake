@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/raft.dir/External/Client.cpp.o"
   "CMakeFiles/raft.dir/RaftServer.cpp.o"
-  "CMakeFiles/raft.dir/Role/Base.cpp.o"
   "CMakeFiles/raft.dir/Role/Candidate.cpp.o"
   "CMakeFiles/raft.dir/Role/Follower.cpp.o"
   "CMakeFiles/raft.dir/Role/Leader.cpp.o"
+  "CMakeFiles/raft.dir/Role/Role.cpp.o"
   "CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o"
   "CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o"
   "CMakeFiles/raft.dir/Task.cpp.o"

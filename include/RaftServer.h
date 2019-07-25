@@ -3,11 +3,13 @@
 
 #include <cstdio>
 #include <iostream>
+#include <functional>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/lock_factories.hpp>
-#include <boost/fiber/future/future.hpp>
+#include <boost/thread/future.hpp>
 #include "defines.h"
 #include "Task.h"
+#include "Role.h"
 #include "RaftRpc.pb.h"
 #include "RaftRpc.grpc.pb.h"
 #include "RaftRpcServer.h"
@@ -16,31 +18,32 @@
 namespace Raft {
   class RaftServer {
   private:
-    RaftServerRole currentRole;
     RaftServerCluster cluster;
     RaftServerInfo info;
     
-    std::unique_ptr<Rpc::RaftRpcServer> rpcServer;
-    std::unique_ptr<Rpc::RaftRpcClient> rpcClient;
+    std::shared_ptr<Rpc::RaftRpcServer> rpcServer;
+    std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
     
-    std::queue<Task::Type> taskQueue;
-    std::queue<Task::Put> putQueue;
-    std::queue<Task::Get> getQueue;
-    std::queue<Task::RespondRequestVote> respondRequestVoteQueue;
-    std::queue<Task::RespondAppendEntries> respondAppendEntiresQueue;
-    std::queue<Task::Heartbeat> heartbeatQueue;
-    std::queue<Task::Transform> transformQueue;
-    
+    std::queue<TaskType> taskQueue;
+    std::queue<PutTask> putQueue;
+    std::queue<GetTask> getQueue;
+    std::queue<RespondRequestVoteTask> respondRequestVoteQueue;
+    std::queue<RespondAppendEntriesTask> respondAppendEntiresQueue;
+    std::queue<HeartbeatTask> heartbeatQueue;
+    std::queue<TransformTask> transformQueue;
     boost::mutex queueMutex;
     boost::condition_variable queueCond;
-   // unique_ptr<Role> roles[4];
+    boost::thread queueThread;
+
+    std::unique_ptr<Role> roles[4];
+    RaftServerRole currentRole;
 
   public:
     RaftServer(const std::string &fileName);
     void start();
-    void RequestVotes();
+    void shutdown();    
     void executeTask();
-    RequestVoteReply respondRequestVote(const RequestVoteRequest &requset);
+    RequestVoteReply respondRequestVote(RequestVoteRequest requset);
 
   };
 }

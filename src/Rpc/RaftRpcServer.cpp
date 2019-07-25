@@ -3,8 +3,8 @@
 namespace Raft {
   namespace Rpc {
     grpc::Status RaftRpcServiceImpl::RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *rpcRequest, RpcAppendEntriesReply *rpcReply) {
-      reply->set_term(233);
-      reply->set_success(1);
+      rpcReply->set_term(233);
+      rpcReply->set_success(1);
       return grpc::Status::OK;
     }
     grpc::Status RaftRpcServiceImpl::RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *rpcRequest, RpcRequestVoteReply *rpcReply) {
@@ -14,26 +14,11 @@ namespace Raft {
         rpcRequest->lastlogindex()
       );
       RequestVoteReply reply = respondRequestVote(request);
-      rpcRequest->set_success(reply.success);
-      rpcRequest->set_term(reply.term);
+      rpcReply->set_votegranted(reply.voteGranted);
+      rpcReply->set_term(reply.term);
       return grpc::Status::OK;
     }
-    template <class T> 
-    void RaftRpcServiceImpl::bindRespondRequestVote(T &&func) {
-      respondRequestVote = std::forward<T>(func);
-    }
-    template<class T>
-    void RaftRpcServiceImpl::bindRespondAppendEntries(T &&func) {
-      respondAppendEntries = std::forward<T>(func);
-    }
-    template <class T> 
-    void RaftRpcServer::bindRespondRequestVote(T &&func) {
-      service.bindRespondRequestVote<T>(std::forward<T>(func));
-    }
-    template<class T>
-    void RaftRpcServer::bindRespondAppendEntries(T &&func) {
-      service.bindrespondAppendEntries<T>(std::forward<T>(func));
-    }
+
     void RaftRpcServer::start(const std::string &str) {
       service.localId = str;
       grpc::ServerBuilder builder;

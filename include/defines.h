@@ -1,6 +1,8 @@
 #ifndef RAFT_DEFINES_H
 #define RAFT_DEFINES_H
 
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 #include <vector>
 #include <boost/chrono/chrono.hpp>
@@ -9,17 +11,20 @@
 
 namespace Raft {
   using Term = uint64_t;
-  const Term invalidTerm = 0;
+  extern const Term invalidTerm;
 
   using Index = uint64_t; 
-  const Index invalidIndex = 0;
+  extern const Index invalidIndex;
 
   using Timer = uint64_t;
-
+  Timer randTimer(Timer range);
+  extern const Timer broadcastTimeout;
+  
   using Address = std::string;  
   using Port = uint16_t; 
   using ServerId = std::string;
-  const ServerId invalidServerId = " : ";
+  extern const ServerId invalidServerId;
+
 
   enum RaftServerRole {
     Follower, Candidate, Leader, DeadServer
@@ -71,7 +76,8 @@ namespace Raft {
     Term currentTerm;
     ServerId votedFor;
     Index commitIndex, lastApplied;
-    RaftServerInfo(Term _currentTerm = invalidTerm, ServerId _votedFor = invalidServerId, Index _commitIndex = invalidIndex, Index _lastApplied = invalidIndex);
+    Timer electionTimeout;
+    RaftServerInfo(Term _currentTerm);
   };
 }
 #endif

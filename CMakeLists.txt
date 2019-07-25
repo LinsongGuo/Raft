@@ -4,8 +4,12 @@ project(raft)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) 
 
-#set(Boost_USE_STATIC_LIBS FALSE)
+set(Boost_USE_STATIC_LIBS FALSE)
 find_package(Boost REQUIRED COMPONENTS thread chrono)
+add_definitions(
+        -D BOOST_THREAD_VERSION=4
+        -D BOOST_LOG_DYN_LINK
+)
 
 find_package(Protobuf REQUIRED)
 

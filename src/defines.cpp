@@ -1,8 +1,18 @@
-#include "define.h"
+#include "defines.h"
 
 namespace Raft {
+  const Term invalidTerm = 0;
+
+  const Index invalidIndex = 0;
+
+  const ServerId invalidServerId = " : ";
+
+  const Timer broadcastTimeout = 10;
   Timer getTime() {
     return boost::chrono::duration_cast<boost::chrono::milliseconds>(boost::chrono::system_clock::now().time_since_epoch()).count();
+  }
+  Timer randTimer(Timer range) {
+    return range + rand() % (range + 1);
   }
 
   ServerId getServerId(const Address &address, const Port &port) {
@@ -40,7 +50,7 @@ namespace Raft {
     }
   }
 
-  RaftServerInfo::RaftServerInfo(Term _currentTerm = invalidTerm, ServerId _votedFor = invalidServerId, Index _commitIndex = invalidIndex, Index _lastApplied = invalidIndex):
-    currentTerm(_currentTerm), votedFor(_votedFor), commitIndex(_commitIndex), lastApplied(_lastApplied) {;}
+  RaftServerInfo::RaftServerInfo(Term _currentTerm):
+    currentTerm(_currentTerm) , electionTimeout(150) {;}
 }
 

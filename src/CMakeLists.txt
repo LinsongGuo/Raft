@@ -1,4 +1,4 @@
-file(GLOB_RECURSE SRC_LIST *.cpp *.cc)
+file(GLOB_RECURSE SRC_LIST *.cpp *.cc *.h)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_link_libraries(${PROJECT_NAME} 
 	PRIVATE

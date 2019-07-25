@@ -95,16 +95,20 @@ cstdio
 -
 iostream
 -
+functional
+-
 boost/thread/thread.hpp
 -
 boost/thread/lock_factories.hpp
 -
-boost/fiber/future/future.hpp
+boost/thread/future.hpp
 -
 defines.h
 ../include/defines.h
 Task.h
 ../include/Task.h
+Role.h
+../include/Role.h
 RaftRpc.pb.h
 ../include/RaftRpc.pb.h
 RaftRpc.grpc.pb.h
@@ -114,7 +118,23 @@ RaftRpcServer.h
 RaftRpcClient.h
 ../include/RaftRpcClient.h
 
-../include/Role/Base.h
+../include/Role/Candidate.h
+Role.h
+../include/Role/Role.h
+boost/thread/thread.hpp
+-
+boost/thread/future.hpp
+-
+
+../include/Role/Follower.h
+Role.h
+../include/Role/Role.h
+
+../include/Role/Leader.h
+Role.h
+../include/Role/Role.h
+
+../include/Role/Role.h
 cstdio
 -
 iostream
@@ -123,18 +143,12 @@ defines.h
 ../include/Role/defines.h
 RaftRpcClient.h
 ../include/Role/RaftRpcClient.h
-
-../include/Role/Candidate.h
-Base.h
-../include/Role/Base.h
-
-../include/Role/Follower.h
-Base.h
-../include/Role/Base.h
-
-../include/Role/Leader.h
-Base.h
-../include/Role/Base.h
+RaftRpcServer.h
+../include/Role/RaftRpcServer.h
+RaftRpc.pb.h
+../include/Role/RaftRpc.pb.h
+RaftRpc.grpc.pb.h
+../include/Role/RaftRpc.grpc.pb.h
 
 ../include/Rpc/RaftRpc.grpc.pb.h
 RaftRpc.pb.h
@@ -257,6 +271,10 @@ defines.h
 ../include/defines.h
 
 ../include/defines.h
+ctime
+-
+cstdlib
+-
 iostream
 -
 vector
@@ -343,10 +361,10 @@ google/protobuf/port_undef.inc
 /home/gls/Raft/src/RaftServer.cpp
 RaftServer.h
 /home/gls/Raft/src/RaftServer.h
-
-/home/gls/Raft/src/Role/Base.cpp
-Base.h
-/home/gls/Raft/src/Role/Base.h
+chrono
+-
+thread
+-
 
 /home/gls/Raft/src/Role/Candidate.cpp
 Candidate.h
@@ -359,6 +377,10 @@ Follower.h
 /home/gls/Raft/src/Role/Leader.cpp
 Leader.h
 /home/gls/Raft/src/Role/Leader.h
+
+/home/gls/Raft/src/Role/Role.cpp
+Role.h
+/home/gls/Raft/src/Role/Role.h
 
 /home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc
 RaftRpc.pb.h
@@ -427,8 +449,8 @@ Task.h
 /home/gls/Raft/src/Task.h
 
 /home/gls/Raft/src/defines.cpp
-define.h
-/home/gls/Raft/src/define.h
+defines.h
+/home/gls/Raft/src/defines.h
 
 /home/gls/Raft/src/main.cpp
 cstdlib

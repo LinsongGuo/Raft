@@ -233,33 +233,6 @@ RaftServer.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.s
 .PHONY : RaftServer.cpp.s
 
-Role/Base.o: Role/Base.cpp.o
-
-.PHONY : Role/Base.o
-
-# target to build an object file
-Role/Base.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.o
-.PHONY : Role/Base.cpp.o
-
-Role/Base.i: Role/Base.cpp.i
-
-.PHONY : Role/Base.i
-
-# target to preprocess a source file
-Role/Base.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.i
-.PHONY : Role/Base.cpp.i
-
-Role/Base.s: Role/Base.cpp.s
-
-.PHONY : Role/Base.s
-
-# target to generate assembly for a file
-Role/Base.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Base.cpp.s
-.PHONY : Role/Base.cpp.s
-
 Role/Candidate.o: Role/Candidate.cpp.o
 
 .PHONY : Role/Candidate.o
@@ -340,6 +313,33 @@ Role/Leader.s: Role/Leader.cpp.s
 Role/Leader.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.s
 .PHONY : Role/Leader.cpp.s
+
+Role/Role.o: Role/Role.cpp.o
+
+.PHONY : Role/Role.o
+
+# target to build an object file
+Role/Role.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.o
+.PHONY : Role/Role.cpp.o
+
+Role/Role.i: Role/Role.cpp.i
+
+.PHONY : Role/Role.i
+
+# target to preprocess a source file
+Role/Role.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.i
+.PHONY : Role/Role.cpp.i
+
+Role/Role.s: Role/Role.cpp.s
+
+.PHONY : Role/Role.s
+
+# target to generate assembly for a file
+Role/Role.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.s
+.PHONY : Role/Role.cpp.s
 
 Rpc/RaftRpc.grpc.pb.o: Rpc/RaftRpc.grpc.pb.cc.o
 
@@ -551,9 +551,6 @@ help:
 	@echo "... RaftServer.o"
 	@echo "... RaftServer.i"
 	@echo "... RaftServer.s"
-	@echo "... Role/Base.o"
-	@echo "... Role/Base.i"
-	@echo "... Role/Base.s"
 	@echo "... Role/Candidate.o"
 	@echo "... Role/Candidate.i"
 	@echo "... Role/Candidate.s"
@@ -563,6 +560,9 @@ help:
 	@echo "... Role/Leader.o"
 	@echo "... Role/Leader.i"
 	@echo "... Role/Leader.s"
+	@echo "... Role/Role.o"
+	@echo "... Role/Role.i"
+	@echo "... Role/Role.s"
 	@echo "... Rpc/RaftRpc.grpc.pb.o"
 	@echo "... Rpc/RaftRpc.grpc.pb.i"
 	@echo "... Rpc/RaftRpc.grpc.pb.s"

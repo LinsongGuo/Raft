@@ -7,12 +7,18 @@ namespace Raft {
         stubs.emplace_back(RaftRpc::NewStub(channels[i]));
       }
     }
-    bool RaftRpcClient::RpcRequestVote(size_t id, const RpcRequestVoteRequest &request, RpcRequestVoteReply &reply) {
+    std::pair<bool, RequestVoteReply> RaftRpcClient::sendRequestVote(size_t id, const RequestVoteRequest &request) {
+      RpcRequestVoteRequest rpcRequest;
+      rpcRequest.set_candidateid(request.candidateId);
+      rpcRequest.set_term(request.term);
+      RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      grpc::Status status = stubs[id]->RpcRequestVote(&context, request, &reply);
-      std::cout <<"sending..." << std::endl;
-      return status.ok();
+      context.set_deadline(boost::chrono::system_clock::now() + boost::chrono::milliseconds(broadcastTimeout));
+      grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
+      std::cout <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
+      return std::make_pair(status.ok(), RequestVoteReply(rpcReply.term(), rpcReply.votegranted()));
     }
+    /*
     void RaftRpcClient::RpcRequestVotes(const RpcRequestVoteRequest &request) {
     	for(size_t i = 0; i < stubs.size(); ++i) {
 		     RpcRequestVoteReply reply;
@@ -22,5 +28,6 @@ namespace Raft {
         else std::cout << "error..." << std::endl;
     	}
     }
+    */
   }
 }

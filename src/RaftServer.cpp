@@ -1,21 +1,37 @@
 #include "RaftServer.h"
+#include <chrono>
+#include <thread>
 
 namespace Raft {
-  RaftServer::RaftServer(const std::string &fileName) : cluster(fileName), info(1) {}
-
+  RaftServer::RaftServer(const std::string &fileName) : cluster(fileName), info(1) {
+    roles[RaftServerRole::Follower] = std::make_unique<Role>(Role(
+      std::make_shared<RaftServerInfo>(info),
+      std::make_shared<RaftServerCluster>(cluster), 
+      rpcClient));
+    roles[RaftServerRole::Candidate] = std::make_unique<Role>(Role(
+      std::make_shared<RaftServerInfo>(info),
+      std::make_shared<RaftServerCluster>(cluster), 
+      rpcClient));
+    roles[RaftServerRole::Leader] = std::make_unique<Role>(Role(
+      std::make_shared<RaftServerInfo>(info),
+      std::make_shared<RaftServerCluster>(cluster), 
+      rpcClient));
+  }
+  /*
   void RaftServer::RequestVotes() {
     Rpc::RpcRequestVoteRequest request;
     Term x = rand() % 65536;
     request.set_term(x);
     std::cout << "The local is going to send requests " << x << " to all servers..." << std::endl;
     rpcClient->RpcRequestVotes(request);
-  }
-  RequestVoteReply RaftServer::respondRequestVote(const RequestVoteRequest& request) {
+  }*/
+
+  RequestVoteReply RaftServer::respondRequestVote(RequestVoteRequest request) {
     boost::promise<RequestVoteReply> prm;
-    boost::unique_future<RequestVoteReply> fut = prm.get_future();
+    boost::future<RequestVoteReply> fut = prm.get_future();
     boost::unique_lock<boost::mutex> lk(queueMutex);
-    taskQueue.push(Task::Type::respondRequestVote);
-    respondRequestVoteQueue.push(Task::RespondRequestVote(request, prm));
+    taskQueue.push(TaskType::respondRequestVote);
+    respondRequestVoteQueue.push(RespondRequestVoteTask(request, prm));
     queueCond.notify_one();
     return fut.get();
   }
@@ -25,9 +41,9 @@ namespace Raft {
       queueCond.wait(lk, [this]{return !taskQueue.empty(); });
       while (!taskQueue.empty()) {
         switch(taskQueue.front()) {
-          case Task::Type::respondRequestVote: {
-            auto &tmp = respondRequestVoteQueue.front();
-           // tmp.prm->set_value(roles[currentRole]->respondRequestVote(tmp.request));
+          case TaskType::respondRequestVote: {
+            auto tmp = respondRequestVoteQueue.front();
+            tmp.prm.set_value(roles[currentRole]->respondRequestVote(tmp.request));
             respondRequestVoteQueue.pop();
             break;
           }  
@@ -37,11 +53,14 @@ namespace Raft {
     }
   }
   void RaftServer::start() {
+    srand(time(NULL));
+    currentRole = RaftServerRole::Follower;
     rpcServer = std::make_unique<Rpc::RaftRpcServer>();
     rpcServer->bindRespondRequestVote(std::bind(&RaftServer::respondRequestVote, this, std::placeholders::_1));
     std::cout << "The local Address : " << cluster.localId << std::endl;
     rpcServer->start(cluster.localId);
-
+    queueThread = boost::thread(std::bind(&RaftServer::executeTask, this));
+    // &RaftServer::executeTask ???
 
     std::cout <<"rpcServer has been built, rpcClient is going to be built..." << std::endl;  
     std::time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
@@ -58,6 +77,11 @@ namespace Raft {
       channels.emplace_back(grpc::CreateChannel(cluster.serverList[i], grpc::InsecureChannelCredentials()));
     }
     rpcClient = std::make_unique<Rpc::RaftRpcClient>(channels);
+  }
+  void RaftServer::shutdown() {
+    rpcServer->shutdown();
+    queueThread.interrupt();
+    queueThread.join();
   }
 }
 
