@@ -476,6 +476,33 @@ Task.cpp.s:
 	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.s
 .PHONY : Task.cpp.s
 
+Transformer.o: Transformer.cpp.o
+
+.PHONY : Transformer.o
+
+# target to build an object file
+Transformer.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.o
+.PHONY : Transformer.cpp.o
+
+Transformer.i: Transformer.cpp.i
+
+.PHONY : Transformer.i
+
+# target to preprocess a source file
+Transformer.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.i
+.PHONY : Transformer.cpp.i
+
+Transformer.s: Transformer.cpp.s
+
+.PHONY : Transformer.s
+
+# target to generate assembly for a file
+Transformer.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.s
+.PHONY : Transformer.cpp.s
+
 defines.o: defines.cpp.o
 
 .PHONY : defines.o
@@ -578,6 +605,9 @@ help:
 	@echo "... Task.o"
 	@echo "... Task.i"
 	@echo "... Task.s"
+	@echo "... Transformer.o"
+	@echo "... Transformer.i"
+	@echo "... Transformer.s"
 	@echo "... defines.o"
 	@echo "... defines.i"
 	@echo "... defines.s"

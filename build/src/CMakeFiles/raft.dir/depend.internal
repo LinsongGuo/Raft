@@ -340,12 +340,16 @@ src/CMakeFiles/raft.dir/External/External.pb.cc.o
  /usr/local/include/google/protobuf/wire_format_lite.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o
  ../include/RaftServer.h
+ ../include/Role/Candidate.h
+ ../include/Role/Follower.h
+ ../include/Role/Leader.h
  ../include/Role/Role.h
  ../include/Rpc/RaftRpc.grpc.pb.h
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
  ../include/Task.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/RaftServer.cpp
  /usr/local/include/google/protobuf/any.h
@@ -539,6 +543,7 @@ src/CMakeFiles/raft.dir/Role/Candidate.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/Role/Candidate.cpp
  /usr/local/include/google/protobuf/any.h
@@ -732,6 +737,7 @@ src/CMakeFiles/raft.dir/Role/Follower.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/Role/Follower.cpp
  /usr/local/include/google/protobuf/any.h
@@ -925,6 +931,7 @@ src/CMakeFiles/raft.dir/Role/Leader.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/Role/Leader.cpp
  /usr/local/include/google/protobuf/any.h
@@ -1117,6 +1124,7 @@ src/CMakeFiles/raft.dir/Role/Role.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/Role/Role.cpp
  /usr/local/include/google/protobuf/any.h
@@ -1849,17 +1857,25 @@ src/CMakeFiles/raft.dir/Task.cpp.o
  ../include/Task.h
  ../include/defines.h
  /home/gls/Raft/src/Task.cpp
+src/CMakeFiles/raft.dir/Transformer.cpp.o
+ ../include/Transformer.h
+ ../include/defines.h
+ /home/gls/Raft/src/Transformer.cpp
 src/CMakeFiles/raft.dir/defines.cpp.o
  ../include/defines.h
  /home/gls/Raft/src/defines.cpp
 src/CMakeFiles/raft.dir/main.cpp.o
  ../include/RaftServer.h
+ ../include/Role/Candidate.h
+ ../include/Role/Follower.h
+ ../include/Role/Leader.h
  ../include/Role/Role.h
  ../include/Rpc/RaftRpc.grpc.pb.h
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/Rpc/RaftRpcServer.h
  ../include/Task.h
+ ../include/Transformer.h
  ../include/defines.h
  /home/gls/Raft/src/main.cpp
  /usr/local/include/google/protobuf/any.h

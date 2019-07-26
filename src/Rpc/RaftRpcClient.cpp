@@ -13,9 +13,9 @@ namespace Raft {
       rpcRequest.set_term(request.term);
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      context.set_deadline(boost::chrono::system_clock::now() + boost::chrono::milliseconds(broadcastTimeout));
-      grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
+      context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       std::cout <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
+      grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
       return std::make_pair(status.ok(), RequestVoteReply(rpcReply.term(), rpcReply.votegranted()));
     }
     /*

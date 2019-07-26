@@ -273,9 +273,33 @@ src/CMakeFiles/raft.dir/Task.cpp.o.provides: src/CMakeFiles/raft.dir/Task.cpp.o.
 src/CMakeFiles/raft.dir/Task.cpp.o.provides.build: src/CMakeFiles/raft.dir/Task.cpp.o
 
 
+src/CMakeFiles/raft.dir/Transformer.cpp.o: src/CMakeFiles/raft.dir/flags.make
+src/CMakeFiles/raft.dir/Transformer.cpp.o: ../src/Transformer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/raft.dir/Transformer.cpp.o"
+	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/Transformer.cpp.o -c /home/gls/Raft/src/Transformer.cpp
+
+src/CMakeFiles/raft.dir/Transformer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raft.dir/Transformer.cpp.i"
+	cd /home/gls/Raft/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gls/Raft/src/Transformer.cpp > CMakeFiles/raft.dir/Transformer.cpp.i
+
+src/CMakeFiles/raft.dir/Transformer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raft.dir/Transformer.cpp.s"
+	cd /home/gls/Raft/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gls/Raft/src/Transformer.cpp -o CMakeFiles/raft.dir/Transformer.cpp.s
+
+src/CMakeFiles/raft.dir/Transformer.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/raft.dir/Transformer.cpp.o.requires
+
+src/CMakeFiles/raft.dir/Transformer.cpp.o.provides: src/CMakeFiles/raft.dir/Transformer.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.o.provides.build
+.PHONY : src/CMakeFiles/raft.dir/Transformer.cpp.o.provides
+
+src/CMakeFiles/raft.dir/Transformer.cpp.o.provides.build: src/CMakeFiles/raft.dir/Transformer.cpp.o
+
+
 src/CMakeFiles/raft.dir/defines.cpp.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/defines.cpp.o: ../src/defines.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/raft.dir/defines.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/raft.dir/defines.cpp.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/defines.cpp.o -c /home/gls/Raft/src/defines.cpp
 
 src/CMakeFiles/raft.dir/defines.cpp.i: cmake_force
@@ -299,7 +323,7 @@ src/CMakeFiles/raft.dir/defines.cpp.o.provides.build: src/CMakeFiles/raft.dir/de
 
 src/CMakeFiles/raft.dir/main.cpp.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/raft.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/raft.dir/main.cpp.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/main.cpp.o -c /home/gls/Raft/src/main.cpp
 
 src/CMakeFiles/raft.dir/main.cpp.i: cmake_force
@@ -323,7 +347,7 @@ src/CMakeFiles/raft.dir/main.cpp.o.provides.build: src/CMakeFiles/raft.dir/main.
 
 src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o: ../src/External/External.grpc.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/External/External.grpc.pb.cc.o -c /home/gls/Raft/src/External/External.grpc.pb.cc
 
 src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.i: cmake_force
@@ -347,7 +371,7 @@ src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o.provides.build: src/CMake
 
 src/CMakeFiles/raft.dir/External/External.pb.cc.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/External/External.pb.cc.o: ../src/External/External.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/raft.dir/External/External.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/raft.dir/External/External.pb.cc.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/External/External.pb.cc.o -c /home/gls/Raft/src/External/External.pb.cc
 
 src/CMakeFiles/raft.dir/External/External.pb.cc.i: cmake_force
@@ -371,7 +395,7 @@ src/CMakeFiles/raft.dir/External/External.pb.cc.o.provides.build: src/CMakeFiles
 
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o: ../src/Rpc/RaftRpc.grpc.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o -c /home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc
 
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.i: cmake_force
@@ -395,7 +419,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o.provides.build: src/CMakeFiles/
 
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o: src/CMakeFiles/raft.dir/flags.make
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o: ../src/Rpc/RaftRpc.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o"
 	cd /home/gls/Raft/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o -c /home/gls/Raft/src/Rpc/RaftRpc.pb.cc
 
 src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.i: cmake_force
@@ -428,6 +452,7 @@ raft_OBJECTS = \
 "CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o" \
 "CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o" \
 "CMakeFiles/raft.dir/Task.cpp.o" \
+"CMakeFiles/raft.dir/Transformer.cpp.o" \
 "CMakeFiles/raft.dir/defines.cpp.o" \
 "CMakeFiles/raft.dir/main.cpp.o" \
 "CMakeFiles/raft.dir/External/External.grpc.pb.cc.o" \
@@ -447,6 +472,7 @@ raft_EXTERNAL_OBJECTS =
 ../bin/raft: src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o
 ../bin/raft: src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o
 ../bin/raft: src/CMakeFiles/raft.dir/Task.cpp.o
+../bin/raft: src/CMakeFiles/raft.dir/Transformer.cpp.o
 ../bin/raft: src/CMakeFiles/raft.dir/defines.cpp.o
 ../bin/raft: src/CMakeFiles/raft.dir/main.cpp.o
 ../bin/raft: src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o
@@ -465,7 +491,7 @@ raft_EXTERNAL_OBJECTS =
 ../bin/raft: /usr/local/lib/libgrpc.so
 ../bin/raft: /usr/local/lib/libgpr.so
 ../bin/raft: src/CMakeFiles/raft.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable ../../bin/raft"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable ../../bin/raft"
 	cd /home/gls/Raft/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raft.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -482,6 +508,7 @@ src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/Role/Role.cpp.o.requir
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o.requires
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o.requires
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/Task.cpp.o.requires
+src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/Transformer.cpp.o.requires
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/defines.cpp.o.requires
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/main.cpp.o.requires
 src/CMakeFiles/raft.dir/requires: src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o.requires

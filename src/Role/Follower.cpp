@@ -1,9 +1,22 @@
 #include "Follower.h"
 
+#include <cstdio>
+#include <iostream>
+#include <fstream>
+
 namespace Raft {
+  Follower::Follower(std::shared_ptr<RaftServerInfo> _info, 
+    std::shared_ptr<RaftServerCluster> _cluster, 
+    std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
+    std::shared_ptr<Transformer> _transformer):
+    Role(_info, _cluster, _rpcClient, _transformer) {;}
+
   RequestVoteReply Follower::respondRequestVote(const RequestVoteRequest &request) {
+    std::cout<<"Follower respondRequestVote " <<' ' << request.candidateId <<' '<< request.term << ' ' <<info->currentTerm<<std::endl;
    sleepThread.interrupt();
-   if(request.term < info->currentTerm) return RequestVoteReply(false, info->currentTerm);
+   if(request.term < info->currentTerm) {
+    return RequestVoteReply(false, info->currentTerm);
+   }
    if(request.term > info->currentTerm) {
     info->currentTerm = request.term;
     info->votedFor = request.candidateId; 
@@ -15,17 +28,36 @@ namespace Raft {
    }
    return RequestVoteReply(false, info->currentTerm);
   }
+
   void Follower::init() {
-    Timer waitTime = randTimer(info->electionTimeout);
-    sleepThread = boost::thread([this, waitTime] {
-      while(true) {
+    std::cout << cluster->localId << " becomes a follower! ---------------------------- " << std::endl;
+    sleepThread = boost::thread([this] {
+      std::ofstream fout;
+      fout.open(cluster->localId + "-follower");
+
+      Timer waitTime = randTimer(info->electionTimeout);
+      fout <<"waitTime: " << waitTime << std::endl;
+      
+      while(true) {  
+        fout <<"sleeping..." << std::endl;
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
         }
         catch(boost::thread_interrupted &e) {
+          fout <<"catch interrupt " << std::endl;
           continue;
         }          
+        
+        fout << cluster->localId << " transform form follower to candidate." << std::endl;
+
+        transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, info->currentTerm + 1);
+        
+        fout << cluster->localId << " transform end." << std::endl;
+        break;
       }
+      fout.close();
     });
+    //boost::this_thread::sleep_for(boost::chrono::milliseconds(1000));
+    std::cout <<"end init..." << std::endl;
   }
 }

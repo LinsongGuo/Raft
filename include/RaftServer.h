@@ -10,6 +10,9 @@
 #include "defines.h"
 #include "Task.h"
 #include "Role.h"
+#include "Follower.h"
+#include "Candidate.h"
+#include "Leader.h"
 #include "RaftRpc.pb.h"
 #include "RaftRpc.grpc.pb.h"
 #include "RaftRpcServer.h"
@@ -18,11 +21,13 @@
 namespace Raft {
   class RaftServer {
   private:
-    RaftServerCluster cluster;
-    RaftServerInfo info;
+    std::shared_ptr<RaftServerCluster> cluster;
+    std::shared_ptr<RaftServerInfo> info;
     
     std::shared_ptr<Rpc::RaftRpcServer> rpcServer;
     std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
+    
+    std::shared_ptr<Transformer> transformer;
     
     std::queue<TaskType> taskQueue;
     std::queue<PutTask> putQueue;
@@ -43,6 +48,7 @@ namespace Raft {
     void start();
     void shutdown();    
     void executeTask();
+    void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
     RequestVoteReply respondRequestVote(RequestVoteRequest requset);
 
   };

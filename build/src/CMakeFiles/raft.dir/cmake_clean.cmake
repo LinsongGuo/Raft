@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o"
   "CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o"
   "CMakeFiles/raft.dir/Task.cpp.o"
+  "CMakeFiles/raft.dir/Transformer.cpp.o"
   "CMakeFiles/raft.dir/defines.cpp.o"
   "CMakeFiles/raft.dir/main.cpp.o"
   "CMakeFiles/raft.dir/External/External.grpc.pb.cc.o"

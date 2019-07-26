@@ -109,6 +109,12 @@ Task.h
 ../include/Task.h
 Role.h
 ../include/Role.h
+Follower.h
+../include/Follower.h
+Candidate.h
+../include/Candidate.h
+Leader.h
+../include/Leader.h
 RaftRpc.pb.h
 ../include/RaftRpc.pb.h
 RaftRpc.grpc.pb.h
@@ -141,6 +147,8 @@ iostream
 -
 defines.h
 ../include/Role/defines.h
+Transformer.h
+../include/Role/Transformer.h
 RaftRpcClient.h
 ../include/Role/RaftRpcClient.h
 RaftRpcServer.h
@@ -270,6 +278,14 @@ boost/thread/future.hpp
 defines.h
 ../include/defines.h
 
+../include/Transformer.h
+functional
+-
+defines.h
+../include/defines.h
+Transformer.h
+../include/Transformer.h
+
 ../include/defines.h
 ctime
 -
@@ -278,6 +294,10 @@ cstdlib
 iostream
 -
 vector
+-
+chrono
+-
+fstream
 -
 boost/chrono/chrono.hpp
 -
@@ -373,6 +393,12 @@ Candidate.h
 /home/gls/Raft/src/Role/Follower.cpp
 Follower.h
 /home/gls/Raft/src/Role/Follower.h
+cstdio
+-
+iostream
+-
+fstream
+-
 
 /home/gls/Raft/src/Role/Leader.cpp
 Leader.h
@@ -447,6 +473,10 @@ RaftRpcServer.h
 /home/gls/Raft/src/Task.cpp
 Task.h
 /home/gls/Raft/src/Task.h
+
+/home/gls/Raft/src/Transformer.cpp
+Transformer.h
+/home/gls/Raft/src/Transformer.h
 
 /home/gls/Raft/src/defines.cpp
 defines.h

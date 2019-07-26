@@ -39,7 +39,9 @@ namespace Raft {
     HeartbeatTask();
   };
   struct TransformTask {
-    TransformTask();
+    RaftServerRole fromRole, toRole;
+    Term term;
+    TransformTask(RaftServerRole _fromRole, RaftServerRole _toRole, Term _term);
   }; 
 }
 

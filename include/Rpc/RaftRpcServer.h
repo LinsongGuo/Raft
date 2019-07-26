@@ -32,7 +32,7 @@ namespace Raft {
       void bindRespondAppendEntries(T &&func) {
         respondAppendEntries = std::forward<T>(func);
       }
-        ServerId localId;  
+      ServerId localId;  
     };
     class RaftRpcServer {
     private:

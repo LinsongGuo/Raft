@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <fstream>
 #include <boost/chrono/chrono.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -27,7 +29,7 @@ namespace Raft {
 
 
   enum RaftServerRole {
-    Follower, Candidate, Leader, DeadServer
+    follower, candidate, leader, deadServer
   };
 
   struct Entry {
@@ -47,10 +49,9 @@ namespace Raft {
   struct AppendEntiresReply {
     Term term;
     bool success;
-    AppendEntiresReply(Term _term, bool _success);
+    AppendEntiresReply(bool _success, Term _term);
   };
   
-
   struct RequestVoteRequest {
     ServerId candidateId;
     Term term, lastLogTerm;
@@ -61,7 +62,7 @@ namespace Raft {
   struct RequestVoteReply {
     Term term;
     bool voteGranted;
-    RequestVoteReply(Term _term, bool _voteGranted);
+    RequestVoteReply(bool _voteGranted, Term _term);
   };
 
   struct RaftServerCluster {

@@ -22,14 +22,14 @@ namespace Raft {
   AppendEntriesRequest::AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit):
     leaderId(_leaderId), term(_term), prevLogTerm(_prevLogTerm), prevLogIndex(_prevLogIndex), leaderCommit(_leaderCommit) {;}
  
-  AppendEntiresReply::AppendEntiresReply(Term _term, bool _success): 
-    term(_term), success(_success) {;}
+  AppendEntiresReply::AppendEntiresReply(bool _success, Term _term): 
+    success(_success), term(_term) {;}
   
   RequestVoteRequest::RequestVoteRequest(ServerId _candidateId, Term _term, Term _lastLogTerm, Index _lastLogIndex):
     candidateId(_candidateId), term(_term), lastLogTerm(_lastLogTerm), lastLogIndex(_lastLogIndex) {;}
   
-  RequestVoteReply::RequestVoteReply(Term _term, bool _voteGranted): 
-    term(_term), voteGranted(_voteGranted) {;}
+  RequestVoteReply::RequestVoteReply(bool _voteGranted, Term _term): 
+    voteGranted(_voteGranted), term(_term) {;}
   
   RaftServerCluster::RaftServerCluster(): 
     localId(invalidServerId) {;}
@@ -51,6 +51,6 @@ namespace Raft {
   }
 
   RaftServerInfo::RaftServerInfo(Term _currentTerm):
-    currentTerm(_currentTerm) , electionTimeout(150) {;}
+    currentTerm(_currentTerm) , electionTimeout(1000) {;}
 }
 

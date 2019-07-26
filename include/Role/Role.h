@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <iostream>
 #include "defines.h"
+#include "Transformer.h"
 #include "RaftRpcClient.h"
 #include "RaftRpcServer.h"
 #include "RaftRpc.pb.h"
@@ -15,12 +16,14 @@ namespace Raft {
     std::shared_ptr<RaftServerInfo> info;
     std::shared_ptr<RaftServerCluster> cluster;
     std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
+    std::shared_ptr<Transformer> transformer;
   public:
     Role(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 
-      std::shared_ptr<Rpc::RaftRpcClient> _rpcClient);
-    virtual void init();
-    virtual RequestVoteReply respondRequestVote(const RequestVoteRequest &request);
+      std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
+      std::shared_ptr<Transformer> _transformer);
+    virtual void init() = 0;
+    virtual RequestVoteReply respondRequestVote(const RequestVoteRequest &request) = 0;
   };
 } 
 

@@ -8,6 +8,8 @@ int main() {
   std::cin >> fileName;
 	std::unique_ptr<Raft::RaftServer>raftServer(new Raft::RaftServer(fileName));
   raftServer->start();
-  //raftServer->RequestVotes();
+  std::cout<<"begin slepp" << std::endl;
+  boost::this_thread::sleep_for(boost::chrono::milliseconds(10000000));
+  std::cout<<"over!" << std::endl;
   return 0;
 }
