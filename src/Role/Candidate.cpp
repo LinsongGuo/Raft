@@ -19,6 +19,7 @@ namespace Raft {
     boost::future<std::pair<bool, RequestVoteReply> > sendFuture[siz];
     for(size_t i = 0; i < siz; ++i) {
       if(cluster->localId == cluster->serverList[i]) continue;
+      std::cout <<"send time " <<' ' << getTime() << std::endl;
       sendFuture[i] = boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendRequestVote, rpcClient, i, request);
     }
     size_t getVotes = 1;
@@ -27,6 +28,7 @@ namespace Raft {
       std::pair<bool, RequestVoteReply> reply = sendFuture[i].get();
       if(reply.first) {
         if(reply.second.voteGranted) {
+          std::cout<<"get vote from " << i << std::endl;
           getVotes++;
           if(reply.second.term > info->currentTerm) {
             transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, reply.second.term);

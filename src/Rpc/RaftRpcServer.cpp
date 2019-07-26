@@ -13,7 +13,7 @@ namespace Raft {
         rpcRequest->lastlogterm(), 
         rpcRequest->lastlogindex()
       );
-      std::cout <<"receive a requestvote from " << rpcRequest->candidateid() << std::endl;
+      std::cout <<getTime() << " receive a requestvote from " << rpcRequest->candidateid() << std::endl;
       RequestVoteReply reply = respondRequestVote(request);
       rpcReply->set_votegranted(reply.voteGranted);
       rpcReply->set_term(reply.term);

@@ -19,6 +19,7 @@ namespace Raft {
   extern const Index invalidIndex;
 
   using Timer = uint64_t;
+  Timer getTime();
   Timer randTimer(Timer range);
   extern const Timer broadcastTimeout;
   

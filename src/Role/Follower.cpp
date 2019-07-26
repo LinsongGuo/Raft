@@ -47,7 +47,7 @@ namespace Raft {
           fout <<"catch interrupt " << std::endl;
           continue;
         }          
-        
+        std::cout<<"follower time " <<getTime() << std::endl;
         fout << cluster->localId << " transform form follower to candidate." << std::endl;
 
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, info->currentTerm + 1);

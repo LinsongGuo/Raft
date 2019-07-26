@@ -1,6 +1,4 @@
-waitTime: 1719
-sleeping...
-catch interrupt 
+waitTime: 1099
 sleeping...
 0.0.0.0:50001 transform form follower to candidate.
 0.0.0.0:50001 transform end.
