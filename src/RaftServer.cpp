@@ -50,6 +50,7 @@ namespace Raft {
     boost::future<RequestVoteReply> fut = prm.get_future();
     {
     boost::unique_lock<boost::mutex> lk(queueMutex);
+    std::cout<<"push respondRequestVote begin" << std::endl; 
     taskQueue.push(TaskType::respondRequestVote);
     respondRequestVoteQueue.push(RespondRequestVoteTask(request, prm));
     }
@@ -61,13 +62,14 @@ namespace Raft {
     std::cout <<getTime() <<' ' <<"push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
     {
     boost::unique_lock<boost::mutex> lk(queueMutex);
+    std::cout<<"push transfrom begin" << std::endl; 
     taskQueue.push(TaskType::transform);
     transformQueue.push(TransformTask(fromRole, toRole, term)); 
     }
     //lk.unlock(); 
-    std::cout <<"unlock "<<std::endl;
+    //std::cout <<"unlock "<<std::endl;
     queueCond.notify_one();
-    std::cout <<"notify "<<std::endl;
+    //std::cout <<"notify "<<std::endl;
   }
   void RaftServer::executeTask() {
     std::ofstream fout(cluster->localId + "-queue");
@@ -89,18 +91,16 @@ namespace Raft {
             currentRole = tmp.toRole;
             info->currentTerm = tmp.term;
             fout << getTime() <<' ' <<"transform " <<tmp.fromRole <<' '<< tmp.toRole << ' ' << tmp.term << std::endl;  
-            lk.unlock();
+            //lk.unlock();
             roles[currentRole]->init();
             transformQueue.pop();
             break;
           }  
         } 
-
         taskQueue.pop();
-        std::cout <<"pop " << std::endl;
+        //std::cout <<"pop " << std::endl;
       }
-
-      std::cout <<"deconstruct " << std::endl;
+      //std::cout <<"deconstruct " << std::endl;
     }
     fout.close();
   }

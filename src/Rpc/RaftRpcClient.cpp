@@ -8,13 +8,13 @@ namespace Raft {
       }
     }
     std::pair<bool, RequestVoteReply> RaftRpcClient::sendRequestVote(size_t id, const RequestVoteRequest &request) {
-      std::cout << "enter " << getTime() << std::endl;
+      ///std::cout << "enter " << getTime() << std::endl;
       RpcRequestVoteRequest rpcRequest;
       rpcRequest.set_candidateid(request.candidateId);
       rpcRequest.set_term(request.term);
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      std::cout<<"before deadline "<< getTime() << std::endl;
+      //std::cout<<"before deadline "<< getTime() << std::endl;
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       std::cout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);

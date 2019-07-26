@@ -12,7 +12,7 @@ namespace Raft {
     Role(_info, _cluster, _rpcClient, _transformer) {;}
 
   RequestVoteReply Follower::respondRequestVote(const RequestVoteRequest &request) {
-    std::cout<<"Follower respondRequestVote " <<' ' << request.candidateId <<' '<< request.term << ' ' <<info->currentTerm<<std::endl;
+   // std::cout<<"Follower respondRequestVote " <<' ' << request.candidateId <<' '<< request.term << ' ' <<info->currentTerm<<std::endl;
    sleepThread.interrupt();
    if(request.term < info->currentTerm) {
     return RequestVoteReply(false, info->currentTerm);
@@ -47,7 +47,7 @@ namespace Raft {
           fout <<"catch interrupt " << std::endl;
           continue;
         }          
-        std::cout<<"follower time " <<getTime() << std::endl;
+       // std::cout<<"follower time " <<getTime() << std::endl;
         fout << cluster->localId << " transform form follower to candidate." << std::endl;
 
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, info->currentTerm + 1);

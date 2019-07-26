@@ -19,7 +19,7 @@ namespace Raft {
     boost::future<std::pair<bool, RequestVoteReply> > sendFuture[siz];
     for(size_t i = 0; i < siz; ++i) {
       if(cluster->localId == cluster->serverList[i]) continue;
-      std::cout <<"send time " <<' ' << getTime() << std::endl;
+      //std::cout <<"send time " <<' ' << getTime() << std::endl;
       sendFuture[i] = boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendRequestVote, rpcClient, i, request);
     }
     size_t getVotes = 1;
