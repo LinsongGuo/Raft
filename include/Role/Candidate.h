@@ -2,11 +2,12 @@
 #define RAFT_ROLE_CANDIDATE_H
 
 #include "Role.h"
-#include <boost/thread/thread.hpp>
-#include <boost/thread/future.hpp>
+
 
 namespace Raft {
   class Candidate: public Role {
+  private:
+    boost::thread voteThread;
   public:
     Candidate(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 

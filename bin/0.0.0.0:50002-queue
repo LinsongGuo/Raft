@@ -1,1 +1,3 @@
-1564146841378 transform 0 1 2
+1564235281305 pop transform 0 1 2
+1564235281355 pop respondRequestVote 1 0.0.0.0:50001 2 2 0
+1564235282672 pop transform 1 1 3

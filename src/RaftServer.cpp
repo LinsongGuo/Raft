@@ -20,6 +20,7 @@ namespace Raft {
     rpcServer = std::make_shared<Rpc::RaftRpcServer>();
     rpcServer->bindRespondRequestVote(std::bind(&RaftServer::respondRequestVote, this, std::placeholders::_1));
     rpcServer->start(cluster->localId);
+    
     queueThread = boost::thread(std::bind(&RaftServer::executeTask, this));
    
     //build client.
@@ -48,28 +49,20 @@ namespace Raft {
     std::cout << getTime() << " push respondRequestVoteQueue " << request.candidateId <<' ' <<request.term << std::endl;
     boost::promise<RequestVoteReply> prm;
     boost::future<RequestVoteReply> fut = prm.get_future();
-    {
     boost::unique_lock<boost::mutex> lk(queueMutex);
-    std::cout<<"push respondRequestVote begin" << std::endl; 
     taskQueue.push(TaskType::respondRequestVote);
     respondRequestVoteQueue.push(RespondRequestVoteTask(request, prm));
-    }
-    //lk.unlock();
+    lk.unlock();
     queueCond.notify_one();
     return fut.get();
   }
   void RaftServer::transform(RaftServerRole fromRole, RaftServerRole toRole, Term term) {
-    std::cout <<getTime() <<' ' <<"push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
-    {
+    std::cout <<getTime() <<" push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
     boost::unique_lock<boost::mutex> lk(queueMutex);
-    std::cout<<"push transfrom begin" << std::endl; 
     taskQueue.push(TaskType::transform);
     transformQueue.push(TransformTask(fromRole, toRole, term)); 
-    }
-    //lk.unlock(); 
-    //std::cout <<"unlock "<<std::endl;
+    lk.unlock(); 
     queueCond.notify_one();
-    //std::cout <<"notify "<<std::endl;
   }
   void RaftServer::executeTask() {
     std::ofstream fout(cluster->localId + "-queue");
@@ -81,7 +74,7 @@ namespace Raft {
           case TaskType::respondRequestVote: {
             auto tmp = respondRequestVoteQueue.front();
             auto result = roles[currentRole]->respondRequestVote(tmp.request);
-            fout << getTime() << " respondRequestVote " <<currentRole <<' '<<tmp.request.candidateId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.voteGranted << std::endl;  
+            fout << getTime() << " pop respondRequestVote " <<currentRole <<' '<<tmp.request.candidateId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.voteGranted << std::endl;  
             tmp.prm.set_value(result);
             respondRequestVoteQueue.pop();
             break;
@@ -90,8 +83,7 @@ namespace Raft {
             auto tmp = transformQueue.front();
             currentRole = tmp.toRole;
             info->currentTerm = tmp.term;
-            fout << getTime() <<' ' <<"transform " <<tmp.fromRole <<' '<< tmp.toRole << ' ' << tmp.term << std::endl;  
-            //lk.unlock();
+            fout << getTime() << " pop transform " <<tmp.fromRole <<' '<< tmp.toRole << ' ' << tmp.term << std::endl;  
             roles[currentRole]->init();
             transformQueue.pop();
             break;

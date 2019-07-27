@@ -1,12 +1,15 @@
 #ifndef RAFT_DEFINES_H
 #define RAFT_DEFINES_H
 
+#include <cstdio>
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
 #include <vector>
 #include <chrono>
 #include <fstream>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/future.hpp>
 #include <boost/chrono/chrono.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -67,6 +70,7 @@ namespace Raft {
   };
 
   struct RaftServerCluster {
+    size_t size, localServer;
     ServerId localId;
     std::vector<ServerId> serverList;
     RaftServerCluster();

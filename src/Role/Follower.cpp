@@ -1,9 +1,5 @@
 #include "Follower.h"
 
-#include <cstdio>
-#include <iostream>
-#include <fstream>
-
 namespace Raft {
   Follower::Follower(std::shared_ptr<RaftServerInfo> _info, 
     std::shared_ptr<RaftServerCluster> _cluster, 
@@ -34,11 +30,9 @@ namespace Raft {
     sleepThread = boost::thread([this] {
       std::ofstream fout;
       fout.open(cluster->localId + "-follower");
-
-      Timer waitTime = randTimer(info->electionTimeout);
-      fout <<"waitTime: " << waitTime << std::endl;
-      
       while(true) {  
+        Timer waitTime = randTimer(info->electionTimeout);
+        fout <<"waitTime: " << waitTime << std::endl;
         fout <<"sleeping..." << std::endl;
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
@@ -47,7 +41,6 @@ namespace Raft {
           fout <<"catch interrupt " << std::endl;
           continue;
         }          
-       // std::cout<<"follower time " <<getTime() << std::endl;
         fout << cluster->localId << " transform form follower to candidate." << std::endl;
 
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, info->currentTerm + 1);
@@ -57,7 +50,5 @@ namespace Raft {
       }
       fout.close();
     });
-    //boost::this_thread::sleep_for(boost::chrono::milliseconds(1000));
-    std::cout <<"end init..." << std::endl;
   }
 }

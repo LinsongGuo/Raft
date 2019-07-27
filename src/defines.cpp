@@ -41,6 +41,13 @@ namespace Raft {
     for(auto &&adr : tree.get_child("serverList")) {
       serverList.emplace_back(adr.second.get_value<std::string>());
     }
+    size = serverList.size();
+    for(size_t i = 0; i < size; ++i) {
+      if(localId == serverList[i]) {
+        localServer = i;
+        break;
+      }
+    }
   }
 
   RaftServerCluster::RaftServerCluster(ServerId _localId, const std::vector<ServerId> &v) {

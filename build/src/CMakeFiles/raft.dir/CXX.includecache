@@ -127,10 +127,6 @@ RaftRpcClient.h
 ../include/Role/Candidate.h
 Role.h
 ../include/Role/Role.h
-boost/thread/thread.hpp
--
-boost/thread/future.hpp
--
 
 ../include/Role/Follower.h
 Role.h
@@ -287,6 +283,8 @@ Transformer.h
 ../include/Transformer.h
 
 ../include/defines.h
+cstdio
+-
 ctime
 -
 cstdlib
@@ -298,6 +296,10 @@ vector
 chrono
 -
 fstream
+-
+boost/thread/thread.hpp
+-
+boost/thread/future.hpp
 -
 boost/chrono/chrono.hpp
 -
@@ -393,12 +395,6 @@ Candidate.h
 /home/gls/Raft/src/Role/Follower.cpp
 Follower.h
 /home/gls/Raft/src/Role/Follower.h
-cstdio
--
-iostream
--
-fstream
--
 
 /home/gls/Raft/src/Role/Leader.cpp
 Leader.h

@@ -7,7 +7,7 @@ namespace Raft {
     std::shared_ptr<Transformer> _transformer):
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
    RequestVoteReply Leader::respondRequestVote(const RequestVoteRequest &request) {
-    ;
+    return RequestVoteReply(false, info->currentTerm);
    }
    void Leader::init() {
     std::cout << cluster->localId << " becomes a leader!---------------------------- " << std::endl;
