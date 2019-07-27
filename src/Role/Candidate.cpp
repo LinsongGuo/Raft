@@ -15,7 +15,7 @@ namespace Raft {
   }
   void Candidate::init() {
     std::cout << cluster->localId << " becomes a candidate!---------------------------- " << std::endl;
-    RequestVoteRequest request(cluster->localId, info->currentTerm, 0, 0);
+    RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
     std::cout<<getTime() << " build voteThread " << std::endl;
     voteThread = boost::thread([this, request]{
       std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(cluster->localServer, request);

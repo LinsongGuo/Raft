@@ -7,22 +7,32 @@ namespace Raft {
     std::shared_ptr<Transformer> _transformer):
     Role(_info, _cluster, _rpcClient, _transformer) {;}
 
+  bool Follower::checkMajorityEntries(const RequestVoteRequest &request) {
+    return request.lastLogTerm > info->lastLogTerm() || 
+    (request.lastLogTerm == info->lastLogTerm() && request.lastLogIndex >= info->lastLogIndex());
+  }
+
   RequestVoteReply Follower::respondRequestVote(const RequestVoteRequest &request) {
    // std::cout<<"Follower respondRequestVote " <<' ' << request.candidateId <<' '<< request.term << ' ' <<info->currentTerm<<std::endl;
-   sleepThread.interrupt();
-   if(request.term < info->currentTerm) {
-    return RequestVoteReply(false, info->currentTerm);
-   }
-   if(request.term > info->currentTerm) {
-    info->currentTerm = request.term;
-    info->votedFor = request.candidateId; 
-    return RequestVoteReply(true, info->currentTerm); 
-   }
-   if(info->votedFor == invalidServerId) {
-    info->votedFor = request.candidateId;
-    return RequestVoteReply(true, info->currentTerm);
-   }
-   return RequestVoteReply(false, info->currentTerm);
+    sleepThread.interrupt();
+    if(request.term < info->currentTerm) {
+      return RequestVoteReply(false, info->currentTerm);
+    }
+    else if(request.term > info->currentTerm) {
+      info->currentTerm = request.term;
+      if(checkMajorityEntries(request)) {
+        info->votedFor = request.candidateId; 
+        return RequestVoteReply(true, info->currentTerm);
+      } 
+      return RequestVoteReply(false, info->currentTerm);
+    }
+    else {
+      if(info->votedFor == invalidServerId) {
+        info->votedFor = request.candidateId;
+        return RequestVoteReply(true, info->currentTerm);
+      }
+      return RequestVoteReply(false, info->currentTerm); 
+    }
   }
 
   void Follower::init() {

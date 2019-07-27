@@ -13,6 +13,7 @@ namespace Raft {
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
       std::shared_ptr<Transformer> _transformer);
     void init() override;
+    bool checkMajorityEntries(const RequestVoteRequest &request);
     RequestVoteReply respondRequestVote(const RequestVoteRequest &request) override;
   };
 }

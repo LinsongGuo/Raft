@@ -8,11 +8,13 @@
 #include <vector>
 #include <chrono>
 #include <fstream>
+#include <exception>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/future.hpp>
 #include <boost/chrono/chrono.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "exception.hpp"
 
 namespace Raft {
   using Term = uint64_t;
@@ -37,11 +39,11 @@ namespace Raft {
   };
 
   struct Entry {
-    Term term = invalidTerm;
+    Term term;
     std::string opt, args;
+    Entry(Term _term = invalidTerm);
   };
   
-
   struct AppendEntriesRequest {
     ServerId leaderId;
     Term term, prevLogTerm;
@@ -81,9 +83,13 @@ namespace Raft {
   struct RaftServerInfo {
     Term currentTerm;
     ServerId votedFor;
+    std::std::vector<Entry> logEntries;
     Index commitIndex, lastApplied;
     Timer electionTimeout;
+    Term lastLogTerm();
+    Index lastLogIndex();
     RaftServerInfo(Term _currentTerm);
   };
+
 }
 #endif

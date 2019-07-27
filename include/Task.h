@@ -33,10 +33,14 @@ namespace Raft {
     RespondRequestVoteTask(RequestVoteRequest _request, boost::promise<RequestVoteReply> &_prm);
   };
   struct RespondAppendEntriesTask {
-    RespondAppendEntriesTask();
+    AppendEntriesRequest request;
+    boost::promise<AppendEntriesReply> &prm;
+    RespondAppendEntriesTask(AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm);
   };
   struct HeartbeatTask {
-    HeartbeatTask();
+    AppendEntriesRequest request;
+    boost::promise<AppendEntriesReply> &prm;
+    HeartbeatTask(AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm);
   };
   struct TransformTask {
     RaftServerRole fromRole, toRole;

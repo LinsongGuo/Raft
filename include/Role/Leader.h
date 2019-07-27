@@ -5,6 +5,8 @@
 
 namespace Raft {    
   class Leader: public Role {
+  private:
+    boost::thread heartbeatThread;
   public:
     Leader(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 
