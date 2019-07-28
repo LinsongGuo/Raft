@@ -7,7 +7,7 @@
 
 namespace Raft {
   enum TaskType {
-    put, get, respondRequestVote, respondAppendEntires, heartbeat, transform  
+    put, get, respondRequestVote, respondAppendEntires, transform  
   };
   struct Task {
     TaskType opt;
@@ -36,11 +36,6 @@ namespace Raft {
     AppendEntriesRequest request;
     boost::promise<AppendEntriesReply> &prm;
     RespondAppendEntriesTask(AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm);
-  };
-  struct HeartbeatTask {
-    AppendEntriesRequest request;
-    boost::promise<AppendEntriesReply> &prm;
-    HeartbeatTask(AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm);
   };
   struct TransformTask {
     RaftServerRole fromRole, toRole;

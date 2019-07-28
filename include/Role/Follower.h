@@ -15,6 +15,7 @@ namespace Raft {
     void init() override;
     bool checkMajorityEntries(const RequestVoteRequest &request);
     RequestVoteReply respondRequestVote(const RequestVoteRequest &request) override;
+    AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) override;  
   };
 }
 

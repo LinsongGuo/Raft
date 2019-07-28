@@ -34,7 +34,6 @@ namespace Raft {
     std::queue<GetTask> getQueue;
     std::queue<RespondRequestVoteTask> respondRequestVoteQueue;
     std::queue<RespondAppendEntriesTask> respondAppendEntiresQueue;
-    std::queue<HeartbeatTask> heartbeatQueue;
     std::queue<TransformTask> transformQueue;
     boost::mutex queueMutex;
     boost::condition_variable queueCond;
@@ -50,7 +49,7 @@ namespace Raft {
     void executeTask();
     void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
     RequestVoteReply respondRequestVote(RequestVoteRequest requset);
-
+    AppendEntriesReply respondAppendEntires(AppendEntiresRequest request);
   };
 }
 #endif

@@ -19,7 +19,11 @@ namespace Raft {
     return address + ":" + std::to_string(port);
   }
   
-  Entry::Entry(Term _term = invalidTerm): term(_term) {;}
+  ReplicatedEntry::ReplicatedEntry(Term _term = invalidTerm, std::string _opt = "", std::string _args = ""): 
+    term(_term), opt(_opt), args(_args) {;}
+
+  AppliedEntry::AppliedEntry(std::string _opt = "", std::string _args = ""): 
+    opt(_opt), args(_args) {;}
 
   AppendEntriesRequest::AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit):
     leaderId(_leaderId), term(_term), prevLogTerm(_prevLogTerm), prevLogIndex(_prevLogIndex), leaderCommit(_leaderCommit) {;}
@@ -61,7 +65,8 @@ namespace Raft {
 
   RaftServerInfo::RaftServerInfo(Term _currentTerm):
     currentTerm(_currentTerm) , electionTimeout(1000) {
-    logEntries.push_back(Entry());
+    replicatedEntries.push_back(ReplicatedEntry());
+    appliedEntries.push_back(AppliedEntries());
   }
 
   Index RaftServerInfo::lastLogIndex() {

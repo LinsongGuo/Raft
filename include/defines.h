@@ -38,12 +38,17 @@ namespace Raft {
     follower, candidate, leader, deadServer
   };
 
-  struct Entry {
+  struct ReplicatedEntry {
     Term term;
     std::string opt, args;
-    Entry(Term _term = invalidTerm);
+    ReplicatedEntry(Term _term = invalidTerm, std::string _opt = "", std::string _args = "");
   };
   
+  struct AppliedEntry {
+    std::string opt, args;
+    AppliedEntry(std::string _opt = "", std::string _args = "");
+  };
+
   struct AppendEntriesRequest {
     ServerId leaderId;
     Term term, prevLogTerm;
@@ -83,7 +88,8 @@ namespace Raft {
   struct RaftServerInfo {
     Term currentTerm;
     ServerId votedFor;
-    std::std::vector<Entry> logEntries;
+    std::vector<ReplicatedEntry> replicatedEntries;
+    std::vector<AppliedEntry> appliedEntries;
     Index commitIndex, lastApplied;
     Timer electionTimeout;
     Term lastLogTerm();

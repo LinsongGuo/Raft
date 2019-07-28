@@ -8,8 +8,6 @@ namespace Raft {
     request(_request), prm(_prm) {;}  
   RespondAppendEntriesTask::RespondAppendEntriesTask(AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm):
     request(_request), prm(_prm) {;}
-  HeartbeatTask::HeartbeatTask() (AppendEntriesRequest _request, boost::promise<AppendEntriesReply> &_prm):
-    request(_request), prm(_prm) {;}
   TransformTask::TransformTask(RaftServerRole _fromRole, RaftServerRole _toRole, Term _term) :
     fromRole(_fromRole), toRole(_toRole), term(_term) {;}
 }

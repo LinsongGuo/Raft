@@ -19,6 +19,7 @@ namespace Raft {
     //build server.
     rpcServer = std::make_shared<Rpc::RaftRpcServer>();
     rpcServer->bindRespondRequestVote(std::bind(&RaftServer::respondRequestVote, this, std::placeholders::_1));
+    rpcServer->bindRespondAppendEntries(std::bind(&RaftServer::bindRespondAppendEntries, this, std::placeholders::_1));
     rpcServer->start(cluster->localId);
     
     queueThread = boost::thread(std::bind(&RaftServer::executeTask, this));
@@ -46,7 +47,7 @@ namespace Raft {
   }*/
 
   RequestVoteReply RaftServer::respondRequestVote(RequestVoteRequest request) {
-    std::cout << getTime() << " push respondRequestVoteQueue " << request.candidateId <<' ' <<request.term << std::endl;
+    std::cout << getTime() << " push respondRequestVote " << request.candidateId <<' ' <<request.term << std::endl;
     boost::promise<RequestVoteReply> prm;
     boost::future<RequestVoteReply> fut = prm.get_future();
     boost::unique_lock<boost::mutex> lk(queueMutex);
@@ -56,6 +57,19 @@ namespace Raft {
     queueCond.notify_one();
     return fut.get();
   }
+
+  AppendEntriesReply RaftServer::bindRespondAppendEntries(AppendEntriesRequest request) {
+    std::cout << getTime() << " push respondAppendEntries " << request.leaderId <<' ' <<request.term << std::endl;
+    boost::promise<AppendEntriesReply> prm;
+    boost::futrue<AppendEntriesReply> fut = prm.get_future();
+    boost::unique_lock<boost::mutex> lk(queueMutex);
+    taskQueue.push(TaskType::respondAppendEntries);
+    respondAppendEntriesQueue.push(RespondAppendEntriesTask(request, prm));
+    lk.unlock();
+    queueCond.notify_one();
+    return fut.get();
+  }
+
   void RaftServer::transform(RaftServerRole fromRole, RaftServerRole toRole, Term term) {
     std::cout <<getTime() <<" push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
     boost::unique_lock<boost::mutex> lk(queueMutex);
@@ -64,6 +78,7 @@ namespace Raft {
     lk.unlock(); 
     queueCond.notify_one();
   }
+
   void RaftServer::executeTask() {
     std::ofstream fout(cluster->localId + "-queue");
     while(true) {
@@ -79,6 +94,13 @@ namespace Raft {
             respondRequestVoteQueue.pop();
             break;
           }
+          case TaskType::respondAppendEntries: {
+            auto tmp = respondAppendEntriesQueue.front();
+            auto result = roles[currentRole]->respondAppendEntries(tmp.request);
+            fout << getTime() << " pop respondAppendEntries " <<currentRole <<' '<<tmp.request.leaderId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.success << std::endl;  
+            tmp.prm.set_value(result);
+            respondAppendEntriesQueue.pop();
+          }
           case TaskType::transform : {
             auto tmp = transformQueue.front();
             currentRole = tmp.toRole;
@@ -90,9 +112,7 @@ namespace Raft {
           }  
         } 
         taskQueue.pop();
-        //std::cout <<"pop " << std::endl;
       }
-      //std::cout <<"deconstruct " << std::endl;
     }
     fout.close();
   }

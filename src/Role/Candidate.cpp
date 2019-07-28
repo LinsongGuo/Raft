@@ -6,6 +6,7 @@ namespace Raft {
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
     std::shared_ptr<Transformer> _transformer):
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
+
   RequestVoteReply Candidate::respondRequestVote(const RequestVoteRequest &request) {
    if(request.term > info->currentTerm) {
     voteThread.interrupt();
@@ -13,6 +14,12 @@ namespace Raft {
    }
    return RequestVoteReply(false, info->currentTerm);
   }
+
+  AppendEntriesReply Candidate::respondAppendEntries(const AppendEntriesRequest &request) {
+    voteThread
+    if(request.term > info->currentTerm);
+  }
+
   void Candidate::init() {
     std::cout << cluster->localId << " becomes a candidate!---------------------------- " << std::endl;
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());

@@ -24,6 +24,7 @@ namespace Raft {
       std::shared_ptr<Transformer> _transformer);
     virtual void init() = 0;
     virtual RequestVoteReply respondRequestVote(const RequestVoteRequest &request) = 0;
+    virtual AppendEntriesReply respondHeartbeat(const AppendEntriesRequest &request) = 0;
   };
 } 
 

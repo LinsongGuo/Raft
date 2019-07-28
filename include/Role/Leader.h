@@ -14,6 +14,7 @@ namespace Raft {
       std::shared_ptr<Transformer> _transformer);
     void init() override;
     RequestVoteReply respondRequestVote(const RequestVoteRequest &request) override;
+    AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) override;
   };
 }
 
