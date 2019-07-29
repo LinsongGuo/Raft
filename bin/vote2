@@ -1,13 +1,11 @@
-opentime 1564383901465
-build 0 1564383901465
-build end 0 1564383901465
-build 1 1564383901465
-build end 1 1564383901465
-enter 1 1564383901465
-1564383901466 0.0.0.0:50003 is sending RequestVote to the server 1...
-enter 0 1564383901470
-1564383901470 0.0.0.0:50003 is sending RequestVote to the server 0...
-1564383901482 get vote 1 1 2
-1564383901486 get vote 1 1 2
-get vote from 0
-get vote from 1
+opentime 1564387800292
+build 0 1564387800293
+build end 0 1564387800293
+build 1 1564387800293
+build end 1 1564387800293
+enter 1 1564387800293
+1564387800293 0.0.0.0:50003 is sending RequestVote to the server 1...
+enter 0 1564387800294
+1564387800295 0.0.0.0:50003 is sending RequestVote to the server 0...
+1564387800318 get vote 0 0 0
+1564387800322 get vote 0 0 0

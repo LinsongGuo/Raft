@@ -1,5 +1,8 @@
 {
   "local" : "0.0.0.0:50002",
+  "electionTimeout" : "150",
+  "heartbeatTimeout" : "30",
+  "broadcastTimeout" : "30", 
   "serverList": 
   {
   	"":"0.0.0.0:50001",
