@@ -14,9 +14,11 @@
 #include <boost/chrono/chrono.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "exception.hpp"
+#include "exception.h"
 
 namespace Raft {
+  extern const std::string invalidString;
+
   using Term = uint64_t;
   extern const Term invalidTerm;
 
@@ -41,26 +43,27 @@ namespace Raft {
   struct ReplicatedEntry {
     Term term;
     std::string opt, args;
-    ReplicatedEntry(Term _term = invalidTerm, std::string _opt = "", std::string _args = "");
+    ReplicatedEntry(Term _term = invalidTerm, std::string _opt = invalidString, std::string _args = invalidString);
   };
   
   struct AppliedEntry {
     std::string opt, args;
-    AppliedEntry(std::string _opt = "", std::string _args = "");
+    AppliedEntry(std::string _opt = invalidString, std::string _args = invalidString);
+    AppliedEntry(const ReplicatedEntry &replicatedEntry);
   };
 
   struct AppendEntriesRequest {
     ServerId leaderId;
     Term term, prevLogTerm;
     Index prevLogIndex, leaderCommit;
-    std::vector<Entry> entries;
+    std::vector<ReplicatedEntry> entries;
     AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
   };
 
-  struct AppendEntiresReply {
+  struct AppendEntriesReply {
     Term term;
     bool success;
-    AppendEntiresReply(bool _success, Term _term);
+    AppendEntriesReply(bool _success, Term _term);
   };
   
   struct RequestVoteRequest {
@@ -86,15 +89,20 @@ namespace Raft {
   }; 
 
   struct RaftServerInfo {
+    boost::mutex infoMutex;
+    RaftServerRole currentRole;
     Term currentTerm;
     ServerId votedFor;
-    std::vector<ReplicatedEntry> replicatedEntries;
-    std::vector<AppliedEntry> appliedEntries;
     Index commitIndex, lastApplied;
     Timer electionTimeout;
+    std::vector<ReplicatedEntry> replicatedEntries;
+    std::vector<AppliedEntry> appliedEntries;
+    std::vector<Index> nextIndex;
+    std::vector<Index> matchIndex;
+
+    RaftServerInfo();
     Term lastLogTerm();
     Index lastLogIndex();
-    RaftServerInfo(Term _currentTerm);
   };
 
 }

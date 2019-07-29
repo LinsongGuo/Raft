@@ -20,7 +20,7 @@ namespace Raft {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     private:
       std::function<RequestVoteReply(RequestVoteRequest)> respondRequestVote;
-      std::function<RequestVoteReply(AppendEntriesRequest)> respondAppendEntries;
+      std::function<AppendEntriesReply(AppendEntriesRequest)> respondAppendEntries;
     public:
       grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
       grpc::Status RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) override;

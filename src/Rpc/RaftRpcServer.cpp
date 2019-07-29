@@ -3,18 +3,30 @@
 namespace Raft {
   namespace Rpc {
     grpc::Status RaftRpcServiceImpl::RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *rpcRequest, RpcAppendEntriesReply *rpcReply) {
-      rpcReply->set_term(233);
-      rpcReply->set_success(1);
+      AppendEntriesRequest request(rpcRequest->leaderid(),
+        rpcRequest->term(),
+        rpcRequest->prevlogterm(),
+        rpcRequest->prevlogindex(),
+        rpcRequest->leadercommit()
+      );
+      std::cout <<getTime() << "receive a AppendEntries from " << rpcRequest->leaderid() << std::endl;
+      AppendEntriesReply reply = respondAppendEntries(request);
+      rpcReply->set_success(reply.success);
+      rpcReply->set_term(reply.term);
       return grpc::Status::OK;
     }
     grpc::Status RaftRpcServiceImpl::RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *rpcRequest, RpcRequestVoteReply *rpcReply) {
+      std::ofstream fout("vote-"+rpcRequest->candidateid() + "-" + std::to_string(rpcRequest->term()));
+      fout<<getTime() <<" enter requestvote" << std::endl;
       RequestVoteRequest request(rpcRequest->candidateid(), 
         rpcRequest->term(), 
         rpcRequest->lastlogterm(), 
         rpcRequest->lastlogindex()
       );
-      std::cout <<getTime() << " receive a requestvote from " << rpcRequest->candidateid() << std::endl;
+      fout <<getTime() << " receive a requestvote from " << rpcRequest->candidateid() << std::endl;
       RequestVoteReply reply = respondRequestVote(request);
+      fout <<getTime() <<" result " << reply.voteGranted << ' '<< reply.term << std::endl;
+      fout.close();
       rpcReply->set_votegranted(reply.voteGranted);
       rpcReply->set_term(reply.term);
       return grpc::Status::OK;

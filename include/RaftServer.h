@@ -33,14 +33,12 @@ namespace Raft {
     std::queue<PutTask> putQueue;
     std::queue<GetTask> getQueue;
     std::queue<RespondRequestVoteTask> respondRequestVoteQueue;
-    std::queue<RespondAppendEntriesTask> respondAppendEntiresQueue;
+    std::queue<RespondAppendEntriesTask> respondAppendEntriesQueue;
     std::queue<TransformTask> transformQueue;
-    boost::mutex queueMutex;
     boost::condition_variable queueCond;
     boost::thread queueThread;
 
     std::unique_ptr<Role> roles[4];
-    RaftServerRole currentRole;
 
   public:
     RaftServer(const std::string &fileName);
@@ -48,8 +46,8 @@ namespace Raft {
     void shutdown();    
     void executeTask();
     void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
-    RequestVoteReply respondRequestVote(RequestVoteRequest requset);
-    AppendEntriesReply respondAppendEntires(AppendEntiresRequest request);
+    RequestVoteReply respondRequestVote(const RequestVoteRequest &requset);
+    AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request);
   };
 }
 #endif

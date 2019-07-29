@@ -8,47 +8,97 @@ namespace Raft {
         stubs.emplace_back(RaftRpc::NewStub(channels[i]));
       }
     }
+    
     std::pair<bool, RequestVoteReply> RaftRpcClient::sendRequestVote(size_t id, const RequestVoteRequest &request) {
       fout << "enter " << id <<' ' <<getTime() << std::endl;
       RpcRequestVoteRequest rpcRequest;
       rpcRequest.set_candidateid(request.candidateId);
       rpcRequest.set_term(request.term);
+      rpcRequest.set_lastlogterm(request.lastLogTerm);
+      rpcRequest.set_lastlogindex(request.lastLogIndex);
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
-      std::cout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
+      //context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
+      fout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
-      return std::make_pair(status.ok(), RequestVoteReply(rpcReply.term(), rpcReply.votegranted()));
+      fout <<getTime() << " get vote "<< status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
+      return std::make_pair(status.ok(), RequestVoteReply(rpcReply.votegranted(), rpcReply.term()));
     }
+    
+    std::pair<bool, AppendEntriesReply> RaftRpcClient::sendAppendEntries(size_t id, const AppendEntriesRequest &request) {
+      RpcAppendEntriesRequest rpcRequest;
+      rpcRequest.set_leaderid(request.leaderId);
+      rpcRequest.set_term(request.term);
+      rpcRequest.set_prevlogterm(request.prevLogTerm);
+      rpcRequest.set_prevlogindex(request.prevLogIndex);
+      rpcRequest.set_leadercommit(request.leaderCommit);
+      RpcAppendEntriesReply rpcReply;
+      grpc::ClientContext context;
+      //context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
+      grpc::Status status = stubs[id]->RpcAppendEntries(&context, rpcRequest, &rpcReply);
+      return std::make_pair(status.ok(), AppendEntriesReply(rpcReply.success(), rpcReply.term()));
+    }
+    
     std::pair<RaftServerRole, Term> RaftRpcClient::sendRequestVotes(size_t localServer, const RequestVoteRequest &request) {
       size_t getVotes = 1;
-      sendFuture.clear();
-      fout.open("votes" + std::to_string(localServer));
+      voteFuture.clear();
+      fout.open("vote" + std::to_string(localServer));
       fout << "opentime " << getTime() << std::endl;
-      for(int i = 0; i < size; ++i) {
+      for(size_t i = 0; i < size; ++i) {
         if(i == localServer) continue;
         fout <<"build " << i <<' ' << getTime() << std::endl;
-        sendFuture.push_back(boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendRequestVote, this, i, request));
+        voteFuture.push_back(boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendRequestVote, this, i, request));
         fout <<"build end " << i <<' ' << getTime() << std::endl;
       }
-      int nowId = 0;
-      for(int i = 0; i < size; ++i) {
+      size_t nowId = 0;
+      for(size_t i = 0; i < size; ++i) {
         if(i == localServer) continue;
-        std::pair<bool, RequestVoteReply> reply = sendFuture[nowId++].get();
+        std::pair<bool, RequestVoteReply> reply = voteFuture[nowId++].get();
         if(reply.first) {
           if(reply.second.voteGranted) {
-            std::cout<<"get vote from " << i << std::endl;
+            fout <<"get vote from " << i << std::endl;
             getVotes++;
             if(reply.second.term > request.term) {
+              fout << "transform to follower " << std::endl;
               return std::make_pair(RaftServerRole::follower, reply.second.term);
             }
           }
         }
       }
+      fout.close();
       if(getVotes * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
       return std::make_pair(RaftServerRole::candidate, request.term + 1);
-      fout.close();
     }
     
+    std::pair<RaftServerRole, Term> RaftRpcClient::sendHeartbeats(size_t localServer, const AppendEntriesRequest &request) {
+      size_t getAppends = 1;
+      appendFuture.clear();
+      std::ofstream fout2("append" + std::to_string(localServer));
+      for(size_t i = 0; i < size; ++i) {
+        if(i == localServer) continue;
+        fout2 << "build " << i << ' ' << getTime() << std::endl;
+        appendFuture.push_back(boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendAppendEntries, this, i, request));
+        fout2 << "build end " << i <<' '<< getTime() << std::endl;
+      }
+      size_t nowId = 0;
+      for(size_t i = 0; i < size; ++i) {
+        if(i == localServer) continue;
+        std::pair<bool, AppendEntriesReply> reply = appendFuture[nowId++].get();
+        fout2 <<"get " << i <<' ' << reply.first <<' ' << reply.second.success <<' ' << reply.second.term << std::endl;
+        if(reply.first) {
+          if(reply.second.success) {
+            getAppends++;
+            fout2 <<"get append from " << i << std::endl;
+            if(reply.second.term > request.term) {
+              fout2 << "transform to follower " << std::endl; 
+              return std::make_pair(RaftServerRole::follower, reply.second.term);
+            }
+          }
+        }
+      }
+      fout2.close();
+      if(getAppends * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
+      return std::make_pair(RaftServerRole::follower, request.term);
+    }
   }
 }

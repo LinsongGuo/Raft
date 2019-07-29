@@ -44,7 +44,7 @@ namespace Raft {
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
     } 
-    if(request.entires.size() > 0) {
+    if(request.entries.size() > 0) {
       //not heartbeat
       if(request.prevLogIndex > info->replicatedEntries.size() - 1 || 
         (request.prevLogIndex != invalidIndex && info->replicatedEntries[request.prevLogIndex].term != request.prevLogTerm)) {
@@ -53,12 +53,12 @@ namespace Raft {
       while(info->replicatedEntries.size() - 1 > request.prevLogIndex) {
         info->replicatedEntries.pop_back();
       }  
-      for(auto &p: request.entires) {
+      for(auto &p: request.entries) {
         info->replicatedEntries.push_back(p);
       }
     }
     if(request.leaderCommit > info->commitIndex) {
-      info->commitIndex = min(request.leaderCommit, info->replicatedEntries.size() - 1);
+      info->commitIndex = std::min(request.leaderCommit, info->replicatedEntries.size() - 1);
     }
     if(info->lastApplied < info->commitIndex) {
       for(size_t i = info->lastApplied + 1; i <= info->commitIndex; ++i) {
@@ -72,25 +72,26 @@ namespace Raft {
   
   void Follower::init() {
     std::cout << cluster->localId << " becomes a follower! ---------------------------- " << std::endl;
-    sleepThread = boost::thread([this] {
+    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    Timer electionTimeout = info->electionTimeout;
+    Term currentTerm = info->currentTerm;
+    lk.unlock();
+    sleepThread = boost::thread([this, electionTimeout, currentTerm] {
       std::ofstream fout;
       fout.open(cluster->localId + "-follower");
       while(true) {  
-        Timer waitTime = randTimer(info->electionTimeout);
-        fout <<"waitTime: " << waitTime << std::endl;
-        fout <<"sleeping..." << std::endl;
+        Timer waitTime = randTimer(electionTimeout);
+        fout <<getTime() << " waitTime: " << waitTime << std::endl;
+        fout <<getTime() << " sleeping..." << std::endl;
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
         }
         catch(boost::thread_interrupted &e) {
-          fout <<"catch interrupt " << std::endl;
+          fout << getTime() << " catch interrupt " << std::endl;
           continue;
         }          
-        fout << cluster->localId << " transform form follower to candidate." << std::endl;
-
-        transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, info->currentTerm + 1);
-        
-        fout << cluster->localId << " transform end." << std::endl;
+        fout << getTime() <<' '<<cluster->localId << " transform form follower to candidate." << std::endl;
+        transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, currentTerm + 1);
         break;
       }
       fout.close();

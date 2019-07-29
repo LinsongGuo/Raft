@@ -9,25 +9,34 @@ namespace Raft {
 
   RequestVoteReply Candidate::respondRequestVote(const RequestVoteRequest &request) {
    if(request.term > info->currentTerm) {
-    voteThread.interrupt();
-    transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, request.term);
+     voteThread.interrupt();
+     transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, request.term);
    }
    return RequestVoteReply(false, info->currentTerm);
   }
 
   AppendEntriesReply Candidate::respondAppendEntries(const AppendEntriesRequest &request) {
-    voteThread
-    if(request.term > info->currentTerm);
+    if(request.term >= info->currentTerm) {
+      voteThread.interrupt();
+      transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, request.term);
+    }
+    return AppendEntriesReply(false, info->currentTerm);    
   }
 
   void Candidate::init() {
     std::cout << cluster->localId << " becomes a candidate!---------------------------- " << std::endl;
+    boost::unique_lock<boost::mutex> lk(info->infoMutex);
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
+    Timer electionTimeout = info->electionTimeout;
+    lk.unlock();
+
     std::cout<<getTime() << " build voteThread " << std::endl;
-    voteThread = boost::thread([this, request]{
+    voteThread = boost::thread([this, request, electionTimeout] {
+      std::ofstream fout(cluster->localId + "-candidate");
+      fout.close();
       std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(cluster->localServer, request);
       if(result.first == RaftServerRole::candidate) {
-        Timer waitTime = randTimer(info->electionTimeout);          
+        Timer waitTime = randTimer(electionTimeout);          
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
         }
@@ -37,5 +46,6 @@ namespace Raft {
       } 
       transformer->Transform(RaftServerRole::candidate, result.first, result.second);
     });
+    std::cout<<getTime() << " end candidate::init " << std::endl;
   }
 }

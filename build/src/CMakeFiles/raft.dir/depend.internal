@@ -351,6 +351,7 @@ src/CMakeFiles/raft.dir/RaftServer.cpp.o
  ../include/Task.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/RaftServer.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -545,6 +546,7 @@ src/CMakeFiles/raft.dir/Role/Candidate.cpp.o
  ../include/Rpc/RaftRpcServer.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Role/Candidate.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -739,6 +741,7 @@ src/CMakeFiles/raft.dir/Role/Follower.cpp.o
  ../include/Rpc/RaftRpcServer.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Role/Follower.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -933,6 +936,7 @@ src/CMakeFiles/raft.dir/Role/Leader.cpp.o
  ../include/Rpc/RaftRpcServer.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Role/Leader.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -1126,6 +1130,7 @@ src/CMakeFiles/raft.dir/Role/Role.cpp.o
  ../include/Rpc/RaftRpcServer.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Role/Role.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -1495,6 +1500,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcClient.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Rpc/RaftRpcClient.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -1681,6 +1687,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o
  ../include/Rpc/RaftRpc.pb.h
  ../include/Rpc/RaftRpcServer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Rpc/RaftRpcServer.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -1856,13 +1863,16 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o
 src/CMakeFiles/raft.dir/Task.cpp.o
  ../include/Task.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Task.cpp
 src/CMakeFiles/raft.dir/Transformer.cpp.o
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Transformer.cpp
 src/CMakeFiles/raft.dir/defines.cpp.o
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/defines.cpp
 src/CMakeFiles/raft.dir/main.cpp.o
  ../include/RaftServer.h
@@ -1877,6 +1887,7 @@ src/CMakeFiles/raft.dir/main.cpp.o
  ../include/Task.h
  ../include/Transformer.h
  ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/main.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h

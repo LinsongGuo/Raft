@@ -1,6 +1,8 @@
 #include "defines.h"
 
 namespace Raft {
+  const std::string invalidString = "";
+
   const Term invalidTerm = 0;
 
   const Index invalidIndex = 0;
@@ -19,16 +21,19 @@ namespace Raft {
     return address + ":" + std::to_string(port);
   }
   
-  ReplicatedEntry::ReplicatedEntry(Term _term = invalidTerm, std::string _opt = "", std::string _args = ""): 
+  ReplicatedEntry::ReplicatedEntry(Term _term, std::string _opt, std::string _args): 
     term(_term), opt(_opt), args(_args) {;}
 
-  AppliedEntry::AppliedEntry(std::string _opt = "", std::string _args = ""): 
+  AppliedEntry::AppliedEntry(std::string _opt, std::string _args): 
     opt(_opt), args(_args) {;}
 
+  AppliedEntry::AppliedEntry(const ReplicatedEntry &replicatedEntry):
+    opt(replicatedEntry.opt), args(replicatedEntry.args) {;}
+    
   AppendEntriesRequest::AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit):
     leaderId(_leaderId), term(_term), prevLogTerm(_prevLogTerm), prevLogIndex(_prevLogIndex), leaderCommit(_leaderCommit) {;}
  
-  AppendEntiresReply::AppendEntiresReply(bool _success, Term _term): 
+  AppendEntriesReply::AppendEntriesReply(bool _success, Term _term): 
     success(_success), term(_term) {;}
   
   RequestVoteRequest::RequestVoteRequest(ServerId _candidateId, Term _term, Term _lastLogTerm, Index _lastLogIndex):
@@ -63,18 +68,26 @@ namespace Raft {
     }
   }
 
-  RaftServerInfo::RaftServerInfo(Term _currentTerm):
-    currentTerm(_currentTerm) , electionTimeout(1000) {
+  RaftServerInfo::RaftServerInfo() {
+    currentRole = RaftServerRole::follower;
+    currentTerm = 1;
+    electionTimeout = 1000;
+    votedFor = invalidServerId;
+    commitIndex = lastApplied = invalidIndex;
     replicatedEntries.push_back(ReplicatedEntry());
-    appliedEntries.push_back(AppliedEntries());
+    appliedEntries.push_back(AppliedEntry());
+    /*for(size_t i = 0; i < size; ++i) {
+      nextIndex.push_back(1);
+      matchIndex.push_back(0);
+    }*/
   }
 
   Index RaftServerInfo::lastLogIndex() {
-    return logEntries.size() - 1;
+    return replicatedEntries.size() - 1;
   }
 
   Term RaftServerInfo::lastLogTerm() {
-    return logEntries.back().term;
+    return replicatedEntries.back().term;
   }
 
 }

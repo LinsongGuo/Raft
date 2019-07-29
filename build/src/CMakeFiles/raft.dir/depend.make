@@ -350,6 +350,7 @@ src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Task.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: ../src/RaftServer.cpp
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/RaftServer.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -544,6 +545,7 @@ src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../include/Rpc/RaftRpcClient.h
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: ../src/Role/Candidate.cpp
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Role/Candidate.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -738,6 +740,7 @@ src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../include/Rpc/RaftRpcClient.h
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: ../src/Role/Follower.cpp
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Role/Follower.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -932,6 +935,7 @@ src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../include/Rpc/RaftRpcClient.h
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: ../src/Role/Leader.cpp
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Role/Leader.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -1125,6 +1129,7 @@ src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../include/Rpc/RaftRpcClient.h
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: ../src/Role/Role.cpp
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Role/Role.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -1494,6 +1499,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../include/Rpc/RaftRpc.pb.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../include/Rpc/RaftRpcClient.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: ../src/Rpc/RaftRpcClient.cpp
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -1680,6 +1686,7 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../include/Rpc/RaftRpc.pb.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: ../src/Rpc/RaftRpcServer.cpp
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -1855,13 +1862,16 @@ src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o: /usr/local/include/grpcpp/suppo
 
 src/CMakeFiles/raft.dir/Task.cpp.o: ../include/Task.h
 src/CMakeFiles/raft.dir/Task.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Task.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Task.cpp.o: ../src/Task.cpp
 
 src/CMakeFiles/raft.dir/Transformer.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/Transformer.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/Transformer.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/Transformer.cpp.o: ../src/Transformer.cpp
 
 src/CMakeFiles/raft.dir/defines.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/defines.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/defines.cpp.o: ../src/defines.cpp
 
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/RaftServer.h
@@ -1876,6 +1886,7 @@ src/CMakeFiles/raft.dir/main.cpp.o: ../include/Rpc/RaftRpcServer.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/Task.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/Transformer.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../include/defines.h
+src/CMakeFiles/raft.dir/main.cpp.o: ../include/exception.h
 src/CMakeFiles/raft.dir/main.cpp.o: ../src/main.cpp
 src/CMakeFiles/raft.dir/main.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/raft.dir/main.cpp.o: /usr/local/include/google/protobuf/any.pb.h

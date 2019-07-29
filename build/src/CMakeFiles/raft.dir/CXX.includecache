@@ -297,6 +297,8 @@ chrono
 -
 fstream
 -
+exception
+-
 boost/thread/thread.hpp
 -
 boost/thread/future.hpp
@@ -307,6 +309,10 @@ boost/property_tree/json_parser.hpp
 -
 boost/property_tree/ptree.hpp
 -
+exception.h
+../include/exception.h
+
+../include/exception.h
 
 /home/gls/Raft/src/External/Client.cpp
 atomic

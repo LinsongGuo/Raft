@@ -7,7 +7,7 @@
 
 namespace Raft {
   enum TaskType {
-    put, get, respondRequestVote, respondAppendEntires, transform  
+    put, get, respondRequestVote, respondAppendEntries, transform  
   };
   struct Task {
     TaskType opt;
