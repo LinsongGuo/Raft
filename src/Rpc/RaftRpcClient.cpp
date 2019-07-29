@@ -2,7 +2,9 @@
 
 namespace Raft {
   namespace Rpc {
-    RaftRpcClient::RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels) {
+    RaftRpcClient::RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout):
+      broadcastTimeout(timeout)
+    {
       size = channels.size();
       for(int i = 0; i < size; ++i) {
         stubs.emplace_back(RaftRpc::NewStub(channels[i]));
@@ -18,7 +20,7 @@ namespace Raft {
       rpcRequest.set_lastlogindex(request.lastLogIndex);
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      //context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
+      context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       fout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
       fout <<getTime() << " get vote "<< status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
@@ -34,7 +36,7 @@ namespace Raft {
       rpcRequest.set_leadercommit(request.leaderCommit);
       RpcAppendEntriesReply rpcReply;
       grpc::ClientContext context;
-      //context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
+      context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       grpc::Status status = stubs[id]->RpcAppendEntries(&context, rpcRequest, &rpcReply);
       return std::make_pair(status.ok(), AppendEntriesReply(rpcReply.success(), rpcReply.term()));
     }

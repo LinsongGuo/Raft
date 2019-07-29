@@ -29,7 +29,7 @@ namespace Raft {
     for(int i = 0; i < cluster->serverList.size(); ++i) {
       channels.emplace_back(grpc::CreateChannel(cluster->serverList[i], grpc::InsecureChannelCredentials()));
     }
-    rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels);
+    rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout);
 
     //create roles.
     roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer);
@@ -71,6 +71,7 @@ namespace Raft {
       transformQueue.push(TransformTask(fromRole, toRole, term));  
     }
     queueCond.notify_one();
+    std::cout <<"push trans "<<std::endl;
   }
 
   void RaftServer::executeTask() {
@@ -108,11 +109,15 @@ namespace Raft {
             fout << getTime() << " pop transform " <<tmp.fromRole <<' '<< tmp.toRole << ' ' << tmp.term << std::endl;  
             transformQueue.pop();
             roles[info->currentRole]->init();
+            fout<<getTime() << " break"<<std::endl;
             break;
           }  
         } 
         taskQueue.pop();
+        fout<<getTime() << " pop"<<std::endl; 
       }
+      fout<<getTime() << " while end"<<std::endl;
+            
     }
     fout.close();
   }

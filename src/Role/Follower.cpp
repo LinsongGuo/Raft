@@ -23,31 +23,29 @@ namespace Raft {
         sleepThread.interrupt();
         return RequestVoteReply(true, info->currentTerm);
       }
-      else {
-        return RequestVoteReply(false, info->currentTerm);
-      } 
+      return RequestVoteReply(false, info->currentTerm); 
     }
     else {
-      if(info->votedFor == invalidServerId) {
+      if((info->votedFor == invalidServerId || info->votedFor == request.candidateId) && checkMajorityEntries(request)) {
         info->votedFor = request.candidateId;
         sleepThread.interrupt();
         return RequestVoteReply(true, info->currentTerm);
       }
-      else {
-        return RequestVoteReply(false, info->currentTerm);
-      } 
+      return RequestVoteReply(false, info->currentTerm); 
     }
   }
   
   AppendEntriesReply Follower::respondAppendEntries(const AppendEntriesRequest &request) {
-    if(request.term < info->currentTerm) return AppendEntriesReply(false, info->currentTerm);
+    if(request.term < info->currentTerm) {
+      return AppendEntriesReply(false, info->currentTerm);
+    }
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
     } 
-    if(request.entries.size() > 0) {
-      //not heartbeat
-      if(request.prevLogIndex > info->replicatedEntries.size() - 1 || 
-        (request.prevLogIndex != invalidIndex && info->replicatedEntries[request.prevLogIndex].term != request.prevLogTerm)) {
+    if(request.entries.size() > 0) { //not heartbeat
+      if(request.prevLogIndex != invalidIndex && 
+        (request.prevLogIndex > info->replicatedEntries.size() - 1 || 
+        info->replicatedEntries[request.prevLogIndex].term != request.prevLogTerm) ) {
         return AppendEntriesReply(false, info->currentTerm);
       }
       while(info->replicatedEntries.size() - 1 > request.prevLogIndex) {
@@ -71,11 +69,13 @@ namespace Raft {
   }
   
   void Follower::init() {
-    std::cout << cluster->localId << " becomes a follower! ---------------------------- " << std::endl;
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
-    Timer electionTimeout = info->electionTimeout;
     Term currentTerm = info->currentTerm;
     lk.unlock();
+    std::cout << cluster->localId << " becomes a follower, currentTerm: " << currentTerm << std::endl;
+    Timer electionTimeout = cluster->electionTimeout;
+    std::cout <<"electionTimeout " << electionTimeout << std::endl;
+    //sleepThread.interrupt();
     sleepThread = boost::thread([this, electionTimeout, currentTerm] {
       std::ofstream fout;
       fout.open(cluster->localId + "-follower");
@@ -91,10 +91,13 @@ namespace Raft {
           continue;
         }          
         fout << getTime() <<' '<<cluster->localId << " transform form follower to candidate." << std::endl;
+        fout.close();
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, currentTerm + 1);
         break;
       }
-      fout.close();
+      //fout.close();
     });
+    sleepThread.detach();
+    std::cout <<getTime() << ' '<<"Follower::init end " << std::endl;
   }
 }

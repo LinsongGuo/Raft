@@ -28,7 +28,6 @@ namespace Raft {
   using Timer = uint64_t;
   Timer getTime();
   Timer randTimer(Timer range);
-  extern const Timer broadcastTimeout;
   
   using Address = std::string;  
   using Port = uint16_t; 
@@ -80,6 +79,7 @@ namespace Raft {
   };
 
   struct RaftServerCluster {
+    Timer electionTimeout, heartbeatTimeout, broadcastTimeout;
     size_t size, localServer;
     ServerId localId;
     std::vector<ServerId> serverList;
@@ -94,7 +94,6 @@ namespace Raft {
     Term currentTerm;
     ServerId votedFor;
     Index commitIndex, lastApplied;
-    Timer electionTimeout;
     std::vector<ReplicatedEntry> replicatedEntries;
     std::vector<AppliedEntry> appliedEntries;
     std::vector<Index> nextIndex;

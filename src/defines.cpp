@@ -9,7 +9,6 @@ namespace Raft {
 
   const ServerId invalidServerId = " : ";
 
-  const Timer broadcastTimeout = 10;
   Timer getTime() {
     return boost::chrono::duration_cast<boost::chrono::milliseconds>(boost::chrono::system_clock::now().time_since_epoch()).count();
   }
@@ -49,6 +48,9 @@ namespace Raft {
     boost::property_tree::ptree tree;
     boost::property_tree::read_json(fileName, tree);
     localId = tree.get<std::string>("local");
+    electionTimeout = tree.get<uint64_t>("electionTimeout");
+    heartbeatTimeout = tree.get<uint64_t>("heartbeatTimeout");
+    broadcastTimeout = tree.get<uint64_t>("broadcastTimeout");
     for(auto &&adr : tree.get_child("serverList")) {
       serverList.emplace_back(adr.second.get_value<std::string>());
     }
@@ -71,7 +73,6 @@ namespace Raft {
   RaftServerInfo::RaftServerInfo() {
     currentRole = RaftServerRole::follower;
     currentTerm = 1;
-    electionTimeout = 1000;
     votedFor = invalidServerId;
     commitIndex = lastApplied = invalidIndex;
     replicatedEntries.push_back(ReplicatedEntry());
