@@ -55,49 +55,61 @@ namespace Raft {
     boost::promise<AppendEntriesReply> prm;
     boost::future<AppendEntriesReply> fut = prm.get_future();
     {
+      //std::cout<<getTime() << " lock" << std::endl;
       boost::unique_lock<boost::mutex> lk(info->infoMutex);
+      //std::cout<<getTime() << " lock end " << std::endl;
       taskQueue.push(TaskType::respondAppendEntries);
       respondAppendEntriesQueue.push(RespondAppendEntriesTask(request, prm));  
     }
+    //std::cout<<getTime() << " notify_one"<<std::endl;
     queueCond.notify_one();
-    return fut.get();
+    auto tmp = fut.get();
+    //std::cout<<getTime() << " end append"<<std::endl;
+    return tmp;
   }
 
   void RaftServer::transform(RaftServerRole fromRole, RaftServerRole toRole, Term term) {
     std::cout <<getTime() <<" push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
-    {
-      boost::unique_lock<boost::mutex> lk(info->infoMutex);
-      taskQueue.push(TaskType::transform);
-      transformQueue.push(TransformTask(fromRole, toRole, term));  
-    }
+    taskQueue.push(TaskType::transform);
+    transformQueue.push(TransformTask(fromRole, toRole, term));  
     queueCond.notify_one();
-    std::cout <<"push trans "<<std::endl;
+    //std::cout <<"push trans "<<std::endl;
   }
 
   void RaftServer::executeTask() {
-    std::ofstream fout(cluster->localId + "-queue");
     while(true) {
       boost::unique_lock<boost::mutex> lk(info->infoMutex);
-      queueCond.wait(lk, [this]{return !taskQueue.empty(); });
+      queueCond.wait(lk, [this]{//std::cout<<getTime()<<" waiting... "<<std::endl;
+        return !taskQueue.empty(); });
       while (!taskQueue.empty()) {
-        if(!lk.owns_lock()) lk.lock();
+        //if(!lk.owns_lock()) lk.lock();
         switch(taskQueue.front()) {
           case TaskType::respondRequestVote: {
             auto tmp = respondRequestVoteQueue.front();
             auto result = roles[info->currentRole]->respondRequestVote(tmp.request);
-            lk.unlock();
-            fout << getTime() << " pop respondRequestVote " <<info->currentRole <<' '<<tmp.request.candidateId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.voteGranted << std::endl;  
+            
+            std::ofstream fout("votequeue-" + cluster->localId + "-" + tmp.request.candidateId + "-" + std::to_string(tmp.request.term));
+
+            //lk.unlock();
             tmp.prm.set_value(result);
             respondRequestVoteQueue.pop();
+
+            fout << getTime() << " pop respondRequestVote " <<info->currentTerm <<' '<<tmp.request.candidateId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.voteGranted << std::endl;  
+            fout.close();
             break;
           }
           case TaskType::respondAppendEntries: {
             auto tmp = respondAppendEntriesQueue.front();
             auto result = roles[info->currentRole]->respondAppendEntries(tmp.request);
-            lk.unlock();
-            fout << getTime() << " pop respondAppendEntries " <<info->currentRole <<' '<<tmp.request.leaderId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.success << std::endl;  
+            
+            std::ofstream fout("appendqueue-" + cluster->localId + "-" + tmp.request.leaderId + "-" + std::to_string(tmp.request.term));
+            
+            //lk.unlock();
             tmp.prm.set_value(result);
+            
             respondAppendEntriesQueue.pop();
+            fout << getTime() << " pop respondAppendEntries " <<info->currentTerm <<' '<<tmp.request.leaderId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.success << std::endl;  
+            fout.close();
             break;
           }
           case TaskType::transform : {
@@ -105,21 +117,23 @@ namespace Raft {
             info->currentRole = tmp.toRole;
             info->currentTerm = tmp.term;
             info->votedFor = invalidServerId;
+            
+            std::ofstream fout("transqueue-" + cluster->localId + "-" + std::to_string(tmp.fromRole) + "-" + std::to_string(tmp.toRole) + "-" + std::to_string(tmp.term));
+            fout<<getTime()<<' '<<info->currentTerm<<std::endl;
+
             lk.unlock();
-            fout << getTime() << " pop transform " <<tmp.fromRole <<' '<< tmp.toRole << ' ' << tmp.term << std::endl;  
             transformQueue.pop();
+            fout<<getTime() <<" pop" << std::endl;
             roles[info->currentRole]->init();
-            fout<<getTime() << " break"<<std::endl;
+            lk.lock();
+            fout<<getTime() <<" break"<<std::endl;
+            fout.close();
             break;
           }  
         } 
         taskQueue.pop();
-        fout<<getTime() << " pop"<<std::endl; 
-      }
-      fout<<getTime() << " while end"<<std::endl;
-            
+      }     
     }
-    fout.close();
   }
   void RaftServer::start() {
     //prepare

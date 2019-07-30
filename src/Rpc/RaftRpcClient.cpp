@@ -69,7 +69,7 @@ namespace Raft {
       }
       fout.close();
       if(getVotes * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
-      return std::make_pair(RaftServerRole::candidate, request.term + 1);
+      return std::make_pair(RaftServerRole::follower, request.term);
     }
     
     std::pair<RaftServerRole, Term> RaftRpcClient::sendHeartbeats(size_t localServer, const AppendEntriesRequest &request) {

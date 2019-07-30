@@ -25,12 +25,14 @@ namespace Raft {
 
   //AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
   void Leader::init() {
-    std::cout << cluster->localId << " becomes a leader!---------------------------- " << std::endl;
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     lk.unlock();
+    
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
-   // heartbeatThread.interrupt();
+    heartbeatThread.interrupt();
+    heartbeatThread.join();
     heartbeatThread = boost::thread([this, request, heartbeatTimeout]{
       std::ofstream fout(cluster->localId + "-leader"); 
       while(true) {
@@ -51,6 +53,6 @@ namespace Raft {
       }
       fout.close();
     });     
-    heartbeatThread.detach(); 
+    //heartbeatThread.detach(); 
   }
 }

@@ -13,6 +13,7 @@ namespace Raft {
   }
 
   RequestVoteReply Follower::respondRequestVote(const RequestVoteRequest &request) {
+     sleepThread.interrupt();
     if(request.term < info->currentTerm) {
       return RequestVoteReply(false, info->currentTerm);
     }
@@ -69,16 +70,18 @@ namespace Raft {
   }
   
   void Follower::init() {
+    
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
     Term currentTerm = info->currentTerm;
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     lk.unlock();
-    std::cout << cluster->localId << " becomes a follower, currentTerm: " << currentTerm << std::endl;
+    
     Timer electionTimeout = cluster->electionTimeout;
-    std::cout <<"electionTimeout " << electionTimeout << std::endl;
-    //sleepThread.interrupt();
+    sleepThread.interrupt();
+    sleepThread.join();
     sleepThread = boost::thread([this, electionTimeout, currentTerm] {
       std::ofstream fout;
-      fout.open(cluster->localId + "-follower");
+      fout.open("follower-"+cluster->localId+"-"+std::to_string(currentTerm));
       while(true) {  
         Timer waitTime = randTimer(electionTimeout);
         fout <<getTime() << " waitTime: " << waitTime << std::endl;
@@ -95,9 +98,6 @@ namespace Raft {
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, currentTerm + 1);
         break;
       }
-      //fout.close();
     });
-    sleepThread.detach();
-    std::cout <<getTime() << ' '<<"Follower::init end " << std::endl;
   }
 }

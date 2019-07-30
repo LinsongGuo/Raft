@@ -24,13 +24,15 @@ namespace Raft {
   }
 
   void Candidate::init() {
-    std::cout << cluster->localId << " becomes a candidate!---------------------------- " << std::endl;
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
     lk.unlock();
     std::cout<<getTime() << " build voteThread " << std::endl;
+    
     Timer electionTimeout = cluster->electionTimeout;
-    //voteThread.interrupt();
+    voteThread.interrupt();
+    voteThread.join();
     voteThread = boost::thread([this, request, electionTimeout] {
       //std::ofstream fout(cluster->localId + "-candidate");
       //fout.close();
@@ -46,7 +48,7 @@ namespace Raft {
       } 
       transformer->Transform(RaftServerRole::candidate, result.first, result.second);
     });
-    voteThread.detach();
+    //voteThread.detach();
     // /std::cout<<getTime() << " end candidate::init " << std::endl;
   }
 }
