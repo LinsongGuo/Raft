@@ -12,7 +12,7 @@ namespace Raft {
       std::shared_ptr<RaftServerCluster>_cluster, 
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
       std::shared_ptr<Transformer> _transformer);
-    void init() override;
+    void init(Term currentTerm) override;
     RequestVoteReply respondRequestVote(const RequestVoteRequest &request) override;
     AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) override;
   };

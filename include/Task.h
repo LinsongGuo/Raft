@@ -14,18 +14,14 @@ namespace Raft {
     Task(TaskType _opt);
   };
   struct PutTask {
-    /*std::string key, args;
+    std::string key, args;
     boost::promise<bool> &prm;
-    Put(std::string _key, std::string _args, boost::promise<bool> _prm);
-  */
-    PutTask();
+    PutTask(std::string _key, std::string _args, boost::promise<bool> &_prm);
   };
   struct GetTask {
-   /* std::string key;
-    boost::promise<std::pair<bool, std::string> > prm;
-    Get(std::string _key, boost::promise<std::pair<bool, std::string> > _prm);
-  */
-    GetTask();
+    std::string key;
+    boost::promise<std::pair<bool, std::string> > &prm;
+    GetTask(std::string _key, boost::promise<std::pair<bool, std::string> > &_prm);
   };
   struct RespondRequestVoteTask {
     RequestVoteRequest request;

@@ -21,6 +21,7 @@
 namespace Raft {
   class RaftServer {
   private:
+    RaftServerRole currentRole;
     std::shared_ptr<RaftServerCluster> cluster;
     std::shared_ptr<RaftServerInfo> info;
     
@@ -35,6 +36,7 @@ namespace Raft {
     std::queue<RespondRequestVoteTask> respondRequestVoteQueue;
     std::queue<RespondAppendEntriesTask> respondAppendEntriesQueue;
     std::queue<TransformTask> transformQueue;
+    boost::mutex queueMutex;
     boost::condition_variable queueCond;
     boost::thread queueThread;
 
@@ -45,9 +47,11 @@ namespace Raft {
     void start();
     void shutdown();    
     void executeTask();
-    void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
+    bool put(const std::string &key, const std::string &args);
+    std::pair<bool, std::string> get(const std::string &key);
     RequestVoteReply respondRequestVote(const RequestVoteRequest &requset);
     AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request);
+    void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
   };
 }
 #endif

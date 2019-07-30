@@ -24,10 +24,11 @@ namespace Raft {
   }
 
   //AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
-  void Leader::init() {
+  void Leader::init(Term currentTerm) {
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    info->currentTerm = currentTerm;
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
     lk.unlock();
     
     Timer heartbeatTimeout = cluster->heartbeatTimeout;

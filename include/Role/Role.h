@@ -22,7 +22,7 @@ namespace Raft {
       std::shared_ptr<RaftServerCluster>_cluster, 
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
       std::shared_ptr<Transformer> _transformer);
-    virtual void init() = 0;
+    virtual void init(Term currentTerm) = 0;
     virtual RequestVoteReply respondRequestVote(const RequestVoteRequest &request) = 0;
     virtual AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) = 0;
   };

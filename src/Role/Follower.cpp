@@ -69,10 +69,9 @@ namespace Raft {
     return AppendEntriesReply(true, info->currentTerm);
   }
   
-  void Follower::init() {
-    
+  void Follower::init(Term currentTerm) {
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
-    Term currentTerm = info->currentTerm;
+    info->currentTerm = currentTerm;
     std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     lk.unlock();
     
