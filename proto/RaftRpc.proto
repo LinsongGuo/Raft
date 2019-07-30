@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package Raft.Rpc;
 
-message RpcEntry {
-    uint64 term = 1;
-    string key = 2;
-    string args = 3;
+message Entry {
+    string key = 1;
+    string args = 2;
+    uint64 term = 3;
 }
 
 message RpcAppendEntriesRequest {
@@ -13,7 +13,7 @@ message RpcAppendEntriesRequest {
     string leaderID = 2;
     uint64 prevLogIndex = 3;
     uint64 prevLogTerm = 4;
-    repeated RpcEntry entries = 5;
+    repeated Entry entries = 5;
     int64 leaderCommit = 6;
 }
 
@@ -35,6 +35,7 @@ message RpcRequestVoteReply {
 }
 
 service RaftRpc {
-    rpc RpcAppendEntries (RpcAppendEntriesRequest) returns (RpcAppendEntriesReply) {}
     rpc RpcRequestVote (RpcRequestVoteRequest) returns (RpcRequestVoteReply) {}
+    rpc RpcHeartbeat (RpcAppendEntriesRequest) returns (RpcAppendEntriesReply) {}
+    rpc RpcAppendEntries (RpcAppendEntriesRequest) returns (RpcAppendEntriesReply) {}
 }

@@ -7,6 +7,15 @@ namespace Raft {
     std::shared_ptr<Transformer> _transformer):
     Role(_info, _cluster, _rpcClient, _transformer) {;}
 
+
+  bool Follower::put(const std::string &key, const std::string &args) {
+    return false; 
+  }
+
+  std::pair<bool, std::string> Follower::get(const std::string &key) {
+    return std::make_pair(false, invalidString);
+  }
+
   bool Follower::checkMajorityEntries(const RequestVoteRequest &request) {
     return request.lastLogTerm > info->lastLogTerm() || 
     (request.lastLogTerm == info->lastLogTerm() && request.lastLogIndex >= info->lastLogIndex());
@@ -36,32 +45,58 @@ namespace Raft {
     }
   }
   
-  AppendEntriesReply Follower::respondAppendEntries(const AppendEntriesRequest &request) {
+  AppendEntriesReply Follower::respondHeartbeat(const AppendEntriesRequest &request) {
     if(request.term < info->currentTerm) {
       return AppendEntriesReply(false, info->currentTerm);
     }
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
     } 
-    if(request.entries.size() > 0) { //not heartbeat
-      if(request.prevLogIndex != invalidIndex && 
-        (request.prevLogIndex > info->replicatedEntries.size() - 1 || 
-        info->replicatedEntries[request.prevLogIndex].term != request.prevLogTerm) ) {
-        return AppendEntriesReply(false, info->currentTerm);
-      }
-      while(info->replicatedEntries.size() - 1 > request.prevLogIndex) {
-        info->replicatedEntries.pop_back();
-      }  
-      for(auto &p: request.entries) {
-        info->replicatedEntries.push_back(p);
-      }
-    }
     if(request.leaderCommit > info->commitIndex) {
       info->commitIndex = std::min(request.leaderCommit, info->replicatedEntries.size() - 1);
     }
     if(info->lastApplied < info->commitIndex) {
       for(size_t i = info->lastApplied + 1; i <= info->commitIndex; ++i) {
-        info->appliedEntries.push_back(info->replicatedEntries[i]);
+        info->appliedEntries[info->replicatedEntries[i].key] = info->replicatedEntries[i].args;
+      }
+      info->lastApplied = info->commitIndex;
+    }
+    sleepThread.interrupt();
+    return AppendEntriesReply(true, info->currentTerm);
+  }
+
+  AppendEntriesReply Follower::respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) {
+    Term term = request->term(), prevLogTerm = request->prevlogterm();
+    Index prevLogIndex = request->prevlogindex(), leaderCommit = request->leadercommit();
+    if(term < info->currentTerm) {
+      return AppendEntriesReply(false, info->currentTerm);
+    }
+    if(term > info->currentTerm) {
+      info->currentTerm = term;
+    } 
+    size_t siz = request->entries().size();
+    if(siz > 0) { 
+      if(prevLogIndex != invalidIndex && 
+        (prevLogIndex > info->replicatedEntries.size() - 1 || 
+        info->replicatedEntries[prevLogIndex].term != prevLogTerm) ) {
+        return AppendEntriesReply(false, info->currentTerm);
+      }
+      while(info->replicatedEntries.size() - 1 > prevLogIndex) {
+        info->replicatedEntries.pop_back();
+      } 
+      if(!request->entries().empty()) {
+        for(size_t i = siz - 1; i >= 0; --i) {
+          auto tmp = request->entries()[i];
+          info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
+        }
+      }
+    }
+    if(leaderCommit > info->commitIndex) {
+      info->commitIndex = std::min(leaderCommit, info->replicatedEntries.size() - 1);
+    }
+    if(info->lastApplied < info->commitIndex) {
+      for(size_t i = info->lastApplied + 1; i <= info->commitIndex; ++i) {
+        info->appliedEntries[info->replicatedEntries[i].key] = info->replicatedEntries[i].args;
       }
       info->lastApplied = info->commitIndex;
     }
@@ -72,6 +107,7 @@ namespace Raft {
   void Follower::init(Term currentTerm) {
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
+    info->votedFor = invalidServerId;
     std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     lk.unlock();
     

@@ -14,12 +14,13 @@ namespace Raft {
       size_t size;
       const Timer broadcastTimeout;
       std::vector<boost::future<std::pair<bool, RequestVoteReply> > > voteFuture;
-      std::vector<boost::future<std::pair<bool, AppendEntriesReply> > > appendFuture;
+      std::vector<boost::future<std::pair<bool, AppendEntriesReply> > > heartbeatFuture;
       std::vector<std::unique_ptr<RaftRpc::Stub> > stubs;
     public:
       RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout);
       std::pair<bool, RequestVoteReply> sendRequestVote(size_t id, const RequestVoteRequest &request);
-      std::pair<bool, AppendEntriesReply> sendAppendEntries(size_t id, const AppendEntriesRequest &request);
+      std::pair<bool, AppendEntriesReply> sendHeartbeat(size_t id, const AppendEntriesRequest &request);
+      std::pair<bool, AppendEntriesReply> sendAppendEntries(size_t id, RpcAppendEntriesRequest rpcRequest);
       std::pair<RaftServerRole, Term> sendRequestVotes(size_t localServer, const RequestVoteRequest &request);
       std::pair<RaftServerRole, Term> sendHeartbeats(size_t localServer, const AppendEntriesRequest &request);
     };

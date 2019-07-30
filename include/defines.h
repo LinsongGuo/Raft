@@ -15,6 +15,8 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include "exception.h"
+#include "RaftRpc.pb.h"
+#include "RaftRpc.grpc.pb.h"
 
 namespace Raft {
   extern const std::string invalidString;
@@ -41,21 +43,19 @@ namespace Raft {
 
   struct ReplicatedEntry {
     Term term;
-    std::string opt, args;
-    ReplicatedEntry(Term _term = invalidTerm, std::string _opt = invalidString, std::string _args = invalidString);
+    std::string key, args;
+    ReplicatedEntry(std::string _key = invalidString, std::string _args = invalidString, Term _term = invalidTerm);
   };
   
   struct AppliedEntry {
-    std::string opt, args;
-    AppliedEntry(std::string _opt = invalidString, std::string _args = invalidString);
-    AppliedEntry(const ReplicatedEntry &replicatedEntry);
+    std::string key, args;
+    AppliedEntry(std::string _key = invalidString, std::string _args = invalidString);
   };
 
   struct AppendEntriesRequest {
     ServerId leaderId;
     Term term, prevLogTerm;
     Index prevLogIndex, leaderCommit;
-    std::vector<ReplicatedEntry> entries;
     AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
   };
 
@@ -79,7 +79,7 @@ namespace Raft {
   };
 
   struct RaftServerCluster {
-    Timer electionTimeout, heartbeatTimeout, broadcastTimeout;
+    Timer electionTimeout, heartbeatTimeout, broadcastTimeout, appendTimeout;
     size_t size, localServer;
     ServerId localId;
     std::vector<ServerId> serverList;
@@ -94,12 +94,11 @@ namespace Raft {
     Term currentTerm;
     ServerId votedFor;
     Index commitIndex, lastApplied;
-    std::vector<ReplicatedEntry> replicatedEntries;
-    std::vector<AppliedEntry> appliedEntries;
     std::vector<Index> nextIndex;
     std::vector<Index> matchIndex;
-
-    RaftServerInfo();
+    std::vector<ReplicatedEntry> replicatedEntries;
+    std::map<std::string, std::string> appliedEntries;
+    RaftServerInfo(size_t size);
     Term lastLogTerm();
     Index lastLogIndex();
   };

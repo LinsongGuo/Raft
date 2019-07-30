@@ -34,6 +34,7 @@ namespace Raft {
     std::queue<PutTask> putQueue;
     std::queue<GetTask> getQueue;
     std::queue<RespondRequestVoteTask> respondRequestVoteQueue;
+    std::queue<RespondHeartbeatTask> respondHeartbeatQueue;
     std::queue<RespondAppendEntriesTask> respondAppendEntriesQueue;
     std::queue<TransformTask> transformQueue;
     boost::mutex queueMutex;
@@ -50,8 +51,9 @@ namespace Raft {
     bool put(const std::string &key, const std::string &args);
     std::pair<bool, std::string> get(const std::string &key);
     RequestVoteReply respondRequestVote(const RequestVoteRequest &requset);
-    AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request);
-    void transform(RaftServerRole fromRole, RaftServerRole toRole, Term term);
+    AppendEntriesReply respondHeartbeat(const AppendEntriesRequest &request);
+    AppendEntriesReply respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request);
+    void transform(const RaftServerRole &fromRole, const RaftServerRole &toRole, const Term &term);
   };
 }
 #endif

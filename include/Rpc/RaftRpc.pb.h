@@ -56,15 +56,15 @@ struct TableStruct_RaftRpc_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_RaftRpc_2eproto;
 namespace Raft {
 namespace Rpc {
+class Entry;
+class EntryDefaultTypeInternal;
+extern EntryDefaultTypeInternal _Entry_default_instance_;
 class RpcAppendEntriesReply;
 class RpcAppendEntriesReplyDefaultTypeInternal;
 extern RpcAppendEntriesReplyDefaultTypeInternal _RpcAppendEntriesReply_default_instance_;
 class RpcAppendEntriesRequest;
 class RpcAppendEntriesRequestDefaultTypeInternal;
 extern RpcAppendEntriesRequestDefaultTypeInternal _RpcAppendEntriesRequest_default_instance_;
-class RpcEntry;
-class RpcEntryDefaultTypeInternal;
-extern RpcEntryDefaultTypeInternal _RpcEntry_default_instance_;
 class RpcRequestVoteReply;
 class RpcRequestVoteReplyDefaultTypeInternal;
 extern RpcRequestVoteReplyDefaultTypeInternal _RpcRequestVoteReply_default_instance_;
@@ -74,9 +74,9 @@ extern RpcRequestVoteRequestDefaultTypeInternal _RpcRequestVoteRequest_default_i
 }  // namespace Rpc
 }  // namespace Raft
 PROTOBUF_NAMESPACE_OPEN
+template<> ::Raft::Rpc::Entry* Arena::CreateMaybeMessage<::Raft::Rpc::Entry>(Arena*);
 template<> ::Raft::Rpc::RpcAppendEntriesReply* Arena::CreateMaybeMessage<::Raft::Rpc::RpcAppendEntriesReply>(Arena*);
 template<> ::Raft::Rpc::RpcAppendEntriesRequest* Arena::CreateMaybeMessage<::Raft::Rpc::RpcAppendEntriesRequest>(Arena*);
-template<> ::Raft::Rpc::RpcEntry* Arena::CreateMaybeMessage<::Raft::Rpc::RpcEntry>(Arena*);
 template<> ::Raft::Rpc::RpcRequestVoteReply* Arena::CreateMaybeMessage<::Raft::Rpc::RpcRequestVoteReply>(Arena*);
 template<> ::Raft::Rpc::RpcRequestVoteRequest* Arena::CreateMaybeMessage<::Raft::Rpc::RpcRequestVoteRequest>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -85,23 +85,23 @@ namespace Rpc {
 
 // ===================================================================
 
-class RpcEntry :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Raft.Rpc.RpcEntry) */ {
+class Entry :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Raft.Rpc.Entry) */ {
  public:
-  RpcEntry();
-  virtual ~RpcEntry();
+  Entry();
+  virtual ~Entry();
 
-  RpcEntry(const RpcEntry& from);
-  RpcEntry(RpcEntry&& from) noexcept
-    : RpcEntry() {
+  Entry(const Entry& from);
+  Entry(Entry&& from) noexcept
+    : Entry() {
     *this = ::std::move(from);
   }
 
-  inline RpcEntry& operator=(const RpcEntry& from) {
+  inline Entry& operator=(const Entry& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RpcEntry& operator=(RpcEntry&& from) noexcept {
+  inline Entry& operator=(Entry&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -119,34 +119,34 @@ class RpcEntry :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const RpcEntry& default_instance();
+  static const Entry& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RpcEntry* internal_default_instance() {
-    return reinterpret_cast<const RpcEntry*>(
-               &_RpcEntry_default_instance_);
+  static inline const Entry* internal_default_instance() {
+    return reinterpret_cast<const Entry*>(
+               &_Entry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  void Swap(RpcEntry* other);
-  friend void swap(RpcEntry& a, RpcEntry& b) {
+  void Swap(Entry* other);
+  friend void swap(Entry& a, Entry& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RpcEntry* New() const final {
-    return CreateMaybeMessage<RpcEntry>(nullptr);
+  inline Entry* New() const final {
+    return CreateMaybeMessage<Entry>(nullptr);
   }
 
-  RpcEntry* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<RpcEntry>(arena);
+  Entry* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<Entry>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const RpcEntry& from);
-  void MergeFrom(const RpcEntry& from);
+  void CopyFrom(const Entry& from);
+  void MergeFrom(const Entry& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -167,10 +167,10 @@ class RpcEntry :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(RpcEntry* other);
+  void InternalSwap(Entry* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Raft.Rpc.RpcEntry";
+    return "Raft.Rpc.Entry";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -194,9 +194,9 @@ class RpcEntry :
 
   // accessors -------------------------------------------------------
 
-  // string key = 2;
+  // string key = 1;
   void clear_key();
-  static const int kKeyFieldNumber = 2;
+  static const int kKeyFieldNumber = 1;
   const std::string& key() const;
   void set_key(const std::string& value);
   void set_key(std::string&& value);
@@ -206,9 +206,9 @@ class RpcEntry :
   std::string* release_key();
   void set_allocated_key(std::string* key);
 
-  // string args = 3;
+  // string args = 2;
   void clear_args();
-  static const int kArgsFieldNumber = 3;
+  static const int kArgsFieldNumber = 2;
   const std::string& args() const;
   void set_args(const std::string& value);
   void set_args(std::string&& value);
@@ -218,13 +218,13 @@ class RpcEntry :
   std::string* release_args();
   void set_allocated_args(std::string* args);
 
-  // uint64 term = 1;
+  // uint64 term = 3;
   void clear_term();
-  static const int kTermFieldNumber = 1;
+  static const int kTermFieldNumber = 3;
   ::PROTOBUF_NAMESPACE_ID::uint64 term() const;
   void set_term(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:Raft.Rpc.RpcEntry)
+  // @@protoc_insertion_point(class_scope:Raft.Rpc.Entry)
  private:
   class HasBitSetters;
 
@@ -346,16 +346,16 @@ class RpcAppendEntriesRequest :
 
   // accessors -------------------------------------------------------
 
-  // repeated .Raft.Rpc.RpcEntry entries = 5;
+  // repeated .Raft.Rpc.Entry entries = 5;
   int entries_size() const;
   void clear_entries();
   static const int kEntriesFieldNumber = 5;
-  ::Raft::Rpc::RpcEntry* mutable_entries(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::RpcEntry >*
+  ::Raft::Rpc::Entry* mutable_entries(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::Entry >*
       mutable_entries();
-  const ::Raft::Rpc::RpcEntry& entries(int index) const;
-  ::Raft::Rpc::RpcEntry* add_entries();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::RpcEntry >&
+  const ::Raft::Rpc::Entry& entries(int index) const;
+  ::Raft::Rpc::Entry* add_entries();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::Entry >&
       entries() const;
 
   // string leaderID = 2;
@@ -399,7 +399,7 @@ class RpcAppendEntriesRequest :
   class HasBitSetters;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::RpcEntry > entries_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::Entry > entries_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr leaderid_;
   ::PROTOBUF_NAMESPACE_ID::uint64 term_;
   ::PROTOBUF_NAMESPACE_ID::uint64 prevlogindex_;
@@ -836,122 +836,122 @@ class RpcRequestVoteReply :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// RpcEntry
+// Entry
 
-// uint64 term = 1;
-inline void RpcEntry::clear_term() {
-  term_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 RpcEntry::term() const {
-  // @@protoc_insertion_point(field_get:Raft.Rpc.RpcEntry.term)
-  return term_;
-}
-inline void RpcEntry::set_term(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  term_ = value;
-  // @@protoc_insertion_point(field_set:Raft.Rpc.RpcEntry.term)
-}
-
-// string key = 2;
-inline void RpcEntry::clear_key() {
+// string key = 1;
+inline void Entry::clear_key() {
   key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& RpcEntry::key() const {
-  // @@protoc_insertion_point(field_get:Raft.Rpc.RpcEntry.key)
+inline const std::string& Entry::key() const {
+  // @@protoc_insertion_point(field_get:Raft.Rpc.Entry.key)
   return key_.GetNoArena();
 }
-inline void RpcEntry::set_key(const std::string& value) {
+inline void Entry::set_key(const std::string& value) {
   
   key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_set:Raft.Rpc.Entry.key)
 }
-inline void RpcEntry::set_key(std::string&& value) {
+inline void Entry::set_key(std::string&& value) {
   
   key_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_set_rvalue:Raft.Rpc.Entry.key)
 }
-inline void RpcEntry::set_key(const char* value) {
+inline void Entry::set_key(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_set_char:Raft.Rpc.Entry.key)
 }
-inline void RpcEntry::set_key(const char* value, size_t size) {
+inline void Entry::set_key(const char* value, size_t size) {
   
   key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_set_pointer:Raft.Rpc.Entry.key)
 }
-inline std::string* RpcEntry::mutable_key() {
+inline std::string* Entry::mutable_key() {
   
-  // @@protoc_insertion_point(field_mutable:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_mutable:Raft.Rpc.Entry.key)
   return key_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* RpcEntry::release_key() {
-  // @@protoc_insertion_point(field_release:Raft.Rpc.RpcEntry.key)
+inline std::string* Entry::release_key() {
+  // @@protoc_insertion_point(field_release:Raft.Rpc.Entry.key)
   
   return key_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void RpcEntry::set_allocated_key(std::string* key) {
+inline void Entry::set_allocated_key(std::string* key) {
   if (key != nullptr) {
     
   } else {
     
   }
   key_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:Raft.Rpc.RpcEntry.key)
+  // @@protoc_insertion_point(field_set_allocated:Raft.Rpc.Entry.key)
 }
 
-// string args = 3;
-inline void RpcEntry::clear_args() {
+// string args = 2;
+inline void Entry::clear_args() {
   args_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& RpcEntry::args() const {
-  // @@protoc_insertion_point(field_get:Raft.Rpc.RpcEntry.args)
+inline const std::string& Entry::args() const {
+  // @@protoc_insertion_point(field_get:Raft.Rpc.Entry.args)
   return args_.GetNoArena();
 }
-inline void RpcEntry::set_args(const std::string& value) {
+inline void Entry::set_args(const std::string& value) {
   
   args_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_set:Raft.Rpc.Entry.args)
 }
-inline void RpcEntry::set_args(std::string&& value) {
+inline void Entry::set_args(std::string&& value) {
   
   args_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_set_rvalue:Raft.Rpc.Entry.args)
 }
-inline void RpcEntry::set_args(const char* value) {
+inline void Entry::set_args(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   args_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_set_char:Raft.Rpc.Entry.args)
 }
-inline void RpcEntry::set_args(const char* value, size_t size) {
+inline void Entry::set_args(const char* value, size_t size) {
   
   args_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_set_pointer:Raft.Rpc.Entry.args)
 }
-inline std::string* RpcEntry::mutable_args() {
+inline std::string* Entry::mutable_args() {
   
-  // @@protoc_insertion_point(field_mutable:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_mutable:Raft.Rpc.Entry.args)
   return args_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* RpcEntry::release_args() {
-  // @@protoc_insertion_point(field_release:Raft.Rpc.RpcEntry.args)
+inline std::string* Entry::release_args() {
+  // @@protoc_insertion_point(field_release:Raft.Rpc.Entry.args)
   
   return args_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void RpcEntry::set_allocated_args(std::string* args) {
+inline void Entry::set_allocated_args(std::string* args) {
   if (args != nullptr) {
     
   } else {
     
   }
   args_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), args);
-  // @@protoc_insertion_point(field_set_allocated:Raft.Rpc.RpcEntry.args)
+  // @@protoc_insertion_point(field_set_allocated:Raft.Rpc.Entry.args)
+}
+
+// uint64 term = 3;
+inline void Entry::clear_term() {
+  term_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 Entry::term() const {
+  // @@protoc_insertion_point(field_get:Raft.Rpc.Entry.term)
+  return term_;
+}
+inline void Entry::set_term(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  term_ = value;
+  // @@protoc_insertion_point(field_set:Raft.Rpc.Entry.term)
 }
 
 // -------------------------------------------------------------------
@@ -1051,31 +1051,31 @@ inline void RpcAppendEntriesRequest::set_prevlogterm(::PROTOBUF_NAMESPACE_ID::ui
   // @@protoc_insertion_point(field_set:Raft.Rpc.RpcAppendEntriesRequest.prevLogTerm)
 }
 
-// repeated .Raft.Rpc.RpcEntry entries = 5;
+// repeated .Raft.Rpc.Entry entries = 5;
 inline int RpcAppendEntriesRequest::entries_size() const {
   return entries_.size();
 }
 inline void RpcAppendEntriesRequest::clear_entries() {
   entries_.Clear();
 }
-inline ::Raft::Rpc::RpcEntry* RpcAppendEntriesRequest::mutable_entries(int index) {
+inline ::Raft::Rpc::Entry* RpcAppendEntriesRequest::mutable_entries(int index) {
   // @@protoc_insertion_point(field_mutable:Raft.Rpc.RpcAppendEntriesRequest.entries)
   return entries_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::RpcEntry >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::Entry >*
 RpcAppendEntriesRequest::mutable_entries() {
   // @@protoc_insertion_point(field_mutable_list:Raft.Rpc.RpcAppendEntriesRequest.entries)
   return &entries_;
 }
-inline const ::Raft::Rpc::RpcEntry& RpcAppendEntriesRequest::entries(int index) const {
+inline const ::Raft::Rpc::Entry& RpcAppendEntriesRequest::entries(int index) const {
   // @@protoc_insertion_point(field_get:Raft.Rpc.RpcAppendEntriesRequest.entries)
   return entries_.Get(index);
 }
-inline ::Raft::Rpc::RpcEntry* RpcAppendEntriesRequest::add_entries() {
+inline ::Raft::Rpc::Entry* RpcAppendEntriesRequest::add_entries() {
   // @@protoc_insertion_point(field_add:Raft.Rpc.RpcAppendEntriesRequest.entries)
   return entries_.Add();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::RpcEntry >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Raft::Rpc::Entry >&
 RpcAppendEntriesRequest::entries() const {
   // @@protoc_insertion_point(field_list:Raft.Rpc.RpcAppendEntriesRequest.entries)
   return entries_;

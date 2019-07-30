@@ -311,6 +311,10 @@ boost/property_tree/ptree.hpp
 -
 exception.h
 ../include/exception.h
+RaftRpc.pb.h
+../include/RaftRpc.pb.h
+RaftRpc.grpc.pb.h
+../include/RaftRpc.grpc.pb.h
 
 ../include/exception.h
 

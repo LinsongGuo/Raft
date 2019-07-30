@@ -19,16 +19,32 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     private:
-      std::function<RequestVoteReply(RequestVoteRequest)> respondRequestVote;
-      std::function<AppendEntriesReply(AppendEntriesRequest)> respondAppendEntries;
+      std::function<bool(const std::string &, const std::string &)> put;
+      std::function<std::pair<bool, const std::string &>(std::string)> get;
+      std::function<RequestVoteReply(const RequestVoteRequest&)> respondRequestVote;
+      std::function<AppendEntriesReply(const AppendEntriesRequest&)> respondHeartbeat;
+      std::function<AppendEntriesReply(const RpcAppendEntriesRequest*)> respondAppendEntries;
     public:
-      grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
       grpc::Status RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) override;
+      grpc::Status RpcHeartbeat(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
+      grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
+      template <class T>
+      void bindPut(T &&func) {
+        put = std::forward<T>(func);
+      }
+      template <class T>
+      void bindGet(T &&func) {
+        get = std::forward<T>(func);
+      }
       template <class T> 
       void bindRespondRequestVote(T &&func) {
         respondRequestVote = std::forward<T>(func);
       }
-      template<class T>
+      template <class T>
+      void bindRespondHeartbeat(T &&func) {
+        respondHeartbeat = std::forward<T>(func);
+      }
+      template <class T>
       void bindRespondAppendEntries(T &&func) {
         respondAppendEntries = std::forward<T>(func);
       }
@@ -42,11 +58,23 @@ namespace Raft {
     public:
       void start(const std::string &str);
       void shutdown(); 
-      template<class T>
+      template <class T>
+      void bindPut(T &&func) {
+        service.bindPut(std::forward<T>(func));
+      }
+      template <class T>
+      void bindGet(T &&func) {
+        service.bindGet(std::forward<T>(func));
+      }
+      template <class T>
       void bindRespondRequestVote(T &&func) {
         service.bindRespondRequestVote(std::forward<T>(func));
       }
-      template<class T>
+      template <class T>
+      void bindRespondHeartbeat(T &&func) {
+        service.bindRespondHeartbeat(std::forward<T>(func));
+      }
+      template <class T>
       void bindRespondAppendEntries(T &&func) {
         service.bindRespondAppendEntries(std::forward<T>(func));
       }

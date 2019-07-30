@@ -13,9 +13,12 @@ namespace Raft {
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
       std::shared_ptr<Transformer> _transformer);
     void init(Term currentTerm) override;
+    bool put(const std::string &key, const std::string &args) override;
+    std::pair<bool, std::string> get(const std::string &key) override;
     bool checkMajorityEntries(const RequestVoteRequest &request);
     RequestVoteReply respondRequestVote(const RequestVoteRequest &request) override;
-    AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) override;  
+    AppendEntriesReply respondHeartbeat(const AppendEntriesRequest &request) override;
+    AppendEntriesReply respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) override;
   };
 }
 

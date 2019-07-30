@@ -7,6 +7,14 @@ namespace Raft {
     std::shared_ptr<Transformer> _transformer):
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
 
+  bool Candidate::put(const std::string &key, const std::string &args) {
+    return false;
+  }
+
+  std::pair<bool, std::string> Candidate::get(const std::string &key) {
+    return std::make_pair(false, invalidString);
+  }
+  
   RequestVoteReply Candidate::respondRequestVote(const RequestVoteRequest &request) {
    if(request.term > info->currentTerm) {
      voteThread.interrupt();
@@ -15,7 +23,7 @@ namespace Raft {
    return RequestVoteReply(false, info->currentTerm);
   }
 
-  AppendEntriesReply Candidate::respondAppendEntries(const AppendEntriesRequest &request) {
+  AppendEntriesReply Candidate::respondHeartbeat(const AppendEntriesRequest &request) {
     if(request.term >= info->currentTerm) {
       voteThread.interrupt();
       transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, request.term);
@@ -23,9 +31,18 @@ namespace Raft {
     return AppendEntriesReply(false, info->currentTerm);    
   }
 
+  AppendEntriesReply Candidate::respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) {
+    if(request->term() >= info->currentTerm) {
+      voteThread.interrupt();
+      transformer->Transform(RaftServerRole::candidate, RaftServerRole::follower, request->term());
+    }
+    return AppendEntriesReply(false, info->currentTerm);    
+  }
+
   void Candidate::init(Term currentTerm) {
     boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
+    info->votedFor = invalidServerId;
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
     std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
     lk.unlock();

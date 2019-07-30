@@ -20,15 +20,12 @@ namespace Raft {
     return address + ":" + std::to_string(port);
   }
   
-  ReplicatedEntry::ReplicatedEntry(Term _term, std::string _opt, std::string _args): 
-    term(_term), opt(_opt), args(_args) {;}
+  ReplicatedEntry::ReplicatedEntry(std::string _key, std::string _args, Term _term): 
+    key(_key), args(_args), term(_term) {;}
 
-  AppliedEntry::AppliedEntry(std::string _opt, std::string _args): 
-    opt(_opt), args(_args) {;}
+  AppliedEntry::AppliedEntry(std::string _key, std::string _args): 
+    key(_key), args(_args) {;}
 
-  AppliedEntry::AppliedEntry(const ReplicatedEntry &replicatedEntry):
-    opt(replicatedEntry.opt), args(replicatedEntry.args) {;}
-    
   AppendEntriesRequest::AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit):
     leaderId(_leaderId), term(_term), prevLogTerm(_prevLogTerm), prevLogIndex(_prevLogIndex), leaderCommit(_leaderCommit) {;}
  
@@ -51,6 +48,7 @@ namespace Raft {
     electionTimeout = tree.get<uint64_t>("electionTimeout");
     heartbeatTimeout = tree.get<uint64_t>("heartbeatTimeout");
     broadcastTimeout = tree.get<uint64_t>("broadcastTimeout");
+    appendTimeout = tree.get<uint64_t>("appendTimeout");
     for(auto &&adr : tree.get_child("serverList")) {
       serverList.emplace_back(adr.second.get_value<std::string>());
     }
@@ -70,17 +68,16 @@ namespace Raft {
     }
   }
 
-  RaftServerInfo::RaftServerInfo() {
+  RaftServerInfo::RaftServerInfo(size_t size) {
     currentRole = RaftServerRole::follower;
     currentTerm = 1;
     votedFor = invalidServerId;
     commitIndex = lastApplied = invalidIndex;
     replicatedEntries.push_back(ReplicatedEntry());
-    appliedEntries.push_back(AppliedEntry());
-    /*for(size_t i = 0; i < size; ++i) {
+    for(size_t i = 0; i < size; ++i) {
       nextIndex.push_back(1);
       matchIndex.push_back(0);
-    }*/
+    }
   }
 
   Index RaftServerInfo::lastLogIndex() {

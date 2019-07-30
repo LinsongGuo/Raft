@@ -23,8 +23,11 @@ namespace Raft {
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
       std::shared_ptr<Transformer> _transformer);
     virtual void init(Term currentTerm) = 0;
+    virtual bool put(const std::string &key, const std::string &args) = 0;
+    virtual std::pair<bool, std::string> get(const std::string &key) = 0;
     virtual RequestVoteReply respondRequestVote(const RequestVoteRequest &request) = 0;
-    virtual AppendEntriesReply respondAppendEntries(const AppendEntriesRequest &request) = 0;
+    virtual AppendEntriesReply respondHeartbeat(const AppendEntriesRequest &request) = 0;
+    virtual AppendEntriesReply respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) = 0;
   };
 } 
 
