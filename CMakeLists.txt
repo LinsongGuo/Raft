@@ -25,6 +25,6 @@ include_directories(
 	${GRPC_INCLUDE_DIR}
 )
 
-add_subdirectory(proto)
+add_subdirectory(protobuf)
 add_subdirectory(src)
 

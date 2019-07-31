@@ -17,6 +17,8 @@
 #include "RaftRpc.grpc.pb.h"
 #include "RaftRpcServer.h"
 #include "RaftRpcClient.h"
+#include "RaftExternalServer.h"
+#include "RaftExternalClient.h"
 
 namespace Raft {
   class RaftServer {
@@ -27,6 +29,7 @@ namespace Raft {
     
     std::shared_ptr<Rpc::RaftRpcServer> rpcServer;
     std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
+    std::shared_ptr<External::RaftExternalServer> externalServer;
     
     std::shared_ptr<Transformer> transformer;
     

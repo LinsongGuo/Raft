@@ -18,6 +18,7 @@
 #include "RaftRpc.pb.h"
 #include "RaftRpc.grpc.pb.h"
 
+
 namespace Raft {
   extern const std::string invalidString;
 

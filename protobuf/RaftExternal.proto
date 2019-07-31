@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package Raft.External;
+
+message PutRequest {
+  string key = 1;
+  string args = 2;
+}
+
+message PutReply {
+  bool status = 1;
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetReply {
+  bool status = 1;
+  string args = 2;
+}
+
+service RaftExternal {
+  rpc Put (PutRequest) returns (PutReply) {}
+  rpc Get (GetRequest) returns (GetReply) {}
+}
+

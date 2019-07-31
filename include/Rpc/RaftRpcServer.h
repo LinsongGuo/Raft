@@ -19,8 +19,6 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     private:
-      std::function<bool(const std::string &, const std::string &)> put;
-      std::function<std::pair<bool, const std::string &>(std::string)> get;
       std::function<RequestVoteReply(const RequestVoteRequest&)> respondRequestVote;
       std::function<AppendEntriesReply(const AppendEntriesRequest&)> respondHeartbeat;
       std::function<AppendEntriesReply(const RpcAppendEntriesRequest*)> respondAppendEntries;
@@ -28,14 +26,6 @@ namespace Raft {
       grpc::Status RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *request, RpcRequestVoteReply *reply) override;
       grpc::Status RpcHeartbeat(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
       grpc::Status RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *request, RpcAppendEntriesReply *reply) override;
-      template <class T>
-      void bindPut(T &&func) {
-        put = std::forward<T>(func);
-      }
-      template <class T>
-      void bindGet(T &&func) {
-        get = std::forward<T>(func);
-      }
       template <class T> 
       void bindRespondRequestVote(T &&func) {
         respondRequestVote = std::forward<T>(func);
@@ -58,14 +48,6 @@ namespace Raft {
     public:
       void start(const std::string &str);
       void shutdown(); 
-      template <class T>
-      void bindPut(T &&func) {
-        service.bindPut(std::forward<T>(func));
-      }
-      template <class T>
-      void bindGet(T &&func) {
-        service.bindGet(std::forward<T>(func));
-      }
       template <class T>
       void bindRespondRequestVote(T &&func) {
         service.bindRespondRequestVote(std::forward<T>(func));

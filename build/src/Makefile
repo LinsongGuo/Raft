@@ -111,100 +111,181 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/raft.dir/rule:
-	cd /home/gls/Raft/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/raft.dir/rule
-.PHONY : src/CMakeFiles/raft.dir/rule
+src/CMakeFiles/Server.dir/rule:
+	cd /home/gls/Raft/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Server.dir/rule
+.PHONY : src/CMakeFiles/Server.dir/rule
 
 # Convenience name for target.
-raft: src/CMakeFiles/raft.dir/rule
+Server: src/CMakeFiles/Server.dir/rule
 
-.PHONY : raft
+.PHONY : Server
 
 # fast build rule for target.
-raft/fast:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/build
-.PHONY : raft/fast
+Server/fast:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/build
+.PHONY : Server/fast
 
-External/Client.o: External/Client.cpp.o
+# Convenience name for target.
+src/CMakeFiles/Client.dir/rule:
+	cd /home/gls/Raft/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Client.dir/rule
+.PHONY : src/CMakeFiles/Client.dir/rule
 
-.PHONY : External/Client.o
+# Convenience name for target.
+Client: src/CMakeFiles/Client.dir/rule
 
-# target to build an object file
-External/Client.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.o
-.PHONY : External/Client.cpp.o
+.PHONY : Client
 
-External/Client.i: External/Client.cpp.i
+# fast build rule for target.
+Client/fast:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/build
+.PHONY : Client/fast
 
-.PHONY : External/Client.i
+Client.o: Client.cpp.o
 
-# target to preprocess a source file
-External/Client.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.i
-.PHONY : External/Client.cpp.i
-
-External/Client.s: External/Client.cpp.s
-
-.PHONY : External/Client.s
-
-# target to generate assembly for a file
-External/Client.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/Client.cpp.s
-.PHONY : External/Client.cpp.s
-
-External/External.grpc.pb.o: External/External.grpc.pb.cc.o
-
-.PHONY : External/External.grpc.pb.o
+.PHONY : Client.o
 
 # target to build an object file
-External/External.grpc.pb.cc.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.o
-.PHONY : External/External.grpc.pb.cc.o
+Client.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Client.cpp.o
+.PHONY : Client.cpp.o
 
-External/External.grpc.pb.i: External/External.grpc.pb.cc.i
+Client.i: Client.cpp.i
 
-.PHONY : External/External.grpc.pb.i
+.PHONY : Client.i
 
 # target to preprocess a source file
-External/External.grpc.pb.cc.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.i
-.PHONY : External/External.grpc.pb.cc.i
+Client.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Client.cpp.i
+.PHONY : Client.cpp.i
 
-External/External.grpc.pb.s: External/External.grpc.pb.cc.s
+Client.s: Client.cpp.s
 
-.PHONY : External/External.grpc.pb.s
+.PHONY : Client.s
 
 # target to generate assembly for a file
-External/External.grpc.pb.cc.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.grpc.pb.cc.s
-.PHONY : External/External.grpc.pb.cc.s
+Client.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Client.cpp.s
+.PHONY : Client.cpp.s
 
-External/External.pb.o: External/External.pb.cc.o
+External/RaftExternal.grpc.pb.o: External/RaftExternal.grpc.pb.cc.o
 
-.PHONY : External/External.pb.o
+.PHONY : External/RaftExternal.grpc.pb.o
 
 # target to build an object file
-External/External.pb.cc.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.o
-.PHONY : External/External.pb.cc.o
+External/RaftExternal.grpc.pb.cc.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.grpc.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.grpc.pb.cc.o
+.PHONY : External/RaftExternal.grpc.pb.cc.o
 
-External/External.pb.i: External/External.pb.cc.i
+External/RaftExternal.grpc.pb.i: External/RaftExternal.grpc.pb.cc.i
 
-.PHONY : External/External.pb.i
+.PHONY : External/RaftExternal.grpc.pb.i
 
 # target to preprocess a source file
-External/External.pb.cc.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.i
-.PHONY : External/External.pb.cc.i
+External/RaftExternal.grpc.pb.cc.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.grpc.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.grpc.pb.cc.i
+.PHONY : External/RaftExternal.grpc.pb.cc.i
 
-External/External.pb.s: External/External.pb.cc.s
+External/RaftExternal.grpc.pb.s: External/RaftExternal.grpc.pb.cc.s
 
-.PHONY : External/External.pb.s
+.PHONY : External/RaftExternal.grpc.pb.s
 
 # target to generate assembly for a file
-External/External.pb.cc.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/External/External.pb.cc.s
-.PHONY : External/External.pb.cc.s
+External/RaftExternal.grpc.pb.cc.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.grpc.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.grpc.pb.cc.s
+.PHONY : External/RaftExternal.grpc.pb.cc.s
+
+External/RaftExternal.pb.o: External/RaftExternal.pb.cc.o
+
+.PHONY : External/RaftExternal.pb.o
+
+# target to build an object file
+External/RaftExternal.pb.cc.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.pb.cc.o
+.PHONY : External/RaftExternal.pb.cc.o
+
+External/RaftExternal.pb.i: External/RaftExternal.pb.cc.i
+
+.PHONY : External/RaftExternal.pb.i
+
+# target to preprocess a source file
+External/RaftExternal.pb.cc.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.pb.cc.i
+.PHONY : External/RaftExternal.pb.cc.i
+
+External/RaftExternal.pb.s: External/RaftExternal.pb.cc.s
+
+.PHONY : External/RaftExternal.pb.s
+
+# target to generate assembly for a file
+External/RaftExternal.pb.cc.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternal.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternal.pb.cc.s
+.PHONY : External/RaftExternal.pb.cc.s
+
+External/RaftExternalClient.o: External/RaftExternalClient.cpp.o
+
+.PHONY : External/RaftExternalClient.o
+
+# target to build an object file
+External/RaftExternalClient.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o
+.PHONY : External/RaftExternalClient.cpp.o
+
+External/RaftExternalClient.i: External/RaftExternalClient.cpp.i
+
+.PHONY : External/RaftExternalClient.i
+
+# target to preprocess a source file
+External/RaftExternalClient.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.i
+.PHONY : External/RaftExternalClient.cpp.i
+
+External/RaftExternalClient.s: External/RaftExternalClient.cpp.s
+
+.PHONY : External/RaftExternalClient.s
+
+# target to generate assembly for a file
+External/RaftExternalClient.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.s
+.PHONY : External/RaftExternalClient.cpp.s
+
+External/RaftExternalServer.o: External/RaftExternalServer.cpp.o
+
+.PHONY : External/RaftExternalServer.o
+
+# target to build an object file
+External/RaftExternalServer.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalServer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalServer.cpp.o
+.PHONY : External/RaftExternalServer.cpp.o
+
+External/RaftExternalServer.i: External/RaftExternalServer.cpp.i
+
+.PHONY : External/RaftExternalServer.i
+
+# target to preprocess a source file
+External/RaftExternalServer.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalServer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalServer.cpp.i
+.PHONY : External/RaftExternalServer.cpp.i
+
+External/RaftExternalServer.s: External/RaftExternalServer.cpp.s
+
+.PHONY : External/RaftExternalServer.s
+
+# target to generate assembly for a file
+External/RaftExternalServer.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/External/RaftExternalServer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/External/RaftExternalServer.cpp.s
+.PHONY : External/RaftExternalServer.cpp.s
 
 RaftServer.o: RaftServer.cpp.o
 
@@ -212,7 +293,8 @@ RaftServer.o: RaftServer.cpp.o
 
 # target to build an object file
 RaftServer.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/RaftServer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/RaftServer.cpp.o
 .PHONY : RaftServer.cpp.o
 
 RaftServer.i: RaftServer.cpp.i
@@ -221,7 +303,8 @@ RaftServer.i: RaftServer.cpp.i
 
 # target to preprocess a source file
 RaftServer.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/RaftServer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/RaftServer.cpp.i
 .PHONY : RaftServer.cpp.i
 
 RaftServer.s: RaftServer.cpp.s
@@ -230,7 +313,8 @@ RaftServer.s: RaftServer.cpp.s
 
 # target to generate assembly for a file
 RaftServer.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/RaftServer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/RaftServer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/RaftServer.cpp.s
 .PHONY : RaftServer.cpp.s
 
 Role/Candidate.o: Role/Candidate.cpp.o
@@ -239,7 +323,8 @@ Role/Candidate.o: Role/Candidate.cpp.o
 
 # target to build an object file
 Role/Candidate.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Candidate.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Candidate.cpp.o
 .PHONY : Role/Candidate.cpp.o
 
 Role/Candidate.i: Role/Candidate.cpp.i
@@ -248,7 +333,8 @@ Role/Candidate.i: Role/Candidate.cpp.i
 
 # target to preprocess a source file
 Role/Candidate.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Candidate.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Candidate.cpp.i
 .PHONY : Role/Candidate.cpp.i
 
 Role/Candidate.s: Role/Candidate.cpp.s
@@ -257,7 +343,8 @@ Role/Candidate.s: Role/Candidate.cpp.s
 
 # target to generate assembly for a file
 Role/Candidate.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Candidate.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Candidate.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Candidate.cpp.s
 .PHONY : Role/Candidate.cpp.s
 
 Role/Follower.o: Role/Follower.cpp.o
@@ -266,7 +353,8 @@ Role/Follower.o: Role/Follower.cpp.o
 
 # target to build an object file
 Role/Follower.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Follower.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Follower.cpp.o
 .PHONY : Role/Follower.cpp.o
 
 Role/Follower.i: Role/Follower.cpp.i
@@ -275,7 +363,8 @@ Role/Follower.i: Role/Follower.cpp.i
 
 # target to preprocess a source file
 Role/Follower.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Follower.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Follower.cpp.i
 .PHONY : Role/Follower.cpp.i
 
 Role/Follower.s: Role/Follower.cpp.s
@@ -284,7 +373,8 @@ Role/Follower.s: Role/Follower.cpp.s
 
 # target to generate assembly for a file
 Role/Follower.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Follower.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Follower.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Follower.cpp.s
 .PHONY : Role/Follower.cpp.s
 
 Role/Leader.o: Role/Leader.cpp.o
@@ -293,7 +383,8 @@ Role/Leader.o: Role/Leader.cpp.o
 
 # target to build an object file
 Role/Leader.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Leader.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Leader.cpp.o
 .PHONY : Role/Leader.cpp.o
 
 Role/Leader.i: Role/Leader.cpp.i
@@ -302,7 +393,8 @@ Role/Leader.i: Role/Leader.cpp.i
 
 # target to preprocess a source file
 Role/Leader.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Leader.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Leader.cpp.i
 .PHONY : Role/Leader.cpp.i
 
 Role/Leader.s: Role/Leader.cpp.s
@@ -311,7 +403,8 @@ Role/Leader.s: Role/Leader.cpp.s
 
 # target to generate assembly for a file
 Role/Leader.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Leader.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Leader.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Leader.cpp.s
 .PHONY : Role/Leader.cpp.s
 
 Role/Role.o: Role/Role.cpp.o
@@ -320,7 +413,8 @@ Role/Role.o: Role/Role.cpp.o
 
 # target to build an object file
 Role/Role.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Role.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Role.cpp.o
 .PHONY : Role/Role.cpp.o
 
 Role/Role.i: Role/Role.cpp.i
@@ -329,7 +423,8 @@ Role/Role.i: Role/Role.cpp.i
 
 # target to preprocess a source file
 Role/Role.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Role.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Role.cpp.i
 .PHONY : Role/Role.cpp.i
 
 Role/Role.s: Role/Role.cpp.s
@@ -338,7 +433,8 @@ Role/Role.s: Role/Role.cpp.s
 
 # target to generate assembly for a file
 Role/Role.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Role/Role.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Role/Role.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Role/Role.cpp.s
 .PHONY : Role/Role.cpp.s
 
 Rpc/RaftRpc.grpc.pb.o: Rpc/RaftRpc.grpc.pb.cc.o
@@ -347,7 +443,8 @@ Rpc/RaftRpc.grpc.pb.o: Rpc/RaftRpc.grpc.pb.cc.o
 
 # target to build an object file
 Rpc/RaftRpc.grpc.pb.cc.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.grpc.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.grpc.pb.cc.o
 .PHONY : Rpc/RaftRpc.grpc.pb.cc.o
 
 Rpc/RaftRpc.grpc.pb.i: Rpc/RaftRpc.grpc.pb.cc.i
@@ -356,7 +453,8 @@ Rpc/RaftRpc.grpc.pb.i: Rpc/RaftRpc.grpc.pb.cc.i
 
 # target to preprocess a source file
 Rpc/RaftRpc.grpc.pb.cc.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.grpc.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.grpc.pb.cc.i
 .PHONY : Rpc/RaftRpc.grpc.pb.cc.i
 
 Rpc/RaftRpc.grpc.pb.s: Rpc/RaftRpc.grpc.pb.cc.s
@@ -365,7 +463,8 @@ Rpc/RaftRpc.grpc.pb.s: Rpc/RaftRpc.grpc.pb.cc.s
 
 # target to generate assembly for a file
 Rpc/RaftRpc.grpc.pb.cc.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.grpc.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.grpc.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.grpc.pb.cc.s
 .PHONY : Rpc/RaftRpc.grpc.pb.cc.s
 
 Rpc/RaftRpc.pb.o: Rpc/RaftRpc.pb.cc.o
@@ -374,7 +473,8 @@ Rpc/RaftRpc.pb.o: Rpc/RaftRpc.pb.cc.o
 
 # target to build an object file
 Rpc/RaftRpc.pb.cc.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.pb.cc.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.pb.cc.o
 .PHONY : Rpc/RaftRpc.pb.cc.o
 
 Rpc/RaftRpc.pb.i: Rpc/RaftRpc.pb.cc.i
@@ -383,7 +483,8 @@ Rpc/RaftRpc.pb.i: Rpc/RaftRpc.pb.cc.i
 
 # target to preprocess a source file
 Rpc/RaftRpc.pb.cc.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.pb.cc.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.pb.cc.i
 .PHONY : Rpc/RaftRpc.pb.cc.i
 
 Rpc/RaftRpc.pb.s: Rpc/RaftRpc.pb.cc.s
@@ -392,7 +493,8 @@ Rpc/RaftRpc.pb.s: Rpc/RaftRpc.pb.cc.s
 
 # target to generate assembly for a file
 Rpc/RaftRpc.pb.cc.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpc.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpc.pb.cc.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpc.pb.cc.s
 .PHONY : Rpc/RaftRpc.pb.cc.s
 
 Rpc/RaftRpcClient.o: Rpc/RaftRpcClient.cpp.o
@@ -401,7 +503,8 @@ Rpc/RaftRpcClient.o: Rpc/RaftRpcClient.cpp.o
 
 # target to build an object file
 Rpc/RaftRpcClient.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcClient.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcClient.cpp.o
 .PHONY : Rpc/RaftRpcClient.cpp.o
 
 Rpc/RaftRpcClient.i: Rpc/RaftRpcClient.cpp.i
@@ -410,7 +513,8 @@ Rpc/RaftRpcClient.i: Rpc/RaftRpcClient.cpp.i
 
 # target to preprocess a source file
 Rpc/RaftRpcClient.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcClient.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcClient.cpp.i
 .PHONY : Rpc/RaftRpcClient.cpp.i
 
 Rpc/RaftRpcClient.s: Rpc/RaftRpcClient.cpp.s
@@ -419,7 +523,8 @@ Rpc/RaftRpcClient.s: Rpc/RaftRpcClient.cpp.s
 
 # target to generate assembly for a file
 Rpc/RaftRpcClient.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcClient.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcClient.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcClient.cpp.s
 .PHONY : Rpc/RaftRpcClient.cpp.s
 
 Rpc/RaftRpcServer.o: Rpc/RaftRpcServer.cpp.o
@@ -428,7 +533,8 @@ Rpc/RaftRpcServer.o: Rpc/RaftRpcServer.cpp.o
 
 # target to build an object file
 Rpc/RaftRpcServer.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcServer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcServer.cpp.o
 .PHONY : Rpc/RaftRpcServer.cpp.o
 
 Rpc/RaftRpcServer.i: Rpc/RaftRpcServer.cpp.i
@@ -437,7 +543,8 @@ Rpc/RaftRpcServer.i: Rpc/RaftRpcServer.cpp.i
 
 # target to preprocess a source file
 Rpc/RaftRpcServer.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcServer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcServer.cpp.i
 .PHONY : Rpc/RaftRpcServer.cpp.i
 
 Rpc/RaftRpcServer.s: Rpc/RaftRpcServer.cpp.s
@@ -446,8 +553,36 @@ Rpc/RaftRpcServer.s: Rpc/RaftRpcServer.cpp.s
 
 # target to generate assembly for a file
 Rpc/RaftRpcServer.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Rpc/RaftRpcServer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Rpc/RaftRpcServer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Rpc/RaftRpcServer.cpp.s
 .PHONY : Rpc/RaftRpcServer.cpp.s
+
+Server.o: Server.cpp.o
+
+.PHONY : Server.o
+
+# target to build an object file
+Server.cpp.o:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Server.cpp.o
+.PHONY : Server.cpp.o
+
+Server.i: Server.cpp.i
+
+.PHONY : Server.i
+
+# target to preprocess a source file
+Server.cpp.i:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Server.cpp.i
+.PHONY : Server.cpp.i
+
+Server.s: Server.cpp.s
+
+.PHONY : Server.s
+
+# target to generate assembly for a file
+Server.cpp.s:
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Server.cpp.s
+.PHONY : Server.cpp.s
 
 Task.o: Task.cpp.o
 
@@ -455,7 +590,8 @@ Task.o: Task.cpp.o
 
 # target to build an object file
 Task.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Task.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Task.cpp.o
 .PHONY : Task.cpp.o
 
 Task.i: Task.cpp.i
@@ -464,7 +600,8 @@ Task.i: Task.cpp.i
 
 # target to preprocess a source file
 Task.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Task.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Task.cpp.i
 .PHONY : Task.cpp.i
 
 Task.s: Task.cpp.s
@@ -473,7 +610,8 @@ Task.s: Task.cpp.s
 
 # target to generate assembly for a file
 Task.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Task.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Task.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Task.cpp.s
 .PHONY : Task.cpp.s
 
 Transformer.o: Transformer.cpp.o
@@ -482,7 +620,8 @@ Transformer.o: Transformer.cpp.o
 
 # target to build an object file
 Transformer.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Transformer.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Transformer.cpp.o
 .PHONY : Transformer.cpp.o
 
 Transformer.i: Transformer.cpp.i
@@ -491,7 +630,8 @@ Transformer.i: Transformer.cpp.i
 
 # target to preprocess a source file
 Transformer.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Transformer.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Transformer.cpp.i
 .PHONY : Transformer.cpp.i
 
 Transformer.s: Transformer.cpp.s
@@ -500,7 +640,8 @@ Transformer.s: Transformer.cpp.s
 
 # target to generate assembly for a file
 Transformer.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/Transformer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/Transformer.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/Transformer.cpp.s
 .PHONY : Transformer.cpp.s
 
 defines.o: defines.cpp.o
@@ -509,7 +650,8 @@ defines.o: defines.cpp.o
 
 # target to build an object file
 defines.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/defines.cpp.o
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/defines.cpp.o
 .PHONY : defines.cpp.o
 
 defines.i: defines.cpp.i
@@ -518,7 +660,8 @@ defines.i: defines.cpp.i
 
 # target to preprocess a source file
 defines.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/defines.cpp.i
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/defines.cpp.i
 .PHONY : defines.cpp.i
 
 defines.s: defines.cpp.s
@@ -527,35 +670,9 @@ defines.s: defines.cpp.s
 
 # target to generate assembly for a file
 defines.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/defines.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/defines.cpp.s
+	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/defines.cpp.s
 .PHONY : defines.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	cd /home/gls/Raft/build && $(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -564,17 +681,24 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... raft"
 	@echo "... edit_cache"
-	@echo "... External/Client.o"
-	@echo "... External/Client.i"
-	@echo "... External/Client.s"
-	@echo "... External/External.grpc.pb.o"
-	@echo "... External/External.grpc.pb.i"
-	@echo "... External/External.grpc.pb.s"
-	@echo "... External/External.pb.o"
-	@echo "... External/External.pb.i"
-	@echo "... External/External.pb.s"
+	@echo "... Server"
+	@echo "... Client"
+	@echo "... Client.o"
+	@echo "... Client.i"
+	@echo "... Client.s"
+	@echo "... External/RaftExternal.grpc.pb.o"
+	@echo "... External/RaftExternal.grpc.pb.i"
+	@echo "... External/RaftExternal.grpc.pb.s"
+	@echo "... External/RaftExternal.pb.o"
+	@echo "... External/RaftExternal.pb.i"
+	@echo "... External/RaftExternal.pb.s"
+	@echo "... External/RaftExternalClient.o"
+	@echo "... External/RaftExternalClient.i"
+	@echo "... External/RaftExternalClient.s"
+	@echo "... External/RaftExternalServer.o"
+	@echo "... External/RaftExternalServer.i"
+	@echo "... External/RaftExternalServer.s"
 	@echo "... RaftServer.o"
 	@echo "... RaftServer.i"
 	@echo "... RaftServer.s"
@@ -602,6 +726,9 @@ help:
 	@echo "... Rpc/RaftRpcServer.o"
 	@echo "... Rpc/RaftRpcServer.i"
 	@echo "... Rpc/RaftRpcServer.s"
+	@echo "... Server.o"
+	@echo "... Server.i"
+	@echo "... Server.s"
 	@echo "... Task.o"
 	@echo "... Task.i"
 	@echo "... Task.s"
@@ -611,9 +738,6 @@ help:
 	@echo "... defines.o"
 	@echo "... defines.i"
 	@echo "... defines.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 

@@ -40,12 +40,12 @@ namespace Raft {
   }
 
   void Candidate::init(Term currentTerm) {
-    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
     std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
-    lk.unlock();
+    //lk.unlock();
     
     std::cout<<getTime() << " build voteThread " << std::endl;
     

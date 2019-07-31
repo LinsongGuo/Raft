@@ -94,22 +94,20 @@ namespace Raft {
     if(leaderCommit > info->commitIndex) {
       info->commitIndex = std::min(leaderCommit, info->replicatedEntries.size() - 1);
     }
-    if(info->lastApplied < info->commitIndex) {
-      for(size_t i = info->lastApplied + 1; i <= info->commitIndex; ++i) {
-        info->appliedEntries[info->replicatedEntries[i].key] = info->replicatedEntries[i].args;
-      }
-      info->lastApplied = info->commitIndex;
+    while(info->lastApplied < info->commitIndex) {
+      ++info->lastApplied;
+      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);
   }
   
   void Follower::init(Term currentTerm) {
-    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
-    lk.unlock();
+    //lk.unlock();
     
     Timer electionTimeout = cluster->electionTimeout;
     sleepThread.interrupt();

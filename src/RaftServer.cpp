@@ -17,9 +17,12 @@ namespace Raft {
     );
 
     //build server.
+    externalServer = std::make_shared<External::RaftExternalServer>();
+    externalServer->bindPut(std::bind(&RaftServer::put, this, std::placeholders::_1, std::placeholders::_2));
+    externalServer->bindGet(std::bind(&RaftServer::get, this, std::placeholders::_1));
+    externalServer->start(cluster->localId);
+
     rpcServer = std::make_shared<Rpc::RaftRpcServer>();
-    rpcServer->bindPut(std::bind(&RaftServer::put, this, std::placeholders::_1, std::placeholders::_2));
-    rpcServer->bindGet(std::bind(&RaftServer::get, this, std::placeholders::_1));
     rpcServer->bindRespondRequestVote(std::bind(&RaftServer::respondRequestVote, this, std::placeholders::_1));
     rpcServer->bindRespondHeartbeat(std::bind(&RaftServer::respondHeartbeat, this, std::placeholders::_1));
     rpcServer->bindRespondAppendEntries(std::bind(&RaftServer::respondAppendEntries, this, std::placeholders::_1));
@@ -179,13 +182,15 @@ namespace Raft {
           }
           case TaskType::transform : {
             auto tmp = transformQueue.front();
-            currentRole = tmp.toRole;
             
             std::ofstream fout("transqueue-" + cluster->localId + "-" + std::to_string(tmp.fromRole) + "-" + std::to_string(tmp.toRole) + "-" + std::to_string(tmp.term));
             fout<<getTime() <<" pop" << std::endl;
             
-            transformQueue.pop();            
-            roles[currentRole]->init(tmp.term);
+            if(currentRole == tmp.fromRole) {
+              currentRole = tmp.toRole;
+              transformQueue.pop();            
+              roles[currentRole]->init(tmp.term);  
+            }
           
             fout<<getTime() <<" break"<<std::endl;
             fout.close();
@@ -214,6 +219,7 @@ namespace Raft {
   }
   void RaftServer::shutdown() {
     rpcServer->shutdown();
+    externalServer->shutdown();
     queueThread.interrupt();
     queueThread.join();
   }

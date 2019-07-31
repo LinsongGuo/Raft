@@ -8,10 +8,11 @@ namespace Raft {
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
   
   bool Leader::put(const std::string &key, const std::string &args) {
-    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
+    size_t siz = cluster->size;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
-    for(size_t i = 0; i < cluster->size; ++i) {
+    for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
       Raft::Rpc::RpcAppendEntriesRequest rpcRequest;
       rpcRequest.set_leaderid(cluster->localId);
@@ -26,8 +27,105 @@ namespace Raft {
         tmp.set_term(info->replicatedEntries[j].term);
         *rpcRequest.add_entries() = std::move(tmp);
       }
-      lk.unlock();
-      appendFuture.push_back(boost::async(boost::launch::async, [this, i, rpcRequest]() -> AppendEntriesReply {
+      appendFuture.push_back(boost::async(boost::launch::async, [this, i, rpcRequest]() mutable -> AppendEntriesReply {
+        Timer startTime = getTime();
+        do {
+          std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
+          if(result.first) {
+            if(result.second.success) {
+              boost::unique_lock<boost::mutex> lk2(info->infoMutex);
+              info->nextIndex[i] = info->replicatedEntries.size();
+              info->matchIndex[i] = info->nextIndex[i] - 1;
+              return AppendEntriesReply(true, result.second.term);
+            }
+            else {
+              if(result.second.term > rpcRequest.term()) {
+                AppendEntriesReply(false, result.second.term);
+              } 
+              if(rpcRequest.prevlogindex() > 0) {
+                Index prevLogIndex = rpcRequest.prevlogindex() - 1;
+                info->nextIndex[i]--;
+                info->matchIndex[i]--;
+                if(prevLogIndex > 0) {
+                  rpcRequest.set_prevlogindex(prevLogIndex);
+                  rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex].term);
+                  Raft::Rpc::Entry tmp;
+                  tmp.set_key(info->replicatedEntries[prevLogIndex].key);
+                  tmp.set_args(info->replicatedEntries[prevLogIndex].args);
+                  tmp.set_term(info->replicatedEntries[prevLogIndex].term);
+                  *rpcRequest.add_entries() = std::move(tmp);  
+                }
+              }
+              //rpcRequest.set_leadercommit(info->commitIndex);
+            }
+          }
+        } while(startTime + cluster->appendTimeout <= getTime());
+        return AppendEntriesReply(false, invalidTerm);
+      }));
+    }
+
+    std::vector<Index> matchIndexes;
+    size_t nowId = 0, getAppends = 1;
+    for(size_t i = 0; i < siz; ++i) {
+      if(i == cluster->localServer) continue;
+      AppendEntriesReply result = appendFuture[nowId++].get();
+      if(result.success) {
+        getAppends++;
+        if(info->matchIndex[i] < info->replicatedEntries.size() 
+          && info->replicatedEntries[info->matchIndex[i]].term == info->currentTerm) {
+          matchIndexes.push_back(info->matchIndex[i]);
+        }
+      }
+      else if(result.term > info->currentTerm) {
+        transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, result.term);
+        return false;
+      }
+    }
+    if(getAppends * 2 <= cluster->size) {
+      transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, info->currentTerm);
+      return false;
+    }
+    sort(matchIndexes.begin(), matchIndexes.end(), [](Index x, Index y)->bool{return x > y;});
+    if((siz + 1) / 2 < matchIndexes.size()) {
+      info->commitIndex = matchIndexes[(siz + 1) / 2];
+      while(info->lastApplied < info->commitIndex) {
+        ++info->lastApplied;
+        info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
+      }
+    } 
+    return info->replicatedEntries.size() - 1 == info->commitIndex;
+  }
+  /*
+  bool Leader::put(const std::string &key, const std::string &args) {
+    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
+    std::vector<Raft::Rpc::RpcAppendEntriesRequest> requests;
+    std::vector<boost::future<AppendEntriesReply> > appendFuture;
+    size_t nowId = 0;
+    for(size_t i = 0; i < cluster->size; ++i) {
+      if(i == cluster->localServer) continue;
+      requests.push_back(Raft::Rpc::RpcAppendEntriesRequest());
+      rpcRequest.set_leaderid(cluster->localId);
+      rpcRequest.set_term(info->currentTerm);
+      rpcRequest.set_prevlogindex(info->nextIndex[i] - 1);
+      rpcRequest.set_prevlogterm(info->replicatedEntries[info->nextIndex[i] - 1].term);
+      rpcRequest.set_leadercommit(info->commitIndex);
+      for(size_t j = info->nextIndex[i]; j < info->replicatedEntries.size(); ++j) {
+        Raft::Rpc::Entry tmp;
+        tmp.set_key(info->replicatedEntries[j].key);
+        tmp.set_args(info->replicatedEntries[j].args);
+        tmp.set_term(info->replicatedEntries[j].term);
+        *rpcRequest.add_entries() = std::move(tmp);
+      }
+      nowId++;
+    }
+    nowId = 0;
+    lk.unlock();
+
+    for(size_t i = 0; i < cluster->size; ++i) {
+      if(i == cluster->size) continue;
+      Raft::Rpc::RpcAppendEntriesRequest &rpcRequest = requests[nowId++];
+      appendFuture.push_back(boost::async(boost::launch::async, [this, i, &rpcRequest]() -> AppendEntriesReply {
         Timer startTime = getTime();
         do {
           std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
@@ -70,10 +168,11 @@ namespace Raft {
       }
       else if(result.term > )
     }
-  }
+  }*/
 
   std::pair<bool, std::string> Leader::get(const std::string &key) {
-
+    if(info->appliedEntries.count(key)) return std::make_pair(true, info->appliedEntries[key]);
+    return std::make_pair(false, invalidString);
   }
 
   RequestVoteReply Leader::respondRequestVote(const RequestVoteRequest &request) {
@@ -102,12 +201,12 @@ namespace Raft {
 
   //AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
   void Leader::init(Term currentTerm) {
-    boost::unique_lock<boost::mutex> lk(info->infoMutex);
+    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
-    lk.unlock();
+    //lk.unlock();
     
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();

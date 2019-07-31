@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named raft
+# Target rules for targets named Server
 
 # Build rule for target.
-raft: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 raft
-.PHONY : raft
+Server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Server
+.PHONY : Server
 
 # fast build rule for target.
-raft/fast:
-	$(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/build
-.PHONY : raft/fast
+Server/fast:
+	$(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/build
+.PHONY : Server/fast
+
+#=============================================================================
+# Target rules for targets named Client
+
+# Build rule for target.
+Client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Client
+.PHONY : Client
+
+# fast build rule for target.
+Client/fast:
+	$(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/build
+.PHONY : Client/fast
 
 # Help Target
 help:
@@ -131,7 +144,8 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... raft"
+	@echo "... Server"
+	@echo "... Client"
 .PHONY : help
 
 

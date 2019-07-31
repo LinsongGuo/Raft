@@ -60,33 +60,35 @@ CMAKE_SOURCE_DIR = /home/gls/Raft
 CMAKE_BINARY_DIR = /home/gls/Raft/build
 
 #=============================================================================
-# Directory level rules for directory proto
+# Directory level rules for directory protobuf
 
 # Convenience name for "all" pass in the directory.
-proto/all:
+protobuf/all:
 
-.PHONY : proto/all
+.PHONY : protobuf/all
 
 # Convenience name for "clean" pass in the directory.
-proto/clean:
+protobuf/clean:
 
-.PHONY : proto/clean
+.PHONY : protobuf/clean
 
 # Convenience name for "preinstall" pass in the directory.
-proto/preinstall:
+protobuf/preinstall:
 
-.PHONY : proto/preinstall
+.PHONY : protobuf/preinstall
 
 #=============================================================================
 # Directory level rules for directory src
 
 # Convenience name for "all" pass in the directory.
-src/all: src/CMakeFiles/raft.dir/all
+src/all: src/CMakeFiles/Server.dir/all
+src/all: src/CMakeFiles/Client.dir/all
 
 .PHONY : src/all
 
 # Convenience name for "clean" pass in the directory.
-src/clean: src/CMakeFiles/raft.dir/clean
+src/clean: src/CMakeFiles/Server.dir/clean
+src/clean: src/CMakeFiles/Client.dir/clean
 
 .PHONY : src/clean
 
@@ -96,39 +98,76 @@ src/preinstall:
 .PHONY : src/preinstall
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/raft.dir
+# Target rules for target src/CMakeFiles/Server.dir
 
 # All Build rule for target.
-src/CMakeFiles/raft.dir/all:
-	$(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/depend
-	$(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Built target raft"
-.PHONY : src/CMakeFiles/raft.dir/all
+src/CMakeFiles/Server.dir/all:
+	$(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/depend
+	$(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target Server"
+.PHONY : src/CMakeFiles/Server.dir/all
 
 # Include target in all.
-all: src/CMakeFiles/raft.dir/all
+all: src/CMakeFiles/Server.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/raft.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gls/Raft/build/CMakeFiles 17
-	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/raft.dir/all
+src/CMakeFiles/Server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gls/Raft/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/gls/Raft/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/raft.dir/rule
+.PHONY : src/CMakeFiles/Server.dir/rule
 
 # Convenience name for target.
-raft: src/CMakeFiles/raft.dir/rule
+Server: src/CMakeFiles/Server.dir/rule
 
-.PHONY : raft
-
-# clean rule for target.
-src/CMakeFiles/raft.dir/clean:
-	$(MAKE) -f src/CMakeFiles/raft.dir/build.make src/CMakeFiles/raft.dir/clean
-.PHONY : src/CMakeFiles/raft.dir/clean
+.PHONY : Server
 
 # clean rule for target.
-clean: src/CMakeFiles/raft.dir/clean
+src/CMakeFiles/Server.dir/clean:
+	$(MAKE) -f src/CMakeFiles/Server.dir/build.make src/CMakeFiles/Server.dir/clean
+.PHONY : src/CMakeFiles/Server.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/Server.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/Client.dir
+
+# All Build rule for target.
+src/CMakeFiles/Client.dir/all:
+	$(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/depend
+	$(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gls/Raft/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target Client"
+.PHONY : src/CMakeFiles/Client.dir/all
+
+# Include target in all.
+all: src/CMakeFiles/Client.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/Client.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gls/Raft/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Client.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gls/Raft/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/Client.dir/rule
+
+# Convenience name for target.
+Client: src/CMakeFiles/Client.dir/rule
+
+.PHONY : Client
+
+# clean rule for target.
+src/CMakeFiles/Client.dir/clean:
+	$(MAKE) -f src/CMakeFiles/Client.dir/build.make src/CMakeFiles/Client.dir/clean
+.PHONY : src/CMakeFiles/Client.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/Client.dir/clean
 
 .PHONY : clean
 
