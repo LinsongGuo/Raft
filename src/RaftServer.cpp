@@ -127,14 +127,25 @@ namespace Raft {
         switch(taskQueue.front()) {
           case TaskType::put : {
             auto tmp = putQueue.front();
+            
+            std::ofstream fout("putqueue-" + cluster->localId + "-" + tmp.key + "-" + tmp.args);
+            
             auto result = roles[currentRole]->put(tmp.key, tmp.args);
+            fout<<getTime() << " result: " << result << std::endl;
+            fout.close();
             tmp.prm.set_value(result);
             putQueue.pop();
             break;
           }
           case TaskType::get : {
             auto tmp = getQueue.front();
+            
+            std::ofstream fout("getqueue-" + cluster->localId + "-" + tmp.key);
+            
             auto result = roles[currentRole]->get(tmp.key);
+            
+            fout << getTime() << " result: " <<result.first <<' ' <<result.second << std::endl;
+            fout.close();
             tmp.prm.set_value(result);
             getQueue.pop();
             break;

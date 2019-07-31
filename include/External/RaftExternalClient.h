@@ -2,6 +2,7 @@
 #define RAFT_EXTERNAL_RAFTEXTERNALCLIENT_H
 
 #include <cstdint>
+#include <iostream>
 #include <memory>
 #include <string>
 #include <exception>

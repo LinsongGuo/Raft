@@ -85,7 +85,7 @@ namespace Raft {
         info->replicatedEntries.pop_back();
       } 
       if(!request->entries().empty()) {
-        for(size_t i = siz - 1; i >= 0; --i) {
+        for(int i = siz - 1; i >= 0; --i) {
           auto tmp = request->entries()[i];
           info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
         }
