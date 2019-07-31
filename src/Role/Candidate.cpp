@@ -47,14 +47,15 @@ namespace Raft {
     std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
     //lk.unlock();
     
-    std::cout<<getTime() << " build voteThread " << std::endl;
+   // std::cout<<getTime() << " build voteThread " << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;
     voteThread.interrupt();
     voteThread.join();
     voteThread = boost::thread([this, request, electionTimeout] {
-      //std::ofstream fout(cluster->localId + "-candidate");
-      //fout.close();
+      std::ofstream fout("candidate-" + cluster->localId + "-" + std::to_string(info->currentTerm));
+      fout << getTime() <<' ' << request.lastLogIndex << ' ' << request.lastLogTerm << std::endl;
+      fout.close();
       std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(cluster->localServer, request);
       if(result.first == RaftServerRole::candidate) {
         Timer waitTime = randTimer(electionTimeout);          

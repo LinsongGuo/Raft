@@ -96,7 +96,8 @@ namespace Raft {
   }
 
   AppendEntriesReply RaftServer::respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) {
-    //std::cout << getTime() << " push respondAppendEntries " << request.leaderId <<' ' <<request.term << std::endl;
+    std::cout << getTime() << " push respondAppendEntries " << request->leaderid() <<' ' <<request->term() << ' ' << 
+    request->prevlogterm() <<' '<<request->prevlogindex() << std::endl;
     boost::promise<AppendEntriesReply> prm;
     boost::future<AppendEntriesReply> fut = prm.get_future();
     {
@@ -109,7 +110,7 @@ namespace Raft {
   }
 
   void RaftServer::transform(const RaftServerRole &fromRole, const RaftServerRole &toRole, const Term &term) {
-    std::cout <<getTime() <<" push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
+    //std::cout <<getTime() <<" push transform "<<fromRole <<' '<< toRole << ' ' << term << std::endl;
     {
       boost::unique_lock<boost::mutex> lk(queueMutex);
       taskQueue.push(TaskType::transform);
@@ -170,21 +171,21 @@ namespace Raft {
             auto tmp = respondAppendEntriesQueue.front();
             auto result = roles[currentRole]->respondAppendEntries(tmp.request);
             
-            //std::ofstream fout("appendqueue-" + cluster->localId + "-" + tmp.request.leaderId + "-" + std::to_string(tmp.request.term));
+            std::ofstream fout("appendqueue-" + cluster->localId + "-" + tmp.request->leaderid() + "-" + std::to_string(tmp.request->term()));
             
             tmp.prm.set_value(result);
             respondAppendEntriesQueue.pop();
             
-            //fout << getTime() << " pop respondAppendEntries " <<info->currentTerm <<' '<<tmp.request.leaderId <<' ' << tmp.request.term <<' '<<result.term <<' '<< result.success << std::endl;  
-            //fout.close();
+            fout << getTime() << " pop respondAppendEntries " <<info->currentTerm  <<' '<<result.term <<' '<< result.success << std::endl;  
+            fout.close();
             
             break;
           }
           case TaskType::transform : {
             auto tmp = transformQueue.front();
             
-            std::ofstream fout("transqueue-" + cluster->localId + "-" + std::to_string(tmp.fromRole) + "-" + std::to_string(tmp.toRole) + "-" + std::to_string(tmp.term));
-            fout<<getTime() <<" pop" << std::endl;
+            //std::ofstream fout("transqueue-" + cluster->localId + "-" + std::to_string(tmp.fromRole) + "-" + std::to_string(tmp.toRole) + "-" + std::to_string(tmp.term));
+            //fout<<getTime() <<" pop" << std::endl;
             
             if(currentRole == tmp.fromRole) {
               currentRole = tmp.toRole;
@@ -192,8 +193,8 @@ namespace Raft {
               roles[currentRole]->init(tmp.term);  
             }
           
-            fout<<getTime() <<" break"<<std::endl;
-            fout.close();
+            //fout<<getTime() <<" break"<<std::endl;
+            //fout.close();
             
             break;
           }  

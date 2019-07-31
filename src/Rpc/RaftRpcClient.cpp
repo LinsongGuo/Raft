@@ -12,7 +12,7 @@ namespace Raft {
     }
 
     std::pair<bool, RequestVoteReply> RaftRpcClient::sendRequestVote(size_t id, const RequestVoteRequest &request) {
-      fout << "enter " << id <<' ' <<getTime() << std::endl;
+      //fout << "enter " << id <<' ' <<getTime() << std::endl;
       RpcRequestVoteRequest rpcRequest;
       rpcRequest.set_candidateid(request.candidateId);
       rpcRequest.set_term(request.term);
@@ -21,9 +21,9 @@ namespace Raft {
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
-      fout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
+      //fout <<getTime() <<' ' <<request.candidateId <<" is sending RequestVote to the server " << id << "..." << std::endl;
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
-      fout <<getTime() << " get vote "<< status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
+      //fout <<getTime() << " get vote "<< status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
       return std::make_pair(status.ok(), RequestVoteReply(rpcReply.votegranted(), rpcReply.term()));
     }
     
@@ -52,7 +52,7 @@ namespace Raft {
     std::pair<RaftServerRole, Term> RaftRpcClient::sendRequestVotes(size_t localServer, const RequestVoteRequest &request) {
       size_t getVotes = 1;
       voteFuture.clear();
-      fout.open("vote" + std::to_string(localServer));
+      fout.open("vote-" + std::to_string(localServer) + "-" + request.candidateId + "-" + std::to_string(request.term));
       fout << "opentime " << getTime() << std::endl;
       for(size_t i = 0; i < size; ++i) {
         if(i == localServer) continue;
@@ -83,7 +83,8 @@ namespace Raft {
     std::pair<RaftServerRole, Term> RaftRpcClient::sendHeartbeats(size_t localServer, const AppendEntriesRequest &request) {
       size_t getAppends = 1;
       heartbeatFuture.clear();
-      std::ofstream fout2("heartbeat" + std::to_string(localServer));
+      std::ofstream fout2("heartbeat-" + std::to_string(localServer) + "-" + request.leaderId + "-" + std::to_string(request.term));
+      fout << "opentime " << getTime() << std::endl;
       for(size_t i = 0; i < size; ++i) {
         if(i == localServer) continue;
         fout2 << "build " << i << ' ' << getTime() << std::endl;
