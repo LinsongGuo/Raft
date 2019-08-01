@@ -38,8 +38,8 @@ namespace Raft {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
         std::cout <<"send to " << pImpl->cur % pImpl->stubs.size() << std::endl;
         grpc::ClientContext ctx;
-        ctx.set_deadline(startTimePoint + std::chrono::milliseconds(10));
-        ctx.set_idempotent(true);
+        ctx.set_deadline(startTimePoint + std::chrono::milliseconds(timeout / 10));
+       // ctx.set_idempotent(true);
 
         PutRequest request;
         request.set_key(key);
@@ -61,8 +61,8 @@ namespace Raft {
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
         grpc::ClientContext ctx;
-        ctx.set_deadline(startTimePoint + std::chrono::milliseconds(10));
-        ctx.set_idempotent(true);
+        ctx.set_deadline(startTimePoint + std::chrono::milliseconds(timeout / 10));
+     //   ctx.set_idempotent(true);
 
         GetRequest request;
         request.set_key(key);

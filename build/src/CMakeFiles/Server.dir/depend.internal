@@ -342,6 +342,10 @@ src/CMakeFiles/Server.dir/External/RaftExternalServer.cpp.o
  ../include/External/RaftExternal.grpc.pb.h
  ../include/External/RaftExternal.pb.h
  ../include/External/RaftExternalServer.h
+ ../include/Rpc/RaftRpc.grpc.pb.h
+ ../include/Rpc/RaftRpc.pb.h
+ ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/External/RaftExternalServer.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h

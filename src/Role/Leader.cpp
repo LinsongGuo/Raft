@@ -32,14 +32,17 @@ namespace Raft {
       }
       fout <<"request finish " <<i<<std::endl;
       appendFuture.push_back(boost::async(boost::launch::async, [this, i, rpcRequest]() mutable -> AppendEntriesReply {
+        std::ofstream fout("leaderput-thread-" + cluster->localId + "-" + std::to_string(rpcRequest.term()));
         Timer startTime = getTime();
         do {
           std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
+          fout <<"do..." << std::endl;
           if(result.first) {
             if(result.second.success) {
               boost::unique_lock<boost::mutex> lk2(info->infoMutex);
               info->nextIndex[i] = info->replicatedEntries.size();
               info->matchIndex[i] = info->nextIndex[i] - 1;
+              fout << "success " << info->nextIndex[i] <<' ' << info->matchIndex[i] << std::endl;
               return AppendEntriesReply(true, result.second.term);
             }
             else {
@@ -49,7 +52,7 @@ namespace Raft {
               if(rpcRequest.prevlogindex() > 0) {
                 Index prevLogIndex = rpcRequest.prevlogindex() - 1;
                 info->nextIndex[i]--;
-                info->matchIndex[i]--;
+                fout <<"fail " << info->nextIndex[i] <<' '<<info->matchIndex[i] << ' ' << prevLogIndex << std::endl;
                 if(prevLogIndex > 0) {
                   rpcRequest.set_prevlogindex(prevLogIndex);
                   rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex].term);
@@ -60,10 +63,10 @@ namespace Raft {
                   *rpcRequest.add_entries() = std::move(tmp);  
                 }
               }
-              //rpcRequest.set_leadercommit(info->commitIndex);
             }
           }
         } while(startTime + cluster->appendTimeout <= getTime());
+        fout.close();
         return AppendEntriesReply(false, invalidTerm);
       }));
     }
@@ -101,21 +104,24 @@ namespace Raft {
     for(size_t j = 0; j < matchIndexes.size(); ++j) {
       fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
     }
-    if((siz >> 1) < matchIndexes.size()) {
-      info->commitIndex = matchIndexes[siz >> 1];
-      fout <<"commit " <<' '<<matchIndexes[siz >> 1]<<std::endl;
-      while(info->lastApplied < info->commitIndex) {
-        ++info->lastApplied;
-        info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
-      }
+    if(siz == 1) {
+      info->commitIndex = info->replicatedEntries.size() - 1;
+    }
+    else if((siz >> 1) - 1 < matchIndexes.size()) {
+      info->commitIndex = matchIndexes[(siz >> 1) - 1];
+      fout <<"commit " <<' '<<matchIndexes[(siz >> 1) - 1]<<std::endl;
     } 
+    while(info->lastApplied < info->commitIndex) {
+      ++info->lastApplied;
+      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
+    }
     fout.close();
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }
 
   std::pair<bool, std::string> Leader::get(const std::string &key) {
     if(info->appliedEntries.count(key)) return std::make_pair(true, info->appliedEntries[key]);
-    return std::make_pair(false, invalidString);
+    return std::make_pair(true, notFound);
   }
 
   RequestVoteReply Leader::respondRequestVote(const RequestVoteRequest &request) {
@@ -142,11 +148,14 @@ namespace Raft {
     return AppendEntriesReply(false, info->currentTerm);
   }
 
-  //AppendEntriesRequest(ServerId _leaderId, Term _term, Term _prevLogTerm, Index _prevLogIndex, Index _leaderCommit);
   void Leader::init(Term currentTerm) {
     //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
+    for(size_t i = 0; i < cluster->size; ++i) {
+      info->nextIndex[i] = info->replicatedEntries.size();
+      info->matchIndex[i] = 0;
+    }
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
     //lk.unlock();

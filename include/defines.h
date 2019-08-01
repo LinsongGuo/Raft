@@ -21,7 +21,8 @@
 
 namespace Raft {
   extern const std::string invalidString;
-
+  extern const std::string notFound;
+  
   using Term = uint64_t;
   extern const Term invalidTerm;
 

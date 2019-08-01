@@ -425,6 +425,8 @@ RaftExternalClient.h
 /home/gls/Raft/src/External/RaftExternalServer.cpp
 RaftExternalServer.h
 /home/gls/Raft/src/External/RaftExternalServer.h
+defines.h
+/home/gls/Raft/src/External/defines.h
 
 /home/gls/Raft/src/RaftServer.cpp
 RaftServer.h

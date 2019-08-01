@@ -22,11 +22,11 @@ namespace Raft {
         rpcRequest->prevlogindex(),
         rpcRequest->leadercommit()
       );
-      //std::cout <<getTime() << " receive a Heartbeat from " << rpcRequest->leaderid() << std::endl;
+      std::cout <<getTime() << " receive a Heartbeat from " << rpcRequest->leaderid() << std::endl;
       AppendEntriesReply reply = respondHeartbeat(request);
       rpcReply->set_success(reply.success);
       rpcReply->set_term(reply.term);
-      //std::cout<<getTime() << " Heartbeatresult " << reply.success <<' '<< reply.term << std::endl;
+      std::cout<<getTime() << " Heartbeatresult " << reply.success <<' '<< reply.term << std::endl;
       return grpc::Status::OK;
     }
     grpc::Status RaftRpcServiceImpl::RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *rpcRequest, RpcAppendEntriesReply *rpcReply) {

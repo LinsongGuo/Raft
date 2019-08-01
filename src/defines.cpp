@@ -2,6 +2,7 @@
 
 namespace Raft {
   const std::string invalidString = "";
+  const std::string notFound = "NOT FOUND";
 
   const Term invalidTerm = 0;
 
