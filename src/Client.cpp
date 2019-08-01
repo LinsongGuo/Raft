@@ -3,10 +3,9 @@
 #include <ctime>
 #include "RaftExternalClient.h"
 
-int main() {
+int main(int argc, char *argv[]) {
   srand(time(NULL));
-  std::string fileName;
-  std::cin >> fileName;
+  std::string fileName = argv[1];
   Raft::External::RaftExternalClient Client(fileName);
   int n;
   std::cin >> n;

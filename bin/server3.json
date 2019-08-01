@@ -1,5 +1,5 @@
 {
-  "local" : "0.0.0.0:50001",
+  "local" : "0.0.0.0:50003",
   "electionTimeout" : "1500",
   "appendTimeout": "500", 
   "heartbeatTimeout" : "500",
