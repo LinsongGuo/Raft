@@ -1,8 +1,8 @@
-1564627025053 term:2
-for 1 3 2 2
-request finish 1
+1564627740538 term:2
+for 0 3 2 2
+request finish 0
 end 
-result 1 1 2
+result 0 1 2
 getAppens 2
 matchIndexes 1
 forj 0 3
