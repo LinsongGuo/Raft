@@ -3,9 +3,9 @@
 #include <ctime>
 #include "RaftExternalClient.h"
 
-int main(int argc, char *argv[]) {
+int main() {
   srand(time(NULL));
-  std::string fileName = argv[1];
+  std::string fileName = "client.json";
   Raft::External::RaftExternalClient Client(fileName);
   int n;
   std::cin >> n;

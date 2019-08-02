@@ -1,0 +1,17 @@
+{
+  "address" : "127.0.0.2",
+  "localPort" : "50001",
+  "externalPort" : "50002",
+  "electionTimeout" : "1500",
+  "appendTimeout": "500",
+  "heartbeatTimeout" : "500",
+  "broadcastTimeout" : "300", 
+  "serverList": 
+  {
+	  "":"127.0.0.1:50001",
+  	"":"127.0.0.2:50001",
+    "":"127.0.0.3:50001",
+    "":"127.0.0.4:50001",
+    "":"127.0.0.5:50001"
+  }
+}
