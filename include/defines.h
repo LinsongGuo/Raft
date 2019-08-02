@@ -81,10 +81,12 @@ namespace Raft {
   };
 
   struct RaftServerCluster {
-    Timer electionTimeout, heartbeatTimeout, broadcastTimeout, appendTimeout;
+    Address address;
+    Port localPort, externalPort;
+    ServerId localId, externalId;
     size_t size, localServer;
-    ServerId localId;
     std::vector<ServerId> serverList;
+    Timer electionTimeout, heartbeatTimeout, broadcastTimeout, appendTimeout;
     RaftServerCluster();
     RaftServerCluster(const std::string &fileName);
     RaftServerCluster(ServerId _localId, const std::vector<ServerId> &v);

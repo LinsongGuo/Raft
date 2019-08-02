@@ -11,14 +11,11 @@ namespace Raft {
     //std::ofstream //fout("leaderput-" + cluster->localId + "-" + key + "-" + args);
     ////fout << getTime() << " term:" << info->currentTerm << std::endl;
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
-    size_t siz = cluster->size, nowId = 0;
+    size_t siz = cluster->size;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
-      nowId++;
       Raft::Rpc::RpcAppendEntriesRequest rpcRequest;
-      //fout << "for " << i <<' ' << info->nextIndex[i] <<' '<< info->replicatedEntries[info->nextIndex[i] - 1].term <<' ' << info->commitIndex << std::endl;
-
       rpcRequest.set_leaderid(cluster->localId);
       rpcRequest.set_term(info->currentTerm);
       rpcRequest.set_prevlogindex(info->nextIndex[i] - 1);
@@ -31,10 +28,11 @@ namespace Raft {
         tmp.set_term(info->replicatedEntries[j].term);
         *rpcRequest.add_entries() = std::move(tmp);
       }
-      appendFuture.push_back(boost::async(boost::launch::async, [this, i, nowId, rpcRequest]() mutable -> AppendEntriesReply {
+
+      appendFuture.push_back(boost::async(boost::launch::async, [this, i, rpcRequest]() mutable -> AppendEntriesReply {
         Timer startTime = getTime();
         do {
-          std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(nowId, rpcRequest);
+          std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
           //fout <<"do..." << std::endl;
           if(result.first) {
             if(result.second.success) {
@@ -71,8 +69,7 @@ namespace Raft {
 
     //fout <<"end " << std::endl;
     std::vector<Index> matchIndexes;
-    size_t getAppends = 1;
-    nowId = 0;
+    size_t getAppends = 1, nowId = 0;
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
       AppendEntriesReply result = appendFuture[nowId++].get();

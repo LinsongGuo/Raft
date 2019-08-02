@@ -46,9 +46,25 @@ int main(int argc, char *argv[]) {
     Server[2]->shutdown();
   }); 
 
+  boost::thread t4 =
+  boost::thread([&]{
+    Server[3]->start();
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(10000000));
+    Server[3]->shutdown();
+  }); 
+
+  boost::thread t5 =
+  boost::thread([&]{
+    Server[4]->start();
+    boost::this_thread::sleep_for(boost::chrono::milliseconds(10000000));
+    Server[4]->shutdown();
+  }); 
+
   t1.join();
   t2.join();
   t3.join();
+  t4.join();
+  t5.join();
 
   std::cout<<"over!" << std::endl;
   

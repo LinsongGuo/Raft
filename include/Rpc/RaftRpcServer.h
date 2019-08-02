@@ -39,7 +39,7 @@ namespace Raft {
       void bindRespondAppendEntries(T &&func) {
         respondAppendEntries = std::forward<T>(func);
       }  
-      void openFile(const std::string &address);
+      void openFile(const Address &address);
       void closeFile();
     };
     class RaftRpcServer {
@@ -48,7 +48,7 @@ namespace Raft {
        std::unique_ptr<grpc::Server> server;
        boost::thread raftRpcServerThread;
     public:
-      void start(const std::string &address);
+      void start(const Address &address, const ServerId &localId);
       void shutdown(); 
       template <class T>
       void bindRespondRequestVote(T &&func) {

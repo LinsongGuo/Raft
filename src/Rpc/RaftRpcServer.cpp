@@ -49,7 +49,7 @@ namespace Raft {
       
       return grpc::Status::OK;
     }
-    void RaftRpcServiceImpl::openFile(const std::string &address) {
+    void RaftRpcServiceImpl::openFile(const Address &address) {
       fout1.open(address + "/receive-requestvote");
       fout2.open(address + "/receive-heartbeat");
       fout3.open(address + "/receive-appendentries");
@@ -60,11 +60,11 @@ namespace Raft {
       fout3.close();
     }  
 
-    void RaftRpcServer::start(const std::string &address) {
+    void RaftRpcServer::start(const Address &address, const ServerId &localId) {
       service.openFile(address);
       
       grpc::ServerBuilder builder;
-      builder.AddListeningPort(address, grpc::InsecureServerCredentials());
+      builder.AddListeningPort(localId, grpc::InsecureServerCredentials());
       builder.RegisterService(&service);
       server = builder.BuildAndStart();
       raftRpcServerThread = boost::thread([this]{server->Wait();});

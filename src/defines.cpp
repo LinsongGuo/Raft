@@ -45,7 +45,11 @@ namespace Raft {
   RaftServerCluster::RaftServerCluster(const std::string &fileName) {
     boost::property_tree::ptree tree;
     boost::property_tree::read_json(fileName, tree);
-    localId = tree.get<std::string>("local");
+    address = tree.get<std::string>("address");
+    localPort = tree.get<uint16_t>("localPort");
+    externalPort = tree.get<uint16_t>("externalPort");
+    localId = address + ":" + std::to_string(localPort);
+    externalId = address + ":" + std::to_string(externalPort);
     electionTimeout = tree.get<uint64_t>("electionTimeout");
     heartbeatTimeout = tree.get<uint64_t>("heartbeatTimeout");
     broadcastTimeout = tree.get<uint64_t>("broadcastTimeout");

@@ -31,7 +31,7 @@ namespace Raft {
       
       return grpc::Status::OK;
     }
-    void RaftExternalServerImpl::openFile(const std::string &address) {
+    void RaftExternalServerImpl::openFile(const Address &address) {
       fout1.open(address + "/receive-put");
       fout2.open(address + "/receive-get");
     }
@@ -40,11 +40,11 @@ namespace Raft {
       fout2.close();
     }
 
-    void RaftExternalServer::start(const std::string &address) {
+    void RaftExternalServer::start(const Address &address, const ServerId &externalId) {
       service.openFile(address);
 
       grpc::ServerBuilder builder;
-      builder.AddListeningPort(address, grpc::InsecureServerCredentials());
+      builder.AddListeningPort(externalId, grpc::InsecureServerCredentials());
       builder.RegisterService(&service);
       Server = builder.BuildAndStart();
       runningThread = std::thread([this] { Server->Wait(); });

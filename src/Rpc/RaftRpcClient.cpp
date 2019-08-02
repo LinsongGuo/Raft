@@ -2,8 +2,8 @@
 
 namespace Raft {
   namespace Rpc {
-    RaftRpcClient::RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout, const std::string &address):
-      broadcastTimeout(timeout)
+    RaftRpcClient::RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout, const size_t &_localServer, const Address &address):
+      broadcastTimeout(timeout), localServer(_localServer)
     {
       fout1.open(address + "/send-requestvote");
       fout2.open(address + "/send-heartbeat");
@@ -62,13 +62,15 @@ namespace Raft {
     }
 
     std::pair<RaftServerRole, Term> RaftRpcClient::sendRequestVotes(const RequestVoteRequest &request) {
-      size_t getVotes = 1;
+      size_t nowId = 0, getVotes = 1;
       voteFuture.clear();
       for(size_t i = 0; i < size; ++i) {
+        if(i == localServer) continue;
         voteFuture.push_back(boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendRequestVote, this, i, request));
       }
       for(size_t i = 0; i < size; ++i) {
-        std::pair<bool, RequestVoteReply> reply = voteFuture[i].get();
+        if(i == localServer) continue;
+        std::pair<bool, RequestVoteReply> reply = voteFuture[nowId++].get();
         if(reply.first) {
           if(reply.second.voteGranted) {
             getVotes++;
@@ -78,18 +80,20 @@ namespace Raft {
           }
         }
       }
-      if(getVotes * 2 > size + 1) return std::make_pair(RaftServerRole::leader, request.term);
+      if(getVotes * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
       return std::make_pair(RaftServerRole::follower, request.term);
     }
     
     std::pair<RaftServerRole, Term> RaftRpcClient::sendHeartbeats(const AppendEntriesRequest &request) {
-      size_t getAppends = 1;
+      size_t nowId = 0, getAppends = 1;
       heartbeatFuture.clear();
       for(size_t i = 0; i < size; ++i) {
+        if(i == localServer) continue;
         heartbeatFuture.push_back(boost::async(boost::launch::async, &Rpc::RaftRpcClient::sendHeartbeat, this, i, request));
       }
       for(size_t i = 0; i < size; ++i) {
-        std::pair<bool, AppendEntriesReply> reply = heartbeatFuture[i].get();
+        if(i == localServer) continue;
+        std::pair<bool, AppendEntriesReply> reply = heartbeatFuture[nowId++].get();
         if(reply.first) {
           if(reply.second.success) {
             getAppends++;
@@ -99,7 +103,7 @@ namespace Raft {
           }
         }
       }
-      if(getAppends * 2 > size + 1) return std::make_pair(RaftServerRole::leader, request.term);
+      if(getAppends * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
       return std::make_pair(RaftServerRole::follower, request.term);
     }
   }

@@ -6,13 +6,13 @@ namespace Raft {
   RaftServer::RaftServer(const std::string &fileName) : 
     cluster(std::make_shared<RaftServerCluster>(fileName))
   {
-    fout0.open(cluster->localId + "/start");
-    fout1.open(cluster->localId + "/respond-put");
-    fout2.open(cluster->localId + "/respond-get");
-    fout3.open(cluster->localId + "/respond-requestvote");
-    fout4.open(cluster->localId + "/respond-heartbeat");
-    fout5.open(cluster->localId + "/respond-appendentries");
-    fout6.open(cluster->localId + "/respond-transform");
+    fout0.open(cluster->address + "/start");
+    fout1.open(cluster->address + "/respond-put");
+    fout2.open(cluster->address + "/respond-get");
+    fout3.open(cluster->address + "/respond-requestvote");
+    fout4.open(cluster->address + "/respond-heartbeat");
+    fout5.open(cluster->address + "/respond-appendentries");
+    fout6.open(cluster->address + "/respond-transform");
 
     //build transformer
     info = std::make_shared<RaftServerInfo>(cluster->size);
@@ -24,37 +24,35 @@ namespace Raft {
       std::placeholders::_3)
     );
 
-    //build server.
+    //build server.  
     externalServer = std::make_shared<External::RaftExternalServer>();
     externalServer->bindPut(std::bind(&RaftServer::put, this, std::placeholders::_1, std::placeholders::_2));
     externalServer->bindGet(std::bind(&RaftServer::get, this, std::placeholders::_1));
-    externalServer->start(cluster->localId);
-
+    externalServer->start(cluster->address, cluster->externalId);
+  
     rpcServer = std::make_shared<Rpc::RaftRpcServer>();
     rpcServer->bindRespondRequestVote(std::bind(&RaftServer::respondRequestVote, this, std::placeholders::_1));
     rpcServer->bindRespondHeartbeat(std::bind(&RaftServer::respondHeartbeat, this, std::placeholders::_1));
     rpcServer->bindRespondAppendEntries(std::bind(&RaftServer::respondAppendEntries, this, std::placeholders::_1));
-    rpcServer->start(cluster->localId);
+    rpcServer->start(cluster->address, cluster->localId);
     
     queueThread = boost::thread(std::bind(&RaftServer::executeTask, this));
    
     //build client.
     std::vector<std::shared_ptr<grpc::Channel> > channels;
     for(int i = 0; i < cluster->serverList.size(); ++i) {
-      if(i == cluster->localServer) continue;
-      fout0 << getTime() <<' ' << i << ' ' << cluster->serverList[i] << std::endl; 
       channels.emplace_back(grpc::CreateChannel(cluster->serverList[i], grpc::InsecureChannelCredentials()));
     }
-    rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localId);
+    rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localServer, cluster->address);
 
     //create roles.
     roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer);
     roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer);
     roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer);
 
-    roles[RaftServerRole::follower]->fout.open(cluster->localId + "/follower");
-    roles[RaftServerRole::candidate]->fout.open(cluster->localId + "/candidate");
-    roles[RaftServerRole::leader]->fout.open(cluster->localId + "/leader");
+    roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
+    roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
+    roles[RaftServerRole::leader]->fout.open(cluster->address + "/leader");
     fout0 << getTime() << " construct end." << std::endl;    
   }
 

@@ -28,7 +28,7 @@ namespace Raft {
 
       grpc::Status Get(grpc::ServerContext *context, const GetRequest *request,
                        GetReply *response) override;
-      void openFile(const std::string &address);
+      void openFile(const Address &address);
       void closeFile();
      };
 
@@ -44,7 +44,7 @@ namespace Raft {
       template <class Func>
       void bindGet(Func && f) { service.bindGet(std::forward<Func>(f)); }
 
-      void start(const std::string &address);
+      void start(const Address &address, const ServerId &externalId);
       void shutdown();
     };
   }
