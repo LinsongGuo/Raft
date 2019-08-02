@@ -12,6 +12,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <grpc++/create_channel.h>
+#include "defines.h"
 #include "RaftExternal.pb.h"
 #include "RaftExternal.grpc.pb.h"
 

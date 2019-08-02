@@ -19,6 +19,7 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcServiceImpl final: public RaftRpc::Service {
     private:
+      std::ofstream fout1, fout2, fout3;
       std::function<RequestVoteReply(const RequestVoteRequest&)> respondRequestVote;
       std::function<AppendEntriesReply(const AppendEntriesRequest&)> respondHeartbeat;
       std::function<AppendEntriesReply(const RpcAppendEntriesRequest*)> respondAppendEntries;
@@ -37,8 +38,9 @@ namespace Raft {
       template <class T>
       void bindRespondAppendEntries(T &&func) {
         respondAppendEntries = std::forward<T>(func);
-      }
-      ServerId localId;  
+      }  
+      void openFile(const std::string &address);
+      void closeFile();
     };
     class RaftRpcServer {
     private:
@@ -46,7 +48,7 @@ namespace Raft {
        std::unique_ptr<grpc::Server> server;
        boost::thread raftRpcServerThread;
     public:
-      void start(const std::string &str);
+      void start(const std::string &address);
       void shutdown(); 
       template <class T>
       void bindRespondRequestVote(T &&func) {
@@ -60,7 +62,6 @@ namespace Raft {
       void bindRespondAppendEntries(T &&func) {
         service.bindRespondAppendEntries(std::forward<T>(func));
       }
-      ServerId localId;  
     };
   }
 }

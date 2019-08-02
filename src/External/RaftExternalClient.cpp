@@ -36,7 +36,7 @@ namespace Raft {
 
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
-        std::cout <<"send to " << pImpl->cur % pImpl->stubs.size() << std::endl;
+        //std::cout <<"send to " << pImpl->cur % pImpl->stubs.size() << std::endl;
         grpc::ClientContext ctx;
         ctx.set_deadline(startTimePoint + std::chrono::milliseconds(timeout / 10));
        // ctx.set_idempotent(true);

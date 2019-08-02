@@ -4,6 +4,10 @@
 src/CMakeFiles/Client.dir/Client.cpp.o: ../include/External/RaftExternal.grpc.pb.h
 src/CMakeFiles/Client.dir/Client.cpp.o: ../include/External/RaftExternal.pb.h
 src/CMakeFiles/Client.dir/Client.cpp.o: ../include/External/RaftExternalClient.h
+src/CMakeFiles/Client.dir/Client.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.h
+src/CMakeFiles/Client.dir/Client.cpp.o: ../include/Rpc/RaftRpc.pb.h
+src/CMakeFiles/Client.dir/Client.cpp.o: ../include/defines.h
+src/CMakeFiles/Client.dir/Client.cpp.o: ../include/exception.h
 src/CMakeFiles/Client.dir/Client.cpp.o: ../src/Client.cpp
 src/CMakeFiles/Client.dir/Client.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/Client.dir/Client.cpp.o: /usr/local/include/google/protobuf/any.pb.h
@@ -341,6 +345,10 @@ src/CMakeFiles/Client.dir/External/RaftExternal.pb.cc.o: /usr/local/include/goog
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternal.grpc.pb.h
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternal.pb.h
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternalClient.h
+src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.h
+src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/Rpc/RaftRpc.pb.h
+src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/defines.h
+src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../include/exception.h
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: ../src/External/RaftExternalClient.cpp
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o: /usr/local/include/google/protobuf/any.pb.h

@@ -183,6 +183,10 @@ src/CMakeFiles/Server.dir/External/RaftExternal.pb.cc.o: /usr/local/include/goog
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternal.grpc.pb.h
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternal.pb.h
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/External/RaftExternalClient.h
+src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/Rpc/RaftRpc.grpc.pb.h
+src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/Rpc/RaftRpc.pb.h
+src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/defines.h
+src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../include/exception.h
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: ../src/External/RaftExternalClient.cpp
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: /usr/local/include/google/protobuf/any.h
 src/CMakeFiles/Server.dir/External/RaftExternalClient.cpp.o: /usr/local/include/google/protobuf/any.pb.h

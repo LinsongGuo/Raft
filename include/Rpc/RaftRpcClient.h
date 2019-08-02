@@ -10,14 +10,14 @@ namespace Raft {
   namespace Rpc {
     class RaftRpcClient {
     private:
-      std::ofstream fout;
+      std::ofstream fout1, fout2, fout3;
       size_t size;
       const Timer broadcastTimeout;
       std::vector<boost::future<std::pair<bool, RequestVoteReply> > > voteFuture;
       std::vector<boost::future<std::pair<bool, AppendEntriesReply> > > heartbeatFuture;
       std::vector<std::unique_ptr<RaftRpc::Stub> > stubs;
     public:
-      RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout);
+      RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout, const std::string &address);
       std::pair<bool, RequestVoteReply> sendRequestVote(size_t id, const RequestVoteRequest &request);
       std::pair<bool, AppendEntriesReply> sendHeartbeat(size_t id, const AppendEntriesRequest &request);
       std::pair<bool, AppendEntriesReply> sendAppendEntries(size_t id, RpcAppendEntriesRequest rpcRequest);

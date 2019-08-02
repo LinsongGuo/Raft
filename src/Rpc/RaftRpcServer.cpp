@@ -3,45 +3,68 @@
 namespace Raft {
   namespace Rpc {
     grpc::Status RaftRpcServiceImpl::RpcRequestVote(grpc::ServerContext *context, const RpcRequestVoteRequest *rpcRequest, RpcRequestVoteReply *rpcReply) {
+      fout1 << getTime() << " receive a requestvote from " << rpcRequest->candidateid() << ":" <<rpcRequest->term() << ' ' 
+      << rpcRequest->lastlogterm() << ' ' << rpcRequest->lastlogindex() << std::endl;
+      
       RequestVoteRequest request(rpcRequest->candidateid(), 
         rpcRequest->term(), 
         rpcRequest->lastlogterm(), 
         rpcRequest->lastlogindex()
       );
-      std::cout <<getTime() << " receive a requestvote from " << rpcRequest->candidateid() << std::endl;
       RequestVoteReply reply = respondRequestVote(request);
-      std::cout <<getTime() <<" voteresult " << reply.voteGranted << ' '<< reply.term << std::endl;
       rpcReply->set_votegranted(reply.voteGranted);
       rpcReply->set_term(reply.term);
+      
+      fout1 << getTime() <<" result " << reply.voteGranted << ' '<< reply.term << std::endl;
+      
       return grpc::Status::OK;
     }
     grpc::Status RaftRpcServiceImpl::RpcHeartbeat(grpc::ServerContext *context, const RpcAppendEntriesRequest *rpcRequest, RpcAppendEntriesReply *rpcReply) {
+      fout2 << getTime() << " receive a heartbeat from " << rpcRequest->leaderid() << ' ' << rpcRequest->term() << ' ' 
+      << ' ' << rpcRequest->prevlogterm() << ' ' << rpcRequest->prevlogindex() << ' ' << rpcRequest->leadercommit() << std::endl;
+     
       AppendEntriesRequest request(rpcRequest->leaderid(),
         rpcRequest->term(),
         rpcRequest->prevlogterm(),
         rpcRequest->prevlogindex(),
         rpcRequest->leadercommit()
       );
-      std::cout <<getTime() << " receive a Heartbeat from " << rpcRequest->leaderid() << std::endl;
       AppendEntriesReply reply = respondHeartbeat(request);
       rpcReply->set_success(reply.success);
       rpcReply->set_term(reply.term);
-      std::cout<<getTime() << " Heartbeatresult " << reply.success <<' '<< reply.term << std::endl;
+      
+      fout2 << getTime() << " result " << reply.success <<' '<< reply.term << std::endl;
+      
       return grpc::Status::OK;
     }
     grpc::Status RaftRpcServiceImpl::RpcAppendEntries(grpc::ServerContext *context, const RpcAppendEntriesRequest *rpcRequest, RpcAppendEntriesReply *rpcReply) {
-      std::cout <<getTime() << " receive a AppendEntries from " << rpcRequest->leaderid() << std::endl;
+      fout3 << getTime() << " receive a appendentries from " << rpcRequest->leaderid() << ' ' << rpcRequest->term() << ' ' 
+      << ' ' << rpcRequest->prevlogterm() << ' ' << rpcRequest->prevlogindex() << ' ' << rpcRequest->leadercommit() << std::endl;
+      
       AppendEntriesReply reply = respondAppendEntries(rpcRequest);
       rpcReply->set_success(reply.success);
       rpcReply->set_term(reply.term);
-      std::cout<<getTime() << " appendresult " << reply.success <<' '<< reply.term << std::endl;
+      
+      fout3 << getTime() << " result " << reply.success <<' '<< reply.term << std::endl;
+      
       return grpc::Status::OK;
     }
+    void RaftRpcServiceImpl::openFile(const std::string &address) {
+      fout1.open(address + "-receive-requestvote");
+      fout2.open(address + "-receive-heartbeat");
+      fout3.open(address + "-receive-appendentries");
+    }
+    void RaftRpcServiceImpl::closeFile() {
+      fout1.close();
+      fout2.close();
+      fout3.close();
+    }  
 
-    void RaftRpcServer::start(const std::string &str) {
-      service.localId = str;
+    void RaftRpcServer::start(const std::string &address) {
+      service.openFile(address);
+      
       grpc::ServerBuilder builder;
-      builder.AddListeningPort(str, grpc::InsecureServerCredentials());
+      builder.AddListeningPort(address, grpc::InsecureServerCredentials());
       builder.RegisterService(&service);
       server = builder.BuildAndStart();
       raftRpcServerThread = boost::thread([this]{server->Wait();});
@@ -49,6 +72,8 @@ namespace Raft {
     void RaftRpcServer::shutdown(){
       if (server) server->Shutdown();
       raftRpcServerThread.join();
+      
+      service.closeFile();
     }
   }
 }

@@ -5,12 +5,17 @@
 #include <thread>
 #include <grpc++/server.h>
 #include <grpc++/server_builder.h>
+#include "defines.h"
 #include "RaftExternal.pb.h"
 #include "RaftExternal.grpc.pb.h"
 
 namespace Raft {
   namespace External {
     class RaftExternalServerImpl : public RaftExternal::Service {
+    private:
+      std::ofstream fout1, fout2;
+      std::function<bool(const std::string &, const std::string &)> put;
+      std::function<std::pair<bool, std::string>(const std::string &)> get;
     public:
       template <class Func> 
       void bindPut(Func &&f) { put = std::forward<Func>(f); }
@@ -23,11 +28,9 @@ namespace Raft {
 
       grpc::Status Get(grpc::ServerContext *context, const GetRequest *request,
                        GetReply *response) override;
-
-    private:
-      std::function<bool(const std::string &, const std::string &)> put;
-      std::function<std::pair<bool, std::string>(const std::string &)> get;
-    };
+      void openFile(const std::string &address);
+      void closeFile();
+     };
 
     class RaftExternalServer {
     private:
@@ -41,7 +44,7 @@ namespace Raft {
       template <class Func>
       void bindGet(Func && f) { service.bindGet(std::forward<Func>(f)); }
 
-      void start(const std::string &addr);
+      void start(const std::string &address);
       void shutdown();
     };
   }

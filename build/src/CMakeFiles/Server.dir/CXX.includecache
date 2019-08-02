@@ -103,6 +103,8 @@ boost/property_tree/ptree.hpp
 -
 grpc++/create_channel.h
 -
+defines.h
+../include/External/defines.h
 RaftExternal.pb.h
 ../include/External/RaftExternal.pb.h
 RaftExternal.grpc.pb.h
@@ -117,6 +119,8 @@ grpc++/server.h
 -
 grpc++/server_builder.h
 -
+defines.h
+../include/External/defines.h
 RaftExternal.pb.h
 ../include/External/RaftExternal.pb.h
 RaftExternal.grpc.pb.h

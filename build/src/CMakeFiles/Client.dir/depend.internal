@@ -5,6 +5,10 @@ src/CMakeFiles/Client.dir/Client.cpp.o
  ../include/External/RaftExternal.grpc.pb.h
  ../include/External/RaftExternal.pb.h
  ../include/External/RaftExternalClient.h
+ ../include/Rpc/RaftRpc.grpc.pb.h
+ ../include/Rpc/RaftRpc.pb.h
+ ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/Client.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
@@ -342,6 +346,10 @@ src/CMakeFiles/Client.dir/External/RaftExternalClient.cpp.o
  ../include/External/RaftExternal.grpc.pb.h
  ../include/External/RaftExternal.pb.h
  ../include/External/RaftExternalClient.h
+ ../include/Rpc/RaftRpc.grpc.pb.h
+ ../include/Rpc/RaftRpc.pb.h
+ ../include/defines.h
+ ../include/exception.h
  /home/gls/Raft/src/External/RaftExternalClient.cpp
  /usr/local/include/google/protobuf/any.h
  /usr/local/include/google/protobuf/any.pb.h
