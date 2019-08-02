@@ -1,0 +1,12 @@
+1564737780236 send requestvote to 4:2 0 0
+1564737780236 broadcastTimeout 10
+1564737780236 send requestvote to 3:2 0 0
+1564737780236 broadcastTimeout 10
+1564737780238 reply 0 0 0
+1564737780239 reply 0 0 0
+1564737780239 send requestvote to 2:2 0 0
+1564737780239 broadcastTimeout 10
+1564737780241 send requestvote to 1:2 0 0
+1564737780241 broadcastTimeout 10
+1564737780245 reply 1 1 2
+1564737780250 reply 1 1 2

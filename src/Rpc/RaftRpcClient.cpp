@@ -85,7 +85,7 @@ namespace Raft {
     }
     
     std::pair<RaftServerRole, Term> RaftRpcClient::sendHeartbeats(const AppendEntriesRequest &request) {
-      size_t nowId = 0, getAppends = 1;
+      size_t nowId = 0;
       heartbeatFuture.clear();
       for(size_t i = 0; i < size; ++i) {
         if(i == localServer) continue;
@@ -95,16 +95,12 @@ namespace Raft {
         if(i == localServer) continue;
         std::pair<bool, AppendEntriesReply> reply = heartbeatFuture[nowId++].get();
         if(reply.first) {
-          if(reply.second.success) {
-            getAppends++;
-            if(reply.second.term > request.term) {
-              return std::make_pair(RaftServerRole::follower, reply.second.term);
-            }
+          if(reply.second.term > request.term) {
+            return std::make_pair(RaftServerRole::follower, reply.second.term);
           }
         }
       }
-      if(getAppends * 2 > size) return std::make_pair(RaftServerRole::leader, request.term);
-      return std::make_pair(RaftServerRole::follower, request.term);
-    }
+      return std::make_pair(RaftServerRole::leader, request.term);
+     } 
   }
 }

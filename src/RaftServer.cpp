@@ -238,9 +238,7 @@ namespace Raft {
     }
   }
   void RaftServer::start() {
-    /*
-    std::cout << "The local Address : " << cluster->localId << std::endl;
-    std::cout <<"rpcServer and rpcClient have been built." << std::endl;  
+    std::cout << "The RaftServer "  << cluster->address << " havs been built." << std::endl;  
     std::time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     struct std::tm *ptm = std::localtime(&tt);
     std::cout << "Current time: " << std::put_time(ptm,"%X") << '\n';
@@ -248,7 +246,7 @@ namespace Raft {
     ++ptm->tm_min; ptm->tm_sec=0;
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
     std::cout << std::put_time(ptm,"%X") << " reached!\n";
-    */
+  
     fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
     roles[currentRole = RaftServerRole::follower]->init(1);
     fout0 << getTime() << " end init" << std::endl;

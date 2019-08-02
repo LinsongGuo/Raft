@@ -62,18 +62,18 @@ namespace Raft {
               }
             }
           }
-        } while(startTime + cluster->appendTimeout <= getTime());
+        } while(getTime() <= startTime + cluster->appendTimeout);
         return AppendEntriesReply(false, invalidTerm);
       }));
     }
 
-    //fout <<"end " << std::endl;
     std::vector<Index> matchIndexes;
     size_t getAppends = 1, nowId = 0;
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
       AppendEntriesReply result = appendFuture[nowId++].get();
-      //fout <<"result " << i <<' ' << result.success <<' '<< result.term << std::endl;
+      //fout <<"result " << i <<' ' << result.success <<' '<< result.term << ' ' 
+      //<< info->matchIndex[i] << ' ' << info->nextIndex[i] << std::endl;
       if(result.success) {
         getAppends++;
         if(info->matchIndex[i] < info->replicatedEntries.size() 
@@ -87,19 +87,17 @@ namespace Raft {
       }
     }
     //fout <<"getAppens " << getAppends << std::endl;
+    //fout <<"matchIndexes " << matchIndexes.size() << std::endl;
+    /*for(size_t j = 0; j < matchIndexes.size(); ++j) {
+      fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
+    }*/
+    /*
     if(getAppends * 2 <= cluster->size) {
       transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, info->currentTerm);
       return false;
-    }
-    //fout <<"matchIndexes " << matchIndexes.size() << std::endl;
-    for(size_t j = 0; j < matchIndexes.size(); ++j) {
-      //fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
-    }
+    }*/
     sort(matchIndexes.begin(), matchIndexes.end(), [](Index x, Index y)->bool{return x > y;});
-    //fout <<"sorted" <<std::endl;
-    for(size_t j = 0; j < matchIndexes.size(); ++j) {
-      //fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
-    }
+    
     if(siz == 1) {
       info->commitIndex = info->replicatedEntries.size() - 1;
     }
@@ -111,7 +109,7 @@ namespace Raft {
       ++info->lastApplied;
       info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
-    //fout.close();
+    //fout <<"return " << info->replicatedEntries.size() - 1 << info->commitIndex << std::endl; 
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }
 
@@ -153,8 +151,8 @@ namespace Raft {
     }
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
-    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << ' ' << cluster->appendTimeout << std::endl;
+    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << ' ' << cluster->appendTimeout << std::endl;
 
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();

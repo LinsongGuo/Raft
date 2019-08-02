@@ -3,7 +3,7 @@
   "localPort" : "50001",
   "externalPort" : "50002",
   "electionTimeout" : "150",
-  "appendTimeout": "30", 
+  "appendTimeout": "10", 
   "heartbeatTimeout" : "50",
   "broadcastTimeout" : "10",
   "serverList": 
