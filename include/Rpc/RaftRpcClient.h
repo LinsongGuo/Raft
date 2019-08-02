@@ -21,8 +21,8 @@ namespace Raft {
       std::pair<bool, RequestVoteReply> sendRequestVote(size_t id, const RequestVoteRequest &request);
       std::pair<bool, AppendEntriesReply> sendHeartbeat(size_t id, const AppendEntriesRequest &request);
       std::pair<bool, AppendEntriesReply> sendAppendEntries(size_t id, RpcAppendEntriesRequest rpcRequest);
-      std::pair<RaftServerRole, Term> sendRequestVotes(size_t localServer, const RequestVoteRequest &request);
-      std::pair<RaftServerRole, Term> sendHeartbeats(size_t localServer, const AppendEntriesRequest &request);
+      std::pair<RaftServerRole, Term> sendRequestVotes(const RequestVoteRequest &request);
+      std::pair<RaftServerRole, Term> sendHeartbeats(const AppendEntriesRequest &request);
     };
   }
 }

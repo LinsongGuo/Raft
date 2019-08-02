@@ -8,15 +8,16 @@ namespace Raft {
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
   
   bool Leader::put(const std::string &key, const std::string &args) {
-    std::ofstream fout("leaderput-" + cluster->localId + "-" + key + "-" + args);
-    fout << getTime() << " term:" << info->currentTerm << std::endl;
+    //std::ofstream //fout("leaderput-" + cluster->localId + "-" + key + "-" + args);
+    ////fout << getTime() << " term:" << info->currentTerm << std::endl;
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
-    size_t siz = cluster->size;
+    size_t siz = cluster->size, nowId = 0;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
+      nowId++;
       Raft::Rpc::RpcAppendEntriesRequest rpcRequest;
-      fout << "for " << i <<' ' << info->nextIndex[i] <<' '<< info->replicatedEntries[info->nextIndex[i] - 1].term <<' ' << info->commitIndex << std::endl;
+      //fout << "for " << i <<' ' << info->nextIndex[i] <<' '<< info->replicatedEntries[info->nextIndex[i] - 1].term <<' ' << info->commitIndex << std::endl;
 
       rpcRequest.set_leaderid(cluster->localId);
       rpcRequest.set_term(info->currentTerm);
@@ -30,19 +31,17 @@ namespace Raft {
         tmp.set_term(info->replicatedEntries[j].term);
         *rpcRequest.add_entries() = std::move(tmp);
       }
-      fout <<"request finish " <<i<<std::endl;
-      appendFuture.push_back(boost::async(boost::launch::async, [this, i, rpcRequest]() mutable -> AppendEntriesReply {
-        std::ofstream fout("leaderput-thread-" + cluster->localId + "-" + std::to_string(rpcRequest.term()));
+      appendFuture.push_back(boost::async(boost::launch::async, [this, i, nowId, rpcRequest]() mutable -> AppendEntriesReply {
         Timer startTime = getTime();
         do {
-          std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
-          fout <<"do..." << std::endl;
+          std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(nowId, rpcRequest);
+          //fout <<"do..." << std::endl;
           if(result.first) {
             if(result.second.success) {
               boost::unique_lock<boost::mutex> lk2(info->infoMutex);
               info->nextIndex[i] = info->replicatedEntries.size();
               info->matchIndex[i] = info->nextIndex[i] - 1;
-              fout << "success " << info->nextIndex[i] <<' ' << info->matchIndex[i] << std::endl;
+              //fout << "success " << info->nextIndex[i] <<' ' << info->matchIndex[i] << std::endl;
               return AppendEntriesReply(true, result.second.term);
             }
             else {
@@ -52,7 +51,7 @@ namespace Raft {
               if(rpcRequest.prevlogindex() > 0) {
                 Index prevLogIndex = rpcRequest.prevlogindex() - 1;
                 info->nextIndex[i]--;
-                fout <<"fail " << info->nextIndex[i] <<' '<<info->matchIndex[i] << ' ' << prevLogIndex << std::endl;
+                //fout <<"fail " << info->nextIndex[i] <<' '<<info->matchIndex[i] << ' ' << prevLogIndex << std::endl;
                 if(prevLogIndex > 0) {
                   rpcRequest.set_prevlogindex(prevLogIndex);
                   rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex].term);
@@ -66,18 +65,18 @@ namespace Raft {
             }
           }
         } while(startTime + cluster->appendTimeout <= getTime());
-        fout.close();
         return AppendEntriesReply(false, invalidTerm);
       }));
     }
 
-    fout <<"end " << std::endl;
+    //fout <<"end " << std::endl;
     std::vector<Index> matchIndexes;
-    size_t nowId = 0, getAppends = 1;
+    size_t getAppends = 1;
+    nowId = 0;
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
       AppendEntriesReply result = appendFuture[nowId++].get();
-      fout <<"result " << i <<' ' << result.success <<' '<< result.term << std::endl;
+      //fout <<"result " << i <<' ' << result.success <<' '<< result.term << std::endl;
       if(result.success) {
         getAppends++;
         if(info->matchIndex[i] < info->replicatedEntries.size() 
@@ -90,32 +89,32 @@ namespace Raft {
         return false;
       }
     }
-    fout <<"getAppens " << getAppends << std::endl;
+    //fout <<"getAppens " << getAppends << std::endl;
     if(getAppends * 2 <= cluster->size) {
       transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, info->currentTerm);
       return false;
     }
-    fout <<"matchIndexes " << matchIndexes.size() << std::endl;
+    //fout <<"matchIndexes " << matchIndexes.size() << std::endl;
     for(size_t j = 0; j < matchIndexes.size(); ++j) {
-      fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
+      //fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
     }
     sort(matchIndexes.begin(), matchIndexes.end(), [](Index x, Index y)->bool{return x > y;});
-    fout <<"sorted" <<std::endl;
+    //fout <<"sorted" <<std::endl;
     for(size_t j = 0; j < matchIndexes.size(); ++j) {
-      fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
+      //fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
     }
     if(siz == 1) {
       info->commitIndex = info->replicatedEntries.size() - 1;
     }
     else if((siz >> 1) - 1 < matchIndexes.size()) {
       info->commitIndex = matchIndexes[(siz >> 1) - 1];
-      fout <<"commit " <<' '<<matchIndexes[(siz >> 1) - 1]<<std::endl;
+      //fout <<"commit " <<' '<<matchIndexes[(siz >> 1) - 1]<<std::endl;
     } 
     while(info->lastApplied < info->commitIndex) {
       ++info->lastApplied;
       info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
-    fout.close();
+    //fout.close();
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }
 
@@ -149,7 +148,6 @@ namespace Raft {
   }
 
   void Leader::init(Term currentTerm) {
-    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     for(size_t i = 0; i < cluster->size; ++i) {
@@ -157,21 +155,22 @@ namespace Raft {
       info->matchIndex[i] = 0;
     }
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
-    //lk.unlock();
     
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();
     heartbeatThread.join();
     heartbeatThread = boost::thread([this, request, heartbeatTimeout]{
-      std::ofstream fout(cluster->localId + "-leader"); 
+      //std::ofstream //fout(cluster->localId + "-leader"); 
       while(true) {
         try{
-          fout << getTime() << " sleeping... " << std::endl;
+          //fout << getTime() << " sleeping... " << std::endl;
           boost::this_thread::sleep_for(boost::chrono::milliseconds(heartbeatTimeout));
-          fout << getTime() << " sending..." << std::endl;
-          std::pair<RaftServerRole, Term> result = rpcClient->sendHeartbeats(cluster->localServer, request);
-          fout << getTime() << " result " << result.first <<' '<< result.second << std::endl;
+          //fout << getTime() << " sending..." << std::endl;
+          std::pair<RaftServerRole, Term> result = rpcClient->sendHeartbeats(request);
+          //fout << getTime() << " result " << result.first <<' '<< result.second << std::endl;
           if(result.first == RaftServerRole::follower) {
             transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, result.second);
             return;
@@ -181,7 +180,7 @@ namespace Raft {
           return;
         }       
       }
-      fout.close();
+      //fout.close();
     });     
     //heartbeatThread.detach(); 
   }

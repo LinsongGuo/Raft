@@ -32,8 +32,8 @@ namespace Raft {
       return grpc::Status::OK;
     }
     void RaftExternalServerImpl::openFile(const std::string &address) {
-      fout1.open(address + "-receive-put");
-      fout2.open(address + "-receive-get");
+      fout1.open(address + "/receive-put");
+      fout2.open(address + "/receive-get");
     }
     void RaftExternalServerImpl::closeFile() {
       fout1.close();

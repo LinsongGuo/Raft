@@ -6,6 +6,14 @@ namespace Raft {
   RaftServer::RaftServer(const std::string &fileName) : 
     cluster(std::make_shared<RaftServerCluster>(fileName))
   {
+    fout0.open(cluster->localId + "/start");
+    fout1.open(cluster->localId + "/respond-put");
+    fout2.open(cluster->localId + "/respond-get");
+    fout3.open(cluster->localId + "/respond-requestvote");
+    fout4.open(cluster->localId + "/respond-heartbeat");
+    fout5.open(cluster->localId + "/respond-appendentries");
+    fout6.open(cluster->localId + "/respond-transform");
+
     //build transformer
     info = std::make_shared<RaftServerInfo>(cluster->size);
     transformer = std::make_shared<Transformer>();
@@ -33,6 +41,8 @@ namespace Raft {
     //build client.
     std::vector<std::shared_ptr<grpc::Channel> > channels;
     for(int i = 0; i < cluster->serverList.size(); ++i) {
+      if(i == cluster->localServer) continue;
+      fout0 << getTime() <<' ' << i << ' ' << cluster->serverList[i] << std::endl; 
       channels.emplace_back(grpc::CreateChannel(cluster->serverList[i], grpc::InsecureChannelCredentials()));
     }
     rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localId);
@@ -42,12 +52,10 @@ namespace Raft {
     roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer);
     roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer);
 
-    fout1.open(cluster->localId + "-respond-put");
-    fout2.open(cluster->localId + "-respond-get");
-    fout3.open(cluster->localId + "-respond-requestvote");
-    fout4.open(cluster->localId + "-respond-heartbeat");
-    fout5.open(cluster->localId + "-respond-appendentries");
-    fout6.open(cluster->localId + "-respond-transform");
+    roles[RaftServerRole::follower]->fout.open(cluster->localId + "/follower");
+    roles[RaftServerRole::candidate]->fout.open(cluster->localId + "/candidate");
+    roles[RaftServerRole::leader]->fout.open(cluster->localId + "/leader");
+    fout0 << getTime() << " construct end." << std::endl;    
   }
 
   bool RaftServer::put(const std::string &key, const std::string &args) {
@@ -243,14 +251,16 @@ namespace Raft {
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
     std::cout << std::put_time(ptm,"%X") << " reached!\n";
     */
-    std::cout << getTime() <<" The RaftServer " << cluster->localId << " starts." << std::endl;
+    fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
     roles[currentRole = RaftServerRole::follower]->init(1);
+    fout0 << getTime() << " end init" << std::endl;
   }
   void RaftServer::shutdown() {
     rpcServer->shutdown();
     externalServer->shutdown();
     queueThread.interrupt();
     queueThread.join();
+    fout0.close();
     fout1.close();
     fout2.close();
     fout3.close();

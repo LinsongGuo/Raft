@@ -50,9 +50,9 @@ namespace Raft {
       return grpc::Status::OK;
     }
     void RaftRpcServiceImpl::openFile(const std::string &address) {
-      fout1.open(address + "-receive-requestvote");
-      fout2.open(address + "-receive-heartbeat");
-      fout3.open(address + "-receive-appendentries");
+      fout1.open(address + "/receive-requestvote");
+      fout2.open(address + "/receive-heartbeat");
+      fout3.open(address + "/receive-appendentries");
     }
     void RaftRpcServiceImpl::closeFile() {
       fout1.close();

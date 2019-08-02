@@ -40,23 +40,21 @@ namespace Raft {
   }
 
   void Candidate::init(Term currentTerm) {
-    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
-    //lk.unlock();
     
-   // std::cout<<getTime() << " build voteThread " << std::endl;
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
+    fout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;
     voteThread.interrupt();
     voteThread.join();
     voteThread = boost::thread([this, request, electionTimeout] {
-      std::ofstream fout("candidate-" + cluster->localId + "-" + std::to_string(info->currentTerm));
-      fout << getTime() <<' ' << request.lastLogIndex << ' ' << request.lastLogTerm << std::endl;
-      fout.close();
-      std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(cluster->localServer, request);
+      //std::ofstream //fout("candidate-" + cluster->localId + "-" + std::to_string(info->currentTerm));
+      //fout << getTime() <<' ' << request.lastLogIndex << ' ' << request.lastLogTerm << std::endl;
+      //fout.close();
+      std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(request);
       if(result.first == RaftServerRole::candidate) {
         Timer waitTime = randTimer(electionTimeout);          
         try{

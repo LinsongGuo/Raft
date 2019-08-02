@@ -23,7 +23,7 @@
 namespace Raft {
   class RaftServer {
   private:
-    std::ofstream fout1, fout2, fout3, fout4, fout5, fout6;
+    std::ofstream fout0, fout1, fout2, fout3, fout4, fout5, fout6;
     RaftServerRole currentRole;
     std::shared_ptr<RaftServerCluster> cluster;
     std::shared_ptr<RaftServerInfo> info;

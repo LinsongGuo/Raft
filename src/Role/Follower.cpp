@@ -103,31 +103,30 @@ namespace Raft {
   }
   
   void Follower::init(Term currentTerm) {
-    //boost::unique_lock<boost::mutex> lk(info->infoMutex);
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
-    //lk.unlock();
+    fout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;
     sleepThread.interrupt();
     sleepThread.join();
     sleepThread = boost::thread([this, electionTimeout, currentTerm] {
-      std::ofstream fout;
-      fout.open("follower-"+cluster->localId+"-"+std::to_string(currentTerm));
+      //std::ofstream fout;
+      //fout.open("follower-"+cluster->localId+"-"+std::to_string(currentTerm));
       while(true) {  
         Timer waitTime = randTimer(electionTimeout);
-        fout <<getTime() << " waitTime: " << waitTime << std::endl;
-        fout <<getTime() << " sleeping..." << std::endl;
+        //fout <<getTime() << " waitTime: " << waitTime << std::endl;
+        //fout <<getTime() << " sleeping..." << std::endl;
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
         }
         catch(boost::thread_interrupted &e) {
-          fout << getTime() << " catch interrupt " << std::endl;
+          //fout << getTime() << " catch interrupt " << std::endl;
           continue;
         }          
-        fout << getTime() <<' '<<cluster->localId << " transform form follower to candidate." << std::endl;
-        fout.close();
+        //fout << getTime() <<' '<<cluster->localId << " transform form follower to candidate." << std::endl;
+        //fout.close();
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, currentTerm + 1);
         break;
       }

@@ -18,6 +18,7 @@ namespace Raft {
     std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
     std::shared_ptr<Transformer> transformer;
   public:
+    std::ofstream fout;
     Role(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
