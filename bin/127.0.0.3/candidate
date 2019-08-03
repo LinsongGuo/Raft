@@ -1,3 +1,8 @@
-1564814963613 127.0.0.3:50001 becomes a candidate, currentTerm = 2
-1564814963907 127.0.0.3:50001 becomes a candidate, currentTerm = 3
-1564814964486 127.0.0.3:50001 becomes a candidate, currentTerm = 4
+1564820808259 127.0.0.3:50001 becomes a candidate, currentTerm = 2
+1564820808449 127.0.0.3:50001 becomes a candidate, currentTerm = 3
+1564820808670 127.0.0.3:50001 becomes a candidate, currentTerm = 4
+1564820808846 127.0.0.3:50001 becomes a candidate, currentTerm = 5
+1564820809236 127.0.0.3:50001 becomes a candidate, currentTerm = 6
+1564821179964 127.0.0.3:50001 becomes a candidate, currentTerm = 7
+1564821208888 127.0.0.3:50001 becomes a candidate, currentTerm = 12
+1564821209155 127.0.0.3:50001 becomes a candidate, currentTerm = 13

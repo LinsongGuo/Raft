@@ -19,7 +19,14 @@ The external server(127.0.0.x:50002): receive and reply Put and Get from all the
 ![avatar](https://github.com/LinsongGuo/Raft/blob/master/structure.jpg)
 
 ## Test
-- 10000 Put/Get entries test. 
-- 10000 Put/Get entries test with only 3 servers built.
-- 10000 Put/Get entries test with 2 followers deaded.
-- 10000 Put/Get entries test with one old leader deaded and another new leader elected. 
+
+[√] 10000 Put/Get entries test. 
+
+[√] 10000 Put/Get entries test with only 3 servers built.
+
+[√] 10000 Put/Get entries test with 2 followers deaded.
+
+[√] 10000 Put/Get entries test with one old leader deaded and another new leader elected. 
+
+[×] 10000 Put/Get entries test with a leader and a follower deaded. 
+

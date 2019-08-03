@@ -1,10 +1,18 @@
-1564814962792 127.0.0.2:50001 becomes a follower, currentTerm = 1
-1564814963048 127.0.0.2:50001 becomes a follower, currentTerm = 2
-1564814963339 127.0.0.2:50001 becomes a follower, currentTerm = 3
-1564814963503 new term from requestvote : 6
-1564814963829 new term from requestvote : 7
-1564814964168 127.0.0.2:50001 becomes a follower, currentTerm = 4
-1564814964462 new term from requestvote : 8
-1564814965184 new term from requestvote : 9
-1564814966836 new term from requestvote : 10
-1564814974747 new term from requestvote : 11
+1564820807083 127.0.0.2:50001 becomes a follower, currentTerm = 1
+1564820807361 127.0.0.2:50001 becomes a follower, currentTerm = 2
+1564820807544 127.0.0.2:50001 becomes a follower, currentTerm = 3
+1564820807710 127.0.0.2:50001 becomes a follower, currentTerm = 4
+1564820807871 new term from requestvote : 6
+1564820808036 127.0.0.2:50001 becomes a follower, currentTerm = 5
+1564820808299 new term from requestvote : 7
+1564820808668 new term from requestvote : 8
+1564820809064 127.0.0.2:50001 becomes a follower, currentTerm = 6
+1564820809399 new term from requestvote : 9
+1564820811533 new term from requestvote : 10
+1564820822894 new term from requestvote : 11
+1564821208743 127.0.0.2:50001 becomes a follower, currentTerm = 7
+1564821208890 new term from requestvote : 12
+1564821209156 new term from requestvote : 13
+1564821209816 127.0.0.2:50001 becomes a follower, currentTerm = 8
+1564821209861 new term from heartbeat : 13
+1564821213096 127.0.0.2:50001 becomes a follower, currentTerm = 13
