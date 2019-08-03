@@ -36,7 +36,8 @@ namespace Raft {
       return RequestVoteReply(false, info->currentTerm); 
     }
     else {
-      if((info->votedFor == invalidServerId || info->votedFor == request.candidateId) && checkMajorityEntries(request)) {
+      if((info->votedFor == invalidServerId || info->votedFor == request.candidateId) 
+        && checkMajorityEntries(request)) {
         info->votedFor = request.candidateId;
         sleepThread.interrupt();
         return RequestVoteReply(true, info->currentTerm);

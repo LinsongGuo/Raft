@@ -151,7 +151,9 @@ namespace Raft {
         switch(taskQueue.front()) {
           case TaskType::put : {
             auto tmp = putQueue.front();
-            
+            taskQueue.pop();
+            putQueue.pop();
+
             fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
             
             auto result = roles[currentRole]->put(tmp.key, tmp.args);
@@ -159,11 +161,13 @@ namespace Raft {
             fout1 << getTime() << " result " << result << std::endl;
 
             tmp.prm.set_value(result);
-            putQueue.pop();
+            
             break;
           }
           case TaskType::get : {
             auto tmp = getQueue.front();
+            taskQueue.pop();
+            getQueue.pop();
             
             fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
             
@@ -172,11 +176,12 @@ namespace Raft {
             fout2 << getTime() << " result " << result.first <<' ' << result.second << std::endl;
           
             tmp.prm.set_value(result);
-            getQueue.pop();
             break;
           }
           case TaskType::respondRequestVote : {
             auto tmp = respondRequestVoteQueue.front();
+            taskQueue.pop();
+            respondRequestVoteQueue.pop();
             
             fout3 << getTime() << " pop requestvote " << tmp.request.candidateId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.lastLogTerm << ' ' << tmp.request.lastLogIndex << std::endl;
@@ -186,11 +191,12 @@ namespace Raft {
             fout3 << getTime() << " result " << result.voteGranted << ' ' << result.term << std::endl;  
 
             tmp.prm.set_value(result);
-            respondRequestVoteQueue.pop();
             break;
           }
           case TaskType::respondHeartbeat : {
             auto tmp = respondHeartbeatQueue.front();
+            taskQueue.pop();
+            respondHeartbeatQueue.pop();
             
             fout4 << getTime() << " pop heartbeat " << tmp.request.leaderId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.prevLogTerm << ' ' << tmp.request.prevLogIndex << ' ' << tmp.request.leaderCommit << std::endl;
@@ -200,11 +206,12 @@ namespace Raft {
             fout4 << getTime() << " result " << result.success << ' ' << result.term << std::endl;  
             
             tmp.prm.set_value(result);
-            respondHeartbeatQueue.pop();
             break;
           }
           case TaskType::respondAppendEntries : {
             auto tmp = respondAppendEntriesQueue.front();
+            taskQueue.pop();
+            respondAppendEntriesQueue.pop();
             
             fout5 << getTime() << " pop appendentries " << ' ' << tmp.request->leaderid() << ' ' << tmp.request->term() << ' '
             << tmp.request->prevlogterm() << ' ' << tmp.request->prevlogindex() << ' ' << tmp.request->leadercommit() << std::endl;
@@ -214,17 +221,17 @@ namespace Raft {
             fout5 << getTime() << " result " << ' ' <<result.success <<' '<< result.term << std::endl;  
             
             tmp.prm.set_value(result);
-            respondAppendEntriesQueue.pop();
             break;
           }
           case TaskType::transform : {
             auto tmp = transformQueue.front();
-            
+            taskQueue.pop();
+            transformQueue.pop();            
+              
             fout6 << getTime() << ' ' << "pop transform " << tmp.fromRole <<  ' '  << tmp.toRole << ' ' << tmp.term << std::endl;
            
             if(currentRole == tmp.fromRole) {
               currentRole = tmp.toRole;
-              transformQueue.pop();            
               roles[currentRole]->init(tmp.term);  
             }
           
@@ -233,19 +240,19 @@ namespace Raft {
             break;
           }  
         } 
-        taskQueue.pop();
+        
       }     
     }
   }
   void RaftServer::start() {
-    std::cout << "The RaftServer "  << cluster->address << " havs been built." << std::endl;  
+    /*std::cout << "The RaftServer "  << cluster->address << " havs been built." << std::endl;  
     std::time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     struct std::tm *ptm = std::localtime(&tt);
     std::cout << "Current time: " << std::put_time(ptm,"%X") << '\n';
     std::cout << "Waiting for the next minute to start all raftservers...\n";
     ++ptm->tm_min; ptm->tm_sec=0;
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
-    std::cout << std::put_time(ptm,"%X") << " reached!\n";
+    std::cout << std::put_time(ptm,"%X") << " reached!\n";*/
   
     fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
     roles[currentRole = RaftServerRole::follower]->init(1);
