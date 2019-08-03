@@ -16,7 +16,7 @@ The external server(127.0.0.x:50001): receive and reply Put and Get from all the
 
 ## C++ Source Folder Structure
 
-![avatar](https://github.com/LinsongGuo/Raft/structure.jpg)
+![avatar](https://github.com/LinsongGuo/Raft/blob/master/structure.jpg)
 
 ## Test
 - 10000 Put/Get entries test. 
