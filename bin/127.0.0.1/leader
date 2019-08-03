@@ -1,1 +1,2 @@
-1564814282903 127.0.0.1:50001 becomes a leader, currentTerm = 10
+1564814965184 127.0.0.1:50001 becomes a leader, currentTerm = 9
+1564814974747 127.0.0.1:50001 becomes a leader, currentTerm = 11

@@ -15,6 +15,8 @@ mkdir 127.0.0.5
 echo "executing std..."
 bash -c "./std <test.in >std.out"
 
+sleep 1s
+
 echo "building the raft cluster with 5 servers..."
 gnome-terminal --title="Server1" --window -x bash -c "./Server server1.json"
 gnome-terminal --title="Server2" --window -x bash -c "./Server server2.json"
@@ -22,10 +24,12 @@ gnome-terminal --title="Server3" --window -x bash -c "./Server server3.json"
 gnome-terminal --title="Server4" --window -x bash -c "./Server server4.json"
 gnome-terminal --title="Server5" --window -x bash -c "./Server server5.json"
 
-sleep 5s
+sleep 3s
 
 echo "executing Client..."
 bash -c "./Client <test.in >raft.out"
+
+sleep 1s
 
 echo "comparing raft.out and std.out..."
 diff raft.out std.out

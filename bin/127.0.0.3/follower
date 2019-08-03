@@ -1,9 +1,9 @@
-1564814281212 127.0.0.3:50001 becomes a follower, currentTerm = 1
-1564814281423 127.0.0.3:50001 becomes a follower, currentTerm = 2
-1564814281688 127.0.0.3:50001 becomes a follower, currentTerm = 3
-1564814281927 127.0.0.3:50001 becomes a follower, currentTerm = 4
-1564814282146 new term from requestvote : 6
-1564814282451 127.0.0.3:50001 becomes a follower, currentTerm = 5
-1564814282733 127.0.0.3:50001 becomes a follower, currentTerm = 6
-1564814282902 new term from requestvote : 10
-1564814285075 new term from requestvote : 11
+1564814963416 127.0.0.3:50001 becomes a follower, currentTerm = 1
+1564814963625 127.0.0.3:50001 becomes a follower, currentTerm = 2
+1564814963919 127.0.0.3:50001 becomes a follower, currentTerm = 3
+1564814964168 new term from requestvote : 4
+1564814964502 127.0.0.3:50001 becomes a follower, currentTerm = 4
+1564814964982 new term from requestvote : 5
+1564814965183 new term from requestvote : 9
+1564814966836 new term from requestvote : 10
+1564814974746 new term from requestvote : 11
