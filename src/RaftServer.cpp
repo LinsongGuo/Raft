@@ -153,6 +153,7 @@ namespace Raft {
             auto tmp = putQueue.front();
             taskQueue.pop();
             putQueue.pop();
+            lk.unlock();
 
             fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
             
@@ -168,6 +169,7 @@ namespace Raft {
             auto tmp = getQueue.front();
             taskQueue.pop();
             getQueue.pop();
+            lk.unlock();
             
             fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
             
@@ -182,6 +184,7 @@ namespace Raft {
             auto tmp = respondRequestVoteQueue.front();
             taskQueue.pop();
             respondRequestVoteQueue.pop();
+            lk.unlock();
             
             fout3 << getTime() << " pop requestvote " << tmp.request.candidateId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.lastLogTerm << ' ' << tmp.request.lastLogIndex << std::endl;
@@ -197,6 +200,7 @@ namespace Raft {
             auto tmp = respondHeartbeatQueue.front();
             taskQueue.pop();
             respondHeartbeatQueue.pop();
+            lk.unlock();
             
             fout4 << getTime() << " pop heartbeat " << tmp.request.leaderId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.prevLogTerm << ' ' << tmp.request.prevLogIndex << ' ' << tmp.request.leaderCommit << std::endl;
@@ -212,6 +216,7 @@ namespace Raft {
             auto tmp = respondAppendEntriesQueue.front();
             taskQueue.pop();
             respondAppendEntriesQueue.pop();
+            lk.unlock();
             
             fout5 << getTime() << " pop appendentries " << ' ' << tmp.request->leaderid() << ' ' << tmp.request->term() << ' '
             << tmp.request->prevlogterm() << ' ' << tmp.request->prevlogindex() << ' ' << tmp.request->leadercommit() << std::endl;
@@ -227,6 +232,7 @@ namespace Raft {
             auto tmp = transformQueue.front();
             taskQueue.pop();
             transformQueue.pop();            
+            lk.unlock();
               
             fout6 << getTime() << ' ' << "pop transform " << tmp.fromRole <<  ' '  << tmp.toRole << ' ' << tmp.term << std::endl;
            
@@ -240,7 +246,7 @@ namespace Raft {
             break;
           }  
         } 
-        
+        lk.lock();
       }     
     }
   }

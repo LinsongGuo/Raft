@@ -28,6 +28,8 @@ namespace Raft {
     }
     else if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
+      std::cout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
+      fout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
       if(checkMajorityEntries(request)) {
         info->votedFor = request.candidateId; 
         sleepThread.interrupt();
@@ -52,6 +54,8 @@ namespace Raft {
     }
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
+      std::cout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
+      fout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
     } 
     if(request.leaderCommit > info->commitIndex) {
       info->commitIndex = std::min(request.leaderCommit, info->replicatedEntries.size() - 1);
@@ -74,6 +78,8 @@ namespace Raft {
     }
     if(term > info->currentTerm) {
       info->currentTerm = term;
+      std::cout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
+      fout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
     } 
     size_t siz = request->entries().size();
     if(siz > 0) { 

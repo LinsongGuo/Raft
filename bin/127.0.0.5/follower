@@ -1,7 +1,10 @@
-1564800223083 127.0.0.5:50001 becomes a follower, currentTerm = 1
-1564800223258 127.0.0.5:50001 becomes a follower, currentTerm = 2
-1564800223469 127.0.0.5:50001 becomes a follower, currentTerm = 3
-1564800223732 127.0.0.5:50001 becomes a follower, currentTerm = 4
-1564800223928 127.0.0.5:50001 becomes a follower, currentTerm = 5
-1564800224252 127.0.0.5:50001 becomes a follower, currentTerm = 6
-1564800224483 127.0.0.5:50001 becomes a follower, currentTerm = 7
+1564814282811 127.0.0.5:50001 becomes a follower, currentTerm = 1
+1564814283009 127.0.0.5:50001 becomes a follower, currentTerm = 2
+1564814283304 127.0.0.5:50001 becomes a follower, currentTerm = 3
+1564814283538 127.0.0.5:50001 becomes a follower, currentTerm = 4
+1564814283702 127.0.0.5:50001 becomes a follower, currentTerm = 5
+1564814283920 127.0.0.5:50001 becomes a follower, currentTerm = 6
+1564814284138 127.0.0.5:50001 becomes a follower, currentTerm = 7
+1564814284437 127.0.0.5:50001 becomes a follower, currentTerm = 8
+1564814284670 127.0.0.5:50001 becomes a follower, currentTerm = 9
+1564814284838 127.0.0.5:50001 becomes a follower, currentTerm = 10

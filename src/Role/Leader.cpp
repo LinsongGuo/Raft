@@ -151,8 +151,8 @@ namespace Raft {
     }
     AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << ' ' << cluster->appendTimeout << std::endl;
-    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << ' ' << cluster->appendTimeout << std::endl;
+    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
 
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();
