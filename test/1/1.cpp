@@ -25,7 +25,7 @@ string get(int len) {
 
 int main() {
 	srand(time(NULL));
-	int n = 100, cnt = 0;
+	int n = 1000, cnt = 0;
 	cout << n << endl;
 	for(int i = 0; i < 10; ++i) {
 		string key = get(rand() % 10 + 1);
