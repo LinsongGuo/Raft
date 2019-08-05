@@ -33,3 +33,5 @@ The external server(127.0.0.x:50002): receive and reply Put and Get from all the
 [√] 5000 Put/Get entries test with two leaders deaded. 
 
 [√] 10000 Put/Get entries test with 5 clients. 
+
+[√] 5000(start) + 5000(restart) Put/Get entries test. 

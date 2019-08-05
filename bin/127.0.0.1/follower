@@ -1,16 +1,6 @@
-1564985542802 127.0.0.1:50001 becomes a follower, currentTerm = 12
-1564985543068 127.0.0.1:50001 becomes a follower, currentTerm = 13
-1564985543308 127.0.0.1:50001 becomes a follower, currentTerm = 14
-1564985543592 127.0.0.1:50001 becomes a follower, currentTerm = 15
-1564985543878 127.0.0.1:50001 becomes a follower, currentTerm = 16
-1564985544110 127.0.0.1:50001 becomes a follower, currentTerm = 17
-1564985544265 127.0.0.1:50001 becomes a follower, currentTerm = 18
-1564985545048 127.0.0.1:50001 becomes a follower, currentTerm = 19
-1564985545412 127.0.0.1:50001 becomes a follower, currentTerm = 20
-1564985545585 127.0.0.1:50001 becomes a follower, currentTerm = 21
-1564985546457 127.0.0.1:50001 becomes a follower, currentTerm = 22
-1564985546785 127.0.0.1:50001 becomes a follower, currentTerm = 23
-1564985546941 127.0.0.1:50001 becomes a follower, currentTerm = 24
-1564985547737 127.0.0.1:50001 becomes a follower, currentTerm = 25
-1564985548493 127.0.0.1:50001 becomes a follower, currentTerm = 26
-1564985548914 127.0.0.1:50001 becomes a follower, currentTerm = 27
+1564987769184 127.0.0.1:50001 becomes a follower, currentTerm = 7
+1564987769466 127.0.0.1:50001 becomes a follower, currentTerm = 8
+1564987769667 127.0.0.1:50001 becomes a follower, currentTerm = 9
+1564987769846 new term from requestvote : 10
+1564987770169 127.0.0.1:50001 becomes a follower, currentTerm = 10
+1564987770336 127.0.0.1:50001 becomes a follower, currentTerm = 11

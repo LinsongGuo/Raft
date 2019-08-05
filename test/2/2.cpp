@@ -42,7 +42,7 @@ int main() {
 				cout << "put" << ' ' << cnt << ' ' << cnt << endl;
 			}
 			else {
-				cout << "get" << ' ' << cnt2 << ' ' << cnt2 << endl;
+				cout << "get" << ' ' << cnt2 << endl;
 				++cnt2;
 			}
 		}	
