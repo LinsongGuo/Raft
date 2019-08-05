@@ -1,5 +1,4 @@
-1564967585187 127.0.0.1:50001 becomes a follower, currentTerm = 1
-1564967585463 127.0.0.1:50001 becomes a follower, currentTerm = 2
-1564967585626 127.0.0.1:50001 becomes a follower, currentTerm = 3
-1564967585782 127.0.0.1:50001 becomes a follower, currentTerm = 4
-1564967586025 127.0.0.1:50001 becomes a follower, currentTerm = 5
+1564974376160 127.0.0.1:50001 becomes a follower, currentTerm = 1
+1564974376399 127.0.0.1:50001 becomes a follower, currentTerm = 2
+1564974376571 127.0.0.1:50001 becomes a follower, currentTerm = 3
+1564974377066 127.0.0.1:50001 becomes a follower, currentTerm = 4

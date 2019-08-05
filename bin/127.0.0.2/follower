@@ -1,9 +1,4 @@
-1564967585710 127.0.0.2:50001 becomes a follower, currentTerm = 1
-1564967585986 127.0.0.2:50001 becomes a follower, currentTerm = 2
-1564967586145 127.0.0.2:50001 becomes a follower, currentTerm = 3
-1564967586296 127.0.0.2:50001 becomes a follower, currentTerm = 4
-1564967586489 new term from requestvote : 6
-1564967595763 127.0.0.2:50001 becomes a follower, currentTerm = 5
-1564967595916 new term from requestvote : 7
-1564967595917 127.0.0.2:50001 becomes a follower, currentTerm = 6
-1564967595918 new term from appendentries : 7
+1564974376404 127.0.0.2:50001 becomes a follower, currentTerm = 1
+1564974376644 127.0.0.2:50001 becomes a follower, currentTerm = 2
+1564974376815 127.0.0.2:50001 becomes a follower, currentTerm = 3
+1564974377243 new term from requestvote : 4

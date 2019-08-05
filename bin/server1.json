@@ -4,7 +4,7 @@
   "externalPort" : "50002",
   "electionTimeout" : "150",
   "appendTimeout": "30", 
-  "heartbeatTimeout" : "50",
+  "heartbeatTimeout" : "30",
   "broadcastTimeout" : "10", 
   "serverList": 
   {

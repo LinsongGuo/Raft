@@ -1,8 +1,4 @@
-1564967587417 127.0.0.5:50001 becomes a follower, currentTerm = 1
-1564967587653 127.0.0.5:50001 becomes a follower, currentTerm = 2
-1564967587811 new term from heartbeat : 6
-1564967595579 127.0.0.5:50001 becomes a follower, currentTerm = 3
-1564967595761 new term from requestvote : 5
-1564967595915 new term from requestvote : 7
-1564967600150 127.0.0.5:50001 becomes a follower, currentTerm = 4
-1564967600498 new term from requestvote : 7
+1564974377174 127.0.0.5:50001 becomes a follower, currentTerm = 1
+1564974377398 127.0.0.5:50001 becomes a follower, currentTerm = 2
+1564974377695 127.0.0.5:50001 becomes a follower, currentTerm = 3
+1564974377931 new term from heartbeat : 4

@@ -25,29 +25,27 @@ string get(int len) {
 
 int main() {
 	srand(time(NULL));
-	int n = 10000, cnt = 0, len = 10;
+	int n = 10000, cnt = 0, cnt2 = 1, len = 5;
 	cout << n << endl;
 	for(int i = 0; i < 10; ++i) {
-		string key = get(rand() % len + 1);
-		string args = get(rand() % len + 1);
-		cout << "put" << ' ' << key << ' ' << args << endl;
-		keys[++cnt] = key;
+		++cnt;
+		cout << "put" << ' ' << cnt << ' ' << cnt << endl;
 	}
 	for(int i = 10; i < n; ++i) {
-		if(rand() & 1) {
-			string key = get(rand() % len + 1);
-			string args = get(rand() % len + 1);
-			cout << "put" << ' ' << key << ' ' << args << endl;
-			keys[++cnt] = key;
-		} 
+		if(cnt2 > cnt) {
+			++cnt;
+			cout << "put" << ' ' << cnt << ' ' << cnt << endl;
+		}
 		else {
-			if(rand() % 9) {
-				cout << "get" << ' ' << keys[rand() % cnt + 1] << endl;
+			if(rand() & 1) {
+				++cnt;
+				cout << "put" << ' ' << cnt << ' ' << cnt << endl;
 			}
 			else {
-				cout << "get" << ' ' << get(rand() % len + 1) << endl;
+				cout << "get" << ' ' << cnt2 << ' ' << cnt2 << endl;
+				++cnt2;
 			}
-		}
+		}	
 	}
 	return 0; 
 }
