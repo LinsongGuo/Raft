@@ -4,9 +4,10 @@ namespace Raft {
   Leader::Leader(std::shared_ptr<RaftServerInfo> _info, 
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-    std::shared_ptr<Transformer> _transformer):
-    Role(_info, _cluster, _rpcClient, _transformer) {;} 
-  
+    std::shared_ptr<Transformer> _transformer,
+    std::fstream &_logScanner):
+    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;} 
+    
   bool Leader::put(const std::string &key, const std::string &args) {
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
     size_t siz = cluster->size;
@@ -67,8 +68,6 @@ namespace Raft {
     for(size_t i = 0; i < siz; ++i) {
       if(i == cluster->localServer) continue;
       AppendEntriesReply result = appendFuture[nowId++].get();
-      //fout <<"result " << i <<' ' << result.success <<' '<< result.term << ' ' 
-      //<< info->matchIndex[i] << ' ' << info->nextIndex[i] << std::endl;
       if(result.success) {
         getAppends++;
         if(info->matchIndex[i] < info->replicatedEntries.size() 
@@ -97,7 +96,9 @@ namespace Raft {
     } 
     while(info->lastApplied < info->commitIndex) {
       ++info->lastApplied;
-      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
+      auto &tmp = info->replicatedEntries[info->lastApplied];
+      info->appliedEntries[tmp.key] = tmp.args;
+      logScanner << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
     }
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }
@@ -138,7 +139,6 @@ namespace Raft {
       info->nextIndex[i] = info->replicatedEntries.size();
       info->matchIndex[i] = 0;
     }
-    AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
     
     std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
     fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
@@ -147,14 +147,11 @@ namespace Raft {
     heartbeatThread.interrupt();
     heartbeatThread.join();
     heartbeatThread = boost::thread([this, request, heartbeatTimeout]{
-      //std::ofstream //fout(cluster->localId + "-leader"); 
       while(true) {
         try{
-          //fout << getTime() << " sleeping... " << std::endl;
           boost::this_thread::sleep_for(boost::chrono::milliseconds(heartbeatTimeout));
-          //fout << getTime() << " sending..." << std::endl;
+          AppendEntriesRequest request(cluster->localId, info->currentTerm, invalidTerm, invalidIndex, info->commitIndex);
           std::pair<RaftServerRole, Term> result = rpcClient->sendHeartbeats(request);
-          //fout << getTime() << " result " << result.first <<' '<< result.second << std::endl;
           if(result.first == RaftServerRole::follower) {
             transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, result.second);
             return;
@@ -164,8 +161,6 @@ namespace Raft {
           return;
         }       
       }
-      //fout.close();
-    });     
-    //heartbeatThread.detach(); 
+    });    
   }
 }

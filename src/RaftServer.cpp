@@ -46,9 +46,9 @@ namespace Raft {
     rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localServer, cluster->address);
 
     //create roles.
-    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer);
-    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer);
-    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer);
+    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, logScanner);
+    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, logScanner);
+    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, logScanner);
 
     roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
     roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
@@ -259,16 +259,26 @@ namespace Raft {
     ++ptm->tm_min; ptm->tm_sec=0;
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
     std::cout << std::put_time(ptm,"%X") << " reached!\n";*/
-  
+    
+    logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
+
     fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
-    roles[currentRole = RaftServerRole::follower]->init(1);
+    roles[RaftServerRole::follower]->init(1);
     fout0 << getTime() << " end init" << std::endl;
+  }
+  void RaftServer::restart() {
+    logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
+    Term term = info->readLog(logScanner);
+    roles[RaftServerRole::follower]->init(term);
   }
   void RaftServer::shutdown() {
     rpcServer->shutdown();
     externalServer->shutdown();
     queueThread.interrupt();
     queueThread.join();
+
+    logScanner.close();
+
     fout0.close();
     fout1.close();
     fout2.close();

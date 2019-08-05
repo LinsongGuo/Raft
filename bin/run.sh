@@ -10,7 +10,13 @@ mkdir 127.0.0.3
 mkdir 127.0.0.4
 mkdir 127.0.0.5
 
-#gnome-terminal --title="Server" --window -x bash -c "./Server server1.json server2.json server3.json server4.json server5.json"
+rm -rf log
+mkdir log
+touch log/127.0.0.1
+touch log/127.0.0.2
+touch log/127.0.0.3
+touch log/127.0.0.4
+touch log/127.0.0.5
 
 echo "executing std..."
 bash -c "./std <test.in >std.out"

@@ -4,8 +4,9 @@ namespace Raft {
   Candidate::Candidate(std::shared_ptr<RaftServerInfo> _info, 
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-    std::shared_ptr<Transformer> _transformer):
-    Role(_info, _cluster, _rpcClient, _transformer) {;} 
+    std::shared_ptr<Transformer> _transformer,
+    std::fstream &_logScanner):
+    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;} 
 
   bool Candidate::put(const std::string &key, const std::string &args) {
     return false;
@@ -51,9 +52,6 @@ namespace Raft {
     voteThread.interrupt();
     voteThread.join();
     voteThread = boost::thread([this, request, electionTimeout] {
-      //std::ofstream //fout("candidate-" + cluster->localId + "-" + std::to_string(info->currentTerm));
-      //fout << getTime() <<' ' << request.lastLogIndex << ' ' << request.lastLogTerm << std::endl;
-      //fout.close();
       std::pair<RaftServerRole, Term> result = rpcClient->sendRequestVotes(request);
       if(result.first == RaftServerRole::candidate) {
         Timer waitTime = randTimer(electionTimeout);          
@@ -66,7 +64,5 @@ namespace Raft {
       } 
       transformer->Transform(RaftServerRole::candidate, result.first, result.second);
     });
-    //voteThread.detach();
-    // /std::cout<<getTime() << " end candidate::init " << std::endl;
   }
 }

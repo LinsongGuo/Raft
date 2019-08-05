@@ -13,6 +13,7 @@
 namespace Raft {
   class Role {
   protected:
+    std::fstream &logScanner;
     std::shared_ptr<RaftServerInfo> info;
     std::shared_ptr<RaftServerCluster> cluster;
     std::shared_ptr<Rpc::RaftRpcClient> rpcClient;
@@ -22,7 +23,8 @@ namespace Raft {
     Role(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-      std::shared_ptr<Transformer> _transformer);
+      std::shared_ptr<Transformer> _transformer,
+      std::fstream &_logScanner);
     virtual void init(Term currentTerm) = 0;
     virtual bool put(const std::string &key, const std::string &args) = 0;
     virtual std::pair<bool, std::string> get(const std::string &key) = 0;
