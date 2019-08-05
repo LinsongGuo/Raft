@@ -4,9 +4,8 @@ namespace Raft {
   Follower::Follower(std::shared_ptr<RaftServerInfo> _info, 
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-    std::shared_ptr<Transformer> _transformer,
-    std::fstream &_logScanner):
-    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;}
+    std::shared_ptr<Transformer> _transformer):
+    Role(_info, _cluster, _rpcClient, _transformer) {;}
 
 
   bool Follower::put(const std::string &key, const std::string &args) {
@@ -14,7 +13,7 @@ namespace Raft {
   }
 
   std::pair<bool, std::string> Follower::get(const std::string &key) {
-    return std::make_pair(false, notFound);
+    return std::make_pair(false, invalidString);
   }
 
   bool Follower::checkMajorityEntries(const RequestVoteRequest &request) {
@@ -63,9 +62,7 @@ namespace Raft {
     }
     while(info->lastApplied < info->commitIndex) {
       ++info->lastApplied;
-      auto &tmp = info->replicatedEntries[info->lastApplied];
-      info->appliedEntries[tmp.key] = tmp.args;
-      logScanner << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
+      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);
@@ -104,9 +101,7 @@ namespace Raft {
     }
     while(info->lastApplied < info->commitIndex) {
       ++info->lastApplied;
-      auto &tmp = info->replicatedEntries[info->lastApplied];
-      info->appliedEntries[tmp.key] = tmp.args;
-      logScanner << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
+      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);

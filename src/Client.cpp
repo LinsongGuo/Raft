@@ -14,12 +14,10 @@ int main() {
     std::cin >> opt;
     if(opt == "put") {
       std::cin >> key >> args;
-      std::cerr << opt << ' ' << key << ' ' << args << std::endl;
       Client.Put(key, args);
     }
     else {
       std::cin >> key;
-      std::cerr << opt << ' ' << key << std::endl; 
       std::cout << Client.Get(key) << std::endl;
     }
   }

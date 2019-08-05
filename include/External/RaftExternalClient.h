@@ -29,9 +29,9 @@ namespace Raft {
       RaftExternalClient& operator=(RaftExternalClient &&) = delete;
       ~RaftExternalClient();
 
-      void Put(std::string key, std::string value, std::uint64_t timeout = 5000000000);
+      void Put(std::string key, std::string value, std::uint64_t timeout = 500000);
 
-      std::string Get(std::string key, std::uint64_t timeout = 5000000000);
+      std::string Get(std::string key, std::uint64_t timeout = 500000);
 
     private:
       struct Impl;

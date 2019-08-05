@@ -85,18 +85,6 @@ namespace Raft {
     }
   }
 
-  Term RaftServerInfo::readLog(std::fstream &logScanner) {
-    Term term = 1;
-    std::string key, args;
-    while(logScanner >> key) {
-      logScanner >> args;
-      logScanner >> term;
-      replicatedEntries.push_back(ReplicatedEntry(key, args, term));   
-    }
-    lastApplied = commitIndex = replicatedEntries.size() - 1;
-    return term;
-  }
-
   Index RaftServerInfo::lastLogIndex() {
     return replicatedEntries.size() - 1;
   }

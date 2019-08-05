@@ -11,8 +11,7 @@ namespace Raft {
     Leader(std::shared_ptr<RaftServerInfo> _info, 
       std::shared_ptr<RaftServerCluster>_cluster, 
       std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-      std::shared_ptr<Transformer> _transformer,
-      std::fstream &_logScanner);
+      std::shared_ptr<Transformer> _transformer);
     void init(Term currentTerm) override;
     bool put(const std::string &key, const std::string &args) override;
     std::pair<bool, std::string> get(const std::string &key) override;

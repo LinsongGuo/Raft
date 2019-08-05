@@ -358,7 +358,7 @@ RaftRpc.grpc.pb.h
 
 ../include/exception.h
 
-/home/gls/Raft/src/Client.cpp
+/home/gls/Raft-prev/src/Client.cpp
 iostream
 -
 cstdlib
@@ -366,13 +366,13 @@ cstdlib
 ctime
 -
 RaftExternalClient.h
-/home/gls/Raft/src/RaftExternalClient.h
+/home/gls/Raft-prev/src/RaftExternalClient.h
 
-/home/gls/Raft/src/External/RaftExternal.grpc.pb.cc
+/home/gls/Raft-prev/src/External/RaftExternal.grpc.pb.cc
 RaftExternal.pb.h
-/home/gls/Raft/src/External/RaftExternal.pb.h
+/home/gls/Raft-prev/src/External/RaftExternal.pb.h
 RaftExternal.grpc.pb.h
-/home/gls/Raft/src/External/RaftExternal.grpc.pb.h
+/home/gls/Raft-prev/src/External/RaftExternal.grpc.pb.h
 functional
 -
 grpcpp/impl/codegen/async_stream.h
@@ -396,9 +396,9 @@ grpcpp/impl/codegen/service_type.h
 grpcpp/impl/codegen/sync_stream.h
 -
 
-/home/gls/Raft/src/External/RaftExternal.pb.cc
+/home/gls/Raft-prev/src/External/RaftExternal.pb.cc
 RaftExternal.pb.h
-/home/gls/Raft/src/External/RaftExternal.pb.h
+/home/gls/Raft-prev/src/External/RaftExternal.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -422,45 +422,45 @@ google/protobuf/port_def.inc
 google/protobuf/port_undef.inc
 -
 
-/home/gls/Raft/src/External/RaftExternalClient.cpp
+/home/gls/Raft-prev/src/External/RaftExternalClient.cpp
 RaftExternalClient.h
-/home/gls/Raft/src/External/RaftExternalClient.h
+/home/gls/Raft-prev/src/External/RaftExternalClient.h
 
-/home/gls/Raft/src/External/RaftExternalServer.cpp
+/home/gls/Raft-prev/src/External/RaftExternalServer.cpp
 RaftExternalServer.h
-/home/gls/Raft/src/External/RaftExternalServer.h
+/home/gls/Raft-prev/src/External/RaftExternalServer.h
 defines.h
-/home/gls/Raft/src/External/defines.h
+/home/gls/Raft-prev/src/External/defines.h
 
-/home/gls/Raft/src/RaftServer.cpp
+/home/gls/Raft-prev/src/RaftServer.cpp
 RaftServer.h
-/home/gls/Raft/src/RaftServer.h
+/home/gls/Raft-prev/src/RaftServer.h
 chrono
 -
 thread
 -
 
-/home/gls/Raft/src/Role/Candidate.cpp
+/home/gls/Raft-prev/src/Role/Candidate.cpp
 Candidate.h
-/home/gls/Raft/src/Role/Candidate.h
+/home/gls/Raft-prev/src/Role/Candidate.h
 
-/home/gls/Raft/src/Role/Follower.cpp
+/home/gls/Raft-prev/src/Role/Follower.cpp
 Follower.h
-/home/gls/Raft/src/Role/Follower.h
+/home/gls/Raft-prev/src/Role/Follower.h
 
-/home/gls/Raft/src/Role/Leader.cpp
+/home/gls/Raft-prev/src/Role/Leader.cpp
 Leader.h
-/home/gls/Raft/src/Role/Leader.h
+/home/gls/Raft-prev/src/Role/Leader.h
 
-/home/gls/Raft/src/Role/Role.cpp
+/home/gls/Raft-prev/src/Role/Role.cpp
 Role.h
-/home/gls/Raft/src/Role/Role.h
+/home/gls/Raft-prev/src/Role/Role.h
 
-/home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.cc
+/home/gls/Raft-prev/src/Rpc/RaftRpc.grpc.pb.cc
 RaftRpc.pb.h
-/home/gls/Raft/src/Rpc/RaftRpc.pb.h
+/home/gls/Raft-prev/src/Rpc/RaftRpc.pb.h
 RaftRpc.grpc.pb.h
-/home/gls/Raft/src/Rpc/RaftRpc.grpc.pb.h
+/home/gls/Raft-prev/src/Rpc/RaftRpc.grpc.pb.h
 functional
 -
 grpcpp/impl/codegen/async_stream.h
@@ -484,9 +484,9 @@ grpcpp/impl/codegen/service_type.h
 grpcpp/impl/codegen/sync_stream.h
 -
 
-/home/gls/Raft/src/Rpc/RaftRpc.pb.cc
+/home/gls/Raft-prev/src/Rpc/RaftRpc.pb.cc
 RaftRpc.pb.h
-/home/gls/Raft/src/Rpc/RaftRpc.pb.h
+/home/gls/Raft-prev/src/Rpc/RaftRpc.pb.h
 algorithm
 -
 google/protobuf/stubs/common.h
@@ -510,25 +510,25 @@ google/protobuf/port_def.inc
 google/protobuf/port_undef.inc
 -
 
-/home/gls/Raft/src/Rpc/RaftRpcClient.cpp
+/home/gls/Raft-prev/src/Rpc/RaftRpcClient.cpp
 RaftRpcClient.h
-/home/gls/Raft/src/Rpc/RaftRpcClient.h
+/home/gls/Raft-prev/src/Rpc/RaftRpcClient.h
 
-/home/gls/Raft/src/Rpc/RaftRpcServer.cpp
+/home/gls/Raft-prev/src/Rpc/RaftRpcServer.cpp
 RaftRpcServer.h
-/home/gls/Raft/src/Rpc/RaftRpcServer.h
+/home/gls/Raft-prev/src/Rpc/RaftRpcServer.h
 
-/home/gls/Raft/src/Task.cpp
+/home/gls/Raft-prev/src/Task.cpp
 Task.h
-/home/gls/Raft/src/Task.h
+/home/gls/Raft-prev/src/Task.h
 
-/home/gls/Raft/src/Transformer.cpp
+/home/gls/Raft-prev/src/Transformer.cpp
 Transformer.h
-/home/gls/Raft/src/Transformer.h
+/home/gls/Raft-prev/src/Transformer.h
 
-/home/gls/Raft/src/defines.cpp
+/home/gls/Raft-prev/src/defines.cpp
 defines.h
-/home/gls/Raft/src/defines.h
+/home/gls/Raft-prev/src/defines.h
 
 /usr/local/include/google/protobuf/any.h
 string

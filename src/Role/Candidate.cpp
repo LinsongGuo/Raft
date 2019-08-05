@@ -4,16 +4,15 @@ namespace Raft {
   Candidate::Candidate(std::shared_ptr<RaftServerInfo> _info, 
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
-    std::shared_ptr<Transformer> _transformer,
-    std::fstream &_logScanner):
-    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;} 
+    std::shared_ptr<Transformer> _transformer):
+    Role(_info, _cluster, _rpcClient, _transformer) {;} 
 
   bool Candidate::put(const std::string &key, const std::string &args) {
     return false;
   }
 
   std::pair<bool, std::string> Candidate::get(const std::string &key) {
-    return std::make_pair(false, notFound);
+    return std::make_pair(false, invalidString);
   }
   
   RequestVoteReply Candidate::respondRequestVote(const RequestVoteRequest &request) {

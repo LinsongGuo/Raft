@@ -1,4 +1,4 @@
-# Install script for directory: /home/gls/Raft/protobuf
+# Install script for directory: /home/gls/Raft-prev/protobuf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
