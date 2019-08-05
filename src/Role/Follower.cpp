@@ -60,11 +60,9 @@ namespace Raft {
     if(request.leaderCommit > info->commitIndex) {
       info->commitIndex = std::min(request.leaderCommit, info->replicatedEntries.size() - 1);
     }
-    if(info->lastApplied < info->commitIndex) {
-      for(size_t i = info->lastApplied + 1; i <= info->commitIndex; ++i) {
-        info->appliedEntries[info->replicatedEntries[i].key] = info->replicatedEntries[i].args;
-      }
-      info->lastApplied = info->commitIndex;
+    while(info->lastApplied < info->commitIndex) {
+      ++info->lastApplied;
+      info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);
@@ -119,21 +117,14 @@ namespace Raft {
     sleepThread.interrupt();
     sleepThread.join();
     sleepThread = boost::thread([this, electionTimeout, currentTerm] {
-      //std::ofstream fout;
-      //fout.open("follower-"+cluster->localId+"-"+std::to_string(currentTerm));
       while(true) {  
         Timer waitTime = randTimer(electionTimeout);
-        //fout <<getTime() << " waitTime: " << waitTime << std::endl;
-        //fout <<getTime() << " sleeping..." << std::endl;
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(waitTime));
         }
         catch(boost::thread_interrupted &e) {
-          //fout << getTime() << " catch interrupt " << std::endl;
           continue;
         }          
-        //fout << getTime() <<' '<<cluster->localId << " transform form follower to candidate." << std::endl;
-        //fout.close();
         transformer->Transform(RaftServerRole::follower, RaftServerRole::candidate, currentTerm + 1);
         break;
       }

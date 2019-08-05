@@ -28,6 +28,6 @@ The external server(127.0.0.x:50002): receive and reply Put and Get from all the
 
 [√] 10000 Put/Get entries test with one old leader deaded and another new leader elected. 
 
-[×] 10000 Put/Get entries test with a leader and a follower deaded. 
+[√] 10000 Put/Get entries test with a leader and a follower deaded. 
 
-[×] 5000 Put/Get entries test with two leaders deaded. 
+[√] 5000 Put/Get entries test with two leaders deaded. 

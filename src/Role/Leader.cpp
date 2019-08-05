@@ -8,8 +8,6 @@ namespace Raft {
     Role(_info, _cluster, _rpcClient, _transformer) {;} 
   
   bool Leader::put(const std::string &key, const std::string &args) {
-    //std::ofstream //fout("leaderput-" + cluster->localId + "-" + key + "-" + args);
-    ////fout << getTime() << " term:" << info->currentTerm << std::endl;
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
     size_t siz = cluster->size;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
@@ -33,13 +31,11 @@ namespace Raft {
         Timer startTime = getTime();
         do {
           std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
-          //fout <<"do..." << std::endl;
           if(result.first) {
             if(result.second.success) {
               boost::unique_lock<boost::mutex> lk2(info->infoMutex);
               info->nextIndex[i] = info->replicatedEntries.size();
               info->matchIndex[i] = info->nextIndex[i] - 1;
-              //fout << "success " << info->nextIndex[i] <<' ' << info->matchIndex[i] << std::endl;
               return AppendEntriesReply(true, result.second.term);
             }
             else {
@@ -49,7 +45,6 @@ namespace Raft {
               if(rpcRequest.prevlogindex() > 0) {
                 Index prevLogIndex = rpcRequest.prevlogindex() - 1;
                 info->nextIndex[i]--;
-                //fout <<"fail " << info->nextIndex[i] <<' '<<info->matchIndex[i] << ' ' << prevLogIndex << std::endl;
                 if(prevLogIndex > 0) {
                   rpcRequest.set_prevlogindex(prevLogIndex);
                   rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex].term);
@@ -82,15 +77,11 @@ namespace Raft {
         }
       }
       else if(result.term > info->currentTerm) {
+        heartbeatThread.interrupt();
         transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, result.term);
         return false;
       }
     }
-    //fout <<"getAppens " << getAppends << std::endl;
-    //fout <<"matchIndexes " << matchIndexes.size() << std::endl;
-    /*for(size_t j = 0; j < matchIndexes.size(); ++j) {
-      fout <<"forj " << j <<' ' << matchIndexes[j] << std::endl;
-    }*/
     /*
     if(getAppends * 2 <= cluster->size) {
       transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, info->currentTerm);
@@ -103,13 +94,11 @@ namespace Raft {
     }
     else if((siz >> 1) - 1 < matchIndexes.size()) {
       info->commitIndex = matchIndexes[(siz >> 1) - 1];
-      //fout <<"commit " <<' '<<matchIndexes[(siz >> 1) - 1]<<std::endl;
     } 
     while(info->lastApplied < info->commitIndex) {
       ++info->lastApplied;
       info->appliedEntries[info->replicatedEntries[info->lastApplied].key] = info->replicatedEntries[info->lastApplied].args;
     }
-    //fout <<"return " << info->replicatedEntries.size() - 1 << info->commitIndex << std::endl; 
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }
 
