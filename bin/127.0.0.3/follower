@@ -1,3 +1,32 @@
-1564974376671 127.0.0.3:50001 becomes a follower, currentTerm = 1
-1564974376917 127.0.0.3:50001 becomes a follower, currentTerm = 2
-1564974377089 127.0.0.3:50001 becomes a follower, currentTerm = 3
+1564982713896 127.0.0.3:50001 becomes a follower, currentTerm = 1
+1564982714184 127.0.0.3:50001 becomes a follower, currentTerm = 2
+1564982714380 127.0.0.3:50001 becomes a follower, currentTerm = 3
+1564982714609 127.0.0.3:50001 becomes a follower, currentTerm = 4
+1564982714900 127.0.0.3:50001 becomes a follower, currentTerm = 5
+1564982715084 127.0.0.3:50001 becomes a follower, currentTerm = 6
+1564982715346 127.0.0.3:50001 becomes a follower, currentTerm = 7
+1564982715615 127.0.0.3:50001 becomes a follower, currentTerm = 8
+1564982715884 127.0.0.3:50001 becomes a follower, currentTerm = 9
+1564982716100 127.0.0.3:50001 becomes a follower, currentTerm = 10
+1564982716270 127.0.0.3:50001 becomes a follower, currentTerm = 11
+1564982716424 127.0.0.3:50001 becomes a follower, currentTerm = 12
+1564982716707 new term from requestvote : 34
+1564982716919 new term from requestvote : 35
+1564982717116 127.0.0.3:50001 becomes a follower, currentTerm = 36
+1564982717320 127.0.0.3:50001 becomes a follower, currentTerm = 37
+1564982717534 127.0.0.3:50001 becomes a follower, currentTerm = 38
+1564982717751 127.0.0.3:50001 becomes a follower, currentTerm = 39
+1564982718028 127.0.0.3:50001 becomes a follower, currentTerm = 40
+1564982718210 127.0.0.3:50001 becomes a follower, currentTerm = 41
+1564982718445 127.0.0.3:50001 becomes a follower, currentTerm = 42
+1564982718735 127.0.0.3:50001 becomes a follower, currentTerm = 43
+1564982718915 127.0.0.3:50001 becomes a follower, currentTerm = 44
+1564982719150 127.0.0.3:50001 becomes a follower, currentTerm = 45
+1564982719407 127.0.0.3:50001 becomes a follower, currentTerm = 46
+1564982719575 127.0.0.3:50001 becomes a follower, currentTerm = 47
+1564982719729 127.0.0.3:50001 becomes a follower, currentTerm = 48
+1564982719947 127.0.0.3:50001 becomes a follower, currentTerm = 49
+1564982720242 127.0.0.3:50001 becomes a follower, currentTerm = 50
+1564982720441 127.0.0.3:50001 becomes a follower, currentTerm = 51
+1564982720654 127.0.0.3:50001 becomes a follower, currentTerm = 52
+1564982720869 127.0.0.3:50001 becomes a follower, currentTerm = 53

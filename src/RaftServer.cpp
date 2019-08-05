@@ -6,6 +6,7 @@ namespace Raft {
   RaftServer::RaftServer(const std::string &fileName) : 
     cluster(std::make_shared<RaftServerCluster>(fileName))
   {
+    outToLog.open("log/" + cluster->address);
     fout0.open(cluster->address + "/start");
     fout1.open(cluster->address + "/respond-put");
     fout2.open(cluster->address + "/respond-get");
@@ -46,9 +47,9 @@ namespace Raft {
     rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localServer, cluster->address);
 
     //create roles.
-    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer);
-    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer);
-    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer);
+    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, outToLog);
+    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, outToLog);
+    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, outToLog);
 
     roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
     roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
