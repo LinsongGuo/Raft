@@ -5,8 +5,8 @@ namespace Raft {
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
     std::shared_ptr<Transformer> _transformer,
-    std::ofstream &_outToLog):
-    Role(_info, _cluster, _rpcClient, _transformer, _outToLog) {;} 
+    std::ofstream &_writeToLog):
+    Role(_info, _cluster, _rpcClient, _transformer, _writeToLog) {;} 
   
   bool Leader::put(const std::string &key, const std::string &args) {
     info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
@@ -100,7 +100,7 @@ namespace Raft {
       ++info->lastApplied;
       auto &tmp = info->replicatedEntries[info->lastApplied];
       info->appliedEntries[tmp.key] = tmp.args;
-      outToLog << tmp.term << ' ' << tmp.key << ' ' << tmp.args << std::endl; 
+      writeToLog << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
     }
     return info->replicatedEntries.size() - 1 == info->commitIndex;
   }

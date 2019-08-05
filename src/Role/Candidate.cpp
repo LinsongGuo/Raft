@@ -5,8 +5,8 @@ namespace Raft {
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
     std::shared_ptr<Transformer> _transformer,
-    std::ofstream &_outToLog):
-    Role(_info, _cluster, _rpcClient, _transformer, _outToLog) {;} 
+    std::ofstream &_writeToLog):
+    Role(_info, _cluster, _rpcClient, _transformer, _writeToLog) {;} 
 
   bool Candidate::put(const std::string &key, const std::string &args) {
     return false;

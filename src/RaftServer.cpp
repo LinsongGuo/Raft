@@ -6,7 +6,6 @@ namespace Raft {
   RaftServer::RaftServer(const std::string &fileName) : 
     cluster(std::make_shared<RaftServerCluster>(fileName))
   {
-    outToLog.open("log/" + cluster->address);
     fout0.open(cluster->address + "/start");
     fout1.open(cluster->address + "/respond-put");
     fout2.open(cluster->address + "/respond-get");
@@ -47,9 +46,9 @@ namespace Raft {
     rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localServer, cluster->address);
 
     //create roles.
-    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, outToLog);
-    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, outToLog);
-    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, outToLog);
+    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, writeToLog);
+    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, writeToLog);
+    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, writeToLog);
 
     roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
     roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
@@ -158,7 +157,7 @@ namespace Raft {
 
             fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
             
-            auto result = roles[currentRole]->put(tmp.key, tmp.args);
+            auto result = roles[info->currentRole]->put(tmp.key, tmp.args);
 
             fout1 << getTime() << " result " << result << std::endl;
 
@@ -174,7 +173,7 @@ namespace Raft {
             
             fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
             
-            auto result = roles[currentRole]->get(tmp.key);
+            auto result = roles[info->currentRole]->get(tmp.key);
             
             fout2 << getTime() << " result " << result.first <<' ' << result.second << std::endl;
           
@@ -190,7 +189,7 @@ namespace Raft {
             fout3 << getTime() << " pop requestvote " << tmp.request.candidateId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.lastLogTerm << ' ' << tmp.request.lastLogIndex << std::endl;
 
-            auto result = roles[currentRole]->respondRequestVote(tmp.request);
+            auto result = roles[info->currentRole]->respondRequestVote(tmp.request);
             
             fout3 << getTime() << " result " << result.voteGranted << ' ' << result.term << std::endl;  
 
@@ -206,7 +205,7 @@ namespace Raft {
             fout4 << getTime() << " pop heartbeat " << tmp.request.leaderId  << ' ' << tmp.request.term << ' ' 
             << tmp.request.prevLogTerm << ' ' << tmp.request.prevLogIndex << ' ' << tmp.request.leaderCommit << std::endl;
             
-            auto result = roles[currentRole]->respondHeartbeat(tmp.request);
+            auto result = roles[info->currentRole]->respondHeartbeat(tmp.request);
             
             fout4 << getTime() << " result " << result.success << ' ' << result.term << std::endl;  
             
@@ -222,7 +221,7 @@ namespace Raft {
             fout5 << getTime() << " pop appendentries " << ' ' << tmp.request->leaderid() << ' ' << tmp.request->term() << ' '
             << tmp.request->prevlogterm() << ' ' << tmp.request->prevlogindex() << ' ' << tmp.request->leadercommit() << std::endl;
             
-            auto result = roles[currentRole]->respondAppendEntries(tmp.request);
+            auto result = roles[info->currentRole]->respondAppendEntries(tmp.request);
             
             fout5 << getTime() << " result " << ' ' <<result.success <<' '<< result.term << std::endl;  
             
@@ -237,9 +236,9 @@ namespace Raft {
               
             fout6 << getTime() << ' ' << "pop transform " << tmp.fromRole <<  ' '  << tmp.toRole << ' ' << tmp.term << std::endl;
            
-            if(currentRole == tmp.fromRole) {
-              currentRole = tmp.toRole;
-              roles[currentRole]->init(tmp.term);  
+            if(info->currentRole == tmp.fromRole) {
+              info->currentRole = tmp.toRole;
+              roles[info->currentRole]->init(tmp.term);  
             }
           
             fout6 << getTime() << " init." << std::endl;
@@ -260,16 +259,26 @@ namespace Raft {
     ++ptm->tm_min; ptm->tm_sec=0;
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
     std::cout << std::put_time(ptm,"%X") << " reached!\n";*/
-  
+    
+    writeToLog.open("log/" + cluster->address);
+
     fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
-    roles[currentRole = RaftServerRole::follower]->init(1);
+    roles[RaftServerRole::follower]->init(1);
     fout0 << getTime() << " end init" << std::endl;
+  }
+  void RaftServer::restart() {
+    readFromLog.open("log/" + cluster->address);
+    Term term = info->readLog(readFromLog);
+    roles[RaftServerRole::follower]->init(term);
+    writeToLog.open("log/" + cluster->address);
   }
   void RaftServer::shutdown() {
     rpcServer->shutdown();
     externalServer->shutdown();
     queueThread.interrupt();
     queueThread.join();
+
+    writeToLog.close();
     fout0.close();
     fout1.close();
     fout2.close();
