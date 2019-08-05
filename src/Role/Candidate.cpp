@@ -5,15 +5,15 @@ namespace Raft {
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
     std::shared_ptr<Transformer> _transformer,
-    std::ofstream &_writeToLog):
-    Role(_info, _cluster, _rpcClient, _transformer, _writeToLog) {;} 
+    std::fstream &_logScanner):
+    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;} 
 
   bool Candidate::put(const std::string &key, const std::string &args) {
     return false;
   }
 
   std::pair<bool, std::string> Candidate::get(const std::string &key) {
-    return std::make_pair(false, invalidString);
+    return std::make_pair(false, notFound);
   }
   
   RequestVoteReply Candidate::respondRequestVote(const RequestVoteRequest &request) {

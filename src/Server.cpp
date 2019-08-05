@@ -1,8 +1,12 @@
 #include <cstdlib>
 #include <ctime>
+#include <sys/types.h>
+#include <unistd.h>
 #include "RaftServer.h"
 
 int main(int argc, char *argv[]) {
+  //std::cout << getpid() << std::endl;
+ // getchar();
   srand(time(NULL));
   std::string fileName = argv[1];
   std::unique_ptr<Raft::RaftServer>Server(new Raft::RaftServer(fileName));

@@ -46,9 +46,9 @@ namespace Raft {
     rpcClient = std::make_shared<Rpc::RaftRpcClient>(channels, cluster->broadcastTimeout, cluster->localServer, cluster->address);
 
     //create roles.
-    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, writeToLog);
-    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, writeToLog);
-    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, writeToLog);
+    roles[RaftServerRole::follower] = std::make_unique<Follower>(info, cluster, rpcClient, transformer, logScanner);
+    roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, logScanner);
+    roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, logScanner);
 
     roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
     roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
@@ -57,7 +57,7 @@ namespace Raft {
   }
 
   bool RaftServer::put(const std::string &key, const std::string &args) {
-    fout1 << getTime() << " push put " << key <<' '<< args << std::endl;
+    fout1 << getTime() << " push put " << key <<' '<< args << ' ' << info->currentRole << std::endl;
     boost::promise<bool> prm;
     boost::future<bool> fut = prm.get_future();
     {
@@ -70,7 +70,7 @@ namespace Raft {
   }
 
   std::pair<bool, std::string> RaftServer::get(const std::string &key) {
-    fout2 << getTime() << " push get " << key << std::endl;
+    fout2 << getTime() << " push get " << key << ' ' << info->currentRole << std::endl;
     boost::promise<std::pair<bool, std::string> > prm;
     boost::future<std::pair<bool, std::string> > fut = prm.get_future();
     {
@@ -155,11 +155,11 @@ namespace Raft {
             putQueue.pop();
             lk.unlock();
 
-            fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
+            fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << ' ' << info->currentRole << std::endl;
             
             auto result = roles[info->currentRole]->put(tmp.key, tmp.args);
 
-            fout1 << getTime() << " result " << result << std::endl;
+            fout1 << getTime() << " result " << result << ' ' << info->currentRole << std::endl;
 
             tmp.prm.set_value(result);
             
@@ -171,11 +171,11 @@ namespace Raft {
             getQueue.pop();
             lk.unlock();
             
-            fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
+            fout2 << getTime() << " pop get " << tmp.key << ' ' << info->currentRole << std::endl;
             
             auto result = roles[info->currentRole]->get(tmp.key);
             
-            fout2 << getTime() << " result " << result.first <<' ' << result.second << std::endl;
+            fout2 << getTime() << " result " << result.first <<' ' << result.second << ' ' << info->currentRole << std::endl;
           
             tmp.prm.set_value(result);
             break;
@@ -260,17 +260,16 @@ namespace Raft {
     std::this_thread::sleep_until (std::chrono::system_clock::from_time_t (mktime(ptm)));
     std::cout << std::put_time(ptm,"%X") << " reached!\n";*/
     
-    writeToLog.open("log/" + cluster->address);
+    logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
 
     fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
     roles[RaftServerRole::follower]->init(1);
     fout0 << getTime() << " end init" << std::endl;
   }
   void RaftServer::restart() {
-    readFromLog.open("log/" + cluster->address);
-    Term term = info->readLog(readFromLog);
+    logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
+    Term term = info->readLog(logScanner);
     roles[RaftServerRole::follower]->init(term);
-    writeToLog.open("log/" + cluster->address);
   }
   void RaftServer::shutdown() {
     rpcServer->shutdown();
@@ -278,7 +277,7 @@ namespace Raft {
     queueThread.interrupt();
     queueThread.join();
 
-    writeToLog.close();
+    logScanner.close();
     fout0.close();
     fout1.close();
     fout2.close();

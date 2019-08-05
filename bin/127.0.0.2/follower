@@ -1,6 +1,137 @@
-1564987769452 127.0.0.2:50001 becomes a follower, currentTerm = 7
-1564987769466 new term from requestvote : 8
-1564987769667 127.0.0.2:50001 becomes a follower, currentTerm = 9
-1564987769847 127.0.0.2:50001 becomes a follower, currentTerm = 10
-1564987770336 new term from requestvote : 11
-1564987770598 new term from requestvote : 12
+1565019557224 127.0.0.2:50001 becomes a follower, currentTerm = 1
+1565019557514 127.0.0.2:50001 becomes a follower, currentTerm = 2
+1565019557682 new term from requestvote : 6
+1565019557896 new term from requestvote : 7
+1565019558106 127.0.0.2:50001 becomes a follower, currentTerm = 3
+1565019558324 127.0.0.2:50001 becomes a follower, currentTerm = 4
+1565019558576 127.0.0.2:50001 becomes a follower, currentTerm = 5
+1565019558771 new term from requestvote : 8
+1565019559055 127.0.0.2:50001 becomes a follower, currentTerm = 6
+1565019559275 new term from requestvote : 9
+1565019559621 new term from requestvote : 10
+1565019607588 new term from requestvote : 11
+1565019607777 127.0.0.2:50001 becomes a follower, currentTerm = 7
+1565019607870 new term from requestvote : 12
+1565019608069 new term from requestvote : 13
+1565019608241 new term from requestvote : 14
+1565019608425 new term from requestvote : 15
+1565019608612 new term from requestvote : 16
+1565019608885 new term from requestvote : 17
+1565019609104 new term from requestvote : 18
+1565019609385 new term from requestvote : 19
+1565019609816 new term from requestvote : 20
+1565019609993 127.0.0.2:50001 becomes a follower, currentTerm = 8
+1565019610044 new term from requestvote : 21
+1565019611007 new term from requestvote : 22
+1565019611225 127.0.0.2:50001 becomes a follower, currentTerm = 9
+1565019611308 new term from requestvote : 23
+1565019611486 127.0.0.2:50001 becomes a follower, currentTerm = 10
+1565019611571 new term from requestvote : 24
+1565019611928 new term from requestvote : 25
+1565019612162 127.0.0.2:50001 becomes a follower, currentTerm = 11
+1565019612199 new term from requestvote : 26
+1565019612522 127.0.0.2:50001 becomes a follower, currentTerm = 12
+1565019612598 new term from requestvote : 27
+1565019612804 new term from requestvote : 28
+1565019613014 new term from requestvote : 29
+1565019613233 new term from requestvote : 30
+1565019613449 new term from requestvote : 31
+1565019613775 new term from requestvote : 32
+1565019613973 new term from requestvote : 33
+1565019614557 127.0.0.2:50001 becomes a follower, currentTerm = 34
+1565019614749 new term from requestvote : 35
+1565019615023 127.0.0.2:50001 becomes a follower, currentTerm = 36
+1565019615793 127.0.0.2:50001 becomes a follower, currentTerm = 38
+1565019616033 new term from requestvote : 39
+1565019616377 127.0.0.2:50001 becomes a follower, currentTerm = 40
+1565019616585 new term from requestvote : 41
+1565019616926 new term from requestvote : 42
+1565019617117 new term from requestvote : 43
+1565019617272 127.0.0.2:50001 becomes a follower, currentTerm = 41
+1565019617337 new term from requestvote : 44
+1565019617498 new term from requestvote : 45
+1565019617694 new term from requestvote : 46
+1565019617968 new term from requestvote : 47
+1565019618190 new term from requestvote : 48
+1565019618385 new term from requestvote : 49
+1565019618667 new term from requestvote : 50
+1565019618931 new term from requestvote : 51
+1565019619097 127.0.0.2:50001 becomes a follower, currentTerm = 42
+1565019619113 new term from requestvote : 52
+1565019619818 new term from requestvote : 53
+1565019620024 127.0.0.2:50001 becomes a follower, currentTerm = 43
+1565019620045 new term from requestvote : 54
+1565019620223 127.0.0.2:50001 becomes a follower, currentTerm = 44
+1565019620312 new term from requestvote : 55
+1565019620571 new term from requestvote : 56
+1565019620801 new term from requestvote : 57
+1565019621086 new term from requestvote : 58
+1565019621317 new term from requestvote : 59
+1565019621607 new term from requestvote : 60
+1565019621835 new term from requestvote : 61
+1565019622014 127.0.0.2:50001 becomes a follower, currentTerm = 45
+1565019622091 new term from requestvote : 62
+1565019622249 new term from requestvote : 63
+1565019622512 new term from requestvote : 64
+1565019622700 127.0.0.2:50001 becomes a follower, currentTerm = 46
+1565019622717 new term from requestvote : 65
+1565019622973 new term from requestvote : 66
+1565019623293 new term from requestvote : 67
+1565019623515 new term from requestvote : 68
+1565019623853 new term from requestvote : 69
+1565019624235 127.0.0.2:50001 becomes a follower, currentTerm = 47
+1565019624300 new term from requestvote : 70
+1565019624669 new term from requestvote : 71
+1565019625268 new term from requestvote : 72
+1565019625798 127.0.0.2:50001 becomes a follower, currentTerm = 73
+1565019625969 new term from requestvote : 74
+1565019626137 127.0.0.2:50001 becomes a follower, currentTerm = 74
+1565019626189 new term from requestvote : 75
+1565019626493 new term from requestvote : 76
+1565019626674 127.0.0.2:50001 becomes a follower, currentTerm = 76
+1565019626704 new term from requestvote : 77
+1565019626870 new term from requestvote : 78
+1565019627086 new term from requestvote : 79
+1565019627331 127.0.0.2:50001 becomes a follower, currentTerm = 80
+1565019627655 new term from requestvote : 81
+1565019627828 127.0.0.2:50001 becomes a follower, currentTerm = 81
+1565019627937 new term from requestvote : 82
+1565019628161 new term from requestvote : 83
+1565019628372 127.0.0.2:50001 becomes a follower, currentTerm = 82
+1565019628454 new term from requestvote : 84
+1565019628623 new term from requestvote : 85
+1565019628961 new term from requestvote : 86
+1565019629388 new term from requestvote : 87
+1565019630139 127.0.0.2:50001 becomes a follower, currentTerm = 83
+1565019630154 new term from requestvote : 88
+1565019630361 new term from requestvote : 89
+1565019630556 127.0.0.2:50001 becomes a follower, currentTerm = 84
+1565019630579 new term from requestvote : 90
+1565019631501 127.0.0.2:50001 becomes a follower, currentTerm = 85
+1565019631586 new term from requestvote : 91
+1565019632486 127.0.0.2:50001 becomes a follower, currentTerm = 86
+1565019632505 new term from requestvote : 92
+1565019633029 new term from requestvote : 93
+1565019633406 new term from requestvote : 94
+1565019633771 127.0.0.2:50001 becomes a follower, currentTerm = 87
+1565019633863 new term from requestvote : 95
+1565019634431 127.0.0.2:50001 becomes a follower, currentTerm = 88
+1565019634592 new term from requestvote : 96
+1565019634779 new term from requestvote : 97
+1565019635152 new term from requestvote : 98
+1565019635353 new term from requestvote : 99
+1565019635730 new term from requestvote : 100
+1565019635916 new term from requestvote : 101
+1565019636440 new term from requestvote : 102
+1565019636640 127.0.0.2:50001 becomes a follower, currentTerm = 89
+1565019636794 new term from requestvote : 91
+1565019637198 127.0.0.2:50001 becomes a follower, currentTerm = 90
+1565019637527 new term from requestvote : 103
+1565019637689 new term from requestvote : 104
+1565019637862 127.0.0.2:50001 becomes a follower, currentTerm = 91
+1565019638025 127.0.0.2:50001 becomes a follower, currentTerm = 92
+1565019638431 127.0.0.2:50001 becomes a follower, currentTerm = 93
+1565019638614 new term from requestvote : 105
+1565019639178 127.0.0.2:50001 becomes a follower, currentTerm = 94
+1565019639433 127.0.0.2:50001 becomes a follower, currentTerm = 106
+1565019639621 new term from requestvote : 107

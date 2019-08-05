@@ -5,8 +5,8 @@ namespace Raft {
     std::shared_ptr<RaftServerCluster> _cluster, 
     std::shared_ptr<Rpc::RaftRpcClient> _rpcClient,
     std::shared_ptr<Transformer> _transformer,
-    std::ofstream &_writeToLog):
-    Role(_info, _cluster, _rpcClient, _transformer, _writeToLog) {;}
+    std::fstream &_logScanner):
+    Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;}
 
 
   bool Follower::put(const std::string &key, const std::string &args) {
@@ -14,7 +14,7 @@ namespace Raft {
   }
 
   std::pair<bool, std::string> Follower::get(const std::string &key) {
-    return std::make_pair(false, invalidString);
+    return std::make_pair(false, notFound);
   }
 
   bool Follower::checkMajorityEntries(const RequestVoteRequest &request) {
@@ -65,7 +65,7 @@ namespace Raft {
       ++info->lastApplied;
       auto &tmp = info->replicatedEntries[info->lastApplied];
       info->appliedEntries[tmp.key] = tmp.args;
-      writeToLog << tmp.key << ' ' << tmp.args << tmp.term << ' ' << std::endl; 
+      logScanner << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);
@@ -106,7 +106,7 @@ namespace Raft {
       ++info->lastApplied;
       auto &tmp = info->replicatedEntries[info->lastApplied];
       info->appliedEntries[tmp.key] = tmp.args;
-      writeToLog << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
+      logScanner << tmp.key << ' ' << tmp.args << ' ' << tmp.term << std::endl; 
     }
     sleepThread.interrupt();
     return AppendEntriesReply(true, info->currentTerm);

@@ -103,7 +103,7 @@ namespace Raft {
     std::vector<ReplicatedEntry> replicatedEntries;
     std::map<std::string, std::string> appliedEntries;
     RaftServerInfo(size_t size);
-    Term readLog(std::ifstream &readFromLog);
+    Term readLog(std::fstream &logScanner);
     Term lastLogTerm();
     Index lastLogIndex();
   };

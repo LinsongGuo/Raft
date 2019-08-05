@@ -9,6 +9,7 @@ namespace Raft {
     }; 
 
     RaftExternalClient::RaftExternalClient(const std::string &filename) : pImpl(std::make_unique<Impl>()) {
+      fout.open("client/ExternalClient");
       namespace pt = boost::property_tree;
       pt::ptree tree;
       pt::read_json(filename, tree);
@@ -33,9 +34,11 @@ namespace Raft {
 
     void RaftExternalClient::Put(std::string key, std::string args, uint64_t timeout) {
       auto startTimePoint = std::chrono::system_clock::now();
-
+      fout << getTime() << " put " << key << ' ' << args << std::endl;
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
+        fout << getTime() << " send " << pImpl->cur % pImpl->stubs.size() << std::endl;
+        
         grpc::ClientContext ctx;
         ctx.set_deadline(startTimePoint + std::chrono::milliseconds(timeout));
         ctx.set_idempotent(true);
@@ -45,7 +48,7 @@ namespace Raft {
         request.set_args(args);
         PutReply reply;
         auto status = stub->Put(&ctx, request, &reply);
-       // std::cout << status.ok() << ' '<<reply.status() << std::endl;
+        fout << getTime() << " reply " << status.ok() << ' '<< reply.status() << std::endl;
         if (status.ok() && reply.status())
           return;
         pImpl->cur++;
@@ -56,9 +59,12 @@ namespace Raft {
 
     std::string RaftExternalClient::Get(std::string key, uint64_t timeout) {
       auto startTimePoint = std::chrono::system_clock::now();
-
+      fout << getTime() << " get " << key << std::endl;
+      
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
+        fout << getTime() << " send " << pImpl->cur % pImpl->stubs.size() << std::endl;
+        
         grpc::ClientContext ctx;
         ctx.set_deadline(startTimePoint + std::chrono::milliseconds(timeout));
         ctx.set_idempotent(true);
@@ -67,7 +73,8 @@ namespace Raft {
         request.set_key(key);
         GetReply reply;
         auto status = stub->Get(&ctx, request, &reply);
-
+        fout << getTime() << " reply " << status.ok() << ' '<< reply.status() << std::endl;
+        
         if (status.ok() && reply.status())
           return reply.args();
         pImpl->cur++;
