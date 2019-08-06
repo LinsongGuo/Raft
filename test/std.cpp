@@ -14,8 +14,8 @@ int main() {
 		}
 		else {
 			cin >> key;
-			if(mp.count(key)) cout << mp[key] << endl;
-			else cout << "NOT FOUND" << endl;
+			if(mp.count(key)) cout  << key << ' ' << mp[key] << endl;
+			else cout << key << ' ' << "NOT FOUND" << endl;
 		}
 	}
 	return 0;

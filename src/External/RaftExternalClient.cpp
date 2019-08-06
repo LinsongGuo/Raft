@@ -46,7 +46,6 @@ namespace Raft {
         request.set_args(args);
         PutReply reply;
         auto status = stub->Put(&ctx, request, &reply);
-       // std::cout << status.ok() << ' '<<reply.status() << std::endl;
         if (status.ok() && reply.status())
           return;
         pImpl->cur++;

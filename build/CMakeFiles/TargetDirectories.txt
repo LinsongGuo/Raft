@@ -1,8 +1,8 @@
-/home/gls/Raft-prev/build/CMakeFiles/rebuild_cache.dir
-/home/gls/Raft-prev/build/CMakeFiles/edit_cache.dir
-/home/gls/Raft-prev/build/protobuf/CMakeFiles/rebuild_cache.dir
-/home/gls/Raft-prev/build/protobuf/CMakeFiles/edit_cache.dir
-/home/gls/Raft-prev/build/src/CMakeFiles/rebuild_cache.dir
-/home/gls/Raft-prev/build/src/CMakeFiles/edit_cache.dir
-/home/gls/Raft-prev/build/src/CMakeFiles/Server.dir
-/home/gls/Raft-prev/build/src/CMakeFiles/Client.dir
+/home/gls/Raft/build/CMakeFiles/rebuild_cache.dir
+/home/gls/Raft/build/CMakeFiles/edit_cache.dir
+/home/gls/Raft/build/protobuf/CMakeFiles/rebuild_cache.dir
+/home/gls/Raft/build/protobuf/CMakeFiles/edit_cache.dir
+/home/gls/Raft/build/src/CMakeFiles/rebuild_cache.dir
+/home/gls/Raft/build/src/CMakeFiles/edit_cache.dir
+/home/gls/Raft/build/src/CMakeFiles/Server.dir
+/home/gls/Raft/build/src/CMakeFiles/Client.dir

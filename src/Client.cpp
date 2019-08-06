@@ -3,8 +3,10 @@
 #include <ctime>
 #include "RaftExternalClient.h"
 
-int main() {
+int main(int argc, char *argv[]) {
   srand(time(NULL));
+  freopen("test.in", "r", stdin);
+  freopen("raft.out", "w", stdout);
   std::string fileName = "client.json";
   Raft::External::RaftExternalClient Client(fileName);
   int n;
@@ -18,7 +20,7 @@ int main() {
     }
     else {
       std::cin >> key;
-      std::cout << Client.Get(key) << std::endl;
+      std::cout << key << ' ' << Client.Get(key) << std::endl;
     }
   }
   return 0;

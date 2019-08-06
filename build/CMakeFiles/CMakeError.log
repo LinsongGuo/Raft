@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/gls/Raft-prev/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gls/Raft/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_92641/fast"
-/usr/bin/make -f CMakeFiles/cmTC_92641.dir/build.make CMakeFiles/cmTC_92641.dir/build
-make[1]: 进入目录“/home/gls/Raft-prev/build/CMakeFiles/CMakeTmp”
-Building C object CMakeFiles/cmTC_92641.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_92641.dir/CheckSymbolExists.c.o   -c /home/gls/Raft-prev/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_92641
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92641.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_92641.dir/CheckSymbolExists.c.o  -o cmTC_92641 
-CMakeFiles/cmTC_92641.dir/CheckSymbolExists.c.o：在函数‘main’中：
+Run Build Command:"/usr/bin/make" "cmTC_f7e58/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f7e58.dir/build.make CMakeFiles/cmTC_f7e58.dir/build
+make[1]: 进入目录“/home/gls/Raft/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_f7e58.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f7e58.dir/CheckSymbolExists.c.o   -c /home/gls/Raft/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_f7e58
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f7e58.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_f7e58.dir/CheckSymbolExists.c.o  -o cmTC_f7e58 
+CMakeFiles/cmTC_f7e58.dir/CheckSymbolExists.c.o：在函数‘main’中：
 CheckSymbolExists.c:(.text+0x1b)：对‘pthread_create’未定义的引用
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_92641.dir/build.make:97: recipe for target 'cmTC_92641' failed
-make[1]: *** [cmTC_92641] Error 1
-make[1]: 离开目录“/home/gls/Raft-prev/build/CMakeFiles/CMakeTmp”
-Makefile:126: recipe for target 'cmTC_92641/fast' failed
-make: *** [cmTC_92641/fast] Error 2
+CMakeFiles/cmTC_f7e58.dir/build.make:97: recipe for target 'cmTC_f7e58' failed
+make[1]: *** [cmTC_f7e58] Error 1
+make[1]: 离开目录“/home/gls/Raft/build/CMakeFiles/CMakeTmp”
+Makefile:126: recipe for target 'cmTC_f7e58/fast' failed
+make: *** [cmTC_f7e58/fast] Error 2
 
-File /home/gls/Raft-prev/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/gls/Raft/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/gls/Raft-prev/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gls/Raft/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_3c57b/fast"
-/usr/bin/make -f CMakeFiles/cmTC_3c57b.dir/build.make CMakeFiles/cmTC_3c57b.dir/build
-make[1]: 进入目录“/home/gls/Raft-prev/build/CMakeFiles/CMakeTmp”
-Building C object CMakeFiles/cmTC_3c57b.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_3c57b.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_3c57b
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c57b.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_3c57b.dir/CheckFunctionExists.c.o  -o cmTC_3c57b -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_2e242/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2e242.dir/build.make CMakeFiles/cmTC_2e242.dir/build
+make[1]: 进入目录“/home/gls/Raft/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_2e242.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2e242.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2e242
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2e242.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_2e242.dir/CheckFunctionExists.c.o  -o cmTC_2e242 -lpthreads 
 /usr/bin/ld: 找不到 -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_3c57b.dir/build.make:97: recipe for target 'cmTC_3c57b' failed
-make[1]: *** [cmTC_3c57b] Error 1
-make[1]: 离开目录“/home/gls/Raft-prev/build/CMakeFiles/CMakeTmp”
-Makefile:126: recipe for target 'cmTC_3c57b/fast' failed
-make: *** [cmTC_3c57b/fast] Error 2
+CMakeFiles/cmTC_2e242.dir/build.make:97: recipe for target 'cmTC_2e242' failed
+make[1]: *** [cmTC_2e242] Error 1
+make[1]: 离开目录“/home/gls/Raft/build/CMakeFiles/CMakeTmp”
+Makefile:126: recipe for target 'cmTC_2e242/fast' failed
+make: *** [cmTC_2e242/fast] Error 2
 
 

@@ -146,7 +146,7 @@ namespace Raft {
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();
     heartbeatThread.join();
-    heartbeatThread = boost::thread([this, request, heartbeatTimeout]{
+    heartbeatThread = boost::thread([this, heartbeatTimeout]{
       while(true) {
         try{
           boost::this_thread::sleep_for(boost::chrono::milliseconds(heartbeatTimeout));

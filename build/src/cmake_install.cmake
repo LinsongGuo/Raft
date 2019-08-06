@@ -1,4 +1,4 @@
-# Install script for directory: /home/gls/Raft-prev/src
+# Install script for directory: /home/gls/Raft/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

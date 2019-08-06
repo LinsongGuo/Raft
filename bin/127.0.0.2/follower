@@ -1,6 +1,3 @@
-1565055142543 127.0.0.2:50001 becomes a follower, currentTerm = 1
-1565055142874 127.0.0.2:50001 becomes a follower, currentTerm = 2
-1565055143131 127.0.0.2:50001 becomes a follower, currentTerm = 3
-1565055143594 new term from requestvote : 6
-1565055143883 127.0.0.2:50001 becomes a follower, currentTerm = 4
-1565055144197 new term from requestvote : 7
+1565075793188 127.0.0.2:50001 becomes a follower, currentTerm = 1
+1565075793396 127.0.0.2:50001 becomes a follower, currentTerm = 2
+1565075794157 new term from requestvote : 3

@@ -1,5 +1,5 @@
 {
-  "address" : "127.0.0.4",
+  "address" : "127.0.0.5",
   "localPort" : "50001",
   "externalPort" : "50002",
   "electionTimeout" : "200",
