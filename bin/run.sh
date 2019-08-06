@@ -28,12 +28,17 @@ gnome-terminal --title="Server1" --window -x bash -c "./Server server1.json"
 gnome-terminal --title="Server2" --window -x bash -c "./Server server2.json"
 gnome-terminal --title="Server3" --window -x bash -c "./Server server3.json"
 
+sleep 3s
 
-<<COMMENT
 echo "executing Client..."
-./Client <test.in >raft.out
+gnome-terminal --title="Client" --window -x bash -c "./Client <test.in >raft.out"
+
+sleep 2s
 
 gnome-terminal --title="Server4" --window -x bash -c "./Server server4.json"
+
+<<COMMENT
+
 gnome-terminal --title="Server5" --window -x bash -c "./Server server5.json"
 
 sleep 5s
