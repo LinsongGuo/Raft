@@ -28,7 +28,7 @@ namespace Raft {
     }
     else if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
-      std::cout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
+      std::cerr << getTime() << ' ' << cluster->address << " new term from requestvote : " << info->currentTerm << std::endl;
       fout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
       if(checkMajorityEntries(request)) {
         info->votedFor = request.candidateId; 
@@ -54,7 +54,7 @@ namespace Raft {
     }
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
-      std::cout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
+      std::cerr << getTime() << ' ' << cluster->address << " new term from heartbeat : " << info->currentTerm << std::endl;
       fout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
     } 
     if(request.leaderCommit > info->commitIndex) {
@@ -78,7 +78,7 @@ namespace Raft {
     }
     if(term > info->currentTerm) {
       info->currentTerm = term;
-      std::cout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
+      std::cerr << getTime() << ' ' << cluster->address << " new term from appendentries : " << info->currentTerm << std::endl;
       fout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
     } 
     size_t siz = request->entries().size();
@@ -114,7 +114,7 @@ namespace Raft {
   void Follower::init(Term currentTerm) {
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
+    std::cerr << getTime() <<' '<<cluster->address << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     fout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;

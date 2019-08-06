@@ -83,6 +83,7 @@ public:
     auto randServer = std::bind(serversDist, eng);
     std::uniform_real_distribution<double> uniformDist(0, 1);
     auto rand = std::bind(uniformDist, eng);
+    bool flag[5] = {1, 1, 1, 1, 1};
     while (checkAlive(clients)) {
       std::this_thread::sleep_for(2s);
       auto x = rand();
@@ -95,6 +96,16 @@ public:
         kill(srv, SIGCONT);
         std::cerr << "continue server " << srvIdx << std::endl;
       }
+     /* if(flag[srvIdx]) {
+      	 kill(srv, SIGSTOP);
+         std::cerr << "pause server " << srvIdx << std::endl;
+      }
+      else {
+      	kill(srv, SIGCONT);
+        std::cerr << "continue server " << srvIdx << std::endl;
+      }
+      flag[srvIdx] ^= 1;
+    	*/
     }
 
     for (auto pid : clients)
@@ -255,17 +266,16 @@ int main(int argc, char **argv) {
   std::cerr << "running naive_test1:\n";
   std::cerr << (test.naive(3, 3, 100) ? "passed" : "failed");
   std::cerr << std::endl << std::endl;
-  
-  */
   std::cerr << "running naive_test2:\n";
   std::cerr << (test.naive(5, 1, 5000) ? "passed" : "failed");
-  std::cerr << std::endl <<  clock() <<' ' << std::endl << std::endl;
-  /*std::cerr << "running naive_test3:\n";
+  std::cerr << "running naive_test3:\n";
   std::cerr << (test.naive(3, 1, 1000) ? "passed" : "failed");
   std::cerr << std::endl << std::endl;
+  */
+  unsigned long long t1 = clock();
   std::cerr << "running comprehensive_test:\n";
-  std::cerr << (test.comprehensive(5000, 0.5) ? "passed" : "failed");
-  std::cerr << std::endl << std::endl;
-*/
+  std::cerr << (test.comprehensive(1000, 0.3) ? "passed" : "failed");
+  unsigned long long t2 = clock();
+  std::cerr << std::endl << t2 - t1 << std::endl;
   return 0;
 }

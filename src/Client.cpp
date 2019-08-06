@@ -5,23 +5,30 @@
 
 int main(int argc, char *argv[]) {
   srand(time(NULL));
-  freopen("test.in", "r", stdin);
-  freopen("raft.out", "w", stdout);
   std::string fileName = "client.json";
   Raft::External::RaftExternalClient Client(fileName);
-  int n;
-  std::cin >> n;
   std::string opt, key, args;
-  for(int i = 1; i <= n; ++i) {
-    std::cin >> opt;
-    if(opt == "put") {
-      std::cin >> key >> args;
-      Client.Put(key, args);
+
+  std::string id = argv[1];
+  std::ofstream fout("client" + id);
+
+  while (std::cin.peek() != EOF) {
+    std::string type;
+    std::cin >> type;
+    if (type == "put") {
+      std::string k, v;
+      std::cin >> k >> v;
+      fout << type << ' ' << k << ' ' << v << std::endl;
+      Client.Put(k, v);
+    } else {
+      std::string k;
+      std::cin >> k;
+      fout << type << ' ' << k << std::endl;
+      std::cout << k << " " << Client.Get(k) << std::endl;
     }
-    else {
-      std::cin >> key;
-      std::cout << key << ' ' << Client.Get(key) << std::endl;
-    }
+
+    while (std::isspace(std::cin.peek()))
+      std::cin.get();
   }
   return 0;
 }

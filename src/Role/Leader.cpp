@@ -140,7 +140,7 @@ namespace Raft {
       info->matchIndex[i] = 0;
     }
     
-    std::cout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    std::cerr << getTime() <<' '<<cluster->address << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
     fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
 
     Timer heartbeatTimeout = cluster->heartbeatTimeout;

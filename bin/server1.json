@@ -5,7 +5,7 @@
   "electionTimeout" : "200",
   "appendTimeout": "50", 
   "heartbeatTimeout" : "50",
-  "broadcastTimeout" : "10",
+  "broadcastTimeout" : "20",
   "serverList": 
   {
 	  "":"127.0.0.1:50001",
