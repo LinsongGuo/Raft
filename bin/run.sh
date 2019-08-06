@@ -33,7 +33,7 @@ gnome-terminal --title="Server4" --window -x bash -c "./Server 4"
 sleep 3s
 
 echo "executing Client..."
-./Client 0
+./Client 0 <test.in >raft.out
 
 sleep 1s
 

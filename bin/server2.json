@@ -3,9 +3,9 @@
   "localPort" : "50001",
   "externalPort" : "50002",
   "electionTimeout" : "200",
-  "appendTimeout": "199", 
+  "appendTimeout": "50", 
   "heartbeatTimeout" : "50",
-  "broadcastTimeout" : "199",
+  "broadcastTimeout" : "10",
   "serverList": 
   {
   	"":"127.0.0.1:50001",
