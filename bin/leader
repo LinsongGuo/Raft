@@ -1,0 +1,27 @@
+1565142431843 127.0.0.1:5000 becomes a leader, currentTerm = 16
+1565142501679 127.0.0.1:5000 becomes a leader, currentTerm = 30
+1565142567796 127.0.0.1:5000 becomes a leader, currentTerm = 42
+1565142633549 127.0.0.1:5000 becomes a leader, currentTerm = 50
+1565142708170 127.0.0.1:5000 becomes a leader, currentTerm = 62
+1565142752097 127.0.0.1:5000 becomes a leader, currentTerm = 101
+1565142904609 127.0.0.1:5000 becomes a leader, currentTerm = 116
+
+
+1565142359833 127.0.0.1:5001 becomes a leader, currentTerm = 14
+1565142605951 127.0.0.1:5001 becomes a leader, currentTerm = 47
+1565142679667 127.0.0.1:5001 becomes a leader, currentTerm = 50
+1565142783494 127.0.0.1:5001 becomes a leader, currentTerm = 102
+1565142822295 127.0.0.1:5001 becomes a leader, currentTerm = 104
+
+
+1565142614584 127.0.0.1:5002 becomes a leader, currentTerm = 49
+1565142739485 127.0.0.1:5002 becomes a leader, currentTerm = 85
+
+1565142715654 127.0.0.1:5003 becomes a leader, currentTerm = 63
+1565142878077 127.0.0.1:5003 becomes a leader, currentTerm = 115
+
+1565142397307 127.0.0.1:5004 becomes a leader, currentTerm = 15
+1565142527480 127.0.0.1:5004 becomes a leader, currentTerm = 41
+1565142603690 127.0.0.1:5004 becomes a leader, currentTerm = 46
+1565142614254 127.0.0.1:5004 becomes a leader, currentTerm = 49
+

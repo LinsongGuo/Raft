@@ -1,3 +1,4 @@
+echo "executing std..."
 ./std <comprehensive_test.in >std.out
 
 echo "comparing client0.out and std.out..."

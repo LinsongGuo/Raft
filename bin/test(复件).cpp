@@ -47,7 +47,7 @@ public:
     for (auto pid : clients)
       waitpid(pid, nullptr, 0);
     for (auto pid : servers)
-      kill(pid, SIGTERM);
+      kill(pid, SIGKILL);
 
     // check the result
     std::cerr << "checking...\n";
@@ -60,24 +60,22 @@ public:
     return true;
   }
 
-  bool comprehensive(std::size_t testCaseSize, double p,
-                     std::size_t timeOut = 180) const {
+  bool comprehensive(std::size_t testCaseSize, double p) const {
     using namespace std::chrono_literals;
 
     // generate the test case
     std::cerr << "generating the test cases: testCaseSize = " << testCaseSize
               << ", p = " << p << std::endl;
-    auto kvs = generateRandomKvPairs(testCaseSize);
+    auto kv = generateRandomKvPairs(testCaseSize);
     std::ofstream fout("comprehensive_test.in");
-    dumpKvPairs(kvs, fout);
-    fout.close();
+    dumpKvPairs(kv, fout);
     AnswerMap ans;
-    simulate(ans, kvs);
+    simulate(ans, kv);
 
     // test
     std::cerr << "running...\n";
     std::size_t nServers = 5, nClients = 5;
-    auto servers = createServers(nServers, 0000);
+    auto servers = createServers(nServers, 2000);
     auto clients = createClients(nClients, "comprehensive_test.in");
 
     std::mt19937 eng(std::random_device{}());
@@ -85,11 +83,8 @@ public:
     auto randServer = std::bind(serversDist, eng);
     std::uniform_real_distribution<double> uniformDist(0, 1);
     auto rand = std::bind(uniformDist, eng);
-
-    auto start = std::chrono::system_clock::now();
-    while (std::chrono::duration_cast<std::chrono::seconds>(
-               std::chrono::system_clock::now() - start)
-               .count() < timeOut) {
+    bool flag[5] = {1, 1, 1, 1, 1};
+    while (true) {
       std::this_thread::sleep_for(2s);
       auto x = rand();
       auto srvIdx = randServer();
@@ -101,34 +96,26 @@ public:
         kill(srv, SIGCONT);
         std::cerr << "continue server " << srvIdx << std::endl;
       }
+     /* if(flag[srvIdx]) {
+      	 kill(srv, SIGSTOP);
+         std::cerr << "pause server " << srvIdx << std::endl;
+      }
+      else {
+      	kill(srv, SIGCONT);
+        std::cerr << "continue server " << srvIdx << std::endl;
+      }
+      flag[srvIdx] ^= 1;
+    	*/
     }
 
     for (auto pid : clients)
-      kill(pid, SIGTERM);
-
-    fout.open("comprehensive_test_get.in");
-    for (auto &kv : kvs)
-      fout << "get " << kv.first << std::endl;
-
-    clients.clear();
-    clients = createClients(nClients, "comprehensive_test_get.in", nClients);
-    for (auto pid : clients)
       waitpid(pid, nullptr, 0);
     for (auto pid : servers)
-      kill(pid, SIGTERM);
+      kill(pid, SIGKILL);
 
     // check the result
     std::cerr << "checking...\n";
     for (std::size_t i = 0; i < nClients; ++i) {
-      std::ifstream fin("client" + std::to_string(i) + ".out");
-      auto res = readResult(fin);
-      if (!checkResult(ans, res))
-        return false;
-    }
-    for (auto &kv : kvs) {
-      ans[kv.first] = {kv.second};
-    }
-    for (std::size_t i = nClients; i < nClients * 2; ++i) {
       std::ifstream fin("client" + std::to_string(i) + ".out");
       auto res = readResult(fin);
       if (!checkResult(ans, res))
@@ -189,14 +176,17 @@ private:
   bool checkResult(
       const AnswerMap &mp,
       const std::vector<std::pair<std::string, std::string>> &output) const {
-    if (output.empty())
-      return false;
     for (auto &kv : output) {
-      if (mp.find(kv.first) == mp.end())
-        return false;
+      if (mp.find(kv.first) == mp.end()) {
+        	std::cerr << kv.first << " NOT FOUND" << std::endl;
+        	return false;
+        }
       auto &acceptable = mp.at(kv.first);
-      if (acceptable.find(kv.second) == acceptable.end())
-        return false;
+      if (acceptable.find(kv.second) == acceptable.end()) {
+      	 std::cerr << "kv " << kv.first <<' ' << kv.second << std::endl;
+      	 return false;
+      }
+       
     }
     return true;
   }
@@ -245,8 +235,7 @@ private:
     auto pid = fork();
     if (pid == 0) { // child
       std::string file = "client" + std::to_string(id) + ".out";
-      int fd =
-          open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
+      int fd = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
       dup2(fd, STDOUT_FILENO);
       close(fd);
       fd = open(inputFile.c_str(), O_RDONLY, S_IRUSR);
@@ -275,23 +264,23 @@ private:
 int main(int argc, char **argv) {
   assert(argc == 3);
   RaftTest test(argv[1], argv[2]);
-
-  //  std::cerr << "running naive_test0:\n";
-  //  std::cerr << (test.naive(3, 1, 10) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test1:\n";
-  //  std::cerr << (test.naive(3, 3, 100) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test2:\n";
-  //  std::cerr << (test.naive(5, 5, 5000) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test3:\n";
-  //  std::cerr << (test.naive(3, 5, 5000) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-
-  std::cerr << "running comprehensive_test:\n";
-  std::cerr << (test.comprehensive(1000, 0.3, 20000) ? "passed" : "failed");
+/*
+  std::cerr << "running naive_test0:\n";
+  std::cerr << (test.naive(3, 1, 10) ? "passed" : "failed");
   std::cerr << std::endl << std::endl;
-
+  std::cerr << "running naive_test1:\n";
+  std::cerr << (test.naive(3, 3, 100) ? "passed" : "failed");
+  std::cerr << std::endl << std::endl;
+  std::cerr << "running naive_test2:\n";
+  std::cerr << (test.naive(5, 1, 5000) ? "passed" : "failed");
+  std::cerr << "running naive_test3:\n";
+  std::cerr << (test.naive(3, 1, 1000) ? "passed" : "failed");
+  std::cerr << std::endl << std::endl;
+  */
+  unsigned long long t1 = clock();
+  std::cerr << "running comprehensive_test:\n";
+  std::cerr << (test.comprehensive(500, 0.3) ? "passed" : "failed");
+  unsigned long long t2 = clock();
+  std::cerr << std::endl << t2 - t1 << std::endl;
   return 0;
 }

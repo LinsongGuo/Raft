@@ -115,12 +115,12 @@ namespace Raft {
     request->prevlogterm() << ' ' << request->prevlogindex() << ' ' << request->leadercommit() << std::endl;
     size_t siz = request->entries().size();
     fout5 << "entries:" << ' ' << siz << std::endl;
-    if(siz > 0) { 
+    /*if(siz > 0) { 
         for(int i = siz - 1; i >= 0; --i) {
           auto tmp = request->entries()[i];
           info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
         }
-    }
+    }*/
 
     boost::promise<AppendEntriesReply> prm;
     boost::future<AppendEntriesReply> fut = prm.get_future();

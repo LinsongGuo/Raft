@@ -106,5 +106,13 @@ namespace Raft {
     return replicatedEntries.back().term;
   }
 
+  void RaftServerInfo::push(const std::string &key, const std::string &args, const Term &term) {
+    int siz = replicatedEntries.size();
+    if(siz > 1 && key == replicatedEntries[siz - 1].key 
+      && args == replicatedEntries[siz - 1].args 
+      && term == replicatedEntries[siz - 1].term) 
+      return;
+    replicatedEntries.push_back(ReplicatedEntry(key, args, term));
+  }
 }
 

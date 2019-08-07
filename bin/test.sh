@@ -18,3 +18,7 @@ touch log/server2
 touch log/server3
 touch log/server4
 
+echo "executing test..."
+./test ./Server ./Client
+
+

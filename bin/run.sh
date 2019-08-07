@@ -18,8 +18,6 @@ touch log/server2
 touch log/server3
 touch log/server4
 
-
-
 echo "executing std..."
 bash -c "./std <test.in >std.out"
 

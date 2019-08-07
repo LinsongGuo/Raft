@@ -81,6 +81,7 @@ namespace Raft {
       std::cerr << getTime() << ' ' << cluster->localId << " new term from appendentries : " << info->currentTerm << std::endl;
       fout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
     } 
+    fout << getTime() << "respond append " << request->leaderid() << ' ' << request->prevlogterm() << ' ' << request->prevlogindex() << ' ' << request->leadercommit() << std::endl;
     size_t siz = request->entries().size();
     if(siz > 0) { 
       if(prevLogIndex != invalidIndex && 
@@ -95,6 +96,7 @@ namespace Raft {
         for(int i = siz - 1; i >= 0; --i) {
           auto tmp = request->entries()[i];
           info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
+          fout << getTime() << " append " << request->leaderid() << ' ' << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
         }
       }
     }

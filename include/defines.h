@@ -106,7 +106,7 @@ namespace Raft {
     Term readLog(std::fstream &logScanner);
     Term lastLogTerm();
     Index lastLogIndex();
+    void push(const std::string &key, const std::string &arg, const Term &term);
   };
-
 }
 #endif

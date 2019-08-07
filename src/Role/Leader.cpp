@@ -9,7 +9,8 @@ namespace Raft {
     Role(_info, _cluster, _rpcClient, _transformer, _logScanner) {;} 
     
   bool Leader::put(const std::string &key, const std::string &args) {
-    info->replicatedEntries.push_back(ReplicatedEntry(key, args, info->currentTerm));
+    info->push(key, args, info->currentTerm);
+    fout << getTime() << " put " << key << ' ' << args << ' ' << info->lastLogIndex() << std::endl;
     size_t siz = cluster->size;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
     for(size_t i = 0; i < siz; ++i) {
@@ -20,11 +21,13 @@ namespace Raft {
       rpcRequest.set_prevlogindex(info->nextIndex[i] - 1);
       rpcRequest.set_prevlogterm(info->replicatedEntries[info->nextIndex[i] - 1].term);
       rpcRequest.set_leadercommit(info->commitIndex);
-      for(size_t j = info->nextIndex[i]; j < info->replicatedEntries.size(); ++j) {
+      fout <<getTime() << " rpc " << rpcRequest.term() << ' ' << rpcRequest.prevlogterm() << ' ' << rpcRequest.prevlogindex() << ' ' << rpcRequest.leadercommit() << std::endl; 
+      for(size_t j = info->replicatedEntries.size() - 1; j >= info->nextIndex[i]; --j) {
         Raft::Rpc::Entry tmp;
         tmp.set_key(info->replicatedEntries[j].key);
         tmp.set_args(info->replicatedEntries[j].args);
         tmp.set_term(info->replicatedEntries[j].term);
+        fout <<getTime() << " tmp " << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
         *rpcRequest.add_entries() = std::move(tmp);
       }
 
@@ -34,27 +37,26 @@ namespace Raft {
           std::pair<bool, AppendEntriesReply> result = rpcClient->sendAppendEntries(i, rpcRequest);
           if(result.first) {
             if(result.second.success) {
-              boost::unique_lock<boost::mutex> lk2(info->infoMutex);
               info->nextIndex[i] = info->replicatedEntries.size();
               info->matchIndex[i] = info->nextIndex[i] - 1;
+              fout << getTime() << " success " << i << ' ' << info->nextIndex[i] << ' ' << info->matchIndex[i] << std::endl;
               return AppendEntriesReply(true, result.second.term);
             }
             else {
               if(result.second.term > rpcRequest.term()) {
-                AppendEntriesReply(false, result.second.term);
+                return AppendEntriesReply(false, result.second.term);
               } 
               if(rpcRequest.prevlogindex() > 0) {
-                Index prevLogIndex = rpcRequest.prevlogindex() - 1;
+                Index prevLogIndex = rpcRequest.prevlogindex();
+                Raft::Rpc::Entry tmp;
+                tmp.set_key(info->replicatedEntries[prevLogIndex].key);
+                tmp.set_args(info->replicatedEntries[prevLogIndex].args);
+                tmp.set_term(info->replicatedEntries[prevLogIndex].term);
+                fout << getTime() << " fail " << i << ' ' << prevLogIndex <<' ' << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
+                *rpcRequest.add_entries() = std::move(tmp);
                 info->nextIndex[i]--;
-                if(prevLogIndex > 0) {
-                  rpcRequest.set_prevlogindex(prevLogIndex);
-                  rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex].term);
-                  Raft::Rpc::Entry tmp;
-                  tmp.set_key(info->replicatedEntries[prevLogIndex].key);
-                  tmp.set_args(info->replicatedEntries[prevLogIndex].args);
-                  tmp.set_term(info->replicatedEntries[prevLogIndex].term);
-                  *rpcRequest.add_entries() = std::move(tmp);  
-                }
+                rpcRequest.set_prevlogindex(prevLogIndex - 1);
+                rpcRequest.set_prevlogterm(info->replicatedEntries[prevLogIndex - 1].term);  
               }
             }
           }
@@ -81,13 +83,7 @@ namespace Raft {
         return false;
       }
     }
-    /*
-    if(getAppends * 2 <= cluster->size) {
-      transformer->Transform(RaftServerRole::leader, RaftServerRole::follower, info->currentTerm);
-      return false;
-    }*/
     sort(matchIndexes.begin(), matchIndexes.end(), [](Index x, Index y)->bool{return x > y;});
-    
     if(siz == 1) {
       info->commitIndex = info->replicatedEntries.size() - 1;
     }

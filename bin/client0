@@ -1,2000 +1,1000 @@
-put 66 100
-put 12 80
-put 5 63
-put 75 10
-put 49 86
-put 62 31
-put 75 11
-put 88 3
-put 9 39
-put 13 93
-put 19 11
-put 60 64
-put 54 15
-put 82 7
-put 77 60
-put 7 40
-put 68 1
-put 36 65
-put 6 18
-put 32 25
-put 92 46
-put 34 47
-put 82 52
-put 98 54
-put 39 2
-put 71 28
-put 0 78
-put 43 78
-put 43 36
-put 49 71
-put 33 34
-put 18 25
-put 30 21
-put 9 8
-put 20 0
-put 57 99
-put 88 7
-put 36 44
-put 58 44
-put 71 73
-put 31 92
-put 0 81
-put 46 16
-put 35 0
-put 83 37
-put 58 71
-put 42 6
-put 74 50
-put 69 88
-put 6 26
-put 84 80
-put 3 55
-put 37 26
-put 23 7
-put 39 53
-put 45 55
-put 28 91
-put 97 38
-put 23 27
-put 29 94
-put 95 15
-put 59 39
-put 44 89
-put 45 26
-put 72 4
-put 76 48
-put 100 86
-put 50 98
-put 51 69
-put 14 2
-put 46 71
-put 65 1
-put 53 21
-put 31 11
-put 53 99
-put 41 24
-put 15 57
-put 33 80
-put 6 15
-put 64 8
-put 50 91
-put 7 75
-put 94 40
-put 77 50
-put 90 55
-put 88 63
-put 55 52
-put 71 50
-put 26 17
-put 87 14
-put 38 1
-put 33 36
-put 31 66
-put 73 55
-put 40 92
-put 19 18
-put 41 97
-put 57 0
-put 4 68
-put 11 44
-put 88 27
-put 38 15
-put 46 43
-put 13 9
-put 36 77
-put 68 78
-put 31 63
-put 67 47
-put 62 89
-put 98 30
-put 91 93
-put 15 57
-put 98 46
-put 91 47
-put 35 96
-put 18 86
-put 66 24
-put 81 68
-put 66 54
-put 7 72
-put 30 13
-put 88 4
-put 26 85
-put 34 64
-put 83 7
-put 1 9
-put 47 21
-put 87 5
-put 28 47
-put 39 6
-put 69 67
-put 67 53
-put 20 83
-put 38 68
-put 38 31
-put 20 23
-put 90 89
-put 19 55
-put 78 24
-put 0 42
-put 31 48
-put 90 17
-put 1 2
-put 99 32
-put 59 98
-put 72 39
-put 69 78
-put 15 65
-put 25 47
-put 75 42
-put 84 80
-put 99 15
-put 13 24
-put 20 49
-put 6 89
-put 80 79
-put 9 100
-put 64 30
-put 10 49
-put 84 60
-put 34 100
-put 39 87
-put 78 28
-put 47 9
-put 25 66
-put 57 9
-put 64 97
-put 85 70
-put 83 39
-put 9 83
-put 35 23
-put 64 83
-put 17 63
-put 50 29
-put 74 59
-put 94 56
-put 61 15
-put 15 29
-put 85 90
-put 46 18
-put 39 13
-put 38 54
-put 90 59
-put 94 45
-put 45 31
-put 58 7
-put 8 37
-put 7 28
-put 17 71
-put 46 88
-put 36 52
-put 90 86
-put 2 98
-put 36 99
-put 51 9
-put 58 34
-put 85 28
-put 61 6
-put 44 69
-put 21 94
-put 21 21
-put 94 47
-put 44 22
-put 75 94
-put 89 3
-put 85 78
-put 99 63
-put 57 0
-put 18 99
-put 15 6
-put 17 32
-put 22 7
-put 26 12
-put 5 32
-put 21 86
-put 80 54
-put 5 62
-put 44 65
-put 35 65
-put 82 35
-put 74 25
-put 32 50
-put 15 58
-put 92 14
-put 12 77
-put 60 84
-put 68 9
-put 60 75
-put 51 21
-put 94 51
-put 1 72
-put 11 78
-put 12 91
-put 50 39
-put 96 95
-put 22 7
-put 14 55
-put 79 34
-put 75 87
-put 92 50
-put 48 21
-put 94 62
-put 14 1
-put 28 31
-put 78 0
-put 46 32
-put 58 87
-put 96 62
-put 85 57
-put 61 37
-put 15 50
-put 76 80
-put 17 70
-put 64 19
-put 2 87
-put 60 93
-put 55 82
-put 98 55
-put 51 61
-put 76 78
-put 68 29
-put 38 56
-put 90 32
-put 49 72
-put 25 91
-put 8 27
-put 36 93
-put 33 74
-put 9 12
-put 93 16
-put 92 33
-put 39 6
-put 65 69
-put 40 30
-put 20 2
-put 34 71
-put 1 10
-put 85 66
-put 94 36
-put 38 45
-put 8 78
-put 43 11
-put 21 55
-put 81 78
-put 72 11
-put 39 82
-put 67 78
-put 91 10
-put 20 66
-put 73 0
-put 67 42
-put 75 55
-put 3 28
-put 29 80
-put 31 47
-put 61 32
-put 2 39
-put 91 16
-put 90 90
-put 54 23
-put 76 56
-put 37 40
-put 65 94
-put 7 26
-put 49 45
-put 37 33
-put 54 58
-put 96 0
-put 43 38
-put 28 88
-put 94 90
-put 48 94
-put 77 17
-put 12 50
-put 3 8
-put 29 57
-put 75 18
-put 57 9
-put 42 81
-put 61 71
-put 43 86
-put 81 87
-put 91 24
-put 97 79
-put 5 10
-put 79 7
-put 12 94
-put 1 32
-put 27 91
-put 88 61
-put 78 82
-put 68 3
-put 98 38
-put 14 7
-put 69 49
-put 32 88
-put 66 22
-put 35 29
-put 91 12
-put 54 49
-put 16 55
-put 5 89
-put 67 22
-put 61 93
-put 38 41
-put 60 7
-put 23 51
-put 81 1
-put 28 12
-put 46 0
-put 89 98
-put 84 98
-put 47 58
-put 15 70
-put 61 13
-put 94 92
-put 72 17
-put 4 87
-put 40 18
-put 53 49
-put 55 69
-put 58 58
-put 50 88
-put 5 12
-put 67 89
-put 48 10
-put 18 78
-put 49 22
-put 20 89
-put 14 45
-put 96 38
-put 34 98
-put 86 92
-put 72 34
-put 94 35
-put 71 40
-put 3 54
-put 2 57
-put 83 41
-put 12 49
-put 45 92
-put 37 41
-put 89 48
-put 91 5
-put 46 22
-put 84 70
-put 42 72
-put 86 10
-put 12 99
-put 4 97
-put 10 45
-put 29 55
-put 7 52
-put 53 36
-put 59 49
-put 52 87
-put 27 54
-put 3 46
-put 36 84
-put 96 0
-put 52 29
-put 18 27
-put 74 6
-put 24 12
-put 45 5
-put 22 50
-put 67 20
-put 93 97
-put 38 16
-put 1 68
-put 33 50
-put 74 45
-put 26 49
-put 19 64
-put 69 10
-put 76 90
-put 75 57
-put 98 58
-put 53 44
-put 19 44
-put 100 8
-put 94 18
-put 39 33
-put 58 54
-put 4 28
-put 70 54
-put 34 0
-put 75 70
-put 87 23
-put 85 85
-put 18 97
-put 57 8
-put 62 18
-put 62 92
-put 59 18
-put 18 83
-put 91 34
-put 97 51
-put 51 72
-put 69 99
-put 39 87
-put 45 56
-put 31 47
-put 68 35
-put 12 59
-put 68 73
-put 13 93
-put 45 98
-put 78 33
-put 60 66
-put 4 1
-put 69 7
-put 70 46
-put 56 16
-put 89 33
-put 15 9
-put 8 88
-put 38 48
-put 32 56
-put 44 67
-put 5 32
-put 52 65
-put 40 81
-put 14 29
-put 54 84
-put 87 3
-put 62 64
-put 72 21
-put 51 34
-put 43 95
-put 99 59
-put 64 8
-put 17 31
-put 75 83
-put 91 54
-put 26 75
-put 94 66
-put 57 29
-put 4 57
-put 85 11
-put 83 79
-put 8 99
-put 60 91
-put 12 8
-put 2 79
-put 19 73
-put 67 95
-put 22 84
-put 34 90
-put 61 52
-put 69 86
-put 81 38
-put 39 58
-put 31 28
-put 62 70
-put 59 78
-put 17 84
-put 91 100
-put 58 37
-put 37 91
-put 27 89
-put 94 21
-put 9 89
-put 82 41
-put 19 28
-put 45 10
-put 27 65
-put 64 22
-put 1 89
-put 73 72
-put 94 90
-put 37 54
-put 79 48
-put 26 81
-put 18 54
-put 47 92
-put 54 81
-put 21 85
-put 72 58
-put 67 60
-put 63 81
-put 94 0
-put 51 32
-put 30 92
-put 12 73
-put 65 10
-put 24 68
-put 72 30
-put 35 14
-put 87 51
-put 96 27
-put 86 69
-put 84 14
-put 29 72
-put 67 99
-put 85 83
-put 54 23
-put 85 36
-put 67 88
-put 25 98
-put 12 47
-put 87 18
-put 40 0
-put 98 56
-put 63 97
-put 39 32
-put 91 47
-put 35 36
-put 89 85
-put 67 85
-put 65 81
-put 51 29
-put 89 89
-put 2 97
-put 53 17
-put 44 55
-put 54 45
-put 33 4
-put 21 72
-put 39 30
-put 29 57
-put 46 49
-put 87 80
-put 3 75
-put 56 40
-put 45 76
-put 72 50
-put 23 40
-put 47 15
-put 12 10
-put 74 90
-put 61 64
-put 71 55
-put 9 69
-put 63 39
-put 29 82
-put 36 32
-put 84 91
-put 47 18
-put 6 38
-put 4 32
-put 73 12
-put 60 94
-put 65 82
-put 51 15
-put 71 84
-put 95 14
-put 30 18
-put 35 82
-put 24 50
-put 88 62
-put 97 100
-put 1 5
-put 15 21
-put 47 76
-put 8 35
-put 48 89
-put 39 35
-put 55 43
-put 11 81
-put 52 34
-put 37 77
-put 89 85
-put 92 1
-put 48 34
-put 69 51
-put 30 93
-put 63 2
-put 24 93
-put 31 44
-put 70 61
-put 24 70
-put 16 48
-put 74 57
-put 33 43
-put 24 1
-put 41 95
-put 80 81
-put 83 94
-put 72 40
-put 68 15
-put 37 18
-put 89 84
-put 94 44
-put 42 22
-put 88 91
-put 14 82
-put 79 55
-put 97 23
-put 70 2
-put 67 76
-put 5 84
-put 25 26
-put 17 46
-put 61 50
-put 37 29
-put 81 5
-put 37 90
-put 100 78
-put 55 88
-put 97 41
-put 37 6
-put 64 84
-put 14 42
-put 92 6
-put 19 61
-put 31 97
-put 46 47
-put 68 47
-put 80 39
-put 71 57
-put 68 31
-put 30 36
-put 17 28
-put 98 24
-put 24 23
-put 4 15
-put 97 11
-put 37 96
-put 29 14
-put 3 84
-put 27 41
-put 9 2
-put 45 46
-put 80 17
-put 55 58
-put 91 17
-put 31 89
-put 98 49
-put 89 76
-put 32 2
-put 54 28
-put 2 21
-put 72 74
-put 96 28
-put 50 34
-put 11 8
-put 24 75
-put 38 83
-put 59 81
-put 90 20
-put 96 80
-put 98 33
-put 45 23
-put 18 94
-put 5 4
-put 0 58
-put 56 76
-put 9 5
-put 76 21
-put 22 42
-put 26 39
-put 34 53
-put 97 35
-put 20 20
-put 20 14
-put 100 39
-put 21 24
-put 91 56
-put 36 2
-put 76 20
-put 37 76
-put 55 82
-put 96 53
-put 9 75
-put 37 90
-put 50 21
-put 24 27
-put 95 60
-put 41 76
-put 91 51
-put 20 56
-put 86 98
-put 17 0
-put 62 40
-put 56 72
-put 94 24
-put 38 0
-put 84 33
-put 5 80
-put 31 85
-put 16 100
-put 64 8
-put 29 26
-put 13 61
-put 46 90
-put 35 36
-put 72 23
-put 60 14
-put 89 90
-put 91 56
-put 37 61
-put 35 78
-put 20 53
-put 71 89
-put 43 87
-put 49 93
-put 34 7
-put 79 25
-put 30 55
-put 4 58
-put 75 71
-put 82 81
-put 33 51
-put 50 96
-put 7 64
-put 36 86
-put 88 9
-put 52 97
-put 58 7
-put 17 22
-put 11 5
-put 38 72
-put 16 8
-put 97 16
-put 61 41
-put 36 16
-put 67 54
-put 40 67
-put 79 70
-put 41 1
-put 99 68
-put 17 70
-put 97 81
-put 53 31
-put 6 23
-put 64 8
-put 34 18
-put 62 80
-put 96 82
-put 55 53
-put 83 80
-put 24 88
-put 66 45
-put 21 5
-put 22 52
-put 74 17
-put 45 13
-put 68 68
-put 56 64
-put 77 54
-put 45 56
-put 0 45
-put 14 49
-put 41 72
-put 100 69
-put 8 56
-put 70 26
-put 44 92
-put 74 47
-put 87 24
-put 16 76
-put 60 33
-put 43 35
-put 8 10
-put 21 11
-put 56 58
-put 57 86
-put 33 54
-put 42 80
-put 24 61
-put 49 37
-put 50 48
-put 1 9
-put 79 92
-put 47 79
-put 49 42
-put 50 34
-put 0 64
-put 24 68
-put 22 56
-put 59 32
-put 29 27
-put 7 11
-put 48 53
-put 25 9
-put 43 59
-put 97 56
-put 13 41
-put 45 18
-put 60 8
-put 74 84
-put 40 20
-put 93 21
-put 74 83
-put 24 22
-put 65 82
-put 49 16
-put 20 41
-put 25 67
-put 71 35
-put 26 34
-put 11 29
-put 67 98
-put 46 26
-put 37 42
-put 45 95
-put 91 74
-put 48 59
-put 46 21
-put 15 13
-put 90 29
-put 70 24
-put 53 96
-put 83 96
-put 67 79
-put 32 88
-put 45 3
-put 51 11
-put 63 78
-put 33 5
-put 99 34
-put 9 75
-put 10 82
-put 85 6
-put 48 31
-put 22 60
-put 20 82
-put 51 61
-put 51 3
-put 15 73
-put 75 68
-put 46 10
-put 61 52
-put 83 20
-put 71 2
-put 33 98
-put 57 100
-put 17 32
-put 26 0
-put 34 99
-put 31 70
-put 25 12
-put 94 80
-put 19 44
-put 72 8
-put 59 40
-put 63 2
-put 79 88
-put 39 76
-put 96 7
-put 70 71
-put 66 56
-put 30 2
-put 50 10
-put 20 54
-put 98 30
-put 39 47
-put 72 3
-put 14 16
-put 39 23
-put 20 77
-put 3 68
-put 11 41
-put 85 52
-put 64 41
-put 55 68
-put 40 3
-put 14 46
-put 77 32
-put 8 0
-put 45 26
-put 61 41
-put 75 49
-put 41 88
-put 26 36
-put 71 77
-put 23 6
-put 35 93
-put 50 99
-put 15 53
-put 92 76
-put 41 60
-put 38 46
-put 95 60
-put 50 73
-put 93 60
-put 40 14
-put 86 71
-put 2 68
-put 62 67
-put 2 18
-put 8 82
-put 41 27
-put 22 44
-put 71 31
-put 18 22
-put 68 71
-put 70 98
-put 77 21
-put 11 2
-put 97 25
-put 64 49
-put 52 5
-put 63 35
-put 91 87
-put 44 77
-put 74 100
-put 76 16
-put 34 96
-put 34 72
-put 67 10
-put 73 65
-put 39 39
-put 30 19
-put 76 93
-put 85 90
-put 21 61
-put 44 31
-put 57 85
-put 44 8
-put 40 94
-put 25 67
-put 84 13
-put 20 11
-put 8 5
-put 39 76
-put 54 78
-put 88 6
-put 83 61
-put 99 36
-put 43 46
-put 38 89
-put 96 48
-put 47 16
-put 23 65
-put 92 23
-put 28 0
-put 49 9
-put 78 71
-put 66 31
-put 29 27
-put 94 21
-put 27 86
+put 27 3
+put 60 87
+put 11 52
+put 94 83
+put 51 97
+put 71 37
+put 9 98
+put 52 16
+put 62 68
+put 53 20
+put 56 4
+put 16 62
+put 5 48
+put 56 97
+put 87 9
+put 59 16
+put 18 98
+put 64 63
+put 3 21
+put 21 62
+put 96 94
+put 4 89
+put 33 83
+put 6 1
+put 9 76
+put 39 11
+put 74 98
+put 81 40
+put 35 44
+put 32 32
+put 32 66
+put 46 41
+put 97 18
+put 19 27
+put 48 16
+put 63 96
+put 42 37
+put 70 56
+put 88 37
+put 28 36
+put 44 64
+put 48 32
+put 47 3
+put 64 62
+put 46 72
+put 10 3
+put 84 90
+put 78 39
+put 51 97
+put 100 70
+put 77 91
 put 64 9
-put 47 43
-put 90 97
-put 82 1
-put 8 19
-put 24 10
-put 2 30
-put 81 75
-put 97 61
-put 93 56
-put 12 94
-put 42 23
-put 6 94
-put 41 70
-put 52 21
-put 52 52
-put 84 60
-put 20 18
-put 58 32
-put 65 30
+put 62 26
+put 7 51
+put 19 40
+put 14 5
+put 5 53
+put 81 31
+put 52 62
+put 17 21
+put 46 27
+put 56 44
+put 22 26
+put 12 46
+put 45 49
+put 10 35
+put 72 45
+put 41 39
+put 49 14
+put 35 84
+put 52 6
+put 13 49
+put 16 43
+put 29 64
+put 49 76
+put 99 41
+put 37 69
+put 39 24
+put 87 24
+put 78 100
+put 68 43
+put 8 6
+put 63 3
+put 80 94
+put 89 74
+put 15 88
+put 41 68
+put 99 83
+put 48 92
+put 40 29
+put 21 86
+put 61 73
+put 59 77
+put 25 63
+put 8 28
+put 21 93
+put 10 19
+put 31 38
+put 76 92
+put 92 23
+put 48 70
+put 92 33
+put 38 58
+put 88 77
+put 69 87
+put 33 7
+put 34 44
+put 21 38
+put 90 48
+put 89 30
+put 68 58
+put 23 23
+put 64 98
+put 46 84
+put 88 60
+put 17 60
+put 30 14
+put 16 7
+put 6 4
+put 42 89
+put 23 34
+put 94 56
+put 88 72
+put 1 73
+put 80 40
+put 22 95
+put 28 57
+put 77 12
+put 53 63
+put 80 50
+put 0 45
+put 30 58
+put 3 88
+put 86 33
+put 36 48
+put 1 71
+put 96 93
+put 90 47
+put 24 16
+put 3 59
+put 11 75
+put 35 60
+put 66 75
+put 8 74
+put 62 39
+put 17 11
+put 39 6
+put 18 37
+put 8 45
+put 22 91
+put 96 76
+put 69 10
+put 23 47
+put 57 6
+put 91 70
+put 21 61
+put 37 93
+put 78 98
+put 48 23
+put 83 28
+put 46 24
+put 8 86
+put 78 73
+put 15 80
+put 93 76
+put 51 77
+put 19 98
+put 60 68
+put 70 9
+put 99 21
+put 95 45
+put 13 39
+put 46 95
+put 25 83
+put 91 65
+put 57 19
+put 97 89
+put 13 69
+put 59 91
+put 8 11
+put 54 9
+put 47 20
+put 28 17
+put 24 14
+put 43 83
+put 72 94
+put 61 74
+put 33 94
+put 78 31
+put 37 8
+put 51 16
+put 40 28
+put 71 99
+put 46 4
+put 57 26
+put 8 24
+put 29 25
+put 64 3
+put 3 5
+put 79 97
+put 32 69
+put 28 94
+put 98 44
+put 92 50
+put 24 48
+put 9 75
+put 9 97
+put 13 13
+put 96 90
+put 22 75
+put 69 27
+put 26 1
+put 58 85
+put 53 84
+put 78 59
+put 38 42
+put 85 97
+put 81 11
+put 28 16
+put 80 70
+put 18 78
+put 71 18
+put 94 57
+put 56 97
+put 84 51
+put 70 3
+put 15 77
+put 20 45
+put 83 21
+put 58 76
+put 2 29
+put 11 35
+put 63 13
+put 38 12
+put 76 55
+put 32 88
+put 47 83
+put 92 89
+put 95 80
+put 71 20
+put 76 65
+put 43 18
+put 26 74
+put 100 87
+put 19 34
+put 18 13
+put 91 6
+put 5 80
+put 3 91
+put 85 0
+put 46 44
+put 24 62
+put 30 28
+put 51 39
+put 37 74
+put 54 100
+put 12 86
+put 26 26
+put 94 46
+put 14 53
+put 57 85
+put 89 41
+put 11 22
+put 96 3
+put 78 76
+put 35 78
+put 97 12
+put 77 46
+put 62 33
+put 83 8
+put 91 47
+put 60 93
+put 11 64
+put 52 47
+put 63 29
+put 91 91
+put 4 48
+put 85 99
+put 52 55
+put 53 56
+put 90 90
+put 19 95
+put 75 89
+put 38 37
+put 21 42
+put 74 90
+put 84 55
+put 24 39
+put 79 24
+put 47 68
+put 38 90
+put 64 59
+put 6 100
+put 38 36
+put 68 72
+put 31 27
+put 87 14
+put 49 19
+put 1 3
+put 68 79
+put 67 14
+put 19 73
+put 5 68
+put 83 40
+put 36 81
+put 59 39
+put 35 20
+put 62 17
+put 66 39
+put 18 41
+put 38 76
+put 17 31
+put 59 50
+put 77 46
+put 31 79
+put 51 72
+put 48 36
+put 100 18
+put 30 0
+put 1 96
+put 57 45
+put 0 85
+put 7 52
+put 6 8
+put 11 83
+put 7 13
+put 84 21
+put 52 17
+put 74 88
+put 44 100
+put 42 70
+put 12 38
+put 0 10
+put 76 91
+put 68 63
+put 2 92
+put 93 74
+put 16 38
+put 79 8
+put 74 100
+put 37 91
+put 100 28
+put 75 32
+put 0 11
+put 85 11
+put 5 14
+put 60 88
+put 34 97
+put 85 31
+put 78 96
+put 64 54
+put 3 56
+put 13 6
+put 62 40
+put 98 5
+put 20 69
+put 44 45
+put 63 99
+put 87 25
+put 34 4
+put 40 100
+put 8 56
+put 15 18
+put 5 3
+put 68 55
+put 36 43
+put 29 8
+put 91 79
+put 36 86
+put 73 33
+put 20 3
 put 7 73
-put 95 5
-put 43 17
-put 8 12
-put 55 2
-put 93 59
-get 66
-get 12
-get 5
-get 75
-get 49
-get 62
-get 75
-get 88
-get 9
-get 13
-get 19
+put 20 65
+put 15 86
+put 28 40
+put 36 85
+put 21 69
+put 25 33
+put 29 49
+put 39 76
+put 80 4
+put 10 83
+put 88 37
+put 42 90
+put 93 88
+put 62 25
+put 43 88
+put 66 42
+put 46 8
+put 80 85
+put 90 61
+put 4 80
+put 95 73
+put 6 15
+put 24 47
+put 55 32
+put 33 61
+put 92 41
+put 25 71
+put 40 81
+put 22 26
+put 55 27
+put 27 11
+put 39 88
+put 62 1
+put 39 5
+put 91 24
+put 54 87
+put 61 36
+put 16 48
+put 59 56
+put 71 14
+put 88 47
+put 62 22
+put 2 2
+put 88 4
+put 43 87
+put 74 11
+put 57 77
+put 84 18
+put 53 76
+put 84 63
+put 10 69
+put 10 54
+put 5 55
+put 80 49
+put 67 48
+put 10 82
+put 53 63
+put 60 14
+put 63 86
+put 58 62
+put 0 37
+put 29 27
+put 73 44
+put 5 0
+put 22 85
+put 55 26
+put 10 42
+put 57 77
+put 88 84
+put 78 91
+put 99 47
+put 58 20
+put 92 31
+put 2 98
+put 26 11
+put 37 56
+put 97 72
+put 92 25
+put 69 90
+put 33 59
+put 61 66
+put 46 12
+put 90 47
+put 68 83
+put 90 70
+put 72 14
+put 4 5
+put 9 77
+put 72 86
+put 100 70
+put 86 50
+put 96 29
+put 51 36
+put 21 38
+put 72 12
+put 66 32
+put 84 32
+put 27 78
+put 72 48
+put 33 90
+put 31 28
+put 43 2
+put 77 86
+put 6 20
+put 17 50
+put 37 66
+put 1 11
+put 17 100
+put 49 26
+put 7 51
+put 3 70
+put 75 57
+put 22 27
+put 62 83
+put 35 64
+put 23 10
+put 93 92
+put 56 65
+put 61 77
+put 100 60
+put 76 43
+put 0 79
+put 61 0
+put 71 36
+put 65 54
+put 11 94
+put 12 12
+put 34 64
+get 27
 get 60
-get 54
-get 82
-get 77
-get 7
-get 68
-get 36
-get 6
-get 32
-get 92
-get 34
-get 82
-get 98
-get 39
-get 71
-get 0
-get 43
-get 43
-get 49
-get 33
-get 18
-get 30
-get 9
-get 20
-get 57
-get 88
-get 36
-get 58
-get 71
-get 31
-get 0
-get 46
-get 35
-get 83
-get 58
-get 42
-get 74
-get 69
-get 6
-get 84
-get 3
-get 37
-get 23
-get 39
-get 45
-get 28
-get 97
-get 23
-get 29
-get 95
-get 59
-get 44
-get 45
-get 72
-get 76
-get 100
-get 50
-get 51
-get 14
-get 46
-get 65
-get 53
-get 31
-get 53
-get 41
-get 15
-get 33
-get 6
-get 64
-get 50
-get 7
-get 94
-get 77
-get 90
-get 88
-get 55
-get 71
-get 26
-get 87
-get 38
-get 33
-get 31
-get 73
-get 40
-get 19
-get 41
-get 57
-get 4
 get 11
-get 88
-get 38
-get 46
-get 13
-get 36
-get 68
-get 31
-get 67
-get 62
-get 98
-get 91
-get 15
-get 98
-get 91
-get 35
-get 18
-get 66
-get 81
-get 66
-get 7
-get 30
-get 88
-get 26
-get 34
-get 83
-get 1
-get 47
-get 87
-get 28
-get 39
-get 69
-get 67
-get 20
-get 38
-get 38
-get 20
-get 90
-get 19
-get 78
-get 0
-get 31
-get 90
-get 1
-get 99
-get 59
-get 72
-get 69
-get 15
-get 25
-get 75
-get 84
-get 99
-get 13
-get 20
-get 6
-get 80
+get 94
+get 51
+get 71
 get 9
+get 52
+get 62
+get 53
+get 56
+get 16
+get 5
+get 56
+get 87
+get 59
+get 18
 get 64
+get 3
+get 21
+get 96
+get 4
+get 33
+get 6
+get 9
+get 39
+get 74
+get 81
+get 35
+get 32
+get 32
+get 46
+get 97
+get 19
+get 48
+get 63
+get 42
+get 70
+get 88
+get 28
+get 44
+get 48
+get 47
+get 64
+get 46
 get 10
 get 84
-get 34
-get 39
 get 78
-get 47
-get 25
-get 57
-get 64
-get 85
-get 83
-get 9
-get 35
-get 64
-get 17
-get 50
-get 74
-get 94
-get 61
-get 15
-get 85
-get 46
-get 39
-get 38
-get 90
-get 94
-get 45
-get 58
-get 8
-get 7
-get 17
-get 46
-get 36
-get 90
-get 2
-get 36
 get 51
-get 58
-get 85
-get 61
-get 44
-get 21
-get 21
-get 94
-get 44
-get 75
-get 89
-get 85
-get 99
-get 57
-get 18
-get 15
-get 17
-get 22
-get 26
-get 5
-get 21
-get 80
-get 5
-get 44
-get 35
-get 82
-get 74
-get 32
-get 15
-get 92
-get 12
-get 60
-get 68
-get 60
-get 51
-get 94
-get 1
-get 11
-get 12
-get 50
-get 96
-get 22
-get 14
-get 79
-get 75
-get 92
-get 48
-get 94
-get 14
-get 28
-get 78
-get 46
-get 58
-get 96
-get 85
-get 61
-get 15
-get 76
-get 17
-get 64
-get 2
-get 60
-get 55
-get 98
-get 51
-get 76
-get 68
-get 38
-get 90
-get 49
-get 25
-get 8
-get 36
-get 33
-get 9
-get 93
-get 92
-get 39
-get 65
-get 40
-get 20
-get 34
-get 1
-get 85
-get 94
-get 38
-get 8
-get 43
-get 21
-get 81
-get 72
-get 39
-get 67
-get 91
-get 20
-get 73
-get 67
-get 75
-get 3
-get 29
-get 31
-get 61
-get 2
-get 91
-get 90
-get 54
-get 76
-get 37
-get 65
-get 7
-get 49
-get 37
-get 54
-get 96
-get 43
-get 28
-get 94
-get 48
+get 100
 get 77
-get 12
-get 3
-get 29
-get 75
-get 57
-get 42
-get 61
-get 43
-get 81
-get 91
-get 97
-get 5
-get 79
-get 12
-get 1
-get 27
-get 88
-get 78
-get 68
-get 98
+get 64
+get 62
+get 7
+get 19
 get 14
-get 69
-get 32
-get 66
-get 35
-get 91
-get 54
-get 16
 get 5
-get 67
-get 61
-get 38
-get 60
-get 23
 get 81
-get 28
+get 52
+get 17
 get 46
-get 89
-get 84
-get 47
-get 15
-get 61
-get 94
-get 72
-get 4
-get 40
-get 53
-get 55
-get 58
-get 50
-get 5
-get 67
-get 48
-get 18
-get 49
-get 20
-get 14
-get 96
-get 34
-get 86
-get 72
-get 94
-get 71
-get 3
-get 2
-get 83
+get 56
+get 22
 get 12
 get 45
-get 37
-get 89
-get 91
-get 46
-get 84
-get 42
-get 86
-get 12
-get 4
 get 10
-get 29
-get 7
-get 53
-get 59
+get 72
+get 41
+get 49
+get 35
 get 52
-get 27
-get 3
-get 36
-get 96
-get 52
-get 18
-get 74
-get 24
-get 45
-get 22
-get 67
-get 93
-get 38
-get 1
-get 33
-get 74
-get 26
-get 19
-get 69
-get 76
-get 75
-get 98
-get 53
-get 19
-get 100
-get 94
-get 39
-get 58
-get 4
-get 70
-get 34
-get 75
-get 87
-get 85
-get 18
-get 57
-get 62
-get 62
-get 59
-get 18
-get 91
-get 97
-get 51
-get 69
-get 39
-get 45
-get 31
-get 68
-get 12
-get 68
 get 13
-get 45
+get 16
+get 29
+get 49
+get 99
+get 37
+get 39
+get 87
 get 78
-get 60
-get 4
-get 69
-get 70
-get 56
+get 68
+get 8
+get 63
+get 80
 get 89
 get 15
-get 8
-get 38
-get 32
-get 44
-get 5
-get 52
-get 40
-get 14
-get 54
-get 87
-get 62
-get 72
-get 51
-get 43
-get 99
-get 64
-get 17
-get 75
-get 91
-get 26
-get 94
-get 57
-get 4
-get 85
-get 83
-get 8
-get 60
-get 12
-get 2
-get 19
-get 67
-get 22
-get 34
-get 61
-get 69
-get 81
-get 39
-get 31
-get 62
-get 59
-get 17
-get 91
-get 58
-get 37
-get 27
-get 94
-get 9
-get 82
-get 19
-get 45
-get 27
-get 64
-get 1
-get 73
-get 94
-get 37
-get 79
-get 26
-get 18
-get 47
-get 54
-get 21
-get 72
-get 67
-get 63
-get 94
-get 51
-get 30
-get 12
-get 65
-get 24
-get 72
-get 35
-get 87
-get 96
-get 86
-get 84
-get 29
-get 67
-get 85
-get 54
-get 85
-get 67
-get 25
-get 12
-get 87
-get 40
-get 98
-get 63
-get 39
-get 91
-get 35
-get 89
-get 67
-get 65
-get 51
-get 89
-get 2
-get 53
-get 44
-get 54
-get 33
-get 21
-get 39
-get 29
-get 46
-get 87
-get 3
-get 56
-get 45
-get 72
-get 23
-get 47
-get 12
-get 74
-get 61
-get 71
-get 9
-get 63
-get 29
-get 36
-get 84
-get 47
-get 6
-get 4
-get 73
-get 60
-get 65
-get 51
-get 71
-get 95
-get 30
-get 35
-get 24
-get 88
-get 97
-get 1
-get 15
-get 47
-get 8
-get 48
-get 39
-get 55
-get 11
-get 52
-get 37
-get 89
-get 92
-get 48
-get 69
-get 30
-get 63
-get 24
-get 31
-get 70
-get 24
-get 16
-get 74
-get 33
-get 24
-get 41
-get 80
-get 83
-get 72
-get 68
-get 37
-get 89
-get 94
-get 42
-get 88
-get 14
-get 79
-get 97
-get 70
-get 67
-get 5
-get 25
-get 17
-get 61
-get 37
-get 81
-get 37
-get 100
-get 55
-get 97
-get 37
-get 64
-get 14
-get 92
-get 19
-get 31
-get 46
-get 68
-get 80
-get 71
-get 68
-get 30
-get 17
-get 98
-get 24
-get 4
-get 97
-get 37
-get 29
-get 3
-get 27
-get 9
-get 45
-get 80
-get 55
-get 91
-get 31
-get 98
-get 89
-get 32
-get 54
-get 2
-get 72
-get 96
-get 50
-get 11
-get 24
-get 38
-get 59
-get 90
-get 96
-get 98
-get 45
-get 18
-get 5
-get 0
-get 56
-get 9
-get 76
-get 22
-get 26
-get 34
-get 97
-get 20
-get 20
-get 100
-get 21
-get 91
-get 36
-get 76
-get 37
-get 55
-get 96
-get 9
-get 37
-get 50
-get 24
-get 95
-get 41
-get 91
-get 20
-get 86
-get 17
-get 62
-get 56
-get 94
-get 38
-get 84
-get 5
-get 31
-get 16
-get 64
-get 29
-get 13
-get 46
-get 35
-get 72
-get 60
-get 89
-get 91
-get 37
-get 35
-get 20
-get 71
-get 43
-get 49
-get 34
-get 79
-get 30
-get 4
-get 75
-get 82
-get 33
-get 50
-get 7
-get 36
-get 88
-get 52
-get 58
-get 17
-get 11
-get 38
-get 16
-get 97
-get 61
-get 36
-get 67
-get 40
-get 79
 get 41
 get 99
-get 17
-get 97
-get 53
-get 6
-get 64
-get 34
-get 62
-get 96
-get 55
-get 83
-get 24
-get 66
-get 21
-get 22
-get 74
-get 45
-get 68
-get 56
-get 77
-get 45
-get 0
-get 14
-get 41
-get 100
-get 8
-get 70
-get 44
-get 74
-get 87
-get 16
-get 60
-get 43
-get 8
-get 21
-get 56
-get 57
-get 33
-get 42
-get 24
-get 49
-get 50
-get 1
-get 79
-get 47
-get 49
-get 50
-get 0
-get 24
-get 22
-get 59
-get 29
-get 7
 get 48
-get 25
-get 43
-get 97
-get 13
-get 45
-get 60
-get 74
 get 40
-get 93
-get 74
-get 24
-get 65
-get 49
-get 20
+get 21
+get 61
+get 59
 get 25
-get 71
-get 26
-get 11
-get 67
-get 46
-get 37
-get 45
-get 91
-get 48
-get 46
-get 15
-get 90
-get 70
-get 53
-get 83
-get 67
-get 32
-get 45
-get 51
-get 63
-get 33
-get 99
-get 9
+get 8
+get 21
 get 10
-get 85
-get 48
-get 22
-get 20
-get 51
-get 51
-get 15
-get 75
-get 46
-get 61
-get 83
-get 71
-get 33
-get 57
-get 17
-get 26
-get 34
 get 31
-get 25
-get 94
-get 19
-get 72
-get 59
-get 63
-get 79
-get 39
-get 96
-get 70
-get 66
+get 76
+get 92
+get 48
+get 92
+get 38
+get 88
+get 69
+get 33
+get 34
+get 21
+get 90
+get 89
+get 68
+get 23
+get 64
+get 46
+get 88
+get 17
 get 30
-get 50
-get 20
-get 98
-get 39
-get 72
-get 14
-get 39
-get 20
+get 16
+get 6
+get 42
+get 23
+get 94
+get 88
+get 1
+get 80
+get 22
+get 28
+get 77
+get 53
+get 80
+get 0
+get 30
+get 3
+get 86
+get 36
+get 1
+get 96
+get 90
+get 24
 get 3
 get 11
-get 85
-get 64
-get 55
-get 40
-get 14
-get 77
-get 8
-get 45
-get 61
-get 75
-get 41
-get 26
-get 71
-get 23
 get 35
-get 50
-get 15
-get 92
-get 41
-get 38
-get 95
-get 50
-get 93
-get 40
-get 86
-get 2
-get 62
-get 2
+get 66
 get 8
-get 41
-get 22
-get 71
+get 62
+get 17
+get 39
 get 18
-get 68
+get 8
+get 22
+get 96
+get 69
+get 23
+get 57
+get 91
+get 21
+get 37
+get 78
+get 48
+get 83
+get 46
+get 8
+get 78
+get 15
+get 93
+get 51
+get 19
+get 60
 get 70
-get 77
-get 11
+get 99
+get 95
+get 13
+get 46
+get 25
+get 91
+get 57
 get 97
+get 13
+get 59
+get 8
+get 54
+get 47
+get 28
+get 24
+get 43
+get 72
+get 61
+get 33
+get 78
+get 37
+get 51
+get 40
+get 71
+get 46
+get 57
+get 8
+get 29
 get 64
+get 3
+get 79
+get 32
+get 28
+get 98
+get 92
+get 24
+get 9
+get 9
+get 13
+get 96
+get 22
+get 69
+get 26
+get 58
+get 53
+get 78
+get 38
+get 85
+get 81
+get 28
+get 80
+get 18
+get 71
+get 94
+get 56
+get 84
+get 70
+get 15
+get 20
+get 83
+get 58
+get 2
+get 11
+get 63
+get 38
+get 76
+get 32
+get 47
+get 92
+get 95
+get 71
+get 76
+get 43
+get 26
+get 100
+get 19
+get 18
+get 91
+get 5
+get 3
+get 85
+get 46
+get 24
+get 30
+get 51
+get 37
+get 54
+get 12
+get 26
+get 94
+get 14
+get 57
+get 89
+get 11
+get 96
+get 78
+get 35
+get 97
+get 77
+get 62
+get 83
+get 91
+get 60
+get 11
 get 52
 get 63
 get 91
-get 44
-get 74
-get 76
-get 34
-get 34
-get 67
-get 73
-get 39
-get 30
-get 76
+get 4
 get 85
-get 21
-get 44
-get 57
-get 44
-get 40
-get 25
-get 84
-get 20
-get 8
-get 39
-get 54
-get 88
-get 83
-get 99
-get 43
-get 38
-get 96
-get 47
-get 23
-get 92
-get 28
-get 49
-get 78
-get 66
-get 29
-get 94
-get 27
-get 64
-get 47
+get 52
+get 53
 get 90
-get 82
-get 8
-get 24
-get 2
-get 81
-get 97
-get 93
-get 12
-get 42
-get 6
-get 41
-get 52
-get 52
+get 19
+get 75
+get 38
+get 21
+get 74
 get 84
-get 20
-get 58
-get 65
+get 24
+get 79
+get 47
+get 38
+get 64
+get 6
+get 38
+get 68
+get 31
+get 87
+get 49
+get 1
+get 68
+get 67
+get 19
+get 5
+get 83
+get 36
+get 59
+get 35
+get 62
+get 66
+get 18
+get 38
+get 17
+get 59
+get 77
+get 31
+get 51
+get 48
+get 100
+get 30
+get 1
+get 57
+get 0
 get 7
-get 95
-get 43
-get 8
-get 55
+get 6
+get 11
+get 7
+get 84
+get 52
+get 74
+get 44
+get 42
+get 12
+get 0
+get 76
+get 68
+get 2
 get 93
+get 16
+get 79
+get 74
+get 37
+get 100
+get 75
+get 0
+get 85
+get 5
+get 60
+get 34
+get 85
+get 78
+get 64
+get 3
+get 13
+get 62
+get 98
+get 20
+get 44
+get 63
+get 87
+get 34
+get 40
+get 8
+get 15
+get 5
+get 68
+get 36
+get 29
+get 91
+get 36
+get 73
+get 20
+get 7
+get 20
+get 15
+get 28
+get 36
+get 21
+get 25
+get 29
+get 39
+get 80
+get 10
+get 88
+get 42
+get 93
+get 62
+get 43
+get 66
+get 46
+get 80
+get 90
+get 4
+get 95
+get 6
+get 24
+get 55
+get 33
+get 92
+get 25
+get 40
+get 22
+get 55
+get 27
+get 39
+get 62
+get 39
+get 91
+get 54
+get 61
+get 16
+get 59
+get 71
+get 88
+get 62
+get 2
+get 88
+get 43
+get 74
+get 57
+get 84
+get 53
+get 84
+get 10
+get 10
+get 5
+get 80
+get 67
+get 10
+get 53
+get 60
+get 63
+get 58
+get 0
+get 29
+get 73
+get 5
+get 22
+get 55
+get 10
+get 57
+get 88
+get 78
+get 99
+get 58
+get 92
+get 2
+get 26
+get 37
+get 97
+get 92
+get 69
+get 33
+get 61
+get 46
+get 90
+get 68
+get 90
+get 72
+get 4
+get 9
+get 72
+get 100
+get 86
+get 96
+get 51
+get 21
+get 72
+get 66
+get 84
+get 27
+get 72
+get 33
+get 31
+get 43
+get 77
+get 6
+get 17
+get 37
+get 1
+get 17
+get 49
+get 7
+get 3
+get 75
+get 22
+get 62
+get 35
+get 23
+get 93
+get 56
+get 61
+get 100
+get 76
+get 0
+get 61
+get 71
+get 65
+get 11
+get 12
+get 34
