@@ -30,12 +30,12 @@ The external server(127.0.0.x:50002): receive and reply Put and Get from all the
 
 [√] 10000 Put/Get entries test with a leader and a follower deaded. 
 
-[√] 5000 Put/Get entries test with two leaders deaded. 
+[√] 5000 Put/Get entries test with 2 leaders deaded. 
 
 [√] 10000 Put/Get entries test with 5 clients. 
 
-[√] 5000(start) + 5000(restart) Put/Get entries test. 
-
 [√] The comprehensive test with 1000 Put entries and 1000 Get entries. 
+
+[√] The comprehensive test with 10000 Put entries and 10000 Get entries. 
 
 [X] If we build the raft cluster with 3 servers and start the 4th server after several seconds, the 4th server can't receive heartbeats at the beginning(about 10s).
