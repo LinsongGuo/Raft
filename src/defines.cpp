@@ -64,6 +64,7 @@ namespace Raft {
         break;
       }
     }
+    address = "server" + std::to_string(localServer);
   }
 
   RaftServerCluster::RaftServerCluster(ServerId _localId, const std::vector<ServerId> &v) {

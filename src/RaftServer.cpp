@@ -251,7 +251,7 @@ namespace Raft {
     }
   }
   void RaftServer::start() {
-    /*std::cout << "The RaftServer "  << cluster->address << " havs been built." << std::endl;  
+    /*std::cout << "The RaftServer "  << cluster->localId << " havs been built." << std::endl;  
     std::time_t tt = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     struct std::tm *ptm = std::localtime(&tt);
     std::cout << "Current time: " << std::put_time(ptm,"%X") << '\n';

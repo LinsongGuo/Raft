@@ -1,9 +1,0 @@
-1565098448166 127.0.0.2:50001 becomes a leader, currentTerm = 44
-1565098467372 127.0.0.2:50001 becomes a leader, currentTerm = 46
-1565098553200 127.0.0.2:50001 becomes a leader, currentTerm = 132
-1565098594722 127.0.0.2:50001 becomes a leader, currentTerm = 137
-1565098686468 127.0.0.2:50001 becomes a leader, currentTerm = 220
-1565099032009 127.0.0.2:50001 becomes a leader, currentTerm = 670
-1565099122832 127.0.0.2:50001 becomes a leader, currentTerm = 844
-1565099203600 127.0.0.2:50001 becomes a leader, currentTerm = 932
-1565099332696 127.0.0.2:50001 becomes a leader, currentTerm = 1202

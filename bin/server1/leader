@@ -1,0 +1,5 @@
+1565142359833 127.0.0.1:5001 becomes a leader, currentTerm = 14
+1565142605951 127.0.0.1:5001 becomes a leader, currentTerm = 47
+1565142679667 127.0.0.1:5001 becomes a leader, currentTerm = 50
+1565142783494 127.0.0.1:5001 becomes a leader, currentTerm = 102
+1565142822295 127.0.0.1:5001 becomes a leader, currentTerm = 104

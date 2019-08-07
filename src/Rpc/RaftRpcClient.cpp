@@ -23,7 +23,6 @@ namespace Raft {
       rpcRequest.set_lastlogindex(request.lastLogIndex);
       RpcRequestVoteReply rpcReply;
       grpc::ClientContext context;
-      fout1<<getTime() << " broadcastTimeout " << broadcastTimeout << std::endl;
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       context.set_idempotent(true);
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);

@@ -84,7 +84,7 @@ public:
     std::uniform_real_distribution<double> uniformDist(0, 1);
     auto rand = std::bind(uniformDist, eng);
     bool flag[5] = {1, 1, 1, 1, 1};
-    while (checkAlive(clients)) {
+    while (true) {
       std::this_thread::sleep_for(2s);
       auto x = rand();
       auto srvIdx = randServer();
@@ -177,11 +177,16 @@ private:
       const AnswerMap &mp,
       const std::vector<std::pair<std::string, std::string>> &output) const {
     for (auto &kv : output) {
-      if (mp.find(kv.first) == mp.end())
-        return false;
+      if (mp.find(kv.first) == mp.end()) {
+        	std::cerr << kv.first << " NOT FOUND" << std::endl;
+        	return false;
+        }
       auto &acceptable = mp.at(kv.first);
-      if (acceptable.find(kv.second) == acceptable.end())
-        return false;
+      if (acceptable.find(kv.second) == acceptable.end()) {
+      	 std::cerr << "kv " << kv.first <<' ' << kv.second << std::endl;
+      	 return false;
+      }
+       
     }
     return true;
   }
@@ -245,7 +250,7 @@ private:
 
   bool checkAlive(const std::vector<pid_t> &pids) const {
     for (auto pid : pids) {
-      if (!kill(pid, 0))
+      if (waitpid(pid, nullptr, WNOHANG) == pid)
         return true;
     }
     return false;
