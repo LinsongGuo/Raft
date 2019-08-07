@@ -103,6 +103,9 @@ public:
       }
     }
 
+	for (auto pid : servers) 
+	  kill(pid, SIGCONT);
+	  
     for (auto pid : clients)
       kill(pid, SIGTERM);
 
@@ -290,7 +293,7 @@ int main(int argc, char **argv) {
   //  std::cerr << std::endl << std::endl;
 
   std::cerr << "running comprehensive_test:\n";
-  std::cerr << (test.comprehensive(1000, 0.3, 20000) ? "passed" : "failed");
+  std::cerr << (test.comprehensive(1000, 0.3, 240) ? "passed" : "failed");
   std::cerr << std::endl << std::endl;
 
   return 0;

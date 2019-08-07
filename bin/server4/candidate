@@ -1,7 +1,6 @@
-1565168030676 127.0.0.1:5004 becomes a candidate, currentTerm = 2
-1565168030958 127.0.0.1:5004 becomes a candidate, currentTerm = 3
-1565168031186 127.0.0.1:5004 becomes a candidate, currentTerm = 4
-1565168034704 127.0.0.1:5004 becomes a candidate, currentTerm = 5
-1565168034922 127.0.0.1:5004 becomes a candidate, currentTerm = 12
-1565168044425 127.0.0.1:5004 becomes a candidate, currentTerm = 13
-1565168044772 127.0.0.1:5004 becomes a candidate, currentTerm = 14
+1565168714288 127.0.0.1:5004 becomes a candidate, currentTerm = 2
+1565168745937 127.0.0.1:5004 becomes a candidate, currentTerm = 3
+1565168752137 127.0.0.1:5004 becomes a candidate, currentTerm = 4
+1565168766342 127.0.0.1:5004 becomes a candidate, currentTerm = 8
+1565168830228 127.0.0.1:5004 becomes a candidate, currentTerm = 10
+1565168944151 127.0.0.1:5004 becomes a candidate, currentTerm = 29
