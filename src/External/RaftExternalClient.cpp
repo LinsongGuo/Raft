@@ -9,7 +9,7 @@ namespace Raft {
     }; 
 
     RaftExternalClient::RaftExternalClient(const std::string &filename) : pImpl(std::make_unique<Impl>()) {
-      fout.open("ExternalClient");
+      //fout.open("ExternalClient");
       namespace pt = boost::property_tree;
       pt::ptree tree;
       pt::read_json(filename, tree);
@@ -34,7 +34,7 @@ namespace Raft {
 
     void RaftExternalClient::Put(std::string key, std::string args, uint64_t timeout) {
       auto startTimePoint = std::chrono::system_clock::now();
-      fout << "put " << key << ' ' << args << std::endl;
+      //fout << "put " << key << ' ' << args << std::endl;
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
         grpc::ClientContext ctx;
@@ -56,7 +56,7 @@ namespace Raft {
 
     std::string RaftExternalClient::Get(std::string key, uint64_t timeout) {
       auto startTimePoint = std::chrono::system_clock::now();
-      fout << "get " << key << std::endl;
+      //fout << "get " << key << std::endl;
       while ((uint64_t)timeFrom(startTimePoint) <= timeout) {
         auto & stub = pImpl->stubs[pImpl->cur % pImpl->stubs.size()];
         grpc::ClientContext ctx;

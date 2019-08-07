@@ -7,12 +7,12 @@ namespace Raft {
                                          const PutRequest *request,
                                          PutReply *reply) {
       
-      fout1 << getTime() << " receive a put " << request->key() <<' ' << request->args() << std::endl;
+      //fout1 << getTime() << " receive a put " << request->key() <<' ' << request->args() << std::endl;
       
       bool result = put(request->key(), request->args());
       reply->set_status(result);
       
-      fout1 << getTime() << " result " << result << std::endl; 
+      //fout1 << getTime() << " result " << result << std::endl; 
       
       return grpc::Status::OK;
     }
@@ -21,23 +21,23 @@ namespace Raft {
                                          const GetRequest *request,
                                          GetReply *reply) {
       
-      fout2 << getTime() << " receive a get " << request->key() << std::endl;
+      //fout2 << getTime() << " receive a get " << request->key() << std::endl;
       
       std::pair<bool, std::string> result = get(request->key());
       reply->set_status(result.first);
       reply->set_args(result.second);
       
-      fout2 << getTime() << " result " << result.first << ' ' << result.second << std::endl; 
+      //fout2 << getTime() << " result " << result.first << ' ' << result.second << std::endl; 
       
       return grpc::Status::OK;
     }
     void RaftExternalServerImpl::openFile(const Address &address) {
-      fout1.open(address + "/receive-put");
-      fout2.open(address + "/receive-get");
+      //fout1.open(address + "/receive-put");
+      //fout2.open(address + "/receive-get");
     }
     void RaftExternalServerImpl::closeFile() {
-      fout1.close();
-      fout2.close();
+      //fout1.close();
+      //fout2.close();
     }
 
     void RaftExternalServer::start(const Address &address, const ServerId &externalId) {

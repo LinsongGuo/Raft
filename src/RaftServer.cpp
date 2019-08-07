@@ -6,13 +6,13 @@ namespace Raft {
   RaftServer::RaftServer(const std::string &fileName) : 
     cluster(std::make_shared<RaftServerCluster>(fileName))
   {
-    fout0.open(cluster->address + "/start");
-    fout1.open(cluster->address + "/respond-put");
-    fout2.open(cluster->address + "/respond-get");
-    fout3.open(cluster->address + "/respond-requestvote");
-    fout4.open(cluster->address + "/respond-heartbeat");
-    fout5.open(cluster->address + "/respond-appendentries");
-    fout6.open(cluster->address + "/respond-transform");
+    //fout0.open(cluster->address + "/start");
+    //fout1.open(cluster->address + "/respond-put");
+    //fout2.open(cluster->address + "/respond-get");
+    //fout3.open(cluster->address + "/respond-requestvote");
+    //fout4.open(cluster->address + "/respond-heartbeat");
+    //fout5.open(cluster->address + "/respond-appendentries");
+    //fout6.open(cluster->address + "/respond-transform");
 
     //build transformer
     info = std::make_shared<RaftServerInfo>(cluster->size);
@@ -50,14 +50,14 @@ namespace Raft {
     roles[RaftServerRole::candidate] = std::make_unique<Candidate>(info, cluster, rpcClient, transformer, logScanner);
     roles[RaftServerRole::leader] = std::make_unique<Leader>(info, cluster, rpcClient, transformer, logScanner);
 
-    roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
-    roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
-    roles[RaftServerRole::leader]->fout.open(cluster->address + "/leader");
-    fout0 << getTime() << " construct end." << std::endl;    
+    //roles[RaftServerRole::follower]->fout.open(cluster->address + "/follower");
+    //roles[RaftServerRole::candidate]->fout.open(cluster->address + "/candidate");
+    //roles[RaftServerRole::leader]->fout.open(cluster->address + "/leader");
+    //fout0 << getTime() << " construct end." << std::endl;    
   }
 
   bool RaftServer::put(const std::string &key, const std::string &args) {
-    fout1 << getTime() << " push put " << key <<' '<< args << std::endl;
+    //fout1 << getTime() << " push put " << key <<' '<< args << std::endl;
     boost::promise<bool> prm;
     boost::future<bool> fut = prm.get_future();
     {
@@ -70,7 +70,7 @@ namespace Raft {
   }
 
   std::pair<bool, std::string> RaftServer::get(const std::string &key) {
-    fout2 << getTime() << " push get " << key << std::endl;
+    //fout2 << getTime() << " push get " << key << std::endl;
     boost::promise<std::pair<bool, std::string> > prm;
     boost::future<std::pair<bool, std::string> > fut = prm.get_future();
     {
@@ -83,8 +83,8 @@ namespace Raft {
   }
 
   RequestVoteReply RaftServer::respondRequestVote(const RequestVoteRequest &request) {
-    fout3 << getTime() << " push respondRequestVote " << request.candidateId <<' ' <<request.term << ' ' 
-    << request.lastLogTerm << ' ' << request.lastLogIndex << std::endl;
+    //fout3 << getTime() << " push respondRequestVote " << request.candidateId <<' ' <<request.term << ' ' 
+    //<< request.lastLogTerm << ' ' << request.lastLogIndex << std::endl;
     boost::promise<RequestVoteReply> prm;
     boost::future<RequestVoteReply> fut = prm.get_future();
     {
@@ -97,8 +97,8 @@ namespace Raft {
   }
 
   AppendEntriesReply RaftServer::respondHeartbeat(const AppendEntriesRequest &request) {
-    fout4 << getTime() << " push respondHeartbeat " << request.leaderId <<' ' <<request.term << ' ' 
-    << request.prevLogTerm << ' ' << request.prevLogIndex << ' ' << request.leaderCommit << std::endl;
+    //fout4 << getTime() << " push respondHeartbeat " << request.leaderId <<' ' <<request.term << ' ' 
+    //<< request.prevLogTerm << ' ' << request.prevLogIndex << ' ' << request.leaderCommit << std::endl;
     boost::promise<AppendEntriesReply> prm;
     boost::future<AppendEntriesReply> fut = prm.get_future();
     {
@@ -111,16 +111,9 @@ namespace Raft {
   }
 
   AppendEntriesReply RaftServer::respondAppendEntries(const Raft::Rpc::RpcAppendEntriesRequest *request) {
-    fout5 << getTime() << " push respondAppendEntries " << request->leaderid() <<' ' <<request->term() << ' ' << 
-    request->prevlogterm() << ' ' << request->prevlogindex() << ' ' << request->leadercommit() << std::endl;
+    //fout5 << getTime() << " push respondAppendEntries " << request->leaderid() <<' ' <<request->term() << ' ' << 
+    //request->prevlogterm() << ' ' << request->prevlogindex() << ' ' << request->leadercommit() << std::endl;
     size_t siz = request->entries().size();
-    fout5 << "entries:" << ' ' << siz << std::endl;
-    /*if(siz > 0) { 
-        for(int i = siz - 1; i >= 0; --i) {
-          auto tmp = request->entries()[i];
-          info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
-        }
-    }*/
 
     boost::promise<AppendEntriesReply> prm;
     boost::future<AppendEntriesReply> fut = prm.get_future();
@@ -134,7 +127,7 @@ namespace Raft {
   }
 
   void RaftServer::transform(const RaftServerRole &fromRole, const RaftServerRole &toRole, const Term &term) {
-    fout6 << getTime() <<" push transform "<< fromRole << ' ' << toRole << ' ' << term << std::endl;
+    //fout6 << getTime() <<" push transform "<< fromRole << ' ' << toRole << ' ' << term << std::endl;
     {
       boost::unique_lock<boost::mutex> lk(queueMutex);
       taskQueue.push(TaskType::transform);
@@ -155,11 +148,11 @@ namespace Raft {
             putQueue.pop();
             lk.unlock();
 
-            fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
+            //fout1 << getTime() << " pop put " << tmp.key << ' ' << tmp.args << std::endl;
             
             auto result = roles[currentRole]->put(tmp.key, tmp.args);
 
-            fout1 << getTime() << " result " << result << std::endl;
+            //fout1 << getTime() << " result " << result << std::endl;
 
             tmp.prm.set_value(result);
             
@@ -171,11 +164,11 @@ namespace Raft {
             getQueue.pop();
             lk.unlock();
             
-            fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
+            //fout2 << getTime() << " pop get " << tmp.key << ' ' << std::endl;
             
             auto result = roles[currentRole]->get(tmp.key);
             
-            fout2 << getTime() << " result " << result.first <<' ' << result.second << std::endl;
+            //fout2 << getTime() << " result " << result.first <<' ' << result.second << std::endl;
           
             tmp.prm.set_value(result);
             break;
@@ -186,12 +179,12 @@ namespace Raft {
             respondRequestVoteQueue.pop();
             lk.unlock();
             
-            fout3 << getTime() << " pop requestvote " << tmp.request.candidateId  << ' ' << tmp.request.term << ' ' 
-            << tmp.request.lastLogTerm << ' ' << tmp.request.lastLogIndex << std::endl;
+            //fout3 << getTime() << " pop requestvote " << tmp.request.candidateId  << ' ' << tmp.request.term << ' ' 
+            //<< tmp.request.lastLogTerm << ' ' << tmp.request.lastLogIndex << std::endl;
 
             auto result = roles[currentRole]->respondRequestVote(tmp.request);
             
-            fout3 << getTime() << " result " << result.voteGranted << ' ' << result.term << std::endl;  
+            //fout3 << getTime() << " result " << result.voteGranted << ' ' << result.term << std::endl;  
 
             tmp.prm.set_value(result);
             break;
@@ -202,12 +195,12 @@ namespace Raft {
             respondHeartbeatQueue.pop();
             lk.unlock();
             
-            fout4 << getTime() << " pop heartbeat " << tmp.request.leaderId  << ' ' << tmp.request.term << ' ' 
-            << tmp.request.prevLogTerm << ' ' << tmp.request.prevLogIndex << ' ' << tmp.request.leaderCommit << std::endl;
+            //fout4 << getTime() << " pop heartbeat " << tmp.request.leaderId  << ' ' << tmp.request.term << ' ' 
+            //<< tmp.request.prevLogTerm << ' ' << tmp.request.prevLogIndex << ' ' << tmp.request.leaderCommit << std::endl;
             
             auto result = roles[currentRole]->respondHeartbeat(tmp.request);
             
-            fout4 << getTime() << " result " << result.success << ' ' << result.term << std::endl;  
+            //fout4 << getTime() << " result " << result.success << ' ' << result.term << std::endl;  
             
             tmp.prm.set_value(result);
             break;
@@ -218,12 +211,12 @@ namespace Raft {
             respondAppendEntriesQueue.pop();
             lk.unlock();
             
-            fout5 << getTime() << " pop appendentries " << ' ' << tmp.request->leaderid() << ' ' << tmp.request->term() << ' '
-            << tmp.request->prevlogterm() << ' ' << tmp.request->prevlogindex() << ' ' << tmp.request->leadercommit() << std::endl;
+            //fout5 << getTime() << " pop appendentries " << ' ' << tmp.request->leaderid() << ' ' << tmp.request->term() << ' '
+            //<< tmp.request->prevlogterm() << ' ' << tmp.request->prevlogindex() << ' ' << tmp.request->leadercommit() << std::endl;
             
             auto result = roles[currentRole]->respondAppendEntries(tmp.request);
             
-            fout5 << getTime() << " result " << ' ' <<result.success <<' '<< result.term << std::endl;  
+            //fout5 << getTime() << " result " << ' ' <<result.success <<' '<< result.term << std::endl;  
             
             tmp.prm.set_value(result);
             break;
@@ -234,15 +227,12 @@ namespace Raft {
             transformQueue.pop();            
             lk.unlock();
               
-            fout6 << getTime() << ' ' << "pop transform " << tmp.fromRole <<  ' '  << tmp.toRole << ' ' << tmp.term << std::endl;
+            //fout6 << getTime() << ' ' << "pop transform " << tmp.fromRole <<  ' '  << tmp.toRole << ' ' << tmp.term << std::endl;
            
             if(currentRole == tmp.fromRole) {
               currentRole = tmp.toRole;
               roles[currentRole]->init(tmp.term);  
             }
-          
-            fout6 << getTime() << " init." << std::endl;
-
             break;
           }  
         } 
@@ -262,9 +252,9 @@ namespace Raft {
     
     logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
 
-    fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
+    //fout0 << getTime() << " The RaftServer " << cluster->localId << " starts." << std::endl;
     roles[RaftServerRole::follower]->init(1);
-    fout0 << getTime() << " end init" << std::endl;
+    //fout0 << getTime() << " end init" << std::endl;
   }
   void RaftServer::restart() {
     logScanner.open("log/" + cluster->address, std::ios::in | std::ios::out);
@@ -279,13 +269,13 @@ namespace Raft {
 
     logScanner.close();
 
-    fout0.close();
-    fout1.close();
-    fout2.close();
-    fout3.close();
-    fout4.close();
-    fout5.close();
-    fout6.close();
+    //fout0.close();
+    //fout1.close();
+    //fout2.close();
+    //fout3.close();
+    //fout4.close();
+    //fout5.close();
+    //fout6.close();
   }
 }
 

@@ -29,7 +29,7 @@ namespace Raft {
     else if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
       std::cerr << getTime() << ' ' << cluster->localId << " new term from requestvote : " << info->currentTerm << std::endl;
-      fout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
+      //fout << getTime() << " new term from requestvote : " << info->currentTerm << std::endl;
       if(checkMajorityEntries(request)) {
         info->votedFor = request.candidateId; 
         sleepThread.interrupt();
@@ -55,7 +55,7 @@ namespace Raft {
     if(request.term > info->currentTerm) {
       info->currentTerm = request.term;
       std::cerr << getTime() << ' ' << cluster->localId << " new term from heartbeat : " << info->currentTerm << std::endl;
-      fout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
+      //fout << getTime() << " new term from heartbeat : " << info->currentTerm << std::endl;
     } 
     if(request.leaderCommit > info->commitIndex) {
       info->commitIndex = std::min(request.leaderCommit, info->replicatedEntries.size() - 1);
@@ -79,9 +79,8 @@ namespace Raft {
     if(term > info->currentTerm) {
       info->currentTerm = term;
       std::cerr << getTime() << ' ' << cluster->localId << " new term from appendentries : " << info->currentTerm << std::endl;
-      fout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
+      //fout << getTime() << " new term from appendentries : " << info->currentTerm << std::endl;
     } 
-    fout << getTime() << "respond append " << request->leaderid() << ' ' << request->prevlogterm() << ' ' << request->prevlogindex() << ' ' << request->leadercommit() << std::endl;
     size_t siz = request->entries().size();
     if(siz > 0) { 
       if(prevLogIndex != invalidIndex && 
@@ -96,7 +95,6 @@ namespace Raft {
         for(int i = siz - 1; i >= 0; --i) {
           auto tmp = request->entries()[i];
           info->replicatedEntries.push_back(ReplicatedEntry(tmp.key(), tmp.args(), tmp.term()));
-          fout << getTime() << " append " << request->leaderid() << ' ' << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
         }
       }
     }
@@ -117,7 +115,7 @@ namespace Raft {
     info->currentTerm = currentTerm;
     info->votedFor = invalidServerId;
     std::cerr << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
-    fout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
+    //fout << getTime() <<' '<<cluster->localId << " becomes a follower, currentTerm = " << info->currentTerm << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;
     sleepThread.interrupt();

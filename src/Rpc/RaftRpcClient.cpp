@@ -5,9 +5,9 @@ namespace Raft {
     RaftRpcClient::RaftRpcClient(std::vector<std::shared_ptr<grpc::Channel> > channels, Timer timeout, const size_t &_localServer, const Address &address):
       broadcastTimeout(timeout), localServer(_localServer)
     {
-      fout1.open(address + "/send-requestvote");
-      fout2.open(address + "/send-heartbeat");
-      fout3.open(address + "/send-appendentries");
+      //fout1.open(address + "/send-requestvote");
+      //fout2.open(address + "/send-heartbeat");
+      //fout3.open(address + "/send-appendentries");
       size = channels.size();
       for(int i = 0; i < size; ++i) {
         stubs.emplace_back(RaftRpc::NewStub(channels[i]));
@@ -15,7 +15,7 @@ namespace Raft {
     }
 
     std::pair<bool, RequestVoteReply> RaftRpcClient::sendRequestVote(size_t id, const RequestVoteRequest &request) {
-      fout1 << getTime() << " send requestvote to " << id << ":" << request.term << ' ' << request.lastLogTerm << ' ' << request.lastLogIndex << std::endl;
+      //fout1 << getTime() << " send requestvote to " << id << ":" << request.term << ' ' << request.lastLogTerm << ' ' << request.lastLogIndex << std::endl;
       RpcRequestVoteRequest rpcRequest;
       rpcRequest.set_candidateid(request.candidateId);
       rpcRequest.set_term(request.term);
@@ -26,13 +26,13 @@ namespace Raft {
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       context.set_idempotent(true);
       grpc::Status status = stubs[id]->RpcRequestVote(&context, rpcRequest, &rpcReply);
-      fout1 <<getTime() << " reply " << status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
+      //fout1 <<getTime() << " reply " << status.ok() <<' ' << rpcReply.votegranted() <<' ' << rpcReply.term() << std::endl;
       return std::make_pair(status.ok(), RequestVoteReply(rpcReply.votegranted(), rpcReply.term()));
     }
     
     std::pair<bool, AppendEntriesReply> RaftRpcClient::sendHeartbeat(size_t id, const AppendEntriesRequest &request) {
-      fout2 << getTime() << " send heartbeat to " << id << ":" << request.leaderId << ' ' << request.term << ' ' 
-      << request.prevLogTerm << ' ' << request.prevLogIndex << ' ' << request.leaderCommit << std::endl;
+      //fout2 << getTime() << " send heartbeat to " << id << ":" << request.leaderId << ' ' << request.term << ' ' 
+      //<< request.prevLogTerm << ' ' << request.prevLogIndex << ' ' << request.leaderCommit << std::endl;
       RpcAppendEntriesRequest rpcRequest;
       rpcRequest.set_leaderid(request.leaderId);
       rpcRequest.set_term(request.term);
@@ -44,19 +44,19 @@ namespace Raft {
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       context.set_idempotent(true);
       grpc::Status status = stubs[id]->RpcHeartbeat(&context, rpcRequest, &rpcReply);
-      fout2 << getTime() << " reply " << status.ok() << ' ' << rpcReply.success() << ' ' << rpcReply.term() << std::endl;
+      //fout2 << getTime() << " reply " << status.ok() << ' ' << rpcReply.success() << ' ' << rpcReply.term() << std::endl;
       return std::make_pair(status.ok(), AppendEntriesReply(rpcReply.success(), rpcReply.term()));
     }
     
     std::pair<bool, AppendEntriesReply> RaftRpcClient::sendAppendEntries(size_t id, RpcAppendEntriesRequest rpcRequest) {
-      fout3 << getTime() << " send appendentries to " << id << ":" << rpcRequest.leaderid() << ' ' << rpcRequest.term() << ' ' 
-      << rpcRequest.prevlogterm() << ' ' << rpcRequest.prevlogindex() << ' ' << rpcRequest.leadercommit() << std::endl;
+      //fout3 << getTime() << " send appendentries to " << id << ":" << rpcRequest.leaderid() << ' ' << rpcRequest.term() << ' ' 
+      //<< rpcRequest.prevlogterm() << ' ' << rpcRequest.prevlogindex() << ' ' << rpcRequest.leadercommit() << std::endl;
       RpcAppendEntriesReply rpcReply;
       grpc::ClientContext context;
       context.set_deadline(std::chrono::system_clock::now() + std::chrono::milliseconds(broadcastTimeout));
       context.set_idempotent(true);
       grpc::Status status = stubs[id]->RpcAppendEntries(&context, rpcRequest, &rpcReply);
-      fout3 << getTime() << " reply " << status.ok() << ' ' << rpcReply.success() << ' ' << rpcReply.term() << std::endl;
+      //fout3 << getTime() << " reply " << status.ok() << ' ' << rpcReply.success() << ' ' << rpcReply.term() << std::endl;
       return std::make_pair(status.ok(), AppendEntriesReply(rpcReply.success(), rpcReply.term()));
     }
 

@@ -46,7 +46,7 @@ namespace Raft {
     RequestVoteRequest request(cluster->localId, info->currentTerm, info->lastLogTerm(), info->lastLogIndex());
     
     std::cerr << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
-    fout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
+    //fout << getTime() <<' '<<cluster->localId << " becomes a candidate, currentTerm = " << info->currentTerm << std::endl;
     
     Timer electionTimeout = cluster->electionTimeout;
     voteThread.interrupt();

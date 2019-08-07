@@ -10,7 +10,7 @@ namespace Raft {
     
   bool Leader::put(const std::string &key, const std::string &args) {
     info->push(key, args, info->currentTerm);
-    fout << getTime() << " put " << key << ' ' << args << ' ' << info->lastLogIndex() << std::endl;
+    //fout << getTime() << " put " << key << ' ' << args << ' ' << info->lastLogIndex() << std::endl;
     size_t siz = cluster->size;
     std::vector<boost::future<AppendEntriesReply> > appendFuture;
     for(size_t i = 0; i < siz; ++i) {
@@ -21,13 +21,11 @@ namespace Raft {
       rpcRequest.set_prevlogindex(info->nextIndex[i] - 1);
       rpcRequest.set_prevlogterm(info->replicatedEntries[info->nextIndex[i] - 1].term);
       rpcRequest.set_leadercommit(info->commitIndex);
-      fout <<getTime() << " rpc " << rpcRequest.term() << ' ' << rpcRequest.prevlogterm() << ' ' << rpcRequest.prevlogindex() << ' ' << rpcRequest.leadercommit() << std::endl; 
       for(size_t j = info->replicatedEntries.size() - 1; j >= info->nextIndex[i]; --j) {
         Raft::Rpc::Entry tmp;
         tmp.set_key(info->replicatedEntries[j].key);
         tmp.set_args(info->replicatedEntries[j].args);
         tmp.set_term(info->replicatedEntries[j].term);
-        fout <<getTime() << " tmp " << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
         *rpcRequest.add_entries() = std::move(tmp);
       }
 
@@ -39,7 +37,6 @@ namespace Raft {
             if(result.second.success) {
               info->nextIndex[i] = info->replicatedEntries.size();
               info->matchIndex[i] = info->nextIndex[i] - 1;
-              fout << getTime() << " success " << i << ' ' << info->nextIndex[i] << ' ' << info->matchIndex[i] << std::endl;
               return AppendEntriesReply(true, result.second.term);
             }
             else {
@@ -52,7 +49,6 @@ namespace Raft {
                 tmp.set_key(info->replicatedEntries[prevLogIndex].key);
                 tmp.set_args(info->replicatedEntries[prevLogIndex].args);
                 tmp.set_term(info->replicatedEntries[prevLogIndex].term);
-                fout << getTime() << " fail " << i << ' ' << prevLogIndex <<' ' << tmp.key() << ' ' << tmp.args() << ' ' << tmp.term() << std::endl;
                 *rpcRequest.add_entries() = std::move(tmp);
                 info->nextIndex[i]--;
                 rpcRequest.set_prevlogindex(prevLogIndex - 1);
@@ -137,7 +133,7 @@ namespace Raft {
     }
     
     std::cerr << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
-    fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
+    //fout << getTime() <<' '<<cluster->localId << " becomes a leader, currentTerm = " << info->currentTerm << std::endl;
 
     Timer heartbeatTimeout = cluster->heartbeatTimeout;
     heartbeatThread.interrupt();
