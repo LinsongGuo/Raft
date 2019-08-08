@@ -38,4 +38,6 @@ The external server(127.0.0.x:50002): receive and reply Put and Get from all the
 
 [√] The comprehensive test with 10000 Put entries and 10000 Get entries. 
 
+[√] All tests in test.cpp. 
+
 [X] If we build the raft cluster with 3 servers and start the 4th server after several seconds, the 4th server can't receive heartbeats at the beginning(about 10s).

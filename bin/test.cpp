@@ -278,23 +278,43 @@ private:
 int main(int argc, char **argv) {
   assert(argc == 3);
   RaftTest test(argv[1], argv[2]);
-
-  //  std::cerr << "running naive_test0:\n";
-  //  std::cerr << (test.naive(3, 1, 10) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test1:\n";
-  //  std::cerr << (test.naive(3, 3, 100) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test2:\n";
-  //  std::cerr << (test.naive(5, 5, 5000) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-  //  std::cerr << "running naive_test3:\n";
-  //  std::cerr << (test.naive(3, 5, 5000) ? "passed" : "failed");
-  //  std::cerr << std::endl << std::endl;
-
+  
+  unsigned long long t1 = clock();
+  
+  system("bash ./dir.sh");
+  std::cerr << "running naive_test0:\n";
+  std::cerr << (test.naive(3, 1, 10) ? "passed" : "failed");
+  
+  unsigned long long t2 = clock();
+  std::cerr << std::endl << t2 - t1 << std::endl;
+  
+  system("bash ./dir.sh");
+  std::cerr << "running naive_test1:\n";
+  std::cerr << (test.naive(3, 3, 100) ? "passed" : "failed");
+  
+  unsigned long long t3 = clock();
+  std::cerr << std::endl << t3 - t2 << std::endl;
+  
+  system("bash ./dir.sh");
+  std::cerr << "running naive_test2:\n";
+  std::cerr << (test.naive(5, 5, 5000) ? "passed" : "failed");
+  
+  unsigned long long t4 = clock();
+  std::cerr << std::endl << t4 - t3 << std::endl;
+  
+  system("bash ./dir.sh");
+  std::cerr << "running naive_test3:\n";
+  std::cerr << (test.naive(3, 5, 5000) ? "passed" : "failed");
+  
+  unsigned long long t5 = clock();
+  std::cerr << std::endl << t5 - t4 << std::endl;
+  
+  system("bash ./dir.sh");
   std::cerr << "running comprehensive_test:\n";
-  std::cerr << (test.comprehensive(10000, 0.3, 3600) ? "passed" : "failed");
-  std::cerr << std::endl << std::endl;
+  std::cerr << (test.comprehensive(1000, 0.3, 300) ? "passed" : "failed");
+  
+  unsigned long long t6 = clock();
+  std::cerr << std::endl << t6 - t5 << std::endl;
 
   return 0;
 }
